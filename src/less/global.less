@@ -1,0 +1,468 @@
+ul li, ol li {
+  margin-bottom: 3px;
+}
+ul{
+  margin-top: 5px;
+}
+
+img {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  vertical-align: top;
+}
+img.size-1{
+  width: 100%;
+}
+img.size-2 {
+  width: 100%;
+  min-height: 100%;
+  &.crop {
+    object-fit: cover;
+  }
+}
+.clear {
+  font-size: 0px;
+  clear: both;
+}
+// Набор ширфтов;
+a {
+  // Base;
+  color: @blue1;
+  &:focus {
+    outline: none;
+  }
+  &:hover{
+    color: @reg;
+  }
+  &:link{
+    color: @blue1;
+  }
+  &:visited{
+    color: @blue1;
+  }
+  &.btn{
+    color:@white;
+    &:hover, &:link, &:visited, &:focus{
+      color: @white;
+    }
+  }
+  // Color;
+  &.white {
+    color: @white;
+  }
+}
+
+/*Заголовок*/
+h1 {
+  &.title {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+}
+
+// Trainers
+.trainers__mod {
+   margin-bottom: 20px;
+   .item-image {
+      width: 100%;
+   }
+   .item-caption {
+     background: @grey;
+     padding: 15px 10px;
+     .item-name {
+        font-size: 24px;
+        text-align: center;
+     }
+     .item-role {
+       font-size: 14px;
+       text-align: center;
+     }
+     .rating__mod {
+        padding: 5px 0px;
+        margin-top: 5px;
+     }
+   }
+   .content {
+     margin-bottom: 30px;
+     &:hover {
+        cursor: pointer;
+     }
+   }
+}
+
+// Нововсти
+.news__mod {
+  margin-bottom: 20px;
+  .item-image {
+    width: 100%;
+  }
+  .item-caption {
+    width: 100%;
+    background: @grey;
+    padding: 15px 10px;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
+    .description {
+      font-size: 14px;
+    }
+  }
+  .content {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+// Отзывы;
+.face__mod {
+  margin-bottom: 20px;
+  .item-image {
+    width: 170px;
+    padding: 10px;
+    height: 100px;
+    img {
+      border-radius: 100%;
+    }
+  }
+  .item-caption {
+    display: flex;
+    flex-wrap: nowrap;
+    background: @grey;
+    padding: 15px 10px;
+    .description {
+      font-size: 18px;
+      font-style: italic;
+      small {
+        font-size: 16px;
+        font-style: normal;
+        margin-top: 8px;
+        text-align: right;
+      }
+    }
+  }
+  .content {
+
+    margin-bottom: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.catalog__mod {
+  .item-image {
+    width: 100%;
+  }
+  .item-caption {
+    background: @grey;
+    padding: 15px 10px;
+    .item-name {
+      font-size: 18px;
+      text-align: center;
+    }
+    .price {
+      font-size: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .content {
+    margin-bottom: 30px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+/*---Рейтинг---*/
+.rating__mod {
+  position: relative;
+  height: 20px;
+  .rating-icon {
+    background: url('@{imagesPath}/rating-icon.png') 0px 0px no-repeat;
+    height: 16px;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 82px;
+
+    &.rating-1 {
+      background-position: 0px -16px;
+    }
+    &.rating-2 {
+      background-position: 0px -32px;
+    }
+    &.rating-3 {
+      background-position: 0px -48px;
+    }
+    &.rating-4 {
+      background-position: 0px -64px;
+    }
+    &.rating-5 {
+      background-position: 0px -80px;
+    }
+  }
+}
+
+/*--Меню слева--*/
+.left_menu {
+  font-size: 16px;
+  padding: 0 0 10px 0;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  .title {
+     padding: 5px 15px;
+     display: block;
+     background: @base_color_footer;
+    color:@white;
+  }
+  ul {
+    list-style: none;
+    padding: 0px;
+  }
+  .menu{
+      font-size: 14px;
+      padding: 2px 0 2px 16px;
+      a {
+        color:@base_color_content;
+      }
+      &.active {
+        background: fade(@base_color_footer,60%);
+        a{
+          color:@white;
+        }
+      }
+      &.groups{
+        ul {
+          padding-left: 5px;
+        }
+      }
+  }
+
+  .checkbox {
+     padding: 0 0 0 17px;
+     label {
+       display: block;
+       margin-bottom: 3px;
+     }
+  }
+}
+
+
+.overflow-clear {
+  overflow: unset !important;
+}
+// Чистим отступы;
+.margin-clear{
+  margin:0px !important;
+}
+.margin-right-clear{
+  margin-right:0px !important;
+}
+.margin-bottom-clear {
+  margin-bottom:0px !important;
+}
+.margin-top-clear {
+  margin-top:0px !important;
+}
+.margin-left-clear {
+  margin-left:0px !important;
+}
+.padding-clear{
+  padding:0px !important;;
+}
+.padding-right-clear{
+  padding-right:0px !important;
+}
+.padding-bottom-clear {
+  padding-bottom:0px !important;
+}
+.padding-top-clear {
+  padding-top:0px !important;
+}
+.padding-left-clear {
+  padding-left:0px !important;
+}
+.no-border-top{
+  border-top:none !important;
+}
+.no-border-bottom{
+  border-bottom:none !important;
+}
+.no-border-left{
+  border-left:none !important;
+}
+.no-border-right{
+  border-right:none !important;
+}
+.upper{
+  text-transform: uppercase;
+}
+.no_upper{
+  text-transform: none !important;
+}
+
+.btn {
+  &.btn-border{
+     border: 1px solid @white;
+     padding: 8px 30px;
+     margin-top: 6px;
+     transition: all 0.5s;
+     text-transform: uppercase;
+     &.size-1 {
+       padding: 5px 25px;
+     }
+     &.size-2 {
+       border-width: 2px;
+       font-size: 16px;
+     }
+     /*--Цвета--*/
+      &.blue {
+       border-color:@blue;
+       color: @blue;
+       &:hover {
+         background: @blue;
+         color:@white;
+       }
+     }
+      &.green {
+        border-color:@green;
+        color: @green;
+        &:hover {
+          background: @green;
+          color:@white;
+        }
+      }
+      &.black {
+        border-color:@black;
+        color: @black;
+        &:hover {
+          background: @black;
+          color:@white;
+        }
+      }
+
+     &:hover {
+       background: @white;
+       color:@black;
+     }
+
+     &.btn-center{
+        display: block;
+        margin: 0 auto;
+     }
+     .fa {
+       position: relative;
+       right: 5px;
+       font-size: 16px;
+     }
+  }
+}
+
+.breadcrumb {
+  margin-top: 10px;
+}
+
+.text {
+   font-size: 18px;
+   padding: 5px 0;
+}
+
+.gallery-items {
+   padding: 5px 0px;
+   .items {
+      .item {
+         padding: 5px;
+      }
+   }
+   .slick-dots li {
+     margin: 0 3px;
+     button {
+       &::before {
+         font-size: 12px;
+       }
+     }
+   }
+
+}
+
+
+.schedules__mod {
+  margin-top: 5px;
+  .table  {
+    .week {
+       .data_time {
+          font-size: 11px;
+       }
+       .current {
+         background: @orange3;
+       }
+    }
+    td {
+      &.active {
+        background: @green1;
+        div {
+          color: @white;
+        }
+        .address {
+          font-size: 12px;
+        }
+      }
+      height: 100px;
+      width: 120px;
+      cursor: pointer;
+      background: @grey;
+      &.time {
+         background: @orange3;
+         &:hover {
+           background: (@orange3 - 10);
+         }
+         div {
+           color: @black1;
+           font-weight: bold;
+           padding-bottom: 5px;
+           font-size: 12px;
+           &.trainer {
+              font-weight: normal;
+              font-size: 14px;
+           }
+         }
+         .price {
+            font-weight: normal;
+         }
+      }
+      &.disabled {
+         background: @grey1;
+         cursor: default;
+        &:hover {
+          background: (@grey1 - 10);
+        }
+      }
+      &.open {
+        background: fade(@green,40%);
+        &:hover {
+          background: fade(@green,50%);
+        }
+      }
+    }
+  }
+}
+
+.tab__com {
+  padding-top: 10px;
+  .tab{
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,147 @@
+.trainers {
+  margin-bottom: 60px;
+}
+.trainer {
+  .item-image {
+    min-width: 200px;
+  }
+  .item-caption {
+    .title {
+      padding: 0px;
+      margin: 0 0 5px 0px;
+    }
+
+  }
+  .title.visible-xs {
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+  @media only screen and (max-width: @screen-sm-min) {
+
+  }
+}
+
+.goods {
+  margin-bottom: 60px;
+  .catalog {
+    // background: @grey;
+     height: 100%;
+  }
+}
+
+.good {
+  .title {
+    margin-top: 0px;
+    margin-bottom: 15px;
+  }
+  .item-image {
+    margin: 0px;
+  }
+  .item-caption {
+    margin: 0px;
+    .prices {
+       padding: 5px 0px 20px;
+       .price {
+          font-size: 30px;
+          font-weight: bold;
+       }
+    }
+    .basket {
+      padding: 0px 0px 30px;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 14px;
+      background: @base_color_footer;
+      padding: 5px 10px;
+      color: #fff;
+     }
+    .description {
+      padding: 3px 0;
+      font-size: 16px;
+    }
+  }
+}
+
+// Корзина;
+.basket {
+   .goods-basket {
+       td{
+         padding: 5px;
+         .img {
+           padding-right: 10px;
+         }
+         .name {
+           font-size: 16px;
+           font-weight: bold;
+         }
+         .delete {
+            color:@reg2;
+         }
+       }
+   }
+   .order {
+      button.order {
+         width: 50%;
+      }
+   }
+}
+
+.basin {
+  margin-top: -80px;
+  .images-bg {
+    height: 70vh;
+    min-height: 400px;
+    overflow: hidden;
+    position: relative;
+    .title-main {
+      width: 100%;
+      position: absolute;
+      top: 35%;
+      left: 0%;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0,0,0,.6);
+      z-index: 100;
+      .container {
+        margin: 0px auto;
+      }
+      h1 {
+        font-size: 4em;
+        padding: 0;
+        margin: 0;
+      }
+      .address {
+        font-size: 26px;
+        margin-top: 10px;
+      }
+    }
+  }
+  .advantages {
+    margin: 30px 0px 20px;
+     .title {
+       padding: 5px 0px;
+    }
+     .block {
+       background: @blue;
+       list-style: none;
+       padding: 20px 0 20px 30px;
+       li{
+          color:@white;
+          margin-bottom: 16px;
+          font-size: 16px;
+          .fa {
+              vertical-align: sub;
+              margin-right: 10px;
+          }
+       }
+     }
+     .buttons {
+        margin-top: 15px;
+     }
+  }
+
+}

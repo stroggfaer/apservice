@@ -1,0 +1,63 @@
+.header-menu {
+   .navbar{
+       margin-bottom: 0px;
+       background: fade(@base_color_header,80%);
+       padding: 12px 0px;
+       .nav {
+         a {
+           color: @white;
+           text-transform: uppercase;
+           transition: all 0.3s;
+           font-size: 12px;
+           &:link,&:focus {
+             color: @white;
+           }
+           &:hover{
+             background: transparent;
+             color: @grey1;
+           }
+           &.btn-border {
+             margin-left: 20px;
+             &:hover {
+               background: @white;
+               color:@black;
+             }
+           }
+         }
+       }
+        li {
+         margin: 0px;
+
+       }
+       .navbar-toggle {
+          padding: 4px 10px;
+          margin-right: 0px;
+         @media only screen and (max-width: @screen-sm-min) {
+           margin-right: 60px;
+         }
+       }
+       .collapse {
+         .fa {
+           padding: 0px 5px;
+           font-size: 16px;
+         }
+       }
+
+       /* Hamburger */
+       .nav-icon();
+
+       .my {
+         padding: 8px 10px;
+         font-size: 11px !important;
+       }
+     @media only screen and (max-width: 1015px) {
+       .nav {
+         a {
+            font-size: 11px;
+            padding-left: 5px;
+            padding-right: 5px;
+         }
+       }
+     }
+   }
+}
