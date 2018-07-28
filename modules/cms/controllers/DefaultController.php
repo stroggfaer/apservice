@@ -2,6 +2,7 @@
 
 namespace app\modules\cms\controllers;
 use app\models\Pages;
+use dastanaron\translit\Translit;
 use app\modules\cms\models\PostSearchPages;
 
 use app\models\User;
@@ -9,6 +10,9 @@ use app\modules\cms\models\PostSearchUsers;
 
 use app\models\AuthAssignment;
 use app\modules\cms\models\AuthAssignmentSearch;
+
+use app\models\MenuRepairs;
+use app\modules\cms\models\MenuRepairSearch;
 
 use Yii;
 use yii\web\NotFoundHttpException;
@@ -341,6 +345,107 @@ class DefaultController extends BackendController
     protected function findModelRule($item_name, $user_id)
     {
         if (($model = AuthAssignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Lists all MenuRepairs models.
+     * @return mixed
+     */
+    public function actionMenuRepairs()
+    {
+        $searchModel = new MenuRepairSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('menu-repairs/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single MenuRepairs model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewMenuRepairs($id)
+    {
+        return $this->render('menu-repairs/view', [
+            'model' => $this->findModelMenuRepairs($id),
+        ]);
+    }
+
+    /**
+     * Creates a new MenuRepairs model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateMenuRepairs()
+    {
+        $translit = new Translit();
+        $model = new MenuRepairs();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->url = mb_strtolower($translit->translit($model->title,true,'ru-en'));
+            if(!$model->save(true)) {
+                return 'Ошибка save';
+            }
+            return $this->redirect(['view-menu-repairs', 'id' => $model->id]);
+        }
+
+        return $this->render('menu-repairs/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing MenuRepairs model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateMenuRepairs($id)
+    {
+        $model = $this->findModelMenuRepairs($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-menu-repairs', 'id' => $model->id]);
+        }
+
+        return $this->render('menu-repairs/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing MenuRepairs model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteMenuRepairs($id)
+    {
+        $this->findModelMenuRepairs($id)->delete();
+
+        return $this->redirect(['menu-repairs']);
+    }
+
+    /**
+     * Finds the MenuRepairs model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return MenuRepairs the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelMenuRepairs($id)
+    {
+        if (($model = MenuRepairs::findOne($id)) !== null) {
             return $model;
         }
 

@@ -42,8 +42,8 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
                     <?php endforeach; ?>
                 </ul>
                 <?php if(!empty(Yii::$app->user->isGuest)):?>
-                  <a  class="btn btn-primary  navbar-btn pull-right" style="margin-left: 10px" href="/site/login">Регистрация</a>
-                  <a  class="btn btn-success  navbar-btn pull-right" href="/site/login">Войти</a>
+                  <a  class="btn btn-primary  navbar-btn pull-right" style="margin-left: 10px" href="/repair/login">Регистрация</a>
+                  <a  class="btn btn-success  navbar-btn pull-right" href="/repair/login">Войти</a>
                 <?php else: ?>
                     <a class="pull-right navbar-btn" href="/site/logout" style="color:#fff;margin-left: 10px">Выйти</a>
                     <a class="pull-right navbar-btn" href="#" style="color:#fff"><?=Yii::$app->user->identity->username ?></a>
