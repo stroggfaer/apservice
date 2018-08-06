@@ -267,15 +267,33 @@ class DevicesController extends BackendController
         $model = new DeviceProblems();
         $prices = new Prices();
         $devicesDetails = new DevicesDetails();
+        $translit = new Translit();
 
         $transactionBD = \Yii::$app->db->beginTransaction();
 
         if ($model->load(Yii::$app->request->post()) && $prices->load(Yii::$app->request->post())) {
             try {
+                $model->url = mb_strtolower($translit->translit($model->title,true,'ru-en'));
                 if ($model->save(true)) {
-                    $prices->device_problems_id = $model->id;
-                    $prices->status = 1;
-                    $prices->save(true);
+                    // Список цены;
+                    if($prices->load(Yii::$app->request->post())) {
+                        $_post = Yii::$app->request->post('Prices');
+                        // Добавляем все записей;
+                        if(!empty($_post['money'])) {
+                            foreach ($_post['money'] as $city => $value) {
+                                $pricesOne = Prices::find()->where(['device_problems_id'=>$model->id,'city_id'=>$city])->one();
+                                $pricesList =  new Prices();
+                                $pricesList->money = $value;
+                                $pricesList->device_problems_id = $model->id;
+                                $pricesList->city_id = $city;
+                                if(!$pricesList->save()) {
+                                    print_arr($pricesList->error);
+                                    die();
+                                }
+                            }
+                        }
+                    }
+
                     $transactionBD->commit();
                 }
                 if ($devicesDetails->load(Yii::$app->request->post())) {
@@ -322,13 +340,34 @@ class DevicesController extends BackendController
     public function actionUpdateDeviceProblems($id)
     {
         $model = $this->findModelDeviceProblems($id);
-        $prices = $model->getPrice()->one();
+
         $devicesDetails = new DevicesDetails();
+        $translit = new Translit();
 
+        $prices = $model->getPrice()->one();
 
+        if ($model->load(Yii::$app->request->post()) &&  $model->validate()) {
+            $model->url = (!empty($model->url) ? $model->url : mb_strtolower($translit->translit($model->title,true,'ru-en')));
+            $model->save(true);
+            // Список цены;
+            if($prices->load(Yii::$app->request->post())) {
+                $_post = Yii::$app->request->post('Prices');
+                // Добавляем все записей;
+                if(!empty($_post['money'])) {
+                    foreach ($_post['money'] as $city => $value) {
+                        $pricesOne = Prices::find()->where(['device_problems_id'=>$id,'city_id'=>$city])->one();
+                        $pricesList = !empty($pricesOne) ? $pricesOne : new Prices();
+                        $pricesList->money = $value;
+                        $pricesList->device_problems_id = $id;
+                        $pricesList->city_id = $city;
+                        if(!$pricesList->save()) {
+                            print_arr($pricesList->error);
+                            die();
+                        }
+                    }
+                }
+            }
 
-        if ($model->load(Yii::$app->request->post()) && $prices->load(Yii::$app->request->post()) && $model->save(true)) {
-            $prices->save(true);
             // Добавить привязка услуги;
             if ($devicesDetails->load(Yii::$app->request->post())) {
                 // Пост данные в массиве;
@@ -351,6 +390,7 @@ class DevicesController extends BackendController
                     }
                 }
             }
+
             return $this->redirect(['view-device-problems', 'id' => $model->id]);
         }
 

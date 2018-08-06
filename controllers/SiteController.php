@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Pages;
+use app\models\Repair;
 use app\models\SignupForm;
 use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
@@ -64,11 +65,15 @@ class SiteController extends AppController
      */
     public function actionIndex()
     {
+
         $pages = Pages::find()->where(['id'=>1000])->one();
         // Сео настройки;
         if(!empty($pages)) $this->setMeta((!empty($pages->seo_title) ? $pages->seo_title : $pages->title),$pages->keywords,$pages->description);
 
-        return $this->render('index');
+        $model = new Repair();
+        return $this->render('index',[
+            'model'=>$model,
+        ]);
     }
 
     /**

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\DeviceProblems */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Device Problems', 'url' => ['device-problems']];
+$this->params['breadcrumbs'][] = ['label' => 'Device Problems', 'url' => ['device-problems','group_id'=>$model->group_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="device-problems-view">

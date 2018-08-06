@@ -98,4 +98,11 @@ class City extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Services::className(), ['city_id' => 'id']);
     }
+
+    public function getPrice()
+    {
+        $price = Prices::find()->where(['status'=>1,'city_id'=>$this->id])->one();
+        return $price;
+    }
+
 }

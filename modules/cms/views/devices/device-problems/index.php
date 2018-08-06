@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
           //  ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-           // 'group_id',
             [
                 'attribute'=>'group_id',
                 'content'=>function($data){
@@ -35,7 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $html;
                 },
             ],
+            [
+                'attribute'=>'',
+                'label' => 'Девайс',
+                'content'=>function($data){
+                   return $data->devices;
+                },
+            ],
             'title',
+            'url',
             'description:ntext',
             'time',
             [

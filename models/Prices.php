@@ -35,6 +35,7 @@ class Prices extends \yii\db\ActiveRecord
             [['city_id','money','device_problems_id'], 'required'],
             [['city_id', 'device_problems_id', 'status'], 'integer'],
             [['money'], 'number'],
+             [['value'],'string'],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
             [['device_problems_id'], 'exist', 'skipOnError' => true, 'targetClass' => DeviceProblems::className(), 'targetAttribute' => ['device_problems_id' => 'id']],
         ];

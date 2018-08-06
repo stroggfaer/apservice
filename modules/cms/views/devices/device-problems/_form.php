@@ -15,8 +15,9 @@ $items = ArrayHelper::map(array_merge($parent),'id', 'title');
 $params = ['prompt' => 'Выберите Группы проблемы', 'options' => [$model->group_id=>['selected'=>'selected']]];
 
 $city = \app\models\City::find()->orderBy('id ASC')->all();
-$items1 = ArrayHelper::map(array_merge($city),'id', 'name');
-$params1 = ['prompt' => 'Выберите город', 'options' => [$prices->city_id=>['selected'=>'selected']]];
+
+//$items1 = ArrayHelper::map(array_merge($city),'id', 'name');
+//$params1 = ['prompt' => 'Выберите город', 'options' => [$prices->city_id=>['selected'=>'selected']]];
 
 $devices = ArrayHelper::map(array_merge(\app\models\Devices::find()->where(['status'=>1])->orderBy('id ASC')->all()),'id','title');
 
@@ -28,13 +29,16 @@ $devices = ArrayHelper::map(array_merge(\app\models\Devices::find()->where(['sta
     <div class="row">
         <?=$form->field($model, 'group_id',['options'=>['class'=>'form-group col-sm-6']])->DropDownList($items, $params);  ?>
 
-        <?=$form->field($prices, 'city_id',['options'=>['class'=>'form-group col-sm-6']])->DropDownList($items1, $params1)->label('Город');  ?>
     </div>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('Только латинские буквы и цифры. Можно не заполнять.') ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'time')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
 
     <?php $tags = !empty($model->devicesDetails) ? ArrayHelper::map(array_merge($model->devicesDetails),'id','devices_id') : '';
           $devicesDetails->devices_id = $tags
@@ -51,8 +55,25 @@ $devices = ArrayHelper::map(array_merge(\app\models\Devices::find()->where(['sta
         ],
     ])->label('Добавить устройств');
     ?>
+    <table class="table table-bordered table-hover">
+        <tr class="info">
+            <th>Город</th>
+            <th>Цена</th>
+        </tr>
+        <?php if(!empty($city)):?>
+            <?php
+            $pricesList = !empty($prices) ? ArrayHelper::map(array_merge($model->prices),'city_id','money') : '';
+            $prices->money = $pricesList; ?>
+            <?php foreach ($city as $value): ?>
+                <tr>
+                    <td><?=$value->name?></td>
+                    <?php $price_id = (!empty($value->price) ? $value->price->id : '') ?>
+                    <td><?= $form->field($prices, 'money['.$value->id.']')->textInput(['maxlength' => true]) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </table>
 
-    <?= $form->field($prices, 'money')->textInput(['maxlength' => true]) ?>
 
     <?php if($model->isNewRecord): ?>
         <?php $position = \app\models\DeviceProblems::find()->select('position')->where(['status'=>1])->orderBy('id DESC')->one();

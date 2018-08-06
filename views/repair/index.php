@@ -1,12 +1,7 @@
 <?php
-
 /* @var $this yii\web\View */
-
-$this->title = 'Калькулятор';
-
-
+$this->title = $one->title;
 ?>
-
 <br>
 <br>
 <div id="repair">

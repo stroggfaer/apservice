@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\models\DeviceProblems */
 
 $this->title = 'Редактировать: '.$model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Device Problems', 'url' => ['device-problems']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view-device-problems', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Проблемы с устройством', 'url' => ['device-problems']];
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view-device-problems', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="device-problems-update">

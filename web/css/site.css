@@ -2,7 +2,10 @@ html,
 body {
     height: 100%;
 }
-
+.clear {
+    font-size: 0px;
+    clear: both;
+}
 .wrap {
     min-height: 100%;
     height: auto;
@@ -124,4 +127,61 @@ a.desc:after {
 .dropdown-menu li a:hover {
     background: #323232;
     color: #9d9d9d
+}
+
+.menu__devices .item{
+    padding: 5px;
+    float: left;
+    border: 1px solid;
+    margin-right: 9px;
+}
+.menu__devices .item.active {
+    background: #1b8dbb;
+}
+.menu__devices .item.active a {
+    color: #fff;
+}
+.menu__devices .item a{
+    color: red;
+}
+/*Девайсы*/
+.devices__com {
+
+}
+.devices__com .item{
+    padding: 5px;
+    border: 1px solid;
+    display: inline-block;
+    margin-right: 3px;
+}
+.devices__com .item.active{
+    background: darkred;
+}
+.devices__com .item.active a{
+   color:#fff;
+}
+.devices__com.groups {
+    display: flex;
+    flex-wrap: wrap;
+}
+.devices__com.groups .group {
+    border: 1px solid;
+    padding: 5px;
+    width: 15%;
+    margin: 5px;
+}
+.devices__com.groups .group .name {
+    font-weight: bold;
+    text-align: center;
+}
+.devices__com.groups .group .item {
+    margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    cursor:pointer;
+}
+.devices__com.groups .group .item.active {
+    background: #0d3849;
+    color:#fff;
 }
