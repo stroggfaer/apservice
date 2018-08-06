@@ -5,20 +5,21 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\AuthItem;
 use app\models\User;
-
+use yii\db\Expression;
 /* @var $this yii\web\View */
 /* @var $model app\models\AuthAssignment */
 /* @var $form yii\widgets\ActiveForm */
 
 // Загрузка роли;
-$parent = AuthItem::find()->orderBy('name ASC')->all();
+$parent = AuthItem::find()->where(['status'=>1])->orderBy('name ASC')->all();
 $items = ArrayHelper::map(array_merge($parent),'name','name');
 $params = ['prompt' => 'Выберите роли', 'options' => [$model->item_name=>['selected'=>'selected']]];
 
 // Загрузка пользователи;
-$parent1 = User::find()->orderBy('id ASC')->all();
-$items1 = ArrayHelper::map(array_merge($parent1),'id', 'username');
+$parent1 = User::find()->select(['id', 'name' => new Expression("CONCAT(name,' ', family_name, ' ',last_name)") ])->where(['status'=>1])->orderBy('id ASC')->all();
+$items1 = ArrayHelper::map(array_merge($parent1),'id', 'name');
 $params1 = ['prompt' => 'Выберите пользователь', 'options' => [$model->user_id=>['selected'=>'selected']]];
+
 
 ?>
 

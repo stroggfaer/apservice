@@ -38,7 +38,7 @@ class Options extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 60],
             [['phone'], 'string', 'max' => 12],
             [['email', 'adminEmail'], 'string', 'max' => 30],
-            [['value'], 'string', 'max' => 200],
+            [['value','address'], 'string', 'max' => 200],
             [['logo', 'url', 'description'], 'string', 'max' => 128],
         ];
     }

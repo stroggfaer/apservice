@@ -34,10 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'user_id',
                 'label'=>'Пользователь',
                 'content'   => function ($data) {
-                    return '<b>'.$data->user->username.'</b>';
+                    $html = !empty($data->user->name) && !empty($data->user->family_name) ? $data->user->name.' '.$data->user->family_name.' '.$data->user->last_name : false;
+                    return  $html;
                 }
             ],
-           // 'created_at',
+            // 'created_at',
 
             [
                 'class' => 'yii\grid\ActionColumn',

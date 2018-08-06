@@ -2,6 +2,7 @@
 
 namespace app\modules\cms\controllers;
 use app\models\Pages;
+use dastanaron\translit\Translit;
 use app\modules\cms\models\PostSearchPages;
 
 use app\models\User;
@@ -10,42 +11,23 @@ use app\modules\cms\models\PostSearchUsers;
 use app\models\AuthAssignment;
 use app\modules\cms\models\AuthAssignmentSearch;
 
+use app\models\MenuRepairs;
+use app\modules\cms\models\MenuRepairSearch;
+use app\models\Functions;
+use app\models\Options;
+use app\models\UploadedImage;
+use yii\web\UploadedFile;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+
 /**
  * Default controller for the `cms` module
  */
 class DefaultController extends BackendController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-
-            'access' => [
-                'class' => \yii\filters\AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['admin','manager'],
-                    ],
-                ],
-            ],
-
-        ];
-    }
-
 
     /**
      * Renders the index view for the module
@@ -185,10 +167,11 @@ class DefaultController extends BackendController
     public function actionCreateUsers()
     {
 
-        $model = new User(['scenario' => User::SCENARIO_ADMIN_RULE]);
+        $model = new User();
         // Регистрация пользвателя;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
+                $model->phone = Functions::phone($model->phone);
                 // Генерация ключ;
                 $model->generateAuthKey();
                 $model->generateEmailConfirmToken();
@@ -215,6 +198,8 @@ class DefaultController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view-users', 'id' => $model->id]);
+        }else{
+            if(!empty($model->errors)) print_arr($model->errors);
         }
 
         return $this->render('users/update', [
@@ -347,4 +332,148 @@ class DefaultController extends BackendController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * Lists all MenuRepairs models.
+     * @return mixed
+     */
+    public function actionMenuRepairs()
+    {
+        $searchModel = new MenuRepairSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('menu-repairs/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single MenuRepairs model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewMenuRepairs($id)
+    {
+        return $this->render('menu-repairs/view', [
+            'model' => $this->findModelMenuRepairs($id),
+        ]);
+    }
+
+    /**
+     * Creates a new MenuRepairs model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateMenuRepairs()
+    {
+        $translit = new Translit();
+        $model = new MenuRepairs();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->url = mb_strtolower($translit->translit($model->title,true,'ru-en'));
+            if(!$model->save(true)) {
+                return 'Ошибка save';
+            }
+            return $this->redirect(['view-menu-repairs', 'id' => $model->id]);
+        }
+
+        return $this->render('menu-repairs/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing MenuRepairs model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateMenuRepairs($id)
+    {
+        $model = $this->findModelMenuRepairs($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-menu-repairs', 'id' => $model->id]);
+        }
+
+        return $this->render('menu-repairs/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing MenuRepairs model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteMenuRepairs($id)
+    {
+        $this->findModelMenuRepairs($id)->delete();
+
+        return $this->redirect(['menu-repairs']);
+    }
+
+    /**
+     * Finds the MenuRepairs model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return MenuRepairs the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelMenuRepairs($id)
+    {
+        if (($model = MenuRepairs::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /*--------------Настройки сайта-------------------------*/
+
+    public function actionSettings()
+    {
+        $model = $this->findModelSettings(1000);
+        $image = new UploadedImage();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // Загрузка изображения;
+            $image->imageMax = UploadedFile::getInstance($image, 'imageMax');
+            // Путь и расширения файл;
+            $file = Functions::pathFile('/documents/logo');
+            if(!empty($image->imageMax)) {
+                // Путь к файлу;
+                $fileDir = $file . '.' . $image->imageMax->extension;
+                //Добавляем изображения;
+                $image->imageMax->saveAs($fileDir);
+                $model->logo = '/files/documents/logo.'.$image->imageMax->extension;
+
+            }
+            if(!$model->save()) {
+                return false;
+            }
+            // Уведомления;
+            Yii::$app->getSession()->setFlash('success', 'Настройки успешно сохранены!');
+
+            return $this->redirect(['settings']);
+        }
+
+
+        return $this->render('settings/settings', [
+            'model' => $model,
+            'image' => $image,
+        ]);
+    }
+    protected function findModelSettings($id)
+    {
+        if (($model = Options::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }
