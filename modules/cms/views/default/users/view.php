@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Обновить', ['update-users', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Редактировать', ['update-users', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete-users', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -30,25 +30,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'username',
+            'name',
+            'family_name',
+            'last_name',
+            'phone',
+            'email:email',
+            [
+                'label'     => 'Дата рождения',
+                'attribute' => 'birthday',
+                'format' =>  ['date', 'php:d.m.Y'],
+            ],
             [
                 'label'     => 'Дата создания',
                 'attribute' => 'created_at',
                 'format' =>  ['date', 'php:d.m.Y'],
-                //'options' => ['width' => '100']
             ],
-           [
+            [
                 'label'     => 'Дата обновления',
                 'attribute' => 'updated_at',
                 'format' =>  ['date', 'php:d.m.Y'],
-                //'options' => ['width' => '100']
             ],
-          //  'auth_key',
-           // 'email_confirm_token:email',
-        //    'password_hash',
-         //   'password_reset_token',
-            'email:email',
             'status',
         ],
     ]) ?>
-
 </div>

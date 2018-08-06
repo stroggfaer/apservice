@@ -10,7 +10,7 @@ use app\models\Options;
 
 CmsAsset::register($this);
 
-
+$version = '2.0.2';
 $menu = Pages::find()->where(['status'=>1])->all();
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 
@@ -32,7 +32,7 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 <div class="wrap">
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
-            <div class="navbar-header"><a class="navbar-brand" href="/cms">CMS <small>v 1.1.0</small></a></div>
+            <div class="navbar-header"><a class="navbar-brand" href="/cms">CMS <small>v <?=$version?></small></a></div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <?php if(!empty(\Yii::$app->controller->actionNavigation)): ?>
@@ -67,9 +67,9 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; AppleService <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"></p>
     </div>
 </footer>
 

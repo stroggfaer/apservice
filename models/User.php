@@ -12,21 +12,28 @@ use yii\web\IdentityInterface;
 /**
  * This is the model class for table "user".
  *
- * @property integer $id
- * @property integer $created_at
- * @property integer $updated_at
+ * @property int $id
+ * @property int $created_at
+ * @property int $updated_at
  * @property string $username
+ * @property string $name
+ * @property string $family_name
+ * @property string $last_name
+ * @property string $birthday
  * @property string $phone
+ * @property string $money
  * @property string $auth_key
  * @property string $email_confirm_token
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
- * @property integer $status
+ * @property int $type
+ * @property int $status
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const SCENARIO_ADMIN_RULE = 'admin_signup'; // Правила для админки;
+    const SCENARIO_ADMIN_DEFAULT = 'admin_default'; // Правила для админки;
 
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
@@ -57,18 +64,22 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['username', 'required'],
-            ['username', 'match', 'pattern' => '#^[\w_-]+$#is'],
-            ['username', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
+            [['username','name', 'family_name', 'last_name'], 'required'],
+            //['username', 'match', 'pattern' => '#^[\w_-]+$#is'],
+            ['username', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.','on' => self::SCENARIO_ADMIN_DEFAULT],
             ['username', 'string', 'min' => 2, 'max' => 255],
+            ['post', 'string', 'max' => 255],
+            [['name', 'family_name', 'last_name'], 'string', 'max' => 68],
 
+            [['birthday'], 'safe'],
 
-            ['email', 'required'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => self::className(), 'message' => 'This email address has already been taken.'],
             ['email', 'string', 'max' => 255],
 
-            ['status', 'integer'],
+            [['phone'], 'string', 'max' => 25],
+
+            [['status','type'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
@@ -89,9 +100,18 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => 'Создан',
             'updated_at' => 'Обновлён',
             'username' => 'Логин',
+            'name' => 'Имя',
+            'family_name' => 'Фамилия',
+            'last_name' => 'Отчество',
+            'birthday' => 'Дата рождения',
+            'phone' => 'Телефон',
+            'money' => 'Баланс',
             'password_repeat' => 'Повторить пароль',
             'password' => 'Пароль',
             'email' => 'Email',
+            'gender'=>'Пол',
+            'type' => 'Сотрудник',
+             'post'=>'Должность',
             'status' => 'Статус',
         ];
     }

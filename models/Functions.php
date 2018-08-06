@@ -19,28 +19,6 @@ class Functions extends Model
         }
     }
 
-    // Обработка Timestamp;
-    public static function makeTimestamp($string)
-    {
-        if(empty($string)) {
-            $time = time();
-
-        } elseif (preg_match('/^\d{14}$/', $string)) {
-            $time = mktime(substr($string, 8, 2),substr($string, 10, 2),substr($string, 12, 2),
-                substr($string, 4, 2),substr($string, 6, 2),substr($string, 0, 4));
-
-        } elseif (is_numeric($string)) {
-            $time = (int)$string;
-
-        } else {
-            $time = strtotime($string);
-            if ($time == -1 || $time === false) {
-                $time = time();
-            }
-        }
-        return $time;
-    }
-
     // Генерация sms-код
     public static function codeSms($phone) {
         if(!empty($phone)) {
@@ -82,9 +60,13 @@ class Functions extends Model
     }
 
     // Обработка телефон;
-    public static function phone($phone)
+    public static function phone($phone,$type = true)
     {
-        return str_replace('+7', '', $phone);
+        if($type) {
+            return preg_replace('/(\()|(\))|(-)|(\s)|(^8)/', '', $phone);
+        }else{
+            return preg_replace('/(\+7)|(\()|(\))|(-)|(\s)|(^8)/', '', $phone);
+        }
     }
     public static function phone_is($phone)
     {
@@ -107,6 +89,19 @@ class Functions extends Model
             mkdir($dirName);
         }
         file_put_contents($dirName.'/'.$fileName, $file."\n");
+    }
+// Путь к файлу;
+    public static function pathFile($path= false) {
+        return $_SERVER['DOCUMENT_ROOT'].'/files'.$path;
+    }
+
+    // Директория фотографии;
+    public static function photoDir($photo_id,$type = false) {
+        if(!empty($type)) {
+            return substr(md5($photo_id), 0, 2);
+        }else {
+            return substr(md5($photo_id), 0, 2) . '/' . $photo_id;
+        }
     }
 
 }

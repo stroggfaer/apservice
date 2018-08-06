@@ -3,7 +3,12 @@
 namespace app\modules\cms\controllers;
 use Yii;
 use yii\web\Controller;
-
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use \yii\web\Response;
+use yii\helpers\Html;
+use yii\web\UploadedFile;
+use app\models\UploadedImage;
 /**
  * Default controller for the `admin` module
  */
@@ -131,7 +136,7 @@ class BackendController extends Controller
             'status' => 1,
             'items' => [
                 [
-                    'link' => '/cms/name-site',
+                    'link' => '/cms/settings',
                     'title' => 'Настройки',
                 ],
                 [
@@ -153,5 +158,31 @@ class BackendController extends Controller
         ];
 
 
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin','manager'],
+                    ],
+                ],
+            ],
+
+        ];
     }
 }

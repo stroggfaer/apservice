@@ -13,43 +13,21 @@ use app\modules\cms\models\AuthAssignmentSearch;
 
 use app\models\MenuRepairs;
 use app\modules\cms\models\MenuRepairSearch;
-
+use app\models\Functions;
+use app\models\Options;
+use app\models\UploadedImage;
+use yii\web\UploadedFile;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+
 /**
  * Default controller for the `cms` module
  */
 class DefaultController extends BackendController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-
-            'access' => [
-                'class' => \yii\filters\AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['admin','manager'],
-                    ],
-                ],
-            ],
-
-        ];
-    }
-
 
     /**
      * Renders the index view for the module
@@ -189,10 +167,11 @@ class DefaultController extends BackendController
     public function actionCreateUsers()
     {
 
-        $model = new User(['scenario' => User::SCENARIO_ADMIN_RULE]);
+        $model = new User();
         // Регистрация пользвателя;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
+                $model->phone = Functions::phone($model->phone);
                 // Генерация ключ;
                 $model->generateAuthKey();
                 $model->generateEmailConfirmToken();
@@ -219,6 +198,8 @@ class DefaultController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view-users', 'id' => $model->id]);
+        }else{
+            if(!empty($model->errors)) print_arr($model->errors);
         }
 
         return $this->render('users/update', [
@@ -452,4 +433,47 @@ class DefaultController extends BackendController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /*--------------Настройки сайта-------------------------*/
+
+    public function actionSettings()
+    {
+        $model = $this->findModelSettings(1000);
+        $image = new UploadedImage();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // Загрузка изображения;
+            $image->imageMax = UploadedFile::getInstance($image, 'imageMax');
+            // Путь и расширения файл;
+            $file = Functions::pathFile('/documents/logo');
+            if(!empty($image->imageMax)) {
+                // Путь к файлу;
+                $fileDir = $file . '.' . $image->imageMax->extension;
+                //Добавляем изображения;
+                $image->imageMax->saveAs($fileDir);
+                $model->logo = '/files/documents/logo.'.$image->imageMax->extension;
+
+            }
+            if(!$model->save()) {
+                return false;
+            }
+            // Уведомления;
+            Yii::$app->getSession()->setFlash('success', 'Настройки успешно сохранены!');
+
+            return $this->redirect(['settings']);
+        }
+
+
+        return $this->render('settings/settings', [
+            'model' => $model,
+            'image' => $image,
+        ]);
+    }
+    protected function findModelSettings($id)
+    {
+        if (($model = Options::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }
