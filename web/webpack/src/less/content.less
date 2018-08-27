@@ -1,0 +1,371 @@
+.repair {
+   .slides {
+       width: 100%;
+       height: 560px;
+       background: url('@{imagesPath}/bg.jpg') 0px 0px no-repeat;
+       color:@white;
+       @media only screen and (max-width: @screen-mobile-min) {
+          height: 490px;
+          background-size: cover;
+          background-position: center;
+       }
+       .container {
+           h1 {
+             margin-top: 50px;
+           }
+           .top {
+              margin-top: 30px;
+           }
+           .center-block {
+             width: 660px;
+             margin: 20px auto;
+             font-size: 18px;
+             font-weight: bold;
+             .icon__md {
+                 padding: 5px 0px;
+                 &.left {
+                    margin-left: 55px;
+                 }
+             }
+           }
+           .flex-bottom {
+              display: flex;
+              flex-wrap: nowrap;
+              justify-content: space-evenly;
+              margin-top: 70px;
+              .col {
+                 width: 20%;
+                 text-align: center;
+                 cursor: pointer;
+                 .icon-circle {
+                   background: @white;
+                   color:@black;
+                   width: 95px;
+                   padding: 25px 0;
+                   border-radius: 50%;
+                   text-align: center;
+                   font-size: 42px;
+                   margin: 0 auto;
+                 }
+                  .description {
+                    color:@white;
+                    font-size: 14px;
+                    margin-top: 10px;
+                  }
+                &:hover {
+                  .icon-circle {
+                     color:@blue1;
+                  }
+                  .description {
+                    text-decoration: underline;
+                  }
+                }
+              }
+             @media only screen and (max-width: @screen-mobile-min) {
+                display: block;
+                .col {
+                   width: 50%;
+                   float: left;
+                   margin-bottom: 40px;
+                }
+             }
+           }
+           .buttons {
+               margin-top: 50px;
+              .btn {
+                 font-size: 20px;
+              }
+           }
+           @media only screen and (max-width: @screen-mobile-min) {
+              .top {
+                margin: 0px;
+              }
+              .flex-bottom {
+                 margin-top: 40px;
+              }
+              .center-block {
+                 width: 100%;
+                 margin: 0px;
+              }
+           }
+       }
+   }
+   .menu__devices {
+      margin-top: 10px;
+   }
+   .title-main {
+      padding: 20px 0px;
+      @media only screen and (max-width: @screen-mobile-min) {
+         padding: 0px;
+      }
+   }
+   .devices {
+       .description-seo {
+           margin-bottom: 30px;
+           .text {
+              font-size: 16px;
+           }
+       }
+   }
+  .devices-problems {
+    .title-main-1 {
+       margin: 40px 0 20px;
+    }
+    .default-problems {
+      padding: 30px 0px;
+      a {
+         margin-right: 20px;
+      }
+    }
+    .more {
+      font-size: 18px;
+      padding: 22px 0px;
+      text-align: center;
+    }
+    @media only screen and (max-width: @screen-mobile-min) {
+      .title-main-1 {
+        margin: 20px 0 20px;
+      }
+    }
+  }
+
+  .diagnostics {
+     background: @black1;
+     color:@white1;
+     height: 350px;
+     padding-top: 20px;
+     .form {
+        width: 60%;
+        .description {
+           color:@white1;
+           margin-top: 20px;
+        }
+        .form__mod {
+           padding-top: 25px;
+           padding-bottom: 10px;
+        }
+        .description-warning {
+           font-size: 11px;
+           display: none;
+        }
+       @media only screen and (max-width: @screen-mobile-min) {
+           .form__mod {
+              .form-group {
+                 width: 100%;
+              }
+           }
+       }
+     }
+     .result-content {
+       width: 40%;
+       .content {
+         padding-left: 100px;
+         padding-top: 30px;
+         .description-warning {
+           font-size: 11px;
+         }
+         .title {
+           padding: 25px 0 18px;
+           font-size: 16px;
+           font-weight: normal;
+         }
+         ._icon-ap {
+           padding: 0 0 5px 35px;
+           font-size: 23px;
+         }
+       }
+     }
+     @media only screen and (max-width: @screen-sm-min) {
+        .text-left {
+           text-align: center;
+        }
+        .form {
+          .description-warning {
+             display: block;
+          }
+        }
+        .result-content{
+          .description-warning {
+              display: none;
+          }
+        }
+        .form,.result-content{
+           width: 100%;
+           text-align: center;
+        }
+        .result-content{
+           .content {
+             padding: 0 0 20px 0;
+             ._icon-ap {
+                display: inline-block;
+                padding: 0 30px 5px 25px;
+                vertical-align: text-bottom;
+                position: relative;
+                left:20px;
+             }
+           }
+        }
+
+        height: auto;
+     }
+   }
+  .call-form-content {
+    background: @black1;
+    color:@white1;
+    height: 210px;
+    padding-top: 20px;
+    .description {
+      font-size: 14px;
+      color: @white1;
+      margin-bottom: 30px;
+    }
+    &.salon {
+       h3 {
+          padding: 5px 0;
+          margin: 10px 0 30px;
+       }
+      .form__mod {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+    @media only screen and (max-width: @screen-sm-min) {
+      height: auto;
+      padding-bottom: 35px;
+      &.salon {
+        .form__mod {
+           width: 100%;
+        }
+      }
+    }
+    @media only screen and (max-width: @screen-mobile-min) {
+
+        .form__mod {
+          width: 100%;
+          label {
+            text-align: center;
+          }
+          .form-group {
+            width: 100%;
+            margin-right: 0px;
+            .btn.circle {
+               width: 100%;
+            }
+          }
+        }
+
+    }
+  }
+
+  .return-problem {
+     background: @grey3;
+     text-align: center;
+     padding: 25px 0px;
+     height: 220px;
+    .price {
+       font-size: 24px;
+       padding: 5px 0;
+       margin-top: 20px;
+       color:@blue;
+       font-weight: bold;
+    }
+  }
+
+  .description-seo {
+     &.padding {
+        padding: 30px 0px;
+     }
+    .text {
+       font-size: 14px;
+    }
+  }
+  .apple-service {
+     margin-bottom: 10px;
+     .item {
+        padding: 25px 0;
+        border-bottom: 1px solid @grey;
+        width: 70%;
+        margin: 0 auto;
+        &:last-child {
+         border-bottom: none;
+       }
+        img {
+           width: 140px;
+        }
+        .address-service {
+          @pad: 2px;
+           .title {
+             font-weight: bold;
+             font-size: 16px;
+             margin-bottom: 5px;
+           }
+           .address {
+             padding: @pad;
+           }
+           .metro {
+             padding: 2px 0px 0px 20px;
+             background: url('@{imagesPath}/metro.png') 0px 0px no-repeat;
+             background-size: 18px;
+             background-position: 0 3px;
+           }
+          .time {
+            padding: @pad;
+          }
+          .phone {
+             font-weight: bold;
+             margin-top: 12px;
+          }
+        }
+        .total {
+           border: 1px solid @grey;
+           padding: 10px;
+           .problems {
+              padding: 5px 0px;
+           }
+          ._icon-ap2 {
+             padding: 7px 2px 2px 25px;
+             font-size: 16px;
+          }
+        }
+        @media only screen and (max-width: @screen-sm-min) {
+          width: 100%;
+        }
+
+        @media only screen and (max-width: @screen-mobile-min) {
+           .image {
+              width: 33.33333333%;
+              img {
+                width: 100px !important;
+              }
+           }
+           .address-service  {
+              width: 66.66666667%;
+           }
+           .block {
+              width: 100%;
+              padding-top: 20px;
+              .problems, .content  {
+                float: left;
+                width: 50%;
+              }
+           }
+        }
+     }
+  }
+
+
+
+  .info-call {
+    background: @black1;
+    color:@white1;
+    padding: 10px 0 15px;
+    margin-top: 50px;
+    text-align: center;
+    .phone {
+      font-size: 1.8em;
+      padding: 5px 0;
+      margin-top: 10px;
+    }
+  }
+}
+
