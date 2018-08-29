@@ -46,47 +46,204 @@ $city = \Yii::$app->action->currentCity;
 <div id="is_city_one"></div>
 <?php endif; ?>
 
-<div class="wrap">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Brand</a>
+<div class="wrapper">
+    <!--Шапка-->
+    <div id="header">
+        <div class="container size">
+            <div class="desktop">
+                <a class="logo" href="/">
+                    <span></span>
+                </a>
+                <div class="select-city-menu">
+                    <div class="mcs-module">
+                        <a class="city geo_position js-city" href="javascript:void(0)" title="Выбрать другой город"><?=$city->name?></a>
+                    </div>
+                </div>
+                <div class="fixed_menu">
+                    <div class="slide_menu">
+                        <div class="slide_menu-btn"><span class="slide_menu-btn-two_border"></span>
+                            <?=  app\components\WMenuTop::widget()?>
+                        </div>
+                    </div>
+                </div>
+                <div class="top_phone  icon-fa">
+                    <i class="fa fa-phone white" aria-hidden="true"></i>
+                    <a href="tel:+73832393106" class="callibri_phone">+7 (383) 239-31-06</a>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <?php foreach($menu as $key=>$value): ?>
-                        <li class=""><a href="repair/<?=$value->url?>"><?=$value->title?></a></li>
-                    <?php endforeach; ?>
-                    <li class="modal" id="geo"><a href="#" class="no_border geo_position js-city"><?=$city->name?></a></li>
-                </ul>
-
-                <?php if(!empty(Yii::$app->user->isGuest)):?>
-                   <a  class="btn btn-primary  navbar-btn pull-right" style="margin-left: 10px" href="/repair/login">Регистрация</a>
-                   <a  class="btn btn-success  navbar-btn pull-right" href="/repair/login">Войти</a>
-                <?php else: ?>
-                    <a class="pull-right navbar-btn" href="/site/logout" style="color:#fff;margin-left: 10px">Выйти</a>
-                    <a class="pull-right navbar-btn" href="#" style="color:#fff"><?=Yii::$app->user->identity->username ?></a>
-                <?php endif; ?>
+            <div class="mobile">
+                <div class="flex">
+                    <div class="fixed_menu">
+                        <div class="slide_menu">
+                            <div class="slide_menu-btn"><span class="slide_menu-btn-two_border"></span>
+                                <?=  app\components\WMenuTop::widget()?>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="logo" href="/">
+                        <span></span>
+                    </a>
+                    <div class="top_phone  icon-fa">
+                        <a href="tel:+73832393106" class="callibri_phone"><i class="fa fa-phone white" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+    <div id="menu">
+        <div class="container size">
+            <?=  app\components\WMenu::widget()?>
+            <div class="basket">
+                <div class="icon-basket"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> <!--./Шапка-->
+    <!--Content-->
+    <div id="center">
+        <!--Главная страница-->
+        <div class="repair">
+            <?=  app\components\WSlides::widget()?>
+            <?=$content?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+        </div> <!--./Главная страница-->
+    </div> <!--./Content-->
 
-        <?= $content ?>
+</div>
+<div id="footer">
+    <div class="container size">
+        <!--Десктоп-->
+        <div class="desktop">
+            <div class="border">
+                <div class="custom-menu_in_footer">
+                    <ul>
+                        <li><a href="/about">О компании</a></li>
+                        <li><a href="http://appleservice.us/">Франчайзинг</a></li>
+                        <li><a href="/repair">Ремонт</a></li>
+                        <li><a href="/apple-shop">Продукция Apple</a></li>
+                        <li><a href="/informatsiya">Информация</a></li>
+                        <li><a href="/corpotdel">Организациям</a></li>
+                        <li><a href="/support">Поддержка</a></li>
+                        <li><a href="/accessories">Аксессуары</a></li>
+                        <li><a href="/news">Новости</a></li>
+                        <li><a href="/vakansii">Вакансии</a></li>
+                    </ul>
+                </div>
+                <div class="custom_footerInfo">
+                    <div class="footerSocial">
+                        <span>Мы в социальных сетях:</span>
+                        <div>
+                            <a href="https://www.facebook.com/appleservicensk/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="https://vk.com/appleservicensk" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                            <a href="https://www.instagram.com/http.apple.sc/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="footerCards">
+                        <span>Принимаем:</span>
+                        <div class="cardLogo" id="logoVisa"><i class="fa fa-cc-visa" aria-hidden="true"></i></div>
+                        <div class="cardLogo" id="logoMastercard"><i class="fa fa-cc-mastercard" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="">
+                <div class="custom-adresses">
+                    <h3>Салоны в Новосибирске</h3>
+                </div>
+                <div class="contacts ">
+                    <div class="item">
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                    </div>
+                    <div class="item">
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                    </div>
+                    <div class="item">
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                        <div class="address"><a href="#" class="dotted">"Универсам"</a></div>
+                    </div>
+
+                </div>
+                <div class="copyright">
+                    <div>© 2008-2018 Сервисный центр AppleService  |  ООО Эпплсервис-НСК2 ИНН5401283771</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div><!--./Десктоп-->
+        <!--Мобилка-->
+        <div class="mobile">
+            <div class="menu_bottom__mod">
+                <div class="items">
+                    <div class="item">
+                        <div class="name">О компании</div>
+                        <div class="i">
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">О компании</div>
+                        <div class="i">
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">О компании</div>
+                        <div class="i">
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">О компании</div>
+                        <div class="i">
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">О компании</div>
+                        <div class="i">
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                            <div><a href="#">Информация</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="social">
+                <a href="https://www.facebook.com/appleservicensk/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://vk.com/appleservicensk" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/http.apple.sc/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+            <div class="copyright">
+                <div>© 2008-2018 Сервисный центр AppleService  |  ООО Эпплсервис-НСК2 ИНН5401283771</div>
+            </div>
+        </div> <!--./Мобилка-->
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

@@ -20,9 +20,15 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        //'css/site.css',
+        'js/vendor/carousel/slick.css',
+        'js/vendor/fancybox/jquery.fancybox.css',
+        'js/vendor/font-awesome/css/font-awesome.min.css',
+         'build/css/style.bundle.css'
     ];
     public $js = [
+        'js/vendor/fancybox/jquery.fancybox.js',
+        'js/vendor/carousel/slick.min.js',
         'js/site.js',
         'js/functions.js',
     ];

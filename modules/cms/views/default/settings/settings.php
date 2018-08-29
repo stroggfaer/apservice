@@ -29,7 +29,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'adminEmail')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'value')->textInput(['maxlength' => true])->hint('Можно например написать время работы Колл-центра') ?>
+    <?= $form->field($model, 'value')->textInput(['maxlength' => true])->hint('Например можно написать время работы Колл-центра') ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true])->label('Домен'); ?>
 

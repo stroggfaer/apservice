@@ -796,7 +796,7 @@ h1 {
        height: 105px;
        text-align: center;
 
-      &:hover {
+      &:hover,&.active {
           border-bottom: 1px solid @blue;
           a {
              text-decoration: none;
@@ -845,7 +845,7 @@ h1 {
       a {
         display: block;
         border: 1px solid @grey;
-        padding: 5px 60px;
+        padding: 5px 30px;
         color: @black;
         font-size: 16px;
         border-radius: 50px;
@@ -931,7 +931,7 @@ h1 {
           a {
             font-size: 14px;
           }
-          &.active {
+          &.open {
             a {
               border-color: @reg;
               font-weight: bold;
@@ -942,7 +942,7 @@ h1 {
               }
             }
           }
-          &:hover {
+          &:hover, &.active  {
             a {
               background: @blue;
               color: @white;
@@ -1008,17 +1008,31 @@ h1 {
 }
 
 .devices__menu {
-  padding: 10px 0px 10px 0;
+ // padding: 10px 0px 10px 0;
   margin-bottom: 25px;
   border-bottom: 1px solid @grey;
   .items {
     padding: 0 15px;
      .item{
-
+       padding: 0 5px;
+       position: relative;
+        a {
+          display: block;
+          text-align: center;
+          text-decoration: none;
+          height: 40px;
+          padding: 8px 0;
+        }
+       &:hover,&.active {
+          a {
+            border-bottom: 1px solid @blue;
+            color:@blue;
+          }
+       }
      }
      .fa {
        position: absolute;
-       top: -2px;
+       top: 5px;
        font-size: 23px;
         &.fa-angle-left {
           left: 0;

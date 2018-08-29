@@ -28,25 +28,23 @@ class WDevicesProblems extends Widget{
         if (empty($this->model->devicesProblems) && empty($this->one)) {
             return false;
         }else {
-
             ?>
-            <div class="devices__com">
-                <?php
-
-                if(!empty($this->model->devicesProblems)): ?>
-                    <?php foreach ($this->model->devicesProblems as $devicesProblems):
-                        $active = $this->one->id == $devicesProblems->id ? 'active': '';
-                        ?>
-                        <div class="item <?=$active?>">
-
-                            <a href="<?=$this->model->getUrl($devicesProblems->url)?>">
-                                <?=$devicesProblems->title?>
-                            </a>
-                            <div class="text-center"><?=$devicesProblems->value?></div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
+            <?php if(!empty($this->model->devicesProblems)): ?>
+               <div class="items">
+                <?php foreach ($this->model->devicesProblems as $devicesProblems):
+                    $active = $this->one->id == $devicesProblems->id ? 'active': '';
+                    ?>
+                      <div class="item <?=$active?>">
+                         <a href="<?=$this->model->getUrl($devicesProblems->url)?>">
+                             <?=$devicesProblems->title?>
+                             <?php if(!empty($devicesProblems->value)): ?>
+                                <div class="small"><?=$devicesProblems->value?></div>
+                             <?php endif; ?>
+                         </a>
+                       </div>
+                   <?php endforeach; ?>
+               </div>
+            <?php endif; ?>
             <?php
         }
     }

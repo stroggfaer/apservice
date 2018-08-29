@@ -3,7 +3,7 @@
 * */
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     // Настраиваем путь исходника;
@@ -54,5 +54,10 @@ module.exports = {
             filename: './css/style.bundle.css',
             allChunks: true,
         }),
+        new CopyWebpackPlugin([{
+            from: './fonts',
+            to: './fonts'
+        },
+        ]),
     ]
 };
