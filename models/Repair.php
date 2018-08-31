@@ -5,7 +5,7 @@ use yii\base\Model;
 use Yii;
 use app\models\MenuRepairs;
 /*
- * Repair version 1.0.0
+ * Repair version 1.2.0
  * */
 
 class Repair extends Model
@@ -46,7 +46,7 @@ class Repair extends Model
         return $devices;
     }
 
-    // Список проблемы;
+    // Tекущие роблемы;
     public function getCurrentDeviceProblems($last = false) {
         if(!$last) return false;
         $deviceProblems = DeviceProblems::find()->where(['url'=>$last,'status'=>1])->one();

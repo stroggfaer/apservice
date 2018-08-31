@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'keywords',
             // 'description:ntext',
             // 'text:ntext',
-            // 'status',
-
+             'position',
+             'status',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}&nbsp;{update}&nbsp;{delete}',

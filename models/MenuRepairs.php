@@ -34,7 +34,7 @@ class MenuRepairs extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['seo_description'], 'string'],
+            [['seo_description','icon'], 'string'],
             [['position', 'status'], 'integer'],
             [['url', 'title'], 'string', 'max' => 128],
             [['seo_title'], 'string', 'max' => 258],
@@ -52,6 +52,7 @@ class MenuRepairs extends \yii\db\ActiveRecord
             'title' => 'Название',
             'seo_title' => 'Сео название',
             'seo_description' => 'Сео описание',
+            'icon' => 'Икон class',
             'position' => 'Позиция',
             'status' => 'Статус',
         ];

@@ -24,24 +24,25 @@ class WDevicesProblemsGroups extends Widget{
             return false;
         }else {
 
-
             ?>
             <div class="devices__com groups">
-                <?php foreach ($this->model->devicesProblemsGroups as $devicesProblemsGroups): ?>
+                <div class="items">
+                 <?php foreach ($this->model->devicesProblemsGroups as $devicesProblemsGroups): ?>
                     <div class="group">
                         <div class="name"><?=$devicesProblemsGroups->title?></div>
                         <?php if(!empty($devicesProblemsGroups)): ?>
-                            <?php foreach ($devicesProblemsGroups->deviceProblems as $devicesProblems): ?>
-                                <div class="item">
+                           <?php foreach ($devicesProblemsGroups->deviceProblems as $devicesProblems): ?>
+                               <div class="item">
                                     <a href="<?=Yii::$app->request->url.$devicesProblems->url?>">
-                                      <?=$devicesProblems->title?>
-                                      <div class="small"><?=($devicesProblems->value ? $devicesProblems->price->value : '')?></div>
+                                        <?=$devicesProblems->title?>
+                                        <div class="small"><?=($devicesProblems->value ? $devicesProblems->price->value : '')?></div>
                                     </a>
-                                </div>
+                              </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
-                <?php endforeach; ?>
+                 <?php endforeach; ?>
+                </div>
             </div>
             <?php
         }

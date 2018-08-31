@@ -18,7 +18,7 @@ class PostSearchPages extends Pages
     public function rules()
     {
         return [
-            [['id', 'group_id', 'menu', 'positions', 'status'], 'integer'],
+            [['id', 'group_id', 'menu', 'position', 'status'], 'integer'],
             [['url', 'title', 'seo_title', 'keywords', 'description', 'text'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class PostSearchPages extends Pages
             'id' => $this->id,
             'group_id' => $this->group_id,
             'menu' => $this->menu,
-            'positions' => $this->positions,
+            'position' => $this->position,
             'status' => $this->status,
         ]);
 

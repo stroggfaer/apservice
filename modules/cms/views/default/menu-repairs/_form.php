@@ -27,7 +27,8 @@ use yii\widgets\ActiveForm;
     <?php else: ?>
         <?= $form->field($model, 'position')->textInput() ?>
     <?php endif; ?>
-
+    <?= $form->field($model, 'icon')->textInput(['maxlength' => true])
+        ->hint('Доступные классы: icon-iphone,icon-ipad,icon-mac,icon-watch,icon-tv') ?>
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>
 
     <div class="form-group">

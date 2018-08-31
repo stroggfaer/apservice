@@ -25,13 +25,27 @@ class WMenuRepairs extends Widget{
         }else {
             ?>
             <div class="menu__devices">
-                <div class="items">
+                <div class="items desktop">
                     <?php foreach ($this->model->menuRepairs as $key=>$value ): ?>
                         <?php $active = (!empty($this->model->currentRepair->id) && $this->model->currentRepair->id == $value->id ? 'active' : '') ?>
-                        <div class="item <?=$active?>"><a href="/repair/<?=$value->url?>"><?=$value->title?></a></div>
+                        <div class="item <?=$active?>">
+                            <a href="/repair/<?=$value->url?>">
+                                <div class="icon-menu <?=$value->icon?>"></div>
+                                <div class="menu"><?=$value->title?></div>
+                            </a>
+                        </div>
                     <?php endforeach;  ?>
                 </div>
-                <div class="clear"></div>
+                <div class="mobile">
+                    <div class="select__mod">
+                        <select class="select">
+                            <?php foreach ($this->model->menuRepairs as $key=>$value ): ?>
+                                <?php $active = (!empty($this->model->currentRepair->id) && $this->model->currentRepair->id == $value->id ? 'active' : '') ?>
+                                <option <?=!empty($active) ? 'selected': '' ?>><a href=""><?=$value->title?></a></option>
+                            <?php endforeach;  ?>
+                        </select>
+                    </div>
+                </div>
             </div>
             <?php
         }
