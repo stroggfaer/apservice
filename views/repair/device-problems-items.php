@@ -6,6 +6,7 @@
  * Time: 17:16
  */
 $this->title = $one->title;
+$content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
 
 ?>
 <div class="container size">
@@ -31,11 +32,11 @@ $this->title = $one->title;
     </div>
 </div>
 <div class="container size">
+    <?php if(!empty($content)): ?>
     <div class="description-seo padding">
-        <div class="text">
-            Неврология (невропатология) — область медицины, которая занимается профилактикой, диагностикой и лечением заболеваний нервной системы, а также разрабатывает схемы реабилитации после перенесенных неврологических заболеваний. Учитывая то, что нервная система регулирует и контролирует деятельность практических всех органов и процессов в организме, становится понятной необходимость приема у невролога при первых же признаках патологии.
-        </div>
+        <div class="text"><?=$content->text?></div>
     </div>
+    <?php endif; ?>
 </div>
 <div class="call-form-content salon">
     <div class="container size">

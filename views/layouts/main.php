@@ -60,7 +60,7 @@ $city = \Yii::$app->action->currentCity;
                     </div>
                 </div>
                 <div class="fixed_menu">
-                    <div class="slide_menu">
+                    <div class="slide_menu js-menu">
                         <div class="slide_menu-btn"><span class="slide_menu-btn-two_border"></span>
                             <?=  app\components\WMenuTop::widget()?>
                         </div>

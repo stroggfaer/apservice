@@ -2,6 +2,7 @@
 namespace app\components;
 
 use app\models\Clients;
+use app\models\Devices;
 use app\models\fitness\UserFitness;
 use kartik\date\DatePicker;
 use kartik\datetime\DateTimePicker;
@@ -21,41 +22,29 @@ class WDevicesProblemsList extends Widget{
     }
     public function run(){
 
-        if (empty($this->model->devicesProblems) && false) {
-            return false;
-        }else {
-
+        $devices = new Devices();
+        $devicesAll = $devices->getDevices();
             ?>
+
+
+
             <div class="devices-problems-list">
                 <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
                 <div class="devices__menu devices_carusel desktop">
                     <div class="items">
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
-                        <div class="item"><a href="#">iPhone 6S Plus</a></div>
+                        <?php foreach ($devicesAll as $key => $value): ?>
+                            <div class="item <?=$key == 0 ? 'active' : ''?>"  data-id="<?=$value->id?>"><a href="#"><?=$value->title?></a></div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="select__mod mobile">
                     <select class="select">
-                        <option>Ремонт Phone</option>
-                        <option>Ремонт Phone</option>
-                        <option>Ремонт Phone</option>
-                        <option>Ремонт Phone</option>
-                        <option>Ремонт Phone</option>
-                        <option>Ремонт Phone</option>
-                        <option>Ремонт Phone</option>
-                        <option>Ремонт Phone</option>
+                        <?php foreach ($devicesAll as $key => $value): ?>
+                           <option <?=$key == 0 ? 'selected' : ''?> data-id="<?=$value->id?>"><?=$value->title?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
+
                 <div class="table">
                     <table class="table">
                         <tr>
@@ -63,37 +52,18 @@ class WDevicesProblemsList extends Widget{
                             <th class="text-right name2">Цена выезде</th>
                             <th class="text-right name3">Цена в сервисных центрах</th>
                         </tr>
-                        <tr>
-                            <td><a href="#">Замена сеткла</a></td>
-                            <td class="text-right">2 350 руб</td>
-                            <td class="text-right">от 1350 руб</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Замена сеткла</a></td>
-                            <td class="text-right">2 350 руб</td>
-                            <td class="text-right">от 1350 руб</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Замена сеткла</a></td>
-                            <td class="text-right">2 350 руб</td>
-                            <td class="text-right">от 1350 руб</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Замена сеткла</a></td>
-                            <td class="text-right">2 350 руб</td>
-                            <td class="text-right">от 1350 руб</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Замена сеткла</a></td>
-                            <td class="text-right">2 350 руб</td>
-                            <td class="text-right">от 1350 руб</td>
-                        </tr>
-
+                        <?php foreach ($devices->deviceProblems as $deviceProblem): ?>
+                            <tr>
+                                <td><a href="<?=$devices->device->menuRepair->url?>/<?=$devices->device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></td>
+                                <td class="text-right">2 350 руб</td>
+                                <td class="text-right"><?=$deviceProblem->value?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </table>
                     <a href="#" class="dotted">Еще услуги</a>
                 </div>
             </div>
             <?php
         }
-    }
+
 }

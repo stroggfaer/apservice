@@ -22,6 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions'   => function ($model, $key, $index, $grid) {
+            $class = ($model->status == 1 ? '' : 'text-danger');
+
+            return [
+                'key'   => $key,
+                'index' => $index,
+                'class' => $class
+            ];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

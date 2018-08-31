@@ -34,9 +34,9 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'seo_title', 'keywords', 'description', 'text'], 'required'],
-            [['description', 'text'], 'string'],
-            [['menu', 'positions', 'status'], 'integer'],
+            [['title'], 'required'],
+            [['description', 'text','value'], 'string'],
+            [['menu', 'position', 'status'], 'integer'],
             [['url', 'title', 'seo_title'], 'string', 'max' => 128],
             [['keywords'], 'string', 'max' => 228],
         ];
@@ -56,8 +56,20 @@ class Pages extends \yii\db\ActiveRecord
             'description' => 'Описание',
             'text' => 'Текст',
             'menu' => 'Тип меню',
-            'positions' => 'Позиция',
+            'value' => 'Значения',
+            'position' => 'Позиция',
             'status' => 'Статус',
         ];
     }
+
+    /*--------Страница--------*/
+
+    // Вывод меню страницы;
+    public static function menuPages($type= 1) {
+        $pages = self::find()->where(['status'=>1,'menu'=>$type])->orderBy('position ASC')->all();
+        return $pages;
+    }
+
+
+
 }

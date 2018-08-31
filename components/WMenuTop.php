@@ -1,14 +1,9 @@
 <?php
 namespace app\components;
-
-use app\models\Clients;
-use app\models\fitness\UserFitness;
-use kartik\date\DatePicker;
-use kartik\datetime\DateTimePicker;
 use yii\base\Widget;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use Yii;
+use app\models\Pages;
 
 class WMenuTop extends Widget{
     public $model;
@@ -20,19 +15,17 @@ class WMenuTop extends Widget{
         }
     }
     public function run(){
-        if (!$this->model && false) {
-            return false;
-        }else {
-            ?>
-            <div class="hidden-slide_menu-module">
-                <div><a class="no_border" href="/informatsiya">Информация</a></div>
-                <div><a class="no_border" href="/about">О компании</a></div>
-                <div><a class="no_border" href="/news">Новости</a></div>
-                <div><a class="no_border" href="/vakansii">Вакансии</a></div>
-                <div><a class="no_border" href="http://appleservice.us/" target="_blank">Франчайзинг</a></div>
-                <div><a class="no_border" href="https://apple.sc/corpotdel/">Организациям</a></div>
-            </div>
-            <?php
+
+            $header = Pages::menuPages(3);
+            if(!empty($header)) {
+                ?>
+                <div class="hidden-slide_menu-module">
+                    <?php foreach ($header as $key => $menu): ?>
+                        <div><a class="no_border" href="<?= $menu->value ?>"><?= $menu->title ?></a></div>
+                    <?php endforeach; ?>
+                </div>
+                <?php
+            }
         }
-    }
+
 }

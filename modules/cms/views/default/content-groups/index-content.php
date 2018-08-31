@@ -1,29 +1,31 @@
 <?php
+
 use yii\helpers\Html;
 use yii\grid\GridView;
-//use yii\widgets\Pjax;
 use yii\helpers\Url;
-
 /* @var $this yii\web\View */
-/* @var $searchModel app\module\admin\models\PostSearchPages */
+/* @var $searchModel app\modules\cms\models\ContentGroupsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Страница';
+$this->title = 'Контенты';
 $this->params['breadcrumbs'][] = $this->title;
+
+$group_id = Yii::$app->request->get('group_id');
+
 ?>
-<div class="pages-index">
+<div class="content-groups-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Добавить', ['create-pages'], ['class' => 'btn btn-success']) ?>
-    </p>
+
+
+    <p><?= Html::a('Добавить', ['create-content','group_id'=>$group_id], ['class' => 'btn btn-success']) ?></p>
+
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            $class = ($model->status == 1 ? '' : 'danger-com');
+            $class = ($model->status == 1 ? '' : 'text-danger');
 
             return [
                 'key'   => $key,
@@ -35,20 +37,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'url:url',
+            [
+                'attribute' => 'group_id',
+                'label'     => 'Группы',
+                'content'   => function ($data) {
+                    return $data->group->title;
+                }
+            ],
             'title',
-            'seo_title',
-            'keywords',
-            // 'description:ntext',
-            // 'text:ntext',
-             'position',
-             'status',
+            'title2',
+           // 'description',
+            'status',
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}&nbsp;{update}&nbsp;{delete}',
-                'headerOptions' => ['width' => '80'],
+                'headerOptions' => ['width' => '100'],
                 'urlCreator'=>function($action, $model, $key, $index){
-                    return Url::to([$action.'-pages','id'=>$model->id]);
+                    return Url::to([$action.'-content','id'=>$model->id]);
                 }
 
             ],

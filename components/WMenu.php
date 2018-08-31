@@ -1,13 +1,8 @@
 <?php
 namespace app\components;
-
-use app\models\Clients;
-use app\models\fitness\UserFitness;
-use kartik\date\DatePicker;
-use kartik\datetime\DateTimePicker;
+use app\models\Pages;
 use yii\base\Widget;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use Yii;
 
 class WMenu extends Widget{
@@ -19,17 +14,16 @@ class WMenu extends Widget{
             $this->model = false;
         }
     }
-    public function run(){
-        if (!$this->model && false) {
-            return false;
-        }else {
+    public function run()
+    {
+
+        $header = Pages::menuPages();
+        if (!empty($header)) {
             ?>
             <div class="items">
-                <div class="item active"><a href="#">Ремонт</a></div>
-                <div class="item"><a href="#">Поддержка</a></div>
-                <div class="item"><a href="#">Продукция</a></div>
-                <div class="item"><a href="#">Аксессуары</a></div>
-                <div class="item"><a href="#">Контакты</a></div>
+                <?php foreach ($header as $key => $menu): ?>
+                    <div class="item <?=$key == 0 ? 'active' : ''?>"><a href="<?= $menu->value ?>"><?= $menu->title ?></a></div>
+                <?php endforeach; ?>
             </div>
             <?php
         }

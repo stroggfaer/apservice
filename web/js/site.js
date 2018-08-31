@@ -162,6 +162,15 @@ $(document).ready(function(){
     });
 
     $("[data-fancybox]").fancybox();
+
+    $('.js-menu').hover(function () {
+        clearTimeout($.data(this, 'timer'));
+        $('.hidden-slide_menu-module', this).stop(true, true).show();
+    }, function () {
+        $.data(this, 'timer', setTimeout($.proxy(function () {
+            $('.hidden-slide_menu-module', this).stop(true, true).hide();
+        }, this), 100));
+    });
 });
 
 // Таб переключение

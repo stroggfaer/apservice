@@ -1,26 +1,28 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = $one->title;
+
+$content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1000])->one();
+
 ?>
+
 <div class="container size">
+
     <?=  app\components\WMenuRepairs::widget(['model'=>$model])?>
 
     <div class="devices">
         <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
         <?=  app\components\WDevices::widget(['model'=>$model])?>
-
-        <div class="description-seo">
-            <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
-            <div class="text">
-                Неврология (невропатология) — область медицины, которая занимается профилактикой, диагностикой и лечением заболеваний нервной системы, а также разрабатывает схемы реабилитации после перенесенных неврологических заболеваний. Учитывая то, что нервная система регулирует и контролирует деятельность практических всех органов и процессов в организме, становится понятной необходимость приема у невролога при первых же признаках патологии.
+        <?php if(!empty($content)): ?>
+            <div class="description-seo">
+                <div class="text-center title-main"><h2><?=$content->title?></h2></div>
+                <div class="text"><?=$content->text?></div>
             </div>
-        </div>
-        <div class="description-seo">
-            <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
-            <div class="text">
-                Неврология (невропатология) — область медицины, которая занимается профилактикой, диагностикой и лечением заболеваний нервной системы, а также разрабатывает схемы реабилитации после перенесенных неврологических заболеваний. Учитывая то, что нервная система регулирует и контролирует деятельность практических всех органов и процессов в организме, становится понятной необходимость приема у невролога при первых же признаках патологии.
+            <div class="description-seo">
+                <div class="text-center title-main"><h2><?=$content->title2?></h2></div>
+                <div class="text"><?=$content->text2?></div>
             </div>
-        </div>
+        <?php endif; ?>
         <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
     </div>
 </div>

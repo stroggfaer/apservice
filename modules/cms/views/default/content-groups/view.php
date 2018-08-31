@@ -4,20 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Pages */
+/* @var $model app\models\ContentGroups */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Страница', 'url' => ['pages']];
+$this->params['breadcrumbs'][] = ['label' => 'Группы контента', 'url' => ['content-groups']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pages-view">
+<div class="content-groups-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить', ['create-pages'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Редактировать', ['update-pages', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete-pages', 'id' => $model->id], [
+        <?= Html::a('Редактировать', ['update-content-groups', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete-content-groups', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -30,12 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'url:url',
             'title',
-            'seo_title',
-            'keywords',
-            'description:ntext',
-            'text:ntext',
             'status',
         ],
     ]) ?>

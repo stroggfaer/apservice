@@ -1,6 +1,9 @@
 <?php
 
 namespace app\modules\cms\controllers;
+
+
+use app\models\Content;
 use app\models\Pages;
 use dastanaron\translit\Translit;
 use app\modules\cms\models\PostSearchPages;
@@ -11,6 +14,9 @@ use app\modules\cms\models\PostSearchUsers;
 use app\models\AuthAssignment;
 use app\modules\cms\models\AuthAssignmentSearch;
 
+use app\models\ContentGroups;
+use app\modules\cms\models\ContentGroupsSearch;
+
 use app\models\MenuRepairs;
 use app\modules\cms\models\MenuRepairSearch;
 use app\models\Functions;
@@ -18,6 +24,7 @@ use app\models\Options;
 use app\models\UploadedImage;
 use yii\web\UploadedFile;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
@@ -471,6 +478,182 @@ class DefaultController extends BackendController
     protected function findModelSettings($id)
     {
         if (($model = Options::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Lists all ContentGroups models.
+     * @return mixed
+     */
+    public function actionContentGroups()
+    {
+        $searchModel = new ContentGroupsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('content-groups/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single ContentGroups model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewContentGroups($id)
+    {
+        return $this->render('content-groups/view', [
+            'model' => $this->findModelContentGroups($id),
+        ]);
+    }
+
+    /**
+     * Creates a new ContentGroups model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateContentGroups()
+    {
+        $model = new ContentGroups();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-content-groups', 'id' => $model->id]);
+        }
+
+        return $this->render('content-groups/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing ContentGroups model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateContentGroups($id)
+    {
+        $model = $this->findModelContentGroups($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-content-groups', 'id' => $model->id]);
+        }
+
+        return $this->render('content-groups/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing ContentGroups model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteContentGroups($id)
+    {
+        $this->findModelContentGroups($id)->delete();
+
+        return $this->redirect(['content-groups']);
+    }
+
+    /**
+     * Finds the ContentGroups model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return ContentGroups the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelContentGroups($id)
+    {
+        if (($model = ContentGroups::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+    //КОНТЕНТ;
+    public function actionContent($group_id = false)
+    {
+        if(!empty($group_id)) {
+            $content = Content::find()->where(['group_id'=>$group_id])->orderBy('id DESC');
+        }else{
+            $content = Content::find()->orderBy('id DESC');
+        }
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $content,
+            'pagination' => [
+                'pageSize' => 40,
+            ],
+        ]);
+
+        return $this->render('content-groups/index-content', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    /**
+     * Creates a new ContentGroups model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateContent()
+    {
+        $model = new Content();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['content']);
+        }
+
+        return $this->render('content-groups/create-content', [
+            'model' => $model,
+        ]);
+    }
+    /**
+     * Updates an existing ContentGroups model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateContent($id)
+    {
+        $model = $this->findModelContent($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['content']);
+        }
+
+        return $this->render('content-groups/update-content', [
+            'model' => $model,
+        ]);
+    }
+    /**
+     * Deletes an existing ContentGroups model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteContent($id)
+    {
+        $this->findModelContent($id)->delete();
+
+        return $this->redirect(['content-groups']);
+    }
+
+    protected function findModelContent($id)
+    {
+        if (($model = Content::findOne($id)) !== null) {
             return $model;
         }
 

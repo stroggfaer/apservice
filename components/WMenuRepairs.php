@@ -30,7 +30,7 @@ class WMenuRepairs extends Widget{
                         <?php $active = (!empty($this->model->currentRepair->id) && $this->model->currentRepair->id == $value->id ? 'active' : '') ?>
                         <div class="item <?=$active?>">
                             <a href="/repair/<?=$value->url?>">
-                                <div class="icon-menu icon-iphone"></div>
+                                <div class="icon-menu <?=$value->icon?>"></div>
                                 <div class="menu"><?=$value->title?></div>
                             </a>
                         </div>

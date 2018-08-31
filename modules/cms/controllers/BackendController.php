@@ -35,6 +35,14 @@ class BackendController extends Controller
                         'title' => 'Страницы',
                     ],
                     [
+                        'link' => '/cms/content-groups',
+                        'title' => 'Группы контент',
+                    ],
+                    [
+                        'link' => '/cms/content',
+                        'title' => 'Контент',
+                    ],
+                    [
                         'link' => '/cms/menu-repairs',
                         'title' => 'Меню устройства',
                     ],

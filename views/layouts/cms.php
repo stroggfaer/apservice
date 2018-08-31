@@ -54,6 +54,7 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
                     <?php endif; ?>
                 </ul>
                 <p class="navbar-text navbar-right">Вы <a href="#" class="navbar-link"><?=Yii::$app->user->identity->username ?></a></p>
+                <p class="navbar-text navbar-right"><a href="/repair/" target="_blank" class="navbar-link">Сайт</a></p>
             </div>
         </div>
     </nav>

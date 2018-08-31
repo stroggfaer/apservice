@@ -9,7 +9,8 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="site-error">
+
+<div class="site-error container size">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
