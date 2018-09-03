@@ -20,7 +20,11 @@ class Repair extends Model
         $data = MenuRepairs::find()->where(['status'=>1])->orderBy('position ASC')->all();
         return $data;
     }
-
+    public function getMenuRepair()
+    {
+        $data = MenuRepairs::find()->where(['status'=>1])->orderBy('id ASC')->one();
+        return $data;
+    }
     // Menu Repair;
     public function getCurrentRepair($url = false)
     {
@@ -106,6 +110,13 @@ class Repair extends Model
         $url =  Yii::$app->request->get();
         if(empty($url)) return false;
         return Yii::$app->getUrlManager()->createUrl('').$url['url'].'/'.$url['alias'].'/'.$last;
+    }
+
+    // Получить объект Девайс;
+    public function getDeviceObj()
+    {
+        $device = new Devices();
+        return $device;
     }
 
 }

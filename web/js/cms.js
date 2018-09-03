@@ -12,6 +12,16 @@ $(document).ready(function(){
 
 
 });
+// Удалить избражения;
+$(document).on('click','.js-delete-image-file',function () {
+    var path = $(this).data('path');
+    var element = $(this);
+    if (!confirm("Удалить?")) return false;
+    $.post('/repair/cms/ajax-backend/images-delete',{delete_image_file:true,'path':path},function(response){
+        $(".form-content-images").html(response);
+       // loading('hide');
+    });
+});
 
 /*
 $(document).on('mouseover','.js-mounts .dropdown-toggle',function () {

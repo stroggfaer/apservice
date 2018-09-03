@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\City;
+use app\models\Devices;
 use Yii;
 use yii\web\Controller;
 
@@ -39,5 +40,40 @@ class AjaxController extends Controller
             return false;
         }
     }
+
+    // Предварительная диагностика
+    function actionDiagnostics()
+    {
+        $request = Yii::$app->request;
+        $devices =  new Devices();
+
+        // Выбор девайс;
+        if ($request->post('select_devices_form')) {
+            $device_id = abs($request->post('device_id'));
+            $devices->setDeviceIdSession($device_id);
+            $devices->setDeviceProblemIdSession(false);
+            return \app\components\WDiagnosticsForm::widget();
+        }
+        // Удалить сессия;
+        if ($request->post('select_devices_remove')) {
+            unset($_SESSION['devices']);
+            return \app\components\WDiagnosticsForm::widget();
+        }
+
+        // Выбор проблемы;
+        if ($request->post('select_devices_problems_form')) {
+            $device_problem_id = abs($request->post('device_problem_id'));
+            $devices->setDeviceProblemIdSession($device_problem_id);
+            return \app\components\WDiagnosticsForm::widget();
+        }
+
+        // Удалить сессия
+        if ($request->post('select_devices_problems_remove')) {
+
+            $devices->setDeviceProblemIdSession(false);
+            return \app\components\WDiagnosticsForm::widget();
+        }
+    }
+
 }
 

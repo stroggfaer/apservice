@@ -30,6 +30,7 @@ class UploadedImage  extends Model
 
             // Ресайз;
             if(!empty($width)) {
+
                 $imageResize = new ImageResize($fileDir);
                 $imageResize->resizeImage($width, $height, $options);
                 $imageResize->saveImage($fileDir, 100);

@@ -74,7 +74,13 @@ class City extends \yii\db\ActiveRecord
             'status' => 'Статус',
         ];
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAppleServices()
+    {
+        return $this->hasMany(AppleServices::className(), ['city_id' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

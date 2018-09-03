@@ -46,6 +46,10 @@ $city = \Yii::$app->action->currentCity;
 <div id="is_city_one"></div>
 <?php endif; ?>
 
+<div class="spinner__mod">
+    <div class="loader"></div>
+</div>
+
 <div class="wrapper">
     <!--Шапка-->
     <div id="header">

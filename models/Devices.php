@@ -97,4 +97,54 @@ class Devices extends \yii\db\ActiveRecord
         return $data;
     }
 
+    // Сохранить Id Devais;
+    public function setDeviceIdSession($device_id)
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        $_SESSION['devices']['device_id'] = $device_id;
+        if(empty($device_id)) {
+            unset($_SESSION['devices']['device_id']);
+        }
+        return false;
+    }
+    // Сохранить Id $device_problem_id;
+    public function setDeviceProblemIdSession($device_problem_id)
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        $_SESSION['devices']['device_problem_id'] = $device_problem_id;
+        if(empty($device_problem_id)) {
+            unset($_SESSION['devices']['device_problem_id']);
+        }
+        return false;
+    }
+
+    // Получить девайс;
+    public function getDeviceOne()
+    {
+        $session = Yii::$app->session;
+        if(empty($session['devices']['device_id'])) return false;
+        return Devices::find()->where(['id'=>$session['devices']['device_id'],'status'=>1])->limit(1)->one();
+    }
+
+    // Получить список проблемы;
+    public function getDeviceOneProblems()
+    {
+        $data = [];
+
+        if(empty($this->deviceOne) && empty($this->deviceOne->devicesDetails)) return false;
+        foreach ($this->deviceOne->devicesDetails as $devicesDetail) {
+            $data[] = $devicesDetail->deviceProblems;
+        }
+        return $data;
+    }
+
+    // Получить девайс проблем;
+    public function getDeviceProblemOne()
+    {
+        $session = Yii::$app->session;
+        if(empty($session['devices']['device_problem_id'])) return false;
+        return DeviceProblems::find()->where(['id'=>$session['devices']['device_problem_id'],'status'=>1])->limit(1)->one();
+    }
 }

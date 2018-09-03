@@ -90,11 +90,35 @@ class Functions extends Model
         }
         file_put_contents($dirName.'/'.$fileName, $file."\n");
     }
-// Путь к файлу;
-    public static function pathFile($path= false) {
-        return $_SERVER['DOCUMENT_ROOT'].'/files'.$path;
-    }
 
+    // Путь к файлу;
+    public static function pathFile($path= false) {
+        return $_SERVER['DOCUMENT_ROOT'].'/repair/web/files'.$path;
+    }
+    // Проверка изображения;
+    public static function imgPath($dir, $dev = false) {
+
+        if(!empty($dev)) return $dev.'/repair/files'.$dir;
+        //
+        if(!empty($dir) && file_exists(self::pathFile($dir))) {
+            return '/repair/files'.$dir;
+        }
+        return false;
+    }
+    // Удаление файлов;
+    public static function fDelete($dir, $files) {
+        if (is_array($files)) {
+            foreach ($files as $file) {
+                if (file_exists($dir.$file)) unlink($dir.$file);
+            }
+        } else {
+            if (file_exists($dir.$files)) unlink($dir.$files);
+        }
+    }
+    // Удлаение по одному;
+    public static function fDeleteOne($dir) {
+        if (!empty($dir) && file_exists($dir)) unlink($dir);
+    }
     // Директория фотографии;
     public static function photoDir($photo_id,$type = false) {
         if(!empty($type)) {

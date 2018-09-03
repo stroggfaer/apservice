@@ -58,6 +58,14 @@ class BackendController extends Controller
                         'link' => '/cms/devices/prices',
                         'title' => 'Цены',
                     ],
+                    [
+                        'link' => '/cms/apple-services',
+                        'title' => 'Apple Сервис',
+                    ],
+                    [
+                        'link' => '/cms/delivery',
+                        'title' => 'Доставка',
+                    ],
                 ],
             ],
             'marketing' => [

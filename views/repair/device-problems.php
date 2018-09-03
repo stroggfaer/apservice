@@ -27,50 +27,11 @@ $this->title = $one->title;
 
     </div>
 </div>
+
 <div class="diagnostics">
-    <div class="container size">
-        <div class="text-left"><h2>Предварительная диагностика</h2></div>
-        <div class="form right pull-left">
-            <form role="form" class="form__mod">
-                <div class="row">
-                    <div class="form-group col-md-6 col-xs-6">
-                        <label>Укажите устройство:</label>
-                        <select class="form-control">
-                            <option>---</option>
-                            <option>iphone 4</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6 col-xs-6">
-                        <label>Укажите проблему:</label>
-                        <select class="form-control">
-                            <option>---</option>
-                            <option>Вибро не работает</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-            <div class="clear"></div>
-            <div class="description-warning">
-                Внимание! Данная информация является ознакомительной и не гарантирует, что результаты “Предварительной диагностики” могут совпадать с диагностикой вашего устройства в сервисном центре.
-            </div>
-            <h3 class="title">Разбито стекло</h3>
-            <div class="description">
-                Замена сенсорного экрана дисплея Замена сенсорного экрана дисплея  Замена сенсорного экрана дисплея Замена сенсорного экрана дисплея
-            </div>
-        </div>
-        <div class="result-content pull-left">
-            <div class="content">
-                <div class="description-warning">
-                    Внимание! Данная информация является ознакомительной и не гарантирует, что результаты “Предварительной диагностики” могут совпадать с диагностикой вашего устройства в сервисном центре.
-                </div>
-                <div class="title">Предварительный анализ</div>
-                <div class="_icon-ap time">20 мин</div>
-                <div class="_icon-ap money">1 800 руб.</div>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
+    <?=  app\components\WDiagnosticsForm::widget()?>
 </div>
+
 <div class="container size">
     <?php if(!empty($content)): ?>
        <div class="description-seo">
