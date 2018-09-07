@@ -37,7 +37,7 @@ $city = \Yii::$app->action->currentCity;
 <!--Modal Оплата-->
 <?php Modal::begin(['header' => '<h4></h4>',
     'closeButton' => ['tag' => 'button', 'label' => '&times;'],
-    'id' => 'modal-windows',
+    'id' => 'window-modal',
     // 'size'=>'modal-sm',
 ]);?>
 <?php Modal::end(); ?>
@@ -45,6 +45,10 @@ $city = \Yii::$app->action->currentCity;
 <?php if(!empty($cookies->getValue('city_id'))): ?>
 <div id="is_city_one"></div>
 <?php endif; ?>
+
+<div class="spinner__mod">
+    <div class="loader"></div>
+</div>
 
 <div class="wrapper">
     <!--Шапка-->

@@ -1,11 +1,18 @@
 // Модальная окно;
-function window_modal(name,url,objPost,title) {
+function window_modal(url,title,objPost,name,type) {
     var modalContainer = $(name);
     // Размер окно;
     modalContainer.modal('show');
     //console.log(title);
     if(title){
         modalContainer.find(".modal-header h4").text(title);
+    }
+    if(type == 1) {
+        modalContainer.find('.modal-dialog').addClass('modal-sm').removeClass('modal-lg');
+    }else if(type == 2){
+        modalContainer.find('.modal-dialog').addClass('modal-lg').removeClass('modal-sm');
+    }else{
+        modalContainer.find('.modal-dialog').removeClass('modal-lg modal-sm');
     }
     //Если нет объекта по умол. пустой;
     if(!isset(objPost)) objPost = {};
@@ -16,6 +23,7 @@ function window_modal(name,url,objPost,title) {
         data: objPost,
         async: false,
         success: function (data) {
+            console.log(data);
             modalContainer.find('.modal-body').html(data);
             modalContainer.modal('show');
         }

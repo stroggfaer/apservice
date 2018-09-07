@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use app\models\Repair;
 use Yii;
 
 /**
@@ -53,23 +53,11 @@ class GroupDeviceProblems extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-//    public function getDeviceProblems()
-//    {
-//        return $this->hasMany(DeviceProblems::className(), ['group_id' => 'id'])->
-//            select('device_problems.*,prices.money')->leftJoin(Prices::tableName(),'prices.device_problems_id = device_problems.id')
-//            ->where(['prices.status'=>1,'device_problems.status'=>1]);
-//    }
-//    public function getDeviceProblems()
-//    {
-//        return $this->hasMany(DeviceProblems::className(), ['group_id' => 'id'])->viaTable(Prices::tableName(), ['device_problems_id' => 'id']);
-//
-//    }
-
-
     public function getDeviceProblems()
     {
         return $this->hasMany(DeviceProblems::className(), ['group_id' => 'id'])->where(['status'=>1]);
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */

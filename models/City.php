@@ -45,7 +45,7 @@ class City extends \yii\db\ActiveRecord
             [['seo_description'], 'string'],
             [['domen', 'name', 'seo_name'], 'string', 'max' => 128],
             [['time'], 'string', 'max' => 68],
-            [['phone', 'map_lon'], 'string', 'max' => 16],
+            [['phone', 'map_lon'], 'string', 'max' => 30],
             [['map_lat'], 'string', 'max' => 18],
             [['zoom'], 'string', 'max' => 12],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
@@ -74,7 +74,27 @@ class City extends \yii\db\ActiveRecord
             'status' => 'Статус',
         ];
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAppleServices()
+    {
+        return $this->hasMany(AppleServices::className(), ['city_id' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDeliveries()
+    {
+        return $this->hasMany(Delivery::className(), ['city_id' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDeliverie()
+    {
+        return $this->hasOne(Delivery::className(), ['city_id' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

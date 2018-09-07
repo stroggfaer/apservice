@@ -43,8 +43,7 @@ class WDevices extends Widget{
                  <div class="devices__menu devices_carusel desktop">
                     <div class="items">
                       <?php foreach ($this->model->devices as $device): ?>
-                          <?php $active = !empty($this->model->device) && $device->id == $this->model->device->id ? 'active':
-                                (!empty($this->one) && $this->one->device->id == $device->id ? 'active' : ''); ?>
+                          <?php $active = !empty($this->model->device) && $device->id == $this->model->device->id ? 'active': ''?>
                           <div class="item  <?=$active?>"><a href="/repair/<?=$device->menuRepair->url.'/'.$device->url?>"><?=$device->title?></a></div>
                       <?php endforeach; ?>
                     </div>
@@ -53,9 +52,8 @@ class WDevices extends Widget{
                     <div class="select__mod">
                         <select class="select">
                           <?php foreach ($this->model->devices as $device): ?>
-                              <?php $active = !empty($this->model->device) && $device->id == $this->model->device->id ? 'active':
-                                  (!empty($this->one) && $this->one->device->id == $device->id ? 'active' : ''); ?>
-                            <option <?=!empty($active) ? 'selected' : ''?>><a href="/repair/<?=$device->menuRepair->url.'/'.$device->url?>"><?=$device->title?></a></option>
+                              <?php $selected = !empty($this->model->device) && $device->id == $this->model->device->id ? 'selected': ''; ?>
+                            <option <?=$selected?>><a href="/repair/<?=$device->menuRepair->url.'/'.$device->url?>"><?=$device->title?></a></option>
                           <?php endforeach; ?>
                         </select>
                     </div>

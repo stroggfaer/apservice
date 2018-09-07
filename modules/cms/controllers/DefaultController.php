@@ -19,6 +19,13 @@ use app\modules\cms\models\ContentGroupsSearch;
 
 use app\models\MenuRepairs;
 use app\modules\cms\models\MenuRepairSearch;
+
+use app\models\AppleServices;
+use app\modules\cms\models\AppleServicesSearch;
+
+use app\models\Delivery;
+use app\modules\cms\models\DeliverySearch;
+
 use app\models\Functions;
 use app\models\Options;
 use app\models\UploadedImage;
@@ -654,6 +661,217 @@ class DefaultController extends BackendController
     protected function findModelContent($id)
     {
         if (($model = Content::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Lists all AppleServices models.
+     * @return mixed
+     */
+    public function actionAppleServices()
+    {
+        $searchModel = new AppleServicesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('apple-services/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single AppleServices model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewAppleServices($id)
+    {
+        return $this->render('apple-services/view', [
+            'model' => $this->findModelAppleServices($id),
+        ]);
+    }
+
+    /**
+     * Creates a new AppleServices model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateAppleServices()
+    {
+        $model = new AppleServices();
+        $translit = new Translit();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->url = mb_strtolower($translit->translit($model->title,true,'ru-en'));
+            if(!$model->save(true)) {
+                return 'Ошибка save';
+            }
+            return $this->redirect(['view-apple-services', 'id' => $model->id]);
+        }
+
+        return $this->render('apple-services/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing AppleServices model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateAppleServices($id)
+    {
+        // Загружаем фото;
+        $images = new UploadedImage();
+
+        $model = $this->findModelAppleServices($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $images->imageMax = UploadedFile::getInstance($images, 'imageMax');
+
+
+            // Путь и расширения файл;
+            $file =  Functions::pathFile('/apple/').$model->id;
+
+            // Параметры $file путь; резайз $w-Длина $h-высота;
+            if ($images->isUpload($file,false)) {
+                // file is uploaded successfully
+            }
+            return $this->redirect(['view-apple-services', 'id' => $model->id]);
+        }
+
+        return $this->render('apple-services/update', [
+            'model' => $model,
+            'images'=>$images
+        ]);
+    }
+
+    /**
+     * Deletes an existing AppleServices model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteAppleServices($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['apple-services']);
+    }
+
+    /**
+     * Finds the AppleServices model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return AppleServices the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelAppleServices($id)
+    {
+        if (($model = AppleServices::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Lists all Delivery models.
+     * @return mixed
+     */
+    public function actionDelivery()
+    {
+        $searchModel = new DeliverySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('delivery/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single Delivery model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewDelivery($id)
+    {
+        return $this->render('delivery/view', [
+            'model' => $this->findModelDelivery($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Delivery model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateDelivery()
+    {
+        $model = new Delivery();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-delivery', 'id' => $model->id]);
+        }
+
+        return $this->render('delivery/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Delivery model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateDelivery($id)
+    {
+        $model = $this->findModelDelivery($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-delivery', 'id' => $model->id]);
+        }
+
+        return $this->render('delivery/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing Delivery model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteDelivery($id)
+    {
+        $this->findModelDelivery($id)->delete();
+
+        return $this->redirect(['delivery/index']);
+    }
+
+    /**
+     * Finds the Delivery model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Delivery the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelDelivery($id)
+    {
+        if (($model = Delivery::findOne($id)) !== null) {
             return $model;
         }
 

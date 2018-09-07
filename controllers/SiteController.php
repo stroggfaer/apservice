@@ -71,8 +71,11 @@ class SiteController extends AppController
         if(!empty($pages)) $this->setMeta((!empty($pages->seo_title) ? $pages->seo_title : $pages->title),$pages->keywords,$pages->description);
 
         $model = new Repair();
+        $one =  $model->menuRepair;
+
         return $this->render('index',[
             'model'=>$model,
+            'one'=>$one
         ]);
     }
 

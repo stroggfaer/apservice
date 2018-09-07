@@ -16,9 +16,6 @@ class RepairController extends AppController
     public function actionIndex($url = false, $alias = false, $last = false)
     {
 
-       // $bootstrap = new Bootstrap();
-       // $bootstrap->bootstrap(Yii::$app,Yii::$app->controller->id);
-       // print_arr();
         // Обработка урл;
         $url = (!empty($url) ? trim($url, '/') : false);
         $alias = (!empty($alias) ? trim($alias, '/') : false);
@@ -27,6 +24,7 @@ class RepairController extends AppController
         $model = new Repair();
         // Первый уровень
         if(!empty($url) && empty($alias)) {
+
             $one = $model->getCurrentRepair($url);
             if(!empty($one)) {
                 // Сео настройки;
@@ -42,6 +40,7 @@ class RepairController extends AppController
 
         // Второй уровень
         if(!empty($alias) && empty($last)){
+
             $one = $model->getCurrentDevices($alias);
             if(!empty($one)) {
                 return $this->render('device-problems', [
@@ -55,7 +54,9 @@ class RepairController extends AppController
 
         // Третий уровень
         if(!empty($last)){
+
             $one = $model->getCurrentDeviceProblems($last);
+            $model->getCurrentDevices($alias);
             if(!empty($one)) {
                 return $this->render('device-problems-items', [
                     'model' => $model,

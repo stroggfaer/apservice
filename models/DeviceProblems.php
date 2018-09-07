@@ -121,4 +121,6 @@ class DeviceProblems extends \yii\db\ActiveRecord
         $data = implode(', ',$data);
         return $data;
     }
+
+
 }

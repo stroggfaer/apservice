@@ -173,6 +173,58 @@ $(document).ready(function(){
     });
 });
 
+// Выбор девайс;
+$(document).on('change','.js-select-devices-form',function () {
+    var device_id = parseInt($(this).val());
+    if(device_id) {
+        loading('show');
+        $.post(ajax_path+'/diagnostics',{select_devices_form:true,device_id:device_id},function(response){
+
+            $(".update-select__js").html($(response).find('.update-select__js').html());
+            $(".update-content__js").html($(response).find('.update-content__js').html());
+            $(".result-content__js").html($(response).find('.result-content__js').html());
+
+            loading('hide');
+        });
+    }else{
+        loading('show');
+        $.post(ajax_path+'/diagnostics',{select_devices_remove:true},function(response){
+
+            $(".update-select__js").html($(response).find('.update-select__js').html());
+            $(".update-content__js").html($(response).find('.update-content__js').html());
+            $(".result-content__js").html($(response).find('.result-content__js').html());
+
+            loading('hide');
+        });
+    }
+    return false
+});
+
+// Выбор проблемы;
+$(document).on('change','.js-select-devices-problems-form',function () {
+    var device_problem_id = parseInt($(this).val());
+    if(device_problem_id) {
+        loading('show');
+        $.post(ajax_path+'/diagnostics',{select_devices_problems_form:true,device_problem_id:device_problem_id},function(response){
+
+            $(".update-content__js").html($(response).find('.update-content__js').html());
+            $(".result-content__js").html($(response).find('.result-content__js').html());
+
+            loading('hide');
+        });
+    }else{
+        loading('show');
+        $.post(ajax_path+'/diagnostics',{select_devices_problems_remove:true},function(response){
+
+            $(".update-content__js").html($(response).find('.update-content__js').html());
+            $(".result-content__js").html($(response).find('.result-content__js').html());
+
+            loading('hide');
+        });
+    }
+    return false
+});
+
 // Таб переключение
 $(document).on('click','.js-tab-button',function(){
     var k = $(this).data('key');
@@ -182,5 +234,115 @@ $(document).on('click','.js-tab-button',function(){
     $(".tab__com .tab[data-key="+ k +"]").data('key',k).addClass('active');
     return false;
 });
+
+// Обработка форма аякс;
+$(document).on('beforeSubmit','.js-form-ajax-1', function (event) {
+    return false;
+}).on('ajaxBeforeSend','.js-form-ajax', function (event, jqXHR, textStatus) {
+    $('.loading.btn').button('loading');
+}).on('ajaxComplete','.js-form-ajax', function (event, jqXHR, textStatus) {
+    $('.loading.btn').button('reset');
+    var response = jqXHR.responseJSON;
+    console.log(response);
+    if(response) {
+        $('.alert__js').removeClass('hidden');
+        $('.alert__js .name').text(response);
+        $(this).hide();
+
+        setTimeout(function() {
+            window.location.reload();
+        },2000);
+        console.log('ASDF');
+    }else{
+
+    }
+    return false;
+});
+
+// Отправить данные;
+$(document).on('click','.js-send-call', function(){
+    var $form = $(this),
+        data = $form.parents('.js-form-ajax').serializeArray();
+
+    $('.loading.btn').button('loading');
+
+    // Оправка данные;
+    $.ajax({
+        url: ajax_path + 'call-center',
+        type: 'POST',
+        data: data,
+        success: function(response){
+
+            // Если не дубликать заполняем как обычно;
+            if(isset(response.success) && response.success == 'ok') {
+                $('.alert__js').removeClass('hidden');
+                $('.alert__js .name').text(response.message);
+                $form.parents('.js-form-ajax').hide();
+
+                setTimeout(function() {
+                    window.location.reload();
+                },3000);
+            }
+            // Выводим ошибки;
+            if(isset(response)) {
+                $form.parents('.js-form-ajax').yiiActiveForm('updateMessages', response, true);
+            }
+
+            $('.loading.btn').button('reset');
+        },
+        error: function(){
+            alert('Запрос не выполнен!');
+            $('.loading.btn').button('reset');
+        }
+    });
+
+    return false;
+});
+
+// Позвонить к нам;
+$(document).on('click','.js-call', function(){
+    window_modal('repair/ajax/call','Позвонить к нам',{call:true,group_id:1001},'#window-modal',1);
+});
+
+// Вызвать курьера;
+$(document).on('click','.js-call-courier', function(){
+    window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal',1);
+});
+
+// Вызвать мастера;
+$(document).on('click','.js-call-master', function(){
+    window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal',1);
+});
+
+// Вызвать мастера;
+$(document).on('click','.js-call-buttons', function(){
+    window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal',1);
+});
+
+// Списко таблицы девайсов
+$(document).on('click','.js-select-devices',function () {
+   var id = $(this).data('id');
+    loading('show');
+    $('.js-select-devices').removeClass('active');
+    $(this).addClass('active');
+    $.post(ajax_path + '/select-devices',{id:id},function(response){
+        $('div.update_table_content').html($(response).find('div.update_table_content').html());
+        loading('hide');
+    });
+    return false;
+});
+
+// Ближайщие салоны;
+$(document).on('change','.js-salon-form select',function () {
+    var $post = $(this).parents('.js-salon-form').serializeArray();
+         console.log($post);
+        loading('show');
+        $.post(ajax_path+'salon-list',$post,function(response){
+         //   $('.update-salon').html(response.salonForm);
+            $('.apple-service').html(response.appleServices);
+            loading('hide');
+        });
+});
+
 
 console.log('Scripts Version 3.2.0 ');

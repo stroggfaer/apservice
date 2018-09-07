@@ -19,6 +19,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'seo_description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'title1')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description1')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'title2')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description2')->textarea(['rows' => 4]) ?>
 
     <?php if($model->isNewRecord): ?>
         <?php $position = \app\models\MenuRepairs::find()->select('position')->where(['status'=>1])->orderBy('id DESC')->one();
