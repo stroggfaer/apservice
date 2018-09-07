@@ -119,4 +119,18 @@ class Repair extends Model
         return $device;
     }
 
+    // Apple Serves список сервисов;
+    public function getAppleServices() {
+         $city = \Yii::$app->action->currentCity;
+         $appleServices = AppleServices::find()->where(['city_id'=>$city->id, 'status'=>1])->all();
+         if(empty($appleServices)) return false;
+         return $appleServices;
+    }
+
+    // Список районв;
+    public function getRegions() {
+        $city = \Yii::$app->action->currentCity;
+        return Region::find()->where(['city_id'=>$city->id,'status'=>1])->all();
+    }
+
 }

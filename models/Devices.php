@@ -19,6 +19,10 @@ use Yii;
  */
 class Devices extends \yii\db\ActiveRecord
 {
+
+
+    public $device_id;
+
     /**
      * @inheritdoc
      */
@@ -56,6 +60,8 @@ class Devices extends \yii\db\ActiveRecord
         ];
     }
 
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -75,25 +81,32 @@ class Devices extends \yii\db\ActiveRecord
 
     // Список девайс;
     public function getDevices() {
-       $devices = Devices::find()->where(['status'=>1])->orderBy('position DESC')->all();
+       $devices = Devices::find()->where(['status'=>1])->orderBy('position ASC')->all();
        return $devices;
     }
 
-    public function getDevice() {
-        $device  = $this->devices[0];
+    public function setDevice($device_id) {
+        if(empty($device_id)) return false;
+         return $this->device_id  = $device_id;
+    }
+
+    // Получаем Девайс;
+    public function getDevice($id=false) {
+        if(!empty($id)) {
+            $device = Devices::findOne(['id'=>$id,'status'=>1]);
+        }else{
+            $device = $this->devices[0];
+        }
         return $device;
     }
-    // Список проблемы;
-    public function getDeviceProblems() {
+
+    // Список проблемы; Obj $device;
+    public function getDeviceProblems($device = false) {
         $data = [];
-        $device = $this->device;
-
         if(empty($device)) return false;
-
         foreach ($device->devicesDetails as $devicesDetail) {
             $data[] = $devicesDetail->deviceProblems;
         }
-
         return $data;
     }
 
@@ -147,4 +160,8 @@ class Devices extends \yii\db\ActiveRecord
         if(empty($session['devices']['device_problem_id'])) return false;
         return DeviceProblems::find()->where(['id'=>$session['devices']['device_problem_id'],'status'=>1])->limit(1)->one();
     }
+
+
+
+
 }

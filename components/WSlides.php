@@ -24,17 +24,17 @@ class WSlides extends Widget{
                     </div>
                     <div class="clear"></div>
                     <div class="flex-bottom">
-                        <div class="col">
+                        <div class="col  js-call">
                             <div class="icon-circle icon-phone"></div>
                             <div class="description">Позвонить нам</div>
                         </div>
-                        <div class="col">
+                        <div class="col js-call-courier">
                             <div class="icon-circle icon-curer"></div>
-                            <div class="description">Вызвать курьера</div>
+                            <div class="description ">Вызвать курьера</div>
                         </div>
-                        <div class="col">
+                        <div class="col js-call-master">
                             <div class="icon-circle icon-master"></div>
-                            <div class="description">Вызвать мастера</div>
+                            <div class="description ">Вызвать мастера</div>
                         </div>
                         <div class="col">
                             <div class="icon-circle icon-contacts"></div>
@@ -45,7 +45,7 @@ class WSlides extends Widget{
                 </div>
             </div>
 
-            <div class="text-center buttons desktop"><div class="btn btn-blue circle">Узнать стоимость ремонта</div></div>
+            <div class="text-center buttons desktop"><div class="btn btn-blue circle js-call-buttons">Узнать стоимость ремонта</div></div>
         </div>
     </div>
         <?php

@@ -26,7 +26,7 @@ class Call extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'call';
+        return 'call_center';
     }
 
     /**
@@ -37,12 +37,23 @@ class Call extends \yii\db\ActiveRecord
         return [
             [['group_id', 'status'], 'integer'],
             [['comments'], 'string'],
-            [['fio', 'required']],
+            [['fio','phone'], 'required'],
+
+          //  ['phone', 'validatePhone'],
+            // Проверка на правильно ввода  телефона;
+            ['phone', 'filter', 'filter' => function ($value) {
+                $phone = Functions::phone($value);
+                $phone = preg_match('/^[0-9]{10}$/',Functions::phone_is($phone));
+                if (empty($phone)) {
+                    $this->addError('phone', 'Неверный номер телефона!');
+                }
+                return $value;
+            }],
             ['date', 'default', 'value'=>date('Y-m-d')],
             [['date'], 'safe'],
             [['value'], 'string', 'max' => 228],
             [['fio'], 'string', 'max' => 128],
-            [['phone'], 'string', 'max' => 12],
+            [['phone'], 'string', 'max' => 20],
             [['email'], 'string', 'max' => 64],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => CallGroups::className(), 'targetAttribute' => ['group_id' => 'id']],
         ];
@@ -57,7 +68,7 @@ class Call extends \yii\db\ActiveRecord
             'id' => 'ID',
             'group_id' => 'Group ID',
             'value' => 'Значение',
-            'fio' => 'ФИО',
+            'fio' => 'Имя',
             'phone' => 'Телефон',
             'email' => 'E-mail',
             'comments' => 'Комменатрий',
@@ -66,6 +77,7 @@ class Call extends \yii\db\ActiveRecord
         ];
     }
 
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -73,4 +85,17 @@ class Call extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CallGroups::className(), ['id' => 'group_id']);
     }
+
+//    // Проверка на правильно ввода  телефона;
+//    public function validatePhone()
+//    {
+//        if (!$this->hasErrors()) {
+//            // Формат +700 000 00 00;
+//            $phone = Functions::phone($this->phone);
+//            $phone = preg_match('/^[0-9]{10}$/',Functions::phone_is($phone));
+//            if (empty($phone)) {
+//                $this->addError('phone', 'Неверный номер телефона!');
+//            }
+//        }
+//    }
 }

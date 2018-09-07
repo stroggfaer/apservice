@@ -68,9 +68,15 @@ class Functions extends Model
             return preg_replace('/(\+7)|(\()|(\))|(-)|(\s)|(^8)/', '', $phone);
         }
     }
-    public static function phone_is($phone)
+
+    // Добавить плюс +7
+    public static function phone_is($phone,$type = false)
     {
-        $phone = '+7'.substr($phone, -10);
+        if(!empty($type)) {
+            $phone = '+7' . substr($phone, -10);
+        }else{
+            $phone = substr($phone, -10);
+        }
         return $phone;
     }
     // Обработка срезаем запятую цены;

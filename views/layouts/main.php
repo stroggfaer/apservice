@@ -37,7 +37,7 @@ $city = \Yii::$app->action->currentCity;
 <!--Modal Оплата-->
 <?php Modal::begin(['header' => '<h4></h4>',
     'closeButton' => ['tag' => 'button', 'label' => '&times;'],
-    'id' => 'modal-windows',
+    'id' => 'window-modal',
     // 'size'=>'modal-sm',
 ]);?>
 <?php Modal::end(); ?>

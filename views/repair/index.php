@@ -29,6 +29,8 @@ $description2 = $one->description2 ? $one->description2 : (!empty($content->text
                 <div class="text"><?=$description2?></div>
             </div>
         <?php endif; ?>
-        <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
+        <div class="update-devices-problems-list">
+            <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
+        </div>
     </div>
 </div>

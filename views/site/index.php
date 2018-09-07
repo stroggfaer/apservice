@@ -19,6 +19,8 @@ $description2 = $one->description2 ? $one->description2 : (!empty($content->text
         <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
         <?=  app\components\WDevices::widget(['model'=>$model])?>
 
+
+
         <?php if(!empty($title1) && !empty($title2)):?>
             <div class="description-seo">
                 <div class="text-center title-main"><h2><?=$title1?></h2></div>
@@ -29,6 +31,8 @@ $description2 = $one->description2 ? $one->description2 : (!empty($content->text
                 <div class="text"><?=$description2?></div>
             </div>
         <?php endif; ?>
-        <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
+        <div class="update-devices-problems-list">
+            <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
+        </div>
     </div>
 </div>

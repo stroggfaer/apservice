@@ -1,11 +1,13 @@
 <?php
 namespace app\controllers;
 
+use app\models\Call;
 use app\models\City;
 use app\models\Devices;
+use app\models\Functions;
 use Yii;
 use yii\web\Controller;
-
+use yii\bootstrap\ActiveForm;
 
 class AjaxController extends Controller
 {
@@ -74,6 +76,62 @@ class AjaxController extends Controller
             return \app\components\WDiagnosticsForm::widget();
         }
     }
+
+    // Заявки из формы;
+    function actionCallCenter() {
+        $response = Yii::$app->response;
+        $response->format = \yii\web\Response::FORMAT_JSON;
+
+        $request = Yii::$app->request;
+        $call =  new Call();
+
+        // Отправить данные из формы;
+        if ($request->post('call_form')) {
+            $group_id = abs($request->post('group_id'));
+            $call->load(Yii::$app->request->post());
+            $call_title = !empty($request->post('call_title')) ? $request->post('call_title') : 'Нет';
+
+            if($call->validate()) {
+                $call->phone = Functions::phone($call->phone);
+                $call->group_id = !empty($group_id) ? $group_id : 1001;
+                $call->value = $call_title;
+                if (!$call->save(false)) {
+                    print_arr($call->errors);
+                    die('ERROR');
+                }
+                return $response->data = ['success'=>'ok','message'=>'Ваша заявка отправлена! В ближайшее время с вами свяжется менеджер!'];
+            }else {
+                return ActiveForm::validate($call);
+            }
+            return false;
+            //  Yii::$app->getSession()->setFlash('success', 'Ваша заявка отправлена!<br> В ближайшее время с вами свяжется менеджер!');
+            //  return Yii::$app->response->redirect(Yii::$app->request->referrer);
+        }
+    }
+
+    // Call;
+    function actionCall() {
+        $call =  new Call();
+        if(Yii::$app->request->isAjax) {
+
+        return $this->renderAjax('/site/call-form',[
+                'call'=>$call
+            ]);
+        }
+    }
+
+    // Выбор девайс;
+    function actionSelectDevices() {
+        $request = Yii::$app->request;
+        $id = abs($request->post('id'));
+        //
+        if(Yii::$app->request->isAjax && !empty($id)) {
+
+            return \app\components\WDevicesProblemsList::widget();
+        }
+    }
+
+
 
 }
 
