@@ -29,9 +29,9 @@ class WDevicesProblemsGroups extends Widget{
                 <div class="items">
                  <?php foreach ($this->model->devicesProblemsGroups as $devicesProblemsGroups): ?>
                     <div class="group">
-                        <div class="name"><?=$devicesProblemsGroups->title?></div>
-                        <?php if(!empty($devicesProblemsGroups)): ?>
-                           <?php foreach ($devicesProblemsGroups->deviceProblems as $devicesProblems): ?>
+                        <div class="name"><?=$devicesProblemsGroups['title']?></div>
+                        <?php if(!empty($devicesProblemsGroups['deviceProblem'])): ?>
+                           <?php foreach ($devicesProblemsGroups['deviceProblem'] as $devicesProblems): ?>
                                <div class="item">
                                     <a href="<?=Yii::$app->request->url.$devicesProblems->url?>">
                                         <?=$devicesProblems->title?>

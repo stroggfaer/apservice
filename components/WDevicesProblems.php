@@ -28,6 +28,7 @@ class WDevicesProblems extends Widget{
         if (empty($this->model->devicesProblems) && empty($this->one)) {
             return false;
         }else {
+
             ?>
             <?php if(!empty($this->model->devicesProblems)): ?>
                <div class="items">

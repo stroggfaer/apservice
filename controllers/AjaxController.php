@@ -5,6 +5,7 @@ use app\models\Call;
 use app\models\City;
 use app\models\Devices;
 use app\models\Functions;
+use app\models\Repair;
 use Yii;
 use yii\web\Controller;
 use yii\bootstrap\ActiveForm;
@@ -131,6 +132,35 @@ class AjaxController extends Controller
         }
     }
 
+    // Ближающие салон;
+    function actionSalonList() {
+        $response = Yii::$app->response;
+        $response->format = \yii\web\Response::FORMAT_JSON;
+
+        $request = Yii::$app->request;
+        $_post = $request->post();
+        // Обработка данные;
+        $device_id = abs($_post['device']);
+        $devicesProblem_id = abs($_post['devicesProblem']);
+        $region_id = abs($_post['region']);
+
+        $model = new Repair();
+
+        if(Yii::$app->request->isAjax) {
+           // $model->getCurrentDevices(false,$device_id);
+            if(!empty($region_id)) {
+                $region = $model->getRegionsOne($region_id);
+            }
+            $region = !empty($region->appleServices) ? $region->appleServices : false;
+//            print_arr($region->appleServices);
+//            print_arr($region);
+//            die();
+            return $response->data = [
+                'appleServices'=> \app\components\WAppleServices::widget(['model'=>$region]),
+                'salonForm'=> \app\components\WSalonForm::widget(['model'=>$model])
+            ];
+        }
+    }
 
 
 }

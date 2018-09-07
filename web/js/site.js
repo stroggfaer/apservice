@@ -332,4 +332,17 @@ $(document).on('click','.js-select-devices',function () {
     return false;
 });
 
+// Ближайщие салоны;
+$(document).on('change','.js-salon-form select',function () {
+    var $post = $(this).parents('.js-salon-form').serializeArray();
+         console.log($post);
+        loading('show');
+        $.post(ajax_path+'salon-list',$post,function(response){
+         //   $('.update-salon').html(response.salonForm);
+            $('.apple-service').html(response.appleServices);
+            loading('hide');
+        });
+});
+
+
 console.log('Scripts Version 3.2.0 ');

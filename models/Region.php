@@ -56,7 +56,7 @@ class Region extends \yii\db\ActiveRecord
      */
     public function getAppleServices()
     {
-        return $this->hasMany(AppleServices::className(), ['region_id' => 'id']);
+        return $this->hasMany(AppleServices::className(), ['region_id' => 'id'])->where(['status'=>1]);
     }
 
     /**
@@ -64,6 +64,6 @@ class Region extends \yii\db\ActiveRecord
      */
     public function getCity()
     {
-        return $this->hasOne(City::className(), ['id' => 'city_id']);
+        return $this->hasOne(City::className(), ['id' => 'city_id'])->where(['status'=>1]);
     }
 }

@@ -19,6 +19,11 @@ class WAppleServices extends Widget{
     }
     public function run(){
         if (!$this->model && true) {
+            ?>
+            <div class="container size text-center">
+                <div style="padding: 45px 0px 0"><b>Нет данных</b></div>
+            </div>
+            <?php
             return false;
         }else {
 
