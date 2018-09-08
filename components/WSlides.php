@@ -3,15 +3,16 @@ namespace app\components;
 use yii\base\Widget;
 
 use Yii;
+use app\models\Functions;
 
 class WSlides extends Widget{
 
     public function run(){
-
+        $city = \Yii::$app->action->currentCity;
         ?>
            <div class="slides">
         <div class="container size-2">
-            <h1 class="text-center">Ремонт Apple в Новосибирске</h1>
+            <h1 class="text-center">Ремонт Apple в <?=Functions::strEnd($city->name)?></h1>
             <div class="row top">
                 <div class="center-block">
                     <div class="col-xs-6 desktop">
@@ -24,7 +25,7 @@ class WSlides extends Widget{
                     </div>
                     <div class="clear"></div>
                     <div class="flex-bottom">
-                        <div class="col  js-call">
+                        <div class="col  js-call-address">
                             <div class="icon-circle icon-phone"></div>
                             <div class="description">Позвонить нам</div>
                         </div>

@@ -24,11 +24,15 @@ class WCityGeo extends Widget{
             return false;
         }else {
           //  print_arr(Yii::$app->request->url);
+         //
             ?>
             <div class="items">
                <?php foreach ($this->model as $city): ?>
-
-                   <div class="js-city-one" data-city-id="<?=$city->id?>"><a href="http://local.<?=$city->domen?>/repair/" class="city"><?=$city->name?></a></div>
+                   <?php if(!empty($city->main)): ?>
+                      <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="http://apple.pc/repair/" class="city"><?=$city->name?></a></div>
+                   <?php else: ?>
+                       <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="http://<?=$city->domen?>.apple.pc/repair/" class="city"><?=$city->name?></a></div>
+                   <?php endif; ?>
                 <?php endforeach; ?>
             </div>
             <?php

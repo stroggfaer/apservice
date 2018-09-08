@@ -31,6 +31,8 @@ h1,h2,h3,h4,.title,.name, b{
   }
 }
 #header {
+  position: relative;
+  z-index: 500;
    background: @base_color_header;
   // padding: 24px 0;
    .logo {
@@ -160,6 +162,7 @@ h1,h2,h3,h4,.title,.name, b{
 
 #menu {
   background: @base_color_footer;
+  display: block;
  // padding: 25px 0;
   .items {
      display: flex;
@@ -203,6 +206,28 @@ h1,h2,h3,h4,.title,.name, b{
       top: 48px;
       width: 100%;
       display: none;
+      z-index: 500;
+      .geo {
+         background: @grey1;
+         padding: 10px 15px;
+         margin: 0 -15px;
+        .city {
+          color: @white;
+          font-size: 13px;
+          text-decoration: none;
+          position: relative;
+          &:after {
+            content: '';
+            border-color: #878787 transparent transparent;
+            border-style: solid;
+            border-width: 7px 4px;
+            position: absolute;
+            top: 5px;
+            width: 0px;
+            right: -16px;
+          }
+        }
+      }
       .items {
          display: block;
          width: 100%;
@@ -210,8 +235,8 @@ h1,h2,h3,h4,.title,.name, b{
          .item {
            padding: 10px 15px;
            margin: 0 -15px;
-           border-bottom: 1px solid @black1;
-           &:hover {
+           border-bottom: 1px solid @black1 !important;
+           &:hover,.active {
              border-bottom: 1px solid @black1;
              color:@blue;
            }
@@ -295,15 +320,17 @@ h1,h2,h3,h4,.title,.name, b{
    }
    //
    .contacts {
-      display: flex;
-      flex-wrap: nowrap;
+    //  display: flex;
+    //  flex-wrap: nowrap;
       border-bottom: 1px solid @grey;
       padding-bottom: 35px;
       .item {
-         width: 34%;
+        // width: 34%;
          .address {
             font-family: 'SF UI Display Medium',sans-serif;
             padding: 3px 0px;
+            float: left;
+            width: 20%;
            a {
              color: @grey1;
            }

@@ -36,7 +36,7 @@ class Pages extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['description', 'text','value'], 'string'],
-            [['menu', 'position', 'status'], 'integer'],
+            [['menu', 'position', 'status','footer'], 'integer'],
             [['url', 'title', 'seo_title'], 'string', 'max' => 128],
             [['keywords'], 'string', 'max' => 228],
         ];
@@ -56,6 +56,7 @@ class Pages extends \yii\db\ActiveRecord
             'description' => 'Описание',
             'text' => 'Текст',
             'menu' => 'Тип меню',
+            'footer' => 'Показывать меню на футере',
             'value' => 'Значения',
             'position' => 'Позиция',
             'status' => 'Статус',
@@ -70,6 +71,11 @@ class Pages extends \yii\db\ActiveRecord
         return $pages;
     }
 
+    // Вывод меню страницы;
+    public static function menuPagesFooter() {
+        $pages = self::find()->where(['status'=>1,'footer'=>1])->orderBy('position ASC')->all();
+        return $pages;
+    }
 
 
 }

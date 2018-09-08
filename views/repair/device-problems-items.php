@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Strogg
- * Date: 03.08.2018
- * Time: 17:16
- */
+use app\models\Functions;
 $this->title = $one->title;
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
 
@@ -28,7 +23,7 @@ $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->o
     <div class="container size">
         <div class="title"><h3><?=$one->description?> на <?=$model->device->title?></h3></div>
         <div>Цена в сервисах</div>
-        <div class="price"><?=$one->price->money?> руб. / <?=$one->time?></div>
+        <div class="price"><?=Functions::money($one->price->money)?> руб. / <?=$one->time?></div>
     </div>
 </div>
 

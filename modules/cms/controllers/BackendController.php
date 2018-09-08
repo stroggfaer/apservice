@@ -92,6 +92,10 @@ class BackendController extends Controller
                         'link' => '/cms/geo/city',
                         'title' => 'Город',
                     ],
+                    [
+                        'link' => '/cms/geo/region',
+                        'title' => 'Район',
+                    ],
                 ],
             ],
         ];

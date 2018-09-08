@@ -14,6 +14,8 @@ use app\models\Functions;
 $city = ArrayHelper::map(array_merge(\app\models\City::find()->orderBy('id ASC')->all()),'id', 'name');
 $params = ['prompt' => 'Выберите город', 'options' => [$model->city_id=>['selected'=>'selected']]];
 
+$region= ArrayHelper::map(array_merge(\app\models\Region::find()->orderBy('id ASC')->all()),'id', 'title');
+$params1 = ['prompt' => 'Выберите район', 'options' => [$model->region_id=>['selected'=>'selected']]];
 ?>
 
 <div class="apple-services-form">
@@ -21,6 +23,8 @@ $params = ['prompt' => 'Выберите город', 'options' => [$model->city
     <?php $form = ActiveForm::begin(); ?>
 
     <?=$form->field($model, 'city_id')->DropDownList($city, $params);  ?>
+
+    <?=$form->field($model, 'region_id')->DropDownList($region, $params1);  ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('Только латинские буквы и цифры. Можно не заполнять.') ?>
 

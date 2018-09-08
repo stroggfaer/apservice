@@ -2,25 +2,28 @@ var ajax_path = '/repair/ajax/';
 
 $(document).ready(function(){
 
-    if(!$('#is_city_one').length) {
-        // Запрос на геолокация;
+    if($('#is_city_one').length) {
+        // Запрос на геолокаций;
         $(window).on('load', function () {
-          //  window_modal('#modal-windows','repair/ajax/city/', {geo: true}, 'Выбор города');
+            console.log('GEO');
+            $('.js-city').click();
         });
     }
     //
     $(document).on('click','.js-city',function () {
-        window_modal('#modal-windows','repair/ajax/city/', {geo: true}, 'Выбор города');
+        window_modal('repair/ajax/city','Выбор города',{geo:true},'#window-modal');
         return false;
     });
 
-    // Выбор город;
+    // Заопмним город;
     $(document).one('click','.js-city-one',function () {
-        var city_id = $(this).data('city-id');
-        $.post('/repair/ajax/city-one',{city_id:city_id},function(response){
-
+        var domain = $(this).data('domen');
+        //
+        $.cookie('MCS_CITY_CODE', domain, {
+            domain: '.apple.pc' // apple.sc
         });
-    })
+        //console.log('domain',domain);
+    });
 
     // Карусель для контента;
     if($(".js-slider").length) {
@@ -171,6 +174,24 @@ $(document).ready(function(){
             $('.hidden-slide_menu-module', this).stop(true, true).hide();
         }, this), 100));
     });
+
+
+
+});
+
+// Мобильная версия меню;
+$(document).on('click','.js-menu-mobile',function () {
+    var element = $(this);
+    element.toggleClass('open');
+    $("#menu").fadeToggle();
+    $('.bg-show').toggle();
+    return false;
+});
+$(document).on('click','.bg-show',function () {
+    $(this).hide();
+    $(".js-menu-mobile").removeClass('open');
+    $("#menu").fadeOut();
+    return false;
 });
 
 // Выбор девайс;
@@ -306,17 +327,22 @@ $(document).on('click','.js-call', function(){
 
 // Вызвать курьера;
 $(document).on('click','.js-call-courier', function(){
-    window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal',1);
+    window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal');
 });
 
 // Вызвать мастера;
 $(document).on('click','.js-call-master', function(){
-    window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal',1);
+    window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal');
 });
 
 // Вызвать мастера;
 $(document).on('click','.js-call-buttons', function(){
-    window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal',1);
+    window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal');
+});
+
+// Вызвать мастера;
+$(document).on('click','.js-call-address', function(){
+    window_modal('repair/ajax/call','Позвонить нам',{call:true,group_id:1005},'#window-modal');
 });
 
 // Списко таблицы девайсов

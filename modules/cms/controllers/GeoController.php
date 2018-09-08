@@ -9,6 +9,9 @@ use app\modules\cms\models\CountrySearch;
 use app\models\City;
 use app\modules\cms\models\CitySearch;
 
+use app\models\Region;
+use app\modules\cms\models\RegionSearch;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -211,6 +214,90 @@ class GeoController extends BackendController
     protected function findModelCity($id)
     {
         if (($model = City::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Lists all Region models.
+     * @return mixed
+     */
+    public function actionRegion()
+    {
+        $searchModel = new RegionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('region/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    /**
+     * Creates a new Region model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateRegion()
+    {
+        $model = new Region();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['region']);
+        }
+
+        return $this->render('region/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Region model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateRegion($id)
+    {
+        $model = $this->findModelRegion($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['region']);
+        }
+
+        return $this->render('region/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing Region model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteRegion($id)
+    {
+        $this->findModelRegion($id)->delete();
+
+        return $this->redirect(['region']);
+    }
+
+    /**
+     * Finds the Region model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Region the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelRegion($id)
+    {
+        if (($model = Region::findOne($id)) !== null) {
             return $model;
         }
 

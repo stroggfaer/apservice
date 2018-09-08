@@ -1252,3 +1252,15 @@ h1 {
 }
 
 
+.bg-show {
+  background: fade(@black,70%);
+  .position-bg(fixed,490);
+  cursor: pointer;
+  display: none;
+}
+
+@media only screen and (min-width: @screen-md-min) {
+  .bg-show {
+    display: none !important;
+  }
+}
