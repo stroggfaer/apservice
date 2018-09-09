@@ -1,11 +1,10 @@
 var ajax_path = '/repair/ajax/';
-
+var domain_city = '.apple.pc'; // apple.sc
 $(document).ready(function(){
 
     if($('#is_city_one').length) {
         // Запрос на геолокаций;
         $(window).on('load', function () {
-            console.log('GEO');
             $('.js-city').click();
         });
     }
@@ -20,10 +19,19 @@ $(document).ready(function(){
         var domain = $(this).data('domen');
         //
         $.cookie('MCS_CITY_CODE', domain, {
-            domain: '.apple.pc' // apple.sc
+            domain: domain_city // apple.sc
         });
         //console.log('domain',domain);
     });
+    // Закрыть модалка;
+    $('#window-modal').on('hidden.bs.modal', function (e) {
+        if($('#city-modal').length) {
+            var domain = $('#city-modal').data('domen');
+            $.cookie('MCS_CITY_CODE', domain, {
+                domain: domain_city // apple.sc
+            });
+        }
+    })
 
     // Карусель для контента;
     if($(".js-slider").length) {
