@@ -72,7 +72,7 @@ $city = \Yii::$app->action->currentCity;
                 </div>
                 <div class="top_phone  icon-fa">
                     <i class="fa fa-phone white" aria-hidden="true"></i>
-                    <a href="tel:<?=$city->phone?>" class="callibri_phone"><?=$city->phone?></a>
+                    <a href="tel:<?=$city->phone?>" class="callibri_phone"><?=!empty($city->value) ? $city->value : $city->phone?></a>
                 </div>
             </div>
             <div class="mobile">
