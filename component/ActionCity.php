@@ -22,18 +22,17 @@ class ActionCity extends Component{
     {
         $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 
-        $subDomain = Functions::subDomain($_SERVER['HTTP_HOST']);
-        $city = City::find()->where(['like', 'domen', $subDomain])->one();
-        if(empty($city)) {
-            if(!empty($options->url)) {
-                header("Location: ".$options->url);
-                exit();
-            }else{
-                header("Location: https://apple.sc/");
+        // Если урл пустой в настройки то гео отключаем
+        if(!empty($options->url)) {
+            $subDomain = Functions::subDomain($_SERVER['HTTP_HOST']);
+            $city = City::find()->where(['like', 'domen', $subDomain])->one();
+            if (empty($city)) {
+                header("Location: " . $options->url);
                 exit();
             }
+        }else{
+            $city = City::find()->where(['status'=>1,'main'=>1])->one();
         }
-
         return  $city;
     }
 
