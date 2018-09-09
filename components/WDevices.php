@@ -50,10 +50,10 @@ class WDevices extends Widget{
                 </div>
                  <div class="mobile">
                     <div class="select__mod">
-                        <select class="select">
+                        <select class="select"  onchange="top.location=this.value">
                           <?php foreach ($this->model->devices as $device): ?>
                               <?php $selected = !empty($this->model->device) && $device->id == $this->model->device->id ? 'selected': ''; ?>
-                            <option <?=$selected?>><a href="/repair/<?=$device->menuRepair->url.'/'.$device->url?>"><?=$device->title?></a></option>
+                            <option <?=$selected?> value="/repair/<?=$device->menuRepair->url.'/'.$device->url?>"><?=$device->title?></option>
                           <?php endforeach; ?>
                         </select>
                     </div>

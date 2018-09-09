@@ -38,10 +38,10 @@ class WMenuRepairs extends Widget{
                 </div>
                 <div class="mobile">
                     <div class="select__mod">
-                        <select class="select">
+                        <select class="select" onchange="top.location=this.value">
                             <?php foreach ($this->model->menuRepairs as $key=>$value ): ?>
-                                <?php $active = (!empty($this->model->currentRepair->id) && $this->model->currentRepair->id == $value->id ? 'active' : '') ?>
-                                <option <?=!empty($active) ? 'selected': '' ?>><a href=""><?=$value->title?></a></option>
+                                <?php $selected = (!empty($this->model->currentRepair->id) && $this->model->currentRepair->id == $value->id ? 'selected' : '') ?>
+                                <option <?=$selected?> value="/repair/<?=$value->url?>"><?=$value->title?></option>
                             <?php endforeach;  ?>
                         </select>
                     </div>

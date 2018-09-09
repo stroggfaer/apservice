@@ -32,6 +32,7 @@ class CallGroups extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['status'], 'integer'],
             [['title'], 'string', 'max' => 32],
+            [['description'],'string']
         ];
     }
 
@@ -42,8 +43,9 @@ class CallGroups extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'status' => 'Status',
+            'title' => 'Название',
+            'description' => 'Описание',
+            'status' => 'Статус',
         ];
     }
 

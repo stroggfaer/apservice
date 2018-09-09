@@ -53,6 +53,8 @@ $params = ['prompt' => 'Выберите позицию меню', 'options' => 
 
     <?=$form->field($model, 'menu')->DropDownList($menuType, $params)->label('Тип меню');  ?>
 
+    <?= $form->field($model, 'footer')->checkbox(['disabled' => false,]) ?>
+
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>
 
     <div class="form-group">

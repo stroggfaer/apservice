@@ -38,6 +38,7 @@ $params = ['prompt' => 'Выберите устройства', 'options' => [$m
     </div>
     <div class="clear"></div>
     <?= $form->field($model, 'zoom')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'value')->textInput(['maxlength' => true])->hint('Например: Скоро открытие') ?>
     <?= $form->field($model, 'main')->checkbox(['disabled' => false,]) ?>
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>
 

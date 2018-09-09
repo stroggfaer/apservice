@@ -23,7 +23,7 @@ function window_modal(url,title,objPost,name,type) {
         data: objPost,
         async: false,
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             modalContainer.find('.modal-body').html(data);
             modalContainer.modal('show');
         }

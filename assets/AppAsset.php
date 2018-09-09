@@ -29,6 +29,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/vendor/fancybox/jquery.fancybox.js',
         'js/vendor/carousel/slick.min.js',
+        'js/vendor/cookie/jquery.cookie.js',
         'js/site.js',
         'js/functions.js',
     ];

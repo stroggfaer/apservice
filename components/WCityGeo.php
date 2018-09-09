@@ -10,6 +10,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use Yii;
 
+
 class WCityGeo extends Widget{
     public $model;
 
@@ -23,13 +24,18 @@ class WCityGeo extends Widget{
         if (!$this->model) {
             return false;
         }else {
-          //  print_arr(Yii::$app->request->url);
+            $city = \Yii::$app->action->currentCity;
             ?>
-            <div class="items">
-               <?php foreach ($this->model as $city): ?>
-
-                   <div class="js-city-one" data-city-id="<?=$city->id?>"><a href="http://local.<?=$city->domen?>/repair/" class="city"><?=$city->name?></a></div>
-                <?php endforeach; ?>
+            <div id="city-modal" data-domen="<?=$city->domen?>">
+                <div class="items">
+                   <?php foreach ($this->model as $city): ?>
+                       <?php if(!empty($city->main)): ?>
+                          <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="http://apple.pc/repair/" class="city"><?=$city->name?></a></div>
+                       <?php else: ?>
+                           <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="http://<?=$city->domen?>.apple.pc/repair/" class="city"><?=$city->name?></a></div>
+                       <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <?php
         }

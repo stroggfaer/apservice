@@ -134,4 +134,18 @@ class Functions extends Model
         }
     }
 
+    // Функция PHP для получения субдомена URL-адреса;
+    public static function subDomain($url = false) {
+        if(empty($url)) return false;
+        $http = empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == 'off' ? 'https://' : 'http://';
+        $parsedUrl = parse_url($http.$url);
+        $host = explode('.', $parsedUrl['host']);
+        return $subdomain = $host[0];
+    }
+
+    // Добавляем окончание строки;
+    public static function strEnd($text,$str = 'е') {
+          return preg_replace("/$/", $str, $text);
+    }
+
 }
