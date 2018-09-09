@@ -42,7 +42,7 @@ $city = \Yii::$app->action->currentCity;
 ]);?>
 <?php Modal::end(); ?>
 
-<?php if(empty($_COOKIE['MCS_CITY_CODE'])): ?>
+<?php if(empty($_COOKIE['MCS_CITY_CODE']) && !empty($city->url)): ?>
    <div id="is_city_one"></div>
 <?php endif; ?>
 <div class="bg-show"></div>
