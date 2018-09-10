@@ -55,7 +55,7 @@ class WFooter extends Widget{
                     </div>
                     <div class="contacts">
                         <?php if(empty($city->value)): ?>
-                        <div class="item">
+                        <div class="item js-footer-menu-toggle">
                             <?php if(!empty($appleServices)): ?>
                                <?php foreach ($appleServices as $appleService): ?>
                                    <div class="address"><a href="<?=$appleService->value?>" class="dotted"><?=$appleService->title?></a></div>
@@ -77,7 +77,7 @@ class WFooter extends Widget{
             <div class="mobile">
                 <div class="menu_bottom__mod">
                     <div class="items">
-                        <div class="item">
+                        <div class="item js-footer-menu-toggle">
                             <div class="name">О компании</div>
                             <div class="i">
                                 <?php if(!empty($menuFooter)): ?>
@@ -93,7 +93,7 @@ class WFooter extends Widget{
                         <div class="item">
                             <div class="name"><a href="/accessories" class="no_border">Продукция и аксессуары</a></div>
                         </div>
-                        <div class="item">
+                        <div class="item js-footer-menu-toggle">
                             <div class="name">Салоны в <?=Functions::strEnd($city->name)?></div>
                             <div class="i">
                                 <?php if(!empty($appleServices)): ?>
@@ -101,16 +101,6 @@ class WFooter extends Widget{
                                         <div><a href="<?=$appleService->value?>"><?=$appleService->title?></a></div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">О компании</div>
-                            <div class="i">
-                                <div><a href="#">Информация</a></div>
-                                <div><a href="#">Информация</a></div>
-                                <div><a href="#">Информация</a></div>
-                                <div><a href="#">Информация</a></div>
-                                <div><a href="#">Информация</a></div>
                             </div>
                         </div>
                     </div>

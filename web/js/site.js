@@ -190,14 +190,14 @@ $(document).ready(function(){
 // Мобильная версия меню;
 $(document).on('click','.js-menu-mobile',function () {
     var element = $(this);
-    element.toggleClass('open');
+    element.find('.slide_menu-btn').toggleClass('open');
     $("#menu").fadeToggle();
     $('.bg-show').toggle();
     return false;
 });
 $(document).on('click','.bg-show',function () {
     $(this).hide();
-    $(".js-menu-mobile").removeClass('open');
+    $(".js-menu-mobile .slide_menu-btn").removeClass('open');
     $("#menu").fadeOut();
     return false;
 });
@@ -378,5 +378,10 @@ $(document).on('change','.js-salon-form select',function () {
         });
 });
 
+//
+$(document).on('click','.js-footer-menu-toggle',function () {
+    $(this).find('.i').toggle();
+    $(this).toggleClass('active');
+})
 
 console.log('Scripts Version 3.2.0 ');
