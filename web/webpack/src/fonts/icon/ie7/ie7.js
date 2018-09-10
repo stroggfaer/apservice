@@ -13,6 +13,7 @@
 		el.innerHTML = '<span style="font-family: \'icomoon\'">' + entity + '</span>' + html;
 	}
 	var icons = {
+		'icon-icon_ipod': '&#xe907;',
 		'icon-contacts': '&#xe900;',
 		'icon-curer': '&#xe901;',
 		'icon-ipad': '&#xe902;',
@@ -20,10 +21,10 @@
 		'icon-mac': '&#xe904;',
 		'icon-master': '&#xe905;',
 		'icon-phone': '&#xe906;',
-		'icon-start01': '&#xe907;',
-		'icon-start02': '&#xe908;',
-		'icon-start03': '&#xe909;',
-		'icon-start04': '&#xe90a;',
+		'icon-start01': '&#xe908;',
+		'icon-start02': '&#xe909;',
+		'icon-start03': '&#xe90a;',
+		'icon-start04': '&#xe90d;',
 		'icon-tv': '&#xe90b;',
 		'icon-watch': '&#xe90c;',
 		'0': 0

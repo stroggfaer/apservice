@@ -335,20 +335,20 @@ $(document).on('click','.js-call', function(){
 
 // Вызвать курьера;
 $(document).on('click','.js-call-courier', function(){
-    window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal');
+    window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal',3);
 });
 
 // Вызвать мастера;
 $(document).on('click','.js-call-master', function(){
-    window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal');
+    window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal',3);
 });
 
-// Вызвать мастера;
+// Узнать стоимтость;
 $(document).on('click','.js-call-buttons', function(){
-    window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal');
+    window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal',3);
 });
 
-// Вызвать мастера;
+// Позвонить к нам;
 $(document).on('click','.js-call-address', function(){
     window_modal('repair/ajax/call','Позвонить нам',{call:true,group_id:1005},'#window-modal');
 });

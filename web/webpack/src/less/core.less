@@ -407,10 +407,10 @@ h1,h2,h3,h4,.title,.name, b{
     padding:0px;
     border-radius:100%;
     border:3px solid;
-    border-top-color:fade(@orange2,60%);
-    border-bottom-color:fade(@orange2,60%);
-    border-left-color:fade(@orange2,15%);
-    border-right-color:fade(@orange2,15%);
+    border-top-color:fade(@blue,60%);
+    border-bottom-color:fade(@blue,60%);
+    border-left-color:fade(@blue,15%);
+    border-right-color:fade(@blue,15%);
     -webkit-animation: preloader3 0.8s ease-in-out infinite alternate;
     animation: preloader3 0.8s ease-in-out infinite alternate;
   }
@@ -463,4 +463,51 @@ h1,h2,h3,h4,.title,.name, b{
 @-webkit-keyframes preloader3 {
   from {-webkit-transform: rotate(0deg);}
   to {-webkit-transform: rotate(360deg);}
+}
+
+
+// Модал;
+#window-modal {
+    h4 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    button.close {
+      font-size: 50px;
+      font-weight: normal;
+      opacity: 0.6;
+      margin: -13px 0 -20px 0;
+    }
+    .modal-content {
+       border-radius: 0px;
+    }
+     .modal-xs {
+       width: 428px;
+     }
+    .description {
+       text-align: center;
+       font-size: 16px;
+       padding: 5px 0px;
+       margin-bottom: 20px;
+    }
+    //
+    .apple-services {
+       text-align: center;
+       .item {
+          padding: 5px 0px;
+          .title {
+            font-size: 18px;
+            color:@blue;
+            font-weight: bold;
+          }
+          .address {
+            padding: 0px 0 8px;
+          }
+         .phone {
+            font-size: 24px;
+            font-weight: bold;
+         }
+       }
+    }
 }

@@ -8,11 +8,13 @@ function window_modal(url,title,objPost,name,type) {
         modalContainer.find(".modal-header h4").text(title);
     }
     if(type == 1) {
-        modalContainer.find('.modal-dialog').addClass('modal-sm').removeClass('modal-lg');
+        modalContainer.find('.modal-dialog').addClass('modal-sm').removeClass('modal-lg modal-xs');
     }else if(type == 2){
-        modalContainer.find('.modal-dialog').addClass('modal-lg').removeClass('modal-sm');
+        modalContainer.find('.modal-dialog').addClass('modal-lg').removeClass('modal-sm modal-xs');
+    }else if(type == 3){
+        modalContainer.find('.modal-dialog').addClass('modal-xs').removeClass('modal-sm modal-lg');
     }else{
-        modalContainer.find('.modal-dialog').removeClass('modal-lg modal-sm');
+        modalContainer.find('.modal-dialog').removeClass('modal-lg modal-sm modal-xs');
     }
     //Если нет объекта по умол. пустой;
     if(!isset(objPost)) objPost = {};

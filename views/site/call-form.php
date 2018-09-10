@@ -20,7 +20,10 @@ $model = new \app\models\Repair();
               <div class="item">
                   <div class="title"><?=$appleService->title?></div>
                   <div class="address"><?=$appleService->address?></div>
-                  <div class="phone"><?=(!empty($appleService->phone) ? $appleService->phone : $appleService->city->phone)?></div>
+                  <div class="phone">
+                      <?php $phone = (!empty($appleService->phone) ? $appleService->phone : $appleService->city->phone)?>
+                      <a href="tel:<?=$phone?>" class="no_border"><?=$phone?></a>
+                  </div>
               </div>
             <?php endforeach; ?>
        </div>
