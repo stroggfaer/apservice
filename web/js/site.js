@@ -139,8 +139,8 @@ $(document).ready(function(){
 
     if($(".devices_carusel").length) {
 
-        //loadContent('show');
-        setTimeout(function(){
+       // loadContent('show');
+      //  setTimeout(function(){
             // Карусель
             $(".devices_carusel .items").slick({
                 dots: false,
@@ -165,7 +165,7 @@ $(document).ready(function(){
                 ]
             });
             //  loadContent('hide');
-        },1000);
+      //  },3000);
     }
 
     $('.navbar-toggle').click(function(){
@@ -182,8 +182,6 @@ $(document).ready(function(){
             $('.hidden-slide_menu-module', this).stop(true, true).hide();
         }, this), 100));
     });
-
-
 
 });
 
@@ -330,29 +328,37 @@ $(document).on('click','.js-send-call', function(){
 
 // Позвонить к нам;
 $(document).on('click','.js-call', function(){
-    window_modal('repair/ajax/call','Позвонить к нам',{call:true,group_id:1001},'#window-modal',1);
+    return window_modal('repair/ajax/call','Позвонить к нам',{call:true,group_id:1001},'#window-modal',1);
 });
 
 // Вызвать курьера;
 $(document).on('click','.js-call-courier', function(){
-    window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal',3);
+    return window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal',3);
 });
 
 // Вызвать мастера;
 $(document).on('click','.js-call-master', function(){
-    window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal',3);
+    return window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal',3);
 });
 
 // Узнать стоимтость;
 $(document).on('click','.js-call-buttons', function(){
-    window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal',3);
+    return window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal',3);
 });
 
 // Позвонить к нам;
 $(document).on('click','.js-call-address', function(){
-    window_modal('repair/ajax/call','Позвонить нам',{call:true,group_id:1005},'#window-modal');
+    return window_modal('repair/ajax/call','Позвонить нам',{call:true,group_id:1005},'#window-modal');
 });
 
+// У меня другая проблемы
+$(document).on('click','.js-call-problems1', function(){
+    return window_modal('repair/ajax/call','У меня другая проблемы',{call_problems:true,group_id:1006},'#window-modal',3);
+});
+// У меня несколько проблем
+$(document).on('click','.js-call-problems2', function(){
+    return window_modal('repair/ajax/call','У меня несколько проблем',{call_problems:true,group_id:1006},'#window-modal',3);
+});
 // Списко таблицы девайсов
 $(document).on('click','.js-select-devices',function () {
    var id = $(this).data('id');

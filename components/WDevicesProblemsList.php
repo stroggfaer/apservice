@@ -40,6 +40,7 @@ class WDevicesProblemsList extends Widget{
             <div class="devices-problems-list">
                 <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
                 <div class="devices__menu devices_carusel desktop">
+                    <div class="content__load"><div></div></div>
                     <div class="items">
                         <?php foreach ($devicesAll as $key => $value): ?>
                             <div class="item <?=$device->id == $value->id ? 'active' : ''?>  js-select-devices"  data-id="<?=$value->id?>"><a href="#"><?=$value->title?></a></div>
