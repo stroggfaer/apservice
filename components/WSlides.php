@@ -38,8 +38,10 @@ class WSlides extends Widget{
                             <div class="description ">Вызвать мастера</div>
                         </div>
                         <div class="col">
-                            <div class="icon-circle icon-contacts"></div>
-                            <div class="description">Приехать к нам</div>
+                            <a href="/contacts" class="no_border">
+                              <div class="icon-circle icon-contacts"></div>
+                              <div class="description">Приехать к нам</div>
+                            </a>
                         </div>
                     </div>
                     <div class="clear"></div>

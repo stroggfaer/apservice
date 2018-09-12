@@ -113,11 +113,17 @@ class AjaxController extends Controller
     // Call;
     function actionCall() {
         $call =  new Call();
+        $request = Yii::$app->request;
         if(Yii::$app->request->isAjax) {
-
-        return $this->renderAjax('/site/call-form',[
-                'call'=>$call
-            ]);
+           if($request->post('call_problems')) {
+               return $this->renderAjax('/site/modal-form', [
+                   'call' => $call
+               ]);
+           }else {
+               return $this->renderAjax('/site/call-form', [
+                   'call' => $call
+               ]);
+           }
         }
     }
 

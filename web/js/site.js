@@ -139,8 +139,8 @@ $(document).ready(function(){
 
     if($(".devices_carusel").length) {
 
-        //loadContent('show');
-        setTimeout(function(){
+       // loadContent('show');
+      //  setTimeout(function(){
             // Карусель
             $(".devices_carusel .items").slick({
                 dots: false,
@@ -165,7 +165,7 @@ $(document).ready(function(){
                 ]
             });
             //  loadContent('hide');
-        },1000);
+      //  },3000);
     }
 
     $('.navbar-toggle').click(function(){
@@ -183,21 +183,19 @@ $(document).ready(function(){
         }, this), 100));
     });
 
-
-
 });
 
 // Мобильная версия меню;
 $(document).on('click','.js-menu-mobile',function () {
     var element = $(this);
-    element.toggleClass('open');
+    element.find('.slide_menu-btn').toggleClass('open');
     $("#menu").fadeToggle();
     $('.bg-show').toggle();
     return false;
 });
 $(document).on('click','.bg-show',function () {
     $(this).hide();
-    $(".js-menu-mobile").removeClass('open');
+    $(".js-menu-mobile .slide_menu-btn").removeClass('open');
     $("#menu").fadeOut();
     return false;
 });
@@ -330,29 +328,37 @@ $(document).on('click','.js-send-call', function(){
 
 // Позвонить к нам;
 $(document).on('click','.js-call', function(){
-    window_modal('repair/ajax/call','Позвонить к нам',{call:true,group_id:1001},'#window-modal',1);
+    return window_modal('repair/ajax/call','Позвонить к нам',{call:true,group_id:1001},'#window-modal',1);
 });
 
 // Вызвать курьера;
 $(document).on('click','.js-call-courier', function(){
-    window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal');
+    return window_modal('repair/ajax/call','Вызвать курьера',{call:true,group_id:1002},'#window-modal',3);
 });
 
 // Вызвать мастера;
 $(document).on('click','.js-call-master', function(){
-    window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal');
+    return window_modal('repair/ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal',3);
 });
 
-// Вызвать мастера;
+// Узнать стоимтость;
 $(document).on('click','.js-call-buttons', function(){
-    window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal');
+    return window_modal('repair/ajax/call','Узнать стоимость ремонта',{call:true,group_id:1004},'#window-modal',3);
 });
 
-// Вызвать мастера;
+// Позвонить к нам;
 $(document).on('click','.js-call-address', function(){
-    window_modal('repair/ajax/call','Позвонить нам',{call:true,group_id:1005},'#window-modal');
+    return window_modal('repair/ajax/call','Позвонить нам',{call:true,group_id:1005},'#window-modal');
 });
 
+// У меня другая проблемы
+$(document).on('click','.js-call-problems1', function(){
+    return window_modal('repair/ajax/call','У меня другая проблемы',{call_problems:true,group_id:1006},'#window-modal',3);
+});
+// У меня несколько проблем
+$(document).on('click','.js-call-problems2', function(){
+    return window_modal('repair/ajax/call','У меня несколько проблем',{call_problems:true,group_id:1006},'#window-modal',3);
+});
 // Списко таблицы девайсов
 $(document).on('click','.js-select-devices',function () {
    var id = $(this).data('id');
@@ -378,5 +384,10 @@ $(document).on('change','.js-salon-form select',function () {
         });
 });
 
+//
+$(document).on('click','.js-footer-menu-toggle',function () {
+    $(this).find('.i').toggle();
+    $(this).toggleClass('active');
+})
 
 console.log('Scripts Version 3.2.0 ');

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?h94ysx');
-  src:  url('fonts/icomoon.eot?h94ysx#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?h94ysx') format('truetype'),
-    url('fonts/icomoon.woff?h94ysx') format('woff'),
-    url('fonts/icomoon.svg?h94ysx#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?qe0s2m');
+  src:  url('fonts/icomoon.eot?qe0s2m#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?qe0s2m') format('truetype'),
+    url('fonts/icomoon.woff?qe0s2m') format('woff'),
+    url('fonts/icomoon.svg?qe0s2m#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-icon_ipod:before {
+  content: "\e907";
+}
 .icon-contacts:before {
   content: "\e900";
 }
@@ -48,19 +51,19 @@
   content: "\e906";
 }
 .icon-start01:before {
-  content: "\e907";
-  color: #fff;
-}
-.icon-start02:before {
   content: "\e908";
   color: #fff;
 }
-.icon-start03:before {
+.icon-start02:before {
   content: "\e909";
   color: #fff;
 }
-.icon-start04:before {
+.icon-start03:before {
   content: "\e90a";
+  color: #fff;
+}
+.icon-start04:before {
+  content: "\e90d";
   color: #fff;
 }
 .icon-tv:before {

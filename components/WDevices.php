@@ -41,6 +41,7 @@ class WDevices extends Widget{
             </div>
               <?php else: ?>
                  <div class="devices__menu devices_carusel desktop">
+                    <div class="content__load"><div></div></div>
                     <div class="items">
                       <?php foreach ($this->model->devices as $device): ?>
                           <?php $active = !empty($this->model->device) && $device->id == $this->model->device->id ? 'active': ''?>

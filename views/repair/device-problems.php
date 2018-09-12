@@ -22,8 +22,8 @@ $call = new Call();
         <?=  app\components\WDevicesProblemsGroups::widget(['model'=>$model])?>
 
         <div class="default-problems">
-            <a href="#" class="black solid">У меня другая проблемы</a>
-            <a href="#" class="black solid">У меня несколько проблем</a>
+            <a href="#" class="black solid js-call-problems1">У меня другая проблемы</a>
+            <a href="#" class="black solid js-call-problems2">У меня несколько проблем</a>
         </div>
 
     </div>

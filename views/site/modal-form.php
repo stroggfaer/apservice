@@ -11,24 +11,7 @@ $model = new \app\models\Repair();
     <b class="name"></b>
 </div>
 <div class="call-form">
-    <?php if(!empty($group_id) && $group_id == 1005): ?>
-        <?php if(!empty($callGroups->description)): ?>
-            <div class="description"><?=$callGroups->description?></div>
-        <?php endif; ?>
-       <div class="apple-services">
-           <?php foreach ($model->appleServices as $appleService): ?>
-              <div class="item">
-                  <div class="title"><?=$appleService->title?></div>
-                  <div class="address"><?=$appleService->address?></div>
-                  <div class="phone">
-                      <?php $phone = (!empty($appleService->phone) ? $appleService->phone : $appleService->city->phone)?>
-                      <a href="tel:<?=$phone?>" class="no_border"><?=$phone?></a>
-                  </div>
-              </div>
-            <?php endforeach; ?>
-       </div>
 
-    <?php else: ?>
         <?php if(!empty($callGroups->description)): ?>
             <div class="description"><?=$callGroups->description?></div>
         <?php endif; ?>
@@ -43,12 +26,11 @@ $model = new \app\models\Repair();
             'validateOnSubmit'       => true,
         ]); ?>
         <div class="small">* Обязательные поля</div>
-
         <?= $form->field($call, 'fio')->textInput(['placeholder' => 'Имя*'])->label(false) ?>
         <?= $form->field($call, 'phone')->widget(\yii\widgets\MaskedInput::className(), ['mask' => '+7 (999)-999-9999',])->textInput(['placeholder' => 'Телефон*'])->label(false);?>
+        <?=  $form->field($call, 'comments')->textarea(['row' => 2,'placeholder' => 'Опишите проблему'])->label(false) ?>
         <input type="hidden" name="group_id" value="<?=$group_id?>">
         <input type="hidden" name="call_form" value="true">
         <div class="form-group text-center"><button class="btn btn-success loading js-send-call" type="submit">Отправить</button></div>
         <?php ActiveForm::end(); ?> <!--./Форма-->
-    <?php endif; ?>
 </div>
