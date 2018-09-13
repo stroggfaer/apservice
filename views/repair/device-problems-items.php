@@ -3,6 +3,7 @@ use app\models\Functions;
 $this->title = $one->title;
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
 
+
 ?>
 <div class="container size">
     <div class="devices-problems">
@@ -45,7 +46,7 @@ $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->o
 </div>
 
 <div class="apple-service">
-       <?=  app\components\WAppleServices::widget(['model'=>$model->appleServices])?>
+    <?= app\components\WAppleServices::widget(['appleServices'=>$model->appleServices,'one'=>$one,'model'=>$model])?>
 </div>
 
 <div class="info-call">

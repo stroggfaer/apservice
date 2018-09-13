@@ -3,9 +3,11 @@ namespace app\components;
 use yii\base\Widget;
 use yii\helpers\Html;
 use Yii;
+use app\models\Functions;
 
 class WAppleServices extends Widget{
     public $model;
+    public $appleServices;
     public $one;
 
     public function init() {
@@ -13,12 +15,15 @@ class WAppleServices extends Widget{
         if ($this->model === null) {
             $this->model = false;
         }
+        if ($this->appleServices === null) {
+            $this->appleServices = false;
+        }
         if ($this->one === null) {
             $this->one = false;
         }
     }
     public function run(){
-        if (!$this->model && true) {
+        if (!$this->model && !$this->appleServices && !$this->one) {
             ?>
             <div class="container size text-center">
                 <div style="padding: 45px 0px 0"><b>Нет данных</b></div>
@@ -30,7 +35,7 @@ class WAppleServices extends Widget{
 
             ?>
             <div class="container size">
-                <?php foreach ($this->model as $appleServices): ?>
+                <?php foreach ($this->appleServices as $appleServices): ?>
                    <div class="item">
                     <div class="row">
                         <div class="col-md-3 col-xs-3 image">
@@ -45,10 +50,10 @@ class WAppleServices extends Widget{
                         </div>
                         <div class="col-md-4 col-xs-4 block">
                             <div class="total">
-                                <div class="problems">Замена аккумулятра на iphone 5</div>
+                                <div class="problems">Замена аккумулятра на <?=$this->model->device->title?></div>
                                 <div class="content">
-                                    <div class="_icon-ap2 time">20 мин</div>
-                                    <div class="_icon-ap2 money">1 800 руб.</div>
+                                    <div class="_icon-ap2 time"><?=$this->one->time?> мин</div>
+                                    <div class="_icon-ap2 money"><?=Functions::money($this->one->price->money)?> руб.</div>
                                 </div>
                                 <div class="clear"></div>
                             </div>

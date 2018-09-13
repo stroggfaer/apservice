@@ -50,7 +50,7 @@ class WDevicesProblemsList extends Widget{
                 <div class="select__mod mobile">
                     <select class="select js-select-devices">
                         <?php foreach ($devicesAll as $key => $value): ?>
-                           <option <?=$device->id == $value->id ? 'selected' : ''?>   data-id="<?=$value->id?>"><?=$value->title?></option>
+                           <option <?=$device->id == $value->id ? 'selected' : ''?> value="<?=$value->id?>" ><?=$value->title?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

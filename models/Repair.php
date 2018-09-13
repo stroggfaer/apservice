@@ -4,7 +4,7 @@ use yii\base\Model;
 use Yii;
 ///use app\models\MenuRepairs;
 /*
- * Repair version 1.2.0
+ * Repair version 1.2.2
  * */
 
 class Repair extends Model
@@ -86,11 +86,7 @@ class Repair extends Model
     // Список проблемы выбранного девайса;
     public function getDevicesProblems() {
 
-       $data = [];
-       //$devices_alias =  Yii::$app->request->get();
-
-       //if(empty($devices_alias['alias'])) return false;
-      //  $devices = Devices::find()->where(['url'=>$devices_alias['alias'], 'status'=>1])->one();
+        $data = [];
         $devices = $this->device;
         if(!empty($devices->devicesDetails)) {
             foreach ($devices->devicesDetails as $devicesDetails) {

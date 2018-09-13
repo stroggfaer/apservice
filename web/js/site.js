@@ -355,22 +355,36 @@ $(document).on('click','.js-call-address', function(){
 $(document).on('click','.js-call-problems1', function(){
     return window_modal('repair/ajax/call','У меня другая проблемы',{call_problems:true,group_id:1006},'#window-modal',3);
 });
+
 // У меня несколько проблем
 $(document).on('click','.js-call-problems2', function(){
     return window_modal('repair/ajax/call','У меня несколько проблем',{call_problems:true,group_id:1006},'#window-modal',3);
 });
+
 // Списко таблицы девайсов
 $(document).on('click','.js-select-devices',function () {
    var id = $(this).data('id');
-    loading('show');
     $('.js-select-devices').removeClass('active');
     $(this).addClass('active');
+    select_devices(id);
+    return false;
+})
+$(document).on('change','select.js-select-devices',function () {
+    var id = parseInt($(this).val());
+    $('.js-select-devices').removeClass('active');
+    $(this).addClass('active');
+    select_devices(id);
+    return false;
+});
+
+function select_devices (id) {
+    if(!id) return false;
+    loading('show');
     $.post(ajax_path + '/select-devices',{id:id},function(response){
         $('div.update_table_content').html($(response).find('div.update_table_content').html());
         loading('hide');
     });
-    return false;
-});
+}
 
 // Ближайщие салоны;
 $(document).on('change','.js-salon-form select',function () {
