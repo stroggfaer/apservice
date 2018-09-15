@@ -167,6 +167,31 @@ class AjaxController extends Controller
         }
     }
 
+    // Ленивая подгрузка;
+    function actionLimitDeviceProblems() {
+        $request = Yii::$app->request;
+        $limit = abs($request->post('limit'));
+        $device_id = abs($request->post('device_id'));
+        $devices_problems_id = abs($request->post('devices_problems_id'));
+
+        $model = new Repair();
+
+        // Обновляем контент;
+        if(Yii::$app->request->isAjax) {
+           // print_arr($limit);
+            $model->setLimitDevicesProblems($limit);
+            $model->getCurrentDevices(false,$device_id);
+            $one = $model->getCurrentDeviceProblems(false,$devices_problems_id);
+            return \app\components\WDevicesProblems::widget(['model'=>$model,'one'=>$one]);
+        }
+    }
+
+    // Ленивая подгрузка для список таблиц;
+    function actionLimitDeviceProblemsTableList() {
+
+        return \app\components\WDevicesProblemsList::widget();
+    }
+
 
 }
 

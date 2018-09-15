@@ -398,10 +398,46 @@ $(document).on('change','.js-salon-form select',function () {
         });
 });
 
-//
+// Меню;
 $(document).on('click','.js-footer-menu-toggle',function () {
     $(this).find('.i').toggle();
     $(this).toggleClass('active');
-})
+});
+
+
+// Ленивая загрузка;
+$(document).on('click','.js-limit-devices-problems',function () {
+    var element  = $(this),
+        device_id = element.data('device-id'),
+        devices_problems_id = element.data('devices-problems-id'),
+        counts = element.data('counts'),
+        limit = parseInt(element.attr('data-limit'));
+    console.log(counts);
+    loading('show');
+    $.post(ajax_path+'limit-device-problems',{'limit':counts,'device_id': device_id,'devices_problems_id': devices_problems_id},function(response){
+        $('.update-devices-problems').append(response);
+        $('.more').hide();
+        loading('hide');
+    });
+    return false;
+});
+
+$(document).on('click','.js-limit-devices-problems-table',function () {
+    var element  = $(this),
+        device_id = element.data('device-id'),
+        counts = element.data('counts');
+    loading('show');
+    $.post(ajax_path+'limit-device-problems-table-list',{'limit':counts,'id': device_id},function(response){
+        if(response.length > 0) {
+            $(response).find('div.update_table_content tbody tr.list').not('tr.header').each(function (index, item) {
+                $('div.update_table_content tbody').append('<tr class="list">'+ $(item).html()+ '</tr>');
+                console.log($(item).html());
+            });
+            $('.more').hide();
+        }
+        loading('hide');
+    });
+    return false;
+});
 
 console.log('Scripts Version 3.2.0 ');
