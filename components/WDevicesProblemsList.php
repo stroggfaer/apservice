@@ -24,18 +24,17 @@ class WDevicesProblemsList extends Widget{
     public function run(){
         $request = Yii::$app->request;
         $id = abs($request->post('id'));
+        $limit = abs($request->post('limit'));
 
         $devices = new Devices();
+
         $devicesAll = $devices->getDevices();
         $city =  \Yii::$app->action->currentCity;
         $device = $devices->getDevice($id);
-        $deviceProblems = $devices->getDeviceProblems($device)
-
-
-
+        if(!empty($limit)) $devices->setLimit($limit);
+        $deviceProblems = $devices->getDeviceProblems($device);
+        $countsLimit = $devices->getCountsLimit($device);
         ?>
-
-
 
             <div class="devices-problems-list">
                 <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
@@ -50,21 +49,21 @@ class WDevicesProblemsList extends Widget{
                 <div class="select__mod mobile">
                     <select class="select js-select-devices">
                         <?php foreach ($devicesAll as $key => $value): ?>
-                           <option <?=$device->id == $value->id ? 'selected' : ''?>   data-id="<?=$value->id?>"><?=$value->title?></option>
+                           <option <?=$device->id == $value->id ? 'selected' : ''?> value="<?=$value->id?>" ><?=$value->title?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
 
                 <div class="table update_table_content">
                     <table class="table">
-                        <tr>
-                            <th class="name1">Услуги по ремонту <?=$devicesAll[0]->title?></th>
+                        <tr class="header">
+                            <th class="name1">Услуги по ремонту <?=$device->title?></th>
                             <th class="text-right name2">Цена выезде</th>
                             <th class="text-right name3">Цена в сервисных центрах</th>
                         </tr>
                         <?php if(!empty($deviceProblems)): ?>
                             <?php foreach ($deviceProblems as $deviceProblem): ?>
-                                <tr>
+                                <tr class="list">
                                     <td><a href="<?=$devices->device->menuRepair->url?>/<?=$devices->device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></td>
                                     <td class="text-right"><?=Functions::money($city->deliverie->price)?> руб</td>
                                     <td class="text-right"><?=$deviceProblem->value?></td>
@@ -72,7 +71,9 @@ class WDevicesProblemsList extends Widget{
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </table>
-                    <a href="#" class="dotted">Еще услуги</a>
+                    <?php if(!empty($countsLimit['counts'])): ?>
+                      <a href="#" class="dotted js-limit-devices-problems-table more" data-device-id="<?=$device->id?>" data-counts="<?=$countsLimit['counts']?>"  data-limit="<?=$countsLimit['limit']?>">Еще услуги</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <?php

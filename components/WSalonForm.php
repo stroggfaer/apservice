@@ -24,7 +24,7 @@ class WSalonForm extends Widget{
         }
     }
     public function run(){
-        if (!$this->model) {
+        if (!$this->model && !$this->one) {
             return false;
         }else {
             ?>

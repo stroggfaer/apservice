@@ -1,8 +1,12 @@
 <?php
 use app\models\Functions;
-$this->title = $one->title;
-$content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
+use app\models\Options;
 
+$this->title = $one->title;
+
+$content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
+$options = Options::find()->where(['id'=>1000,'status'=>1])->one();
+$city = \Yii::$app->action->currentCity;
 ?>
 <div class="container size">
     <div class="devices-problems">
@@ -12,9 +16,13 @@ $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->o
 
         <div class="text-center title-main-1"><h2>Выберите проблему на <?=$model->device->title?></h2></div>
         <div class="devices__com list">
-            <?=  app\components\WDevicesProblems::widget(['model'=>$model,'one'=>$one])?>
+            <div class="update-devices-problems">
+                <?=  app\components\WDevicesProblems::widget(['model'=>$model,'one'=>$one])?>
+            </div>
             <div class="clear"></div>
-            <div class="more"><a href="#" class="text-blue dotted">Показать еще</a></div>
+            <?php if(!empty($model->countsLimit['counts'])): ?>
+               <div class="more"><a href="#" class="text-blue dotted js-limit-devices-problems" data-counts="<?=$model->countsLimit['counts']?>"  data-limit="<?=$model->countsLimit['limit']?>" data-device-id="<?=$model->device->id?>" data-devices-problems-id="<?=$one->id?>">Показать еще</a></div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -45,11 +53,11 @@ $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->o
 </div>
 
 <div class="apple-service">
-       <?=  app\components\WAppleServices::widget(['model'=>$model->appleServices])?>
+    <?= app\components\WAppleServices::widget(['appleServices'=>$model->appleServices,'one'=>$one,'model'=>$model])?>
 </div>
 
 <div class="info-call">
     <h3 class="text-center">Бесплатная консультация и подбор сервиса</h3>
     <div class="small">Проконсультируем Вас по нашей горячей линии или отправим к Вам мастера</div>
-    <div class="phone">+7 (383) 239-31-06</div>
+    <div class="phone"><?=!empty($options->phone) ? $options->phone : $city->pnone?></div>
 </div>

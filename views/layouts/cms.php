@@ -28,7 +28,9 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 </head>
 <body>
 <?php $this->beginBody() ?>
-
+<div class="spinner__mod">
+    <div class="loader"></div>
+</div>
 <div class="wrap">
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">

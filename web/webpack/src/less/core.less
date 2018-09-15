@@ -515,6 +515,12 @@ h1,h2,h3,h4,.title,.name, b{
        padding: 5px 0px;
        margin-bottom: 20px;
     }
+    @media only screen and (max-width: @screen-mobile-min) {
+       .modal-dialog {
+          width: 100% !important;
+          min-width: 320px;
+       }
+    }
     //
     .apple-services {
        text-align: center;

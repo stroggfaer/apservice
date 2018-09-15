@@ -23,6 +23,8 @@ class Devices extends \yii\db\ActiveRecord
 
     public $device_id;
 
+    private $limit = 6; // Limit start;
+    private $countLimit = 0; // Limit end;
     /**
      * @inheritdoc
      */
@@ -90,6 +92,10 @@ class Devices extends \yii\db\ActiveRecord
          return $this->device_id  = $device_id;
     }
 
+    public function setLimit($countLimit) {
+        return $this->countLimit  = $countLimit;
+    }
+
     // Получаем Девайс;
     public function getDevice($id=false) {
         if(!empty($id)) {
@@ -104,9 +110,29 @@ class Devices extends \yii\db\ActiveRecord
     public function getDeviceProblems($device = false) {
         $data = [];
         if(empty($device)) return false;
-        foreach ($device->devicesDetails as $devicesDetail) {
+        //
+        if($this->countLimit > 0) {
+            $devicesDetails = $device->getDevicesDetails()->where(['status' => 1])->limit($this->countLimit)->orderBy('id ASC')->offset($this->limit)->all();
+        }else{
+            $devicesDetails = $device->getDevicesDetails()->where(['status' => 1])->limit($this->limit)->all();
+        }
+
+        foreach ($devicesDetails as $devicesDetail) {
             $data[] = $devicesDetail->deviceProblems;
         }
+        return $data;
+    }
+
+    // Количество осталось;
+    public function getCountsLimit($device = false) {
+        $data = [];
+        if(empty($device)) return false;
+        $counts = $device->getDevicesDetails()->where(['status'=>1])->count();
+
+        $data['counts'] = !empty($counts) ? ($counts -= $this->limit) : 0;
+        $data['counts'] = $data['counts'] > 0 ? $data['counts'] : 0;
+        $data['limit'] = $this->limit;
+
         return $data;
     }
 

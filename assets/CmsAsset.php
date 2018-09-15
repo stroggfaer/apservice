@@ -22,11 +22,13 @@ class CmsAsset extends AssetBundle
 
     public $css = [
        // 'css/theme-bootstrap.css',
+        'css/cms.css',
         'css/site.css',
     ];
 
     public $js = [
         'js/cms.js',
+        'js/functions.js',
     ];
 
     public $depends = [

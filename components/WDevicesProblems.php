@@ -25,15 +25,17 @@ class WDevicesProblems extends Widget{
     }
     public function run(){
 
-        if (empty($this->model->devicesProblems) && empty($this->one)) {
+        if (empty($this->model->devicesProblems)) {
             return false;
         }else {
 
             ?>
             <?php if(!empty($this->model->devicesProblems)): ?>
                <div class="items">
-                <?php foreach ($this->model->devicesProblems as $devicesProblems):
-                    $active = $this->one->id == $devicesProblems->id ? 'active': '';
+                <?php foreach ($this->model->devicesProblems as $key => $devicesProblems):
+
+                    $active = !empty($this->one) && $this->one->id == $devicesProblems->id ? 'active': '';
+
                     ?>
                       <div class="item <?=$active?>">
                          <a href="<?=$this->model->getUrl($devicesProblems->url)?>">

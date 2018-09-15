@@ -22,6 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions'   => function ($model, $key, $index, $grid) {
+            $class = ($model->status == 1 ? '' : 'alert-danger');
+
+            return [
+                'key'   => $key,
+                'index' => $index,
+                'class' => $class
+            ];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -29,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'title',
                 'content'   => function ($data) {
-                    return '<a href="/repair/cms/call/call?group_id='.$data->id.'">'.$data->title.'</a>';
+                    return '<a href="/repair/cms/call/call?group_id='.$data->id.'">'.$data->title.'</a> ('.$data->callsCounts.')';
                 }
             ],
             'status',

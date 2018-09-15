@@ -152,20 +152,44 @@ class AjaxController extends Controller
 
         $model = new Repair();
 
+        if(empty($device_id) && empty($devicesProblem_id) && empty($region_id)) return false;
+
         if(Yii::$app->request->isAjax) {
-           // $model->getCurrentDevices(false,$device_id);
-            if(!empty($region_id)) {
-                $region = $model->getRegionsOne($region_id);
-            }
-            $region = !empty($region->appleServices) ? $region->appleServices : false;
-//            print_arr($region->appleServices);
-//            print_arr($region);
-//            die();
+            $region = $model->getRegionsOne($region_id);
+            $appleServices = !empty($region->appleServices) ? $region->appleServices : false;
+            $one = $model->getCurrentDeviceProblems(false,$devicesProblem_id);
+            $model->getCurrentDevices(false,$device_id);
+
             return $response->data = [
-                'appleServices'=> \app\components\WAppleServices::widget(['model'=>$region]),
-                'salonForm'=> \app\components\WSalonForm::widget(['model'=>$model])
+                'appleServices'=> \app\components\WAppleServices::widget(['appleServices'=>$appleServices,'one'=>$one,'model'=>$model]),
+                'salonForm'=> \app\components\WSalonForm::widget(['model'=>$model,'one'=>$one,])
             ];
         }
+    }
+
+    // Ленивая подгрузка;
+    function actionLimitDeviceProblems() {
+        $request = Yii::$app->request;
+        $limit = abs($request->post('limit'));
+        $device_id = abs($request->post('device_id'));
+        $devices_problems_id = abs($request->post('devices_problems_id'));
+
+        $model = new Repair();
+
+        // Обновляем контент;
+        if(Yii::$app->request->isAjax) {
+           // print_arr($limit);
+            $model->setLimitDevicesProblems($limit);
+            $model->getCurrentDevices(false,$device_id);
+            $one = $model->getCurrentDeviceProblems(false,$devices_problems_id);
+            return \app\components\WDevicesProblems::widget(['model'=>$model,'one'=>$one]);
+        }
+    }
+
+    // Ленивая подгрузка для список таблиц;
+    function actionLimitDeviceProblemsTableList() {
+
+        return \app\components\WDevicesProblemsList::widget();
     }
 
 

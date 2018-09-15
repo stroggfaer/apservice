@@ -4,14 +4,21 @@ use yii\base\Model;
 use Yii;
 ///use app\models\MenuRepairs;
 /*
- * Repair version 1.2.0
+ * Repair version 1.2.2
  * */
 
 class Repair extends Model
 {
 
     private $devices;
+    private $limit = 12; // Limit start;
+    private $countLimit = 0; // Limit end;
 
+    // Пагинация ajax; array
+    public function setLimitDevicesProblems($countLimit)
+    {
+       $this->countLimit = $countLimit;
+    }
 
     // Menu Repair;
     public function getMenuRepairs()
@@ -86,17 +93,34 @@ class Repair extends Model
     // Список проблемы выбранного девайса;
     public function getDevicesProblems() {
 
-       $data = [];
-       //$devices_alias =  Yii::$app->request->get();
-
-       //if(empty($devices_alias['alias'])) return false;
-      //  $devices = Devices::find()->where(['url'=>$devices_alias['alias'], 'status'=>1])->one();
+        $data = [];
         $devices = $this->device;
-        if(!empty($devices->devicesDetails)) {
-            foreach ($devices->devicesDetails as $devicesDetails) {
+        if($this->countLimit > 0) {
+            $devicesDetails = $devices->getDevicesDetails()->where(['status' => 1])->limit($this->countLimit)->orderBy('id ASC')->offset($this->limit)->all();
+        }else{
+            $devicesDetails = $devices->getDevicesDetails()->where(['status' => 1])->limit($this->limit)->all();
+        //    ->orderBy([new \yii\db\Expression('FIELD(device_problems_id,100003)'),'device_problems_id' => SORT_ASC])->all();
+          //  ->orderBy([new \yii\db\Expression('FIELD (device_problems_id, 100003)')])->all();  //limit($this->limit)->all();
+               // ->orderBy('id ASC'); 100003
+        }
+
+        if(!empty($devicesDetails)) {
+            foreach ($devicesDetails as $devicesDetails) {
                 $data[] = $devicesDetails->deviceProblems;
             }
         }
+
+        return $data;
+    }
+
+    // Количество осталось;
+    public function getCountsLimit() {
+         $data = [];
+         $devices = $this->device;
+         $counts = $devices->getDevicesDetails()->where(['status'=>1])->count();
+         $data['counts'] = !empty($counts) ? ($counts -= $this->limit) : 0;
+        $data['counts'] = $data['counts'] > 0 ? $data['counts'] : 0;
+         $data['limit'] = $this->limit;
 
         return $data;
     }

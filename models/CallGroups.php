@@ -56,4 +56,8 @@ class CallGroups extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Call::className(), ['group_id' => 'id']);
     }
+    public function getCallsCounts()
+    {
+        return $this->hasMany(Call::className(), ['group_id' => 'id'])->where(['status'=>0])->count();
+    }
 }
