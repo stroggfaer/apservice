@@ -37,7 +37,7 @@ class CallController extends BackendController
                 'dataProvider' => $dataProvider,
             ]);
         }
-        // Пометить как отмечень;
+        // Удалить;
         if (Yii::$app->request->post('delete')) {
             $id = Yii::$app->request->post('id');
             $model =  Call::find()->where(['id'=>$id])->one();

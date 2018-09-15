@@ -12,6 +12,23 @@ $(document).ready(function(){
 
 
 });
+// Чекбокс пометить;
+$(document).on('click','.js-checkbox-column',function(){
+    loading('show');
+    $.post(window.location.href,{checkboxColumn:true,id:$(this).val(),status: $(this).filter(':checked').length},function(html){
+        $('.checkbox-column').html($(html).find('.checkbox-column').html());
+        loading('hide');
+    });
+    return false;
+});
+$(document).on('click','.js-call-delete',function(){
+    loading('show');
+    $.post(window.location.href,{delete:true, id:$(this).data('id')},function(html){
+        $('.checkbox-column').html($(html).find('.checkbox-column').html());
+        loading('hide');
+    });
+    return false;
+});
 // Удалить избражения;
 $(document).on('click','.js-delete-image-file',function () {
     var path = $(this).data('path');

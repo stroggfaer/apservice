@@ -17,11 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="checkbox-column">
-    <?php Pjax::begin(); ?>
         <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            $class = ($model->status == 1 ? '' : 'danger-com');
+            $class = ($model->status == 1 ? '' : 'text-danger');
             return [
                 'key'   => $key,
                 'index' => $index,
@@ -55,6 +54,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
     </div>
 </div>
