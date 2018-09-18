@@ -70,9 +70,10 @@ $city = \Yii::$app->action->currentCity;
                         </div>
                     </div>
                 </div>
+                <?php $phone = !empty($city->value) ? $city->value : (!empty($city->phone) ? $city->phone : 'Нет')?>
                 <div class="top_phone  icon-fa">
                     <i class="fa fa-phone white" aria-hidden="true"></i>
-                    <a href="tel:<?=$city->phone?>" class="callibri_phone"><?=!empty($city->value) ? $city->value : $city->phone?></a>
+                    <a href="tel:<?=$phone?>" class="callibri_phone"><?=$phone?></a>
                 </div>
             </div>
             <div class="mobile">
