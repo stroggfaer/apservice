@@ -7,6 +7,7 @@ $this->title = $one->title;
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 $city = \Yii::$app->action->currentCity;
+
 ?>
 <div class="container size">
     <div class="devices-problems">
@@ -59,5 +60,5 @@ $city = \Yii::$app->action->currentCity;
 <div class="info-call">
     <h3 class="text-center">Бесплатная консультация и подбор сервиса</h3>
     <div class="small">Проконсультируем Вас по нашей горячей линии или отправим к Вам мастера</div>
-    <div class="phone"><?=!empty($options->phone) ? $options->phone : $city->pnone?></div>
+    <div class="phone"><?=!empty($options->phone) ? $options->phone : $city->phone?></div>
 </div>
