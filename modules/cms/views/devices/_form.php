@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use kartik\widgets\Select2;
 /* @var $this yii\web\View */
 /* @var $model app\models\Devices */
 /* @var $form yii\widgets\ActiveForm */
@@ -11,6 +12,9 @@ use yii\helpers\ArrayHelper;
 $parent = \app\models\MenuRepairs::find()->orderBy('id ASC')->all();
 $items = ArrayHelper::map(array_merge($parent),'id', 'title');
 $params = ['prompt' => 'Выберите устройства', 'options' => [$model->menu_repair_id=>['selected'=>'selected']]];
+
+$deviceProblems = $model->deviceProblemsArrayList;
+
 ?>
 
 <div class="devices-form">
@@ -22,7 +26,43 @@ $params = ['prompt' => 'Выберите устройства', 'options' => [$m
     <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('Только латинские буквы и цифры. Можно не заполнять.') ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'seo_description')->textarea(['row' => 2]) ?>
+    <?= $form->field($devicesDetails, 'devices_id')->widget(Select2::classname(), [
+        'data' =>  $model->deviceProblemsArrayList,
+        'maintainOrder' => true,
+        'options' => ['placeholder' => 'Введите список проблемы ...', 'multiple' => true],
+        'pluginOptions' => [
+            'tags' => true,
+            'tokenSeparators' => [',', ' '],
+            'maximumInputLength' => 30
+        ],
+    ])->label('Добавить проблемы'); ?>
 
+    <?= $form->field($model, 'checkbox_copy')->checkbox(['disabled' => false,]) ?>
+    <?php if(!empty($model->devicesDetails)): ?>
+        <div class="table__com">
+            <div class="content">
+                <table class="table table-bordered table-hover">
+                    <tr class="info">
+                        <th>Список проблемы</th>
+                        <th width="50px">Убрать</th>
+                    </tr>
+                       <?php foreach ($model->devicesDetails as $devicesDetails): ?>
+                         <tr class="item">
+                             <td><a href="/repair/cms/devices/update-device-problems?id=<?=$devicesDetails->deviceProblems->id?>" target="_blank"><?=$devicesDetails->deviceProblems->title?></a></td>
+                             <td><button type="button" class="close js-device-problems-delete" data-dismiss="alert" data-id="<?=$devicesDetails->id?>" aria-hidden="true">×</button></td>
+                         </tr>
+                       <?php endforeach; ?>
+
+                </table>
+            </div>
+            <?php if(count($model->devicesDetails) >= 6): ?>
+               <div class="text-center more"> <a href="#" onclick="return table_all();">Загрузить все</a></div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
     <?php if($model->isNewRecord): ?>
         <?php $position = \app\models\Devices::find()->select('position')->where(['status'=>1])->orderBy('id DESC')->one();
         $positionValue =  !empty($position) ? $position->position + 1 : 1 ?>

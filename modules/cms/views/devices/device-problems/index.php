@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'money',
                 'label'=>'Цены',
                 'content'=>function($data){
-                    return $data->price->money;
+                    return !empty($data->price->money) ? $data->price->money : 'Нет';
                 },
             ],
             'position',
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view}&nbsp;{update}&nbsp;{delete}',
                 'headerOptions' => ['width' => '100'],
                 'urlCreator'=>function($action, $model, $key, $index){
-                    return Url::to([$action.'-device-problems','id'=>$model->id]);
+                    return Url::to([$action.'-device-problems','id'=>$model->id,'group_id'=>!empty($model->group->id) ? $model->group->id : false]);
                 }
 
             ],

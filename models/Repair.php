@@ -63,12 +63,20 @@ class Repair extends Model
     }
 
     // Tекущие роблемы;
-    public function getCurrentDeviceProblems($last = false, $id=false) {
+    public function getCurrentDeviceProblems($last = false, $id=false, $params = ['url' => null,'device_id' => null]) {
         if(!empty($last)) {
             $deviceProblems = DeviceProblems::find()->where(['url' => $last, 'status' => 1])->one();
         }
         if(!empty($id)) {
+
             $deviceProblems = DeviceProblems::find()->where(['id' => $id, 'status' => 1])->one();
+        }
+
+        if(!empty($params['url']) && !empty($params['device_id']) ) {
+
+            $deviceProblems = DeviceProblems::find()->
+            leftJoin(DevicesDetails::tableName(),'device_problems.id = devices_details.device_problems_id')->
+            where(['device_problems.url' => $params['url'], 'devices_details.devices_id'=>$params['device_id'], 'device_problems.status' => 1])->one();
         }
         if(empty($deviceProblems)) return false;
         return $deviceProblems;
@@ -149,6 +157,7 @@ class Repair extends Model
     public function getUrl($last = false)
     {
         $url =  Yii::$app->request->get();
+
         if(empty($url)) return false;
         return Yii::$app->getUrlManager()->createUrl('').$url['url'].'/'.$url['alias'].'/'.$last;
     }

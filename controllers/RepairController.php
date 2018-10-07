@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use app\models\Functions;
 use app\models\Repair;
 use Yii;
 use app\models\Bootstrap;
@@ -28,7 +29,7 @@ class RepairController extends AppController
             $one = $model->getCurrentRepair($url);
             if(!empty($one)) {
                 // Сео настройки;
-                $this->setMeta((!empty($one->seo_title) ? $one->seo_title : $one->title), false, $one->seo_description);
+                $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title) : $one->title), false, $one->seo_description);
                 return $this->render('index', [
                     'model' => $model,
                     'one' => $one,
@@ -42,6 +43,7 @@ class RepairController extends AppController
         if(!empty($alias) && empty($last)){
 
             $one = $model->getCurrentDevices($alias);
+            $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title) : $one->title),$one->seo_keywords,$one->seo_description);
             if(!empty($one)) {
                 return $this->render('device-problems', [
                     'model' => $model,
@@ -54,9 +56,10 @@ class RepairController extends AppController
 
         // Третий уровень
         if(!empty($last)){
-
-            $one = $model->getCurrentDeviceProblems($last);
-            $model->getCurrentDevices($alias);
+            $devices = $model->getCurrentDevices($alias);
+            $one = $model->getCurrentDeviceProblems(false,false, array('url'=>$last,'device_id'=>$devices->id));
+            // Сео настройки;
+            $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title) : $one->title),$one->seo_keywords,$one->seo_description);
             if(!empty($one)) {
                 return $this->render('device-problems-items', [
                     'model' => $model,

@@ -53,7 +53,7 @@ class WAppleServices extends Widget{
                                 <div class="problems">Замена аккумулятра на <?=$this->model->device->title?></div>
                                 <div class="content">
                                     <div class="_icon-ap2 time"><?=$this->one->time?> мин</div>
-                                    <div class="_icon-ap2 money"><?=Functions::money($this->one->price->money)?> руб.</div>
+                                    <div class="_icon-ap2 money"><?=Functions::money(!empty($this->one->price->money) ? $this->one->price->money : 0)?> руб.</div>
                                 </div>
                                 <div class="clear"></div>
                             </div>

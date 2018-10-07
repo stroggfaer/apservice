@@ -5,7 +5,7 @@ use app\models\Call;
 
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1001])->one();
 
-$this->title = $one->title;
+//$this->title = $one->title;
 
 $call = new Call();
 

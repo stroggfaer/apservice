@@ -3,7 +3,8 @@
 namespace app\models;
 
 use Yii;
-
+use yii\helpers\ArrayHelper;
+use yii\db\Expression;
 /**
  * This is the model class for table "devices".
  *
@@ -22,7 +23,7 @@ class Devices extends \yii\db\ActiveRecord
 
 
     public $device_id;
-
+    public $checkbox_copy = false;
     private $limit = 6; // Limit start;
     private $countLimit = 0; // Limit end;
     /**
@@ -41,7 +42,9 @@ class Devices extends \yii\db\ActiveRecord
         return [
             [['menu_repair_id', 'position', 'status'], 'integer'],
             [['title','menu_repair_id'], 'required'],
+            [['checkbox_copy'],'boolean'],
             [['url'], 'string', 'max' => 68],
+            [['seo_title','seo_keywords','seo_description'],'string'],
             [['title'], 'string', 'max' => 128],
             [['menu_repair_id'], 'exist', 'skipOnError' => true, 'targetClass' => MenuRepairs::className(), 'targetAttribute' => ['menu_repair_id' => 'id']],
         ];
@@ -58,6 +61,7 @@ class Devices extends \yii\db\ActiveRecord
             'url' => 'Url',
             'title' => 'Название',
             'position' => 'Позиция',
+            'checkbox_copy'=>'Копировать',
             'status' => 'Статус',
         ];
     }
@@ -187,7 +191,17 @@ class Devices extends \yii\db\ActiveRecord
         return DeviceProblems::find()->where(['id'=>$session['devices']['device_problem_id'],'status'=>1])->limit(1)->one();
     }
 
-
-
+    // Список проблемы в массиве;
+    public function getDeviceProblemsArrayList() {
+        $device_problems_id = ArrayHelper::map(array_merge($this->devicesDetails),'id','device_problems_id');
+        $deviceProblems = DeviceProblems::find()->select(['id','title'])->where(['status'=>1])->indexBy('id')->andWhere(['not in','id',$device_problems_id])->orderBy('id ASC')->all();
+        if(!empty($deviceProblems)) {
+            foreach ($deviceProblems as $key => $deviceProblem) {
+                $deviceProblems[$key] = $deviceProblem->title . ' (' .$deviceProblem->devices. ')';
+            }
+        }
+        return $deviceProblems;
+        //return ArrayHelper::map(array_merge(DeviceProblems::find()->where(['status'=>1])->andWhere(['not in','id',$device_problems_id])->orderBy('id ASC')->all()),'id','title');
+    }
 
 }

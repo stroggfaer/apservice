@@ -169,6 +169,7 @@ class AjaxController extends Controller
 
     // Ленивая подгрузка;
     function actionLimitDeviceProblems() {
+
         $request = Yii::$app->request;
         $limit = abs($request->post('limit'));
         $device_id = abs($request->post('device_id'));

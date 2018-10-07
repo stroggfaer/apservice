@@ -40,6 +40,21 @@ $(document).on('click','.js-delete-image-file',function () {
     });
 });
 
+// Удалить проблема;
+$(document).on('click','.js-device-problems-delete',function(){
+    var id = $(this).data('id');
+    var element = $(this);
+    loading('show');
+    $.post(window.location.href,{delete:true, id:id},function(html){
+        window.location.reload();
+        element.parents('.item').remove();
+        //$('.table__com').html($(html).find('.table__com').html());
+        loading('hide');
+    });
+    return false;
+});
+
+
 /*
 $(document).on('mouseover','.js-mounts .dropdown-toggle',function () {
    console.log('Success');
@@ -48,7 +63,11 @@ $(document).on('mouseover','.js-mounts .dropdown-toggle',function () {
 }).on('mouseout',this,function () {
     $(this).siblings('.dropdown-menu').hide();
 }); */
-
+function table_all() {
+    $('.table__com .content').css({'height':'100%'});
+    $('.table__com .more').hide();
+    return false;
+}
 
 
 console.log('Users');

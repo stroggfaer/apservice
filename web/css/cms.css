@@ -171,3 +171,13 @@ a.desc:after {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(360deg);}
 }
+.table__com {
+    margin-bottom: 15px;
+}
+.table__com .content{
+    max-height: 223px;
+    overflow: hidden;
+}
+.table__com .more {
+    padding-top: 15px;
+}

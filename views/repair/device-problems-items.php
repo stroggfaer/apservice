@@ -2,7 +2,7 @@
 use app\models\Functions;
 use app\models\Options;
 
-$this->title = $one->title;
+//$this->title = $one->title;
 
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
@@ -32,16 +32,16 @@ $city = \Yii::$app->action->currentCity;
     <div class="container size">
         <div class="title"><h3><?=$one->description?> на <?=$model->device->title?></h3></div>
         <div>Цена в сервисах</div>
-        <div class="price"><?=Functions::money($one->price->money)?> руб. / <?=$one->time?></div>
+        <div class="price"><?=Functions::money(!empty($one->price->money) ? $one->price->money : 0)?> руб. / <?=$one->time?></div>
     </div>
 </div>
 
 <div class="container size">
-    <?php if(!empty($content)): ?>
+    <?php $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : '')); ?>
     <div class="description-seo padding">
-        <div class="text"><?=$content->text?></div>
+        <div class="text"><?=Functions::getTemplateCode($text,$model->device->id,$one->id)?></div>
     </div>
-    <?php endif; ?>
+
 </div>
 
 <div class="call-form-content salon">
