@@ -32,16 +32,6 @@ $deviceProblems = $model->deviceProblemsArrayList;
     <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город'); ?>
     <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город')  ?>
     <?= $form->field($model, 'seo_description')->textarea(['row' => 2])->hint('Шаблонизатор {city} - Город')  ?>
-    <?= $form->field($devicesDetails, 'devices_id')->widget(Select2::classname(), [
-        'data' =>  $model->deviceProblemsArrayList,
-        'maintainOrder' => true,
-        'options' => ['placeholder' => 'Введите список проблемы ...', 'multiple' => true],
-        'pluginOptions' => [
-            'tags' => true,
-            'tokenSeparators' => [',', ' '],
-            'maximumInputLength' => 30
-        ],
-    ])->label('Добавить проблемы'); ?>
     <?= $form->field($model, 'text')->widget(CKEditor::className(), [
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
             'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
@@ -52,6 +42,17 @@ $deviceProblems = $model->deviceProblemsArrayList;
 
 
     ])->label('Текст')->hint('Шаблонизатор {city} - Город, {device} - Девайс');  ?>
+    <?= $form->field($devicesDetails, 'devices_id')->widget(Select2::classname(), [
+        'data' =>  $model->deviceProblemsArrayList,
+        'maintainOrder' => true,
+        'options' => ['placeholder' => 'Введите список проблемы ...', 'multiple' => true],
+        'pluginOptions' => [
+            'tags' => true,
+            'tokenSeparators' => [',', ' '],
+            'maximumInputLength' => 30
+        ],
+    ])->label('Добавить проблемы'); ?>
+
     <?= $form->field($model, 'checkbox_copy')->checkbox(['disabled' => false,]) ?>
     <?php if(!empty($model->devicesDetails)): ?>
         <div class="table__com">
