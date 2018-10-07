@@ -1,7 +1,7 @@
 <?php
 use yii\bootstrap\ActiveForm;
 use app\models\Call;
-
+use app\models\Functions;
 
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1001])->one();
 
@@ -34,12 +34,14 @@ $call = new Call();
 </div>
 
 <div class="container size">
-    <?php if(!empty($content)): ?>
+
+
        <div class="description-seo">
         <div class="text-center title-main"><h2><?=$content->title?></h2></div>
-        <div class="text"><?=$content->text?></div>
+           <?php $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : '')); ?>
+        <div class="text"><?=Functions::getTemplateCode($one->text,$one->id)?></div>
     </div>
-    <?php endif; ?>
+
     <div class="update-devices-problems-list">
         <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
     </div>

@@ -12,7 +12,7 @@ use yii\filters\AccessControl;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-
+use app\models\Functions;
 
 class SiteController extends AppController
 {
@@ -68,7 +68,7 @@ class SiteController extends AppController
 
         $pages = Pages::find()->where(['id'=>1000])->one();
         // Сео настройки;
-        if(!empty($pages)) $this->setMeta((!empty($pages->seo_title) ? $pages->seo_title : $pages->title),$pages->keywords,$pages->description);
+        if(!empty($pages)) $this->setMeta((!empty($pages->seo_title) ? Functions::getTemplateCode($pages->seo_title) : $pages->title),Functions::getTemplateCode($pages->keywords),Functions::getTemplateCode($pages->description));
 
         $model = new Repair();
         $one =  $model->menuRepair;

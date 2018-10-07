@@ -153,11 +153,6 @@ class Functions extends Model
         $regex = "/\{(.*?)\}/";
         preg_match_all($regex, $string, $matches);
         $model = new Repair();
-
-        // $string = preg_replace($regex, $city->name, $string);
-      //   $string = preg_replace($regex, $city->name, $string);
-      //   $string = preg_replace($regex, $city->name, $string);
-
         if(!empty($matches[1])) {
             foreach ($matches[1] as $value) {
 
@@ -172,7 +167,8 @@ class Functions extends Model
                         if(!empty($device_id)) {
                             $currentDevices = $model->getCurrentDevices(false, $device_id);
                             $string = preg_replace('/\{device\}/', $currentDevices->title, $string);
-
+                        }else{
+                            echo $string;
                         }
 
                         break;
@@ -180,7 +176,9 @@ class Functions extends Model
                         //  '/\[([^]]+)\]/'
                         if(!empty($device_problems_id)) {
                             $currentDeviceProblems = $model->getCurrentDeviceProblems(false,$device_problems_id);
-                           $string = preg_replace('/\{device_problems\}/', $currentDeviceProblems->title, $string);
+                            $string = preg_replace('/\{device_problems\}/', $currentDeviceProblems->title, $string);
+                        }else{
+                            echo $string;
                         }
                         break;
                 }
@@ -188,4 +186,20 @@ class Functions extends Model
         }
         return $string;
     }
+
+    // Админ почта;
+    public static function getAdminEmail($email=false,$title,$text) {
+        $options = Options::findOne(1000);
+        $email = !empty($email) ? $email : $options->adminEmail;
+        // Отправка писемь
+        Yii::$app->mailer->compose()
+            ->setFrom([Yii::$app->params['adminEmail']=>'Форма заявкиAppleService'])
+            ->setTo($email)
+            ->setSubject($title) // тема письма
+            ->setTextBody($text)
+            ->setHtmlBody($text)
+            ->send();
+        return false;
+    }
+
 }

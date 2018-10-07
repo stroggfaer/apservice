@@ -32,38 +32,42 @@ class WAppleServices extends Widget{
             return false;
         }else {
 
-
-            ?>
-            <div class="container size">
-                <?php foreach ($this->appleServices as $appleServices): ?>
-                   <div class="item">
-                    <div class="row">
-                        <div class="col-md-3 col-xs-3 image">
-                            <a href="#" class="no_border"><img src="<?=$appleServices->img?>" /></a>
-                        </div>
-                        <div class="col-md-5 col-xs-5 address-service">
-                            <div class="title"><?=$appleServices->title?></div>
-                            <div class="address"><?=$appleServices->address?></div>
-                            <div class="metro"><?=$appleServices->metro?></div>
-                            <div class="time"><?=$appleServices->time?></div>
-                            <div class="phone"><?=!empty($appleServices->phone) ? $appleServices->phone : $appleServices->city->phone?></div>
-                        </div>
-                        <div class="col-md-4 col-xs-4 block">
-                            <div class="total">
-                                <div class="problems">Замена аккумулятра на <?=$this->model->device->title?></div>
-                                <div class="content">
-                                    <div class="_icon-ap2 time"><?=$this->one->time?> мин</div>
-                                    <div class="_icon-ap2 money"><?=Functions::money(!empty($this->one->price->money) ? $this->one->price->money : 0)?> руб.</div>
+            if(!empty($this->appleServices)) {
+                ?>
+                <div class="container size">
+                    <?php foreach ($this->appleServices as $appleServices): ?>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-3 col-xs-3 image">
+                                    <a href="#" class="no_border"><img src="<?= $appleServices->img ?>"/></a>
                                 </div>
-                                <div class="clear"></div>
+                                <div class="col-md-5 col-xs-5 address-service">
+                                    <div class="title"><?= $appleServices->title ?></div>
+                                    <div class="address"><?= $appleServices->address ?></div>
+                                    <div class="metro"><?= $appleServices->metro ?></div>
+                                    <div class="time"><?= $appleServices->time ?></div>
+                                    <div class="phone"><?= !empty($appleServices->phone) ? $appleServices->phone : $appleServices->city->phone ?></div>
+                                </div>
+                                <div class="col-md-4 col-xs-4 block">
+                                    <div class="total">
+                                        <div class="problems">Замена аккумулятра
+                                            на <?= $this->model->device->title ?></div>
+                                        <div class="content">
+                                            <div class="_icon-ap2 time"><?= $this->one->time ?> мин</div>
+                                            <div class="_icon-ap2 money"><?= Functions::money(!empty($this->one->price->money) ? $this->one->price->money : 0) ?>
+                                                руб.
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
-            </div>
-            <?php
+                <?php
+            }
         }
     }
 }

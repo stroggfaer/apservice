@@ -54,7 +54,8 @@ $city = \Yii::$app->action->currentCity;
 </div>
 
 <div class="apple-service">
-    <?= app\components\WAppleServices::widget(['appleServices'=>$model->appleServices,'one'=>$one,'model'=>$model])?>
+    <?php $regions = $model->getRegionsOne($model->regions[0]->id); ?>
+    <?= app\components\WAppleServices::widget(['appleServices'=>$regions->appleServices,'one'=>$one,'model'=>$model])?>
 </div>
 
 <div class="info-call">

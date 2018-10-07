@@ -27,11 +27,11 @@ $params = ['prompt' => 'Выберите позицию меню', 'options' => 
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город');  ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город');  ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6])->hint('Шаблонизатор {city} - Город');  ?>
 
     <?= $form->field($model, 'text')->widget(CKEditor::className(), [
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
