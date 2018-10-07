@@ -148,4 +148,58 @@ class Functions extends Model
           return preg_replace("/$/", $str, $text);
     }
 
+    // Шаблоный сео;
+    public static function getTemplateCode($string,$device_id = false, $device_problems_id = false) {
+        $regex = "/\{(.*?)\}/";
+        preg_match_all($regex, $string, $matches);
+        $model = new Repair();
+        if(!empty($matches[1])) {
+            foreach ($matches[1] as $value) {
+
+                switch ($value) {
+                    case 'city':
+                        $city = \Yii::$app->action->currentCity;
+                        //  '/\[([^]]+)\]/'
+                        $string = preg_replace('/\{city\}/', $city->name, $string);
+                        break;
+                    case 'device':
+                        //  '/\[([^]]+)\]/'
+                        if(!empty($device_id)) {
+                            $currentDevices = $model->getCurrentDevices(false, $device_id);
+                            $string = preg_replace('/\{device\}/', $currentDevices->title, $string);
+                        }else{
+                            echo $string;
+                        }
+
+                        break;
+                    case 'device_problems':
+                        //  '/\[([^]]+)\]/'
+                        if(!empty($device_problems_id)) {
+                            $currentDeviceProblems = $model->getCurrentDeviceProblems(false,$device_problems_id);
+                            $string = preg_replace('/\{device_problems\}/', $currentDeviceProblems->title, $string);
+                        }else{
+                            echo $string;
+                        }
+                        break;
+                }
+            }
+        }
+        return $string;
+    }
+
+    // Админ почта;
+    public static function getAdminEmail($email=false,$title,$text) {
+        $options = Options::findOne(1000);
+        $email = !empty($email) ? $email : $options->adminEmail;
+        // Отправка писемь
+        Yii::$app->mailer->compose()
+            ->setFrom([Yii::$app->params['adminEmail']=>'Форма заявкиAppleService'])
+            ->setTo($email)
+            ->setSubject($title) // тема письма
+            ->setTextBody($text)
+            ->setHtmlBody($text)
+            ->send();
+        return false;
+    }
+
 }

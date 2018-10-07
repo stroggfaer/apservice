@@ -29,16 +29,18 @@ class WDevicesProblems extends Widget{
             return false;
         }else {
 
+
             ?>
             <?php if(!empty($this->model->devicesProblems)): ?>
                <div class="items">
                 <?php foreach ($this->model->devicesProblems as $key => $devicesProblems):
 
                     $active = !empty($this->one) && $this->one->id == $devicesProblems->id ? 'active': '';
+                  //  $this->model->getUrl($devicesProblems->url)
 
                     ?>
                       <div class="item <?=$active?>">
-                         <a href="<?=$this->model->getUrl($devicesProblems->url)?>">
+                         <a href="/repair/<?=$this->model->device->menuRepair->url.'/'.$this->model->device->url.'/'.$devicesProblems->url?>">
                              <?=$devicesProblems->title?>
                              <?php if(!empty($devicesProblems->value)): ?>
                                 <div class="small"><?=$devicesProblems->value?></div>

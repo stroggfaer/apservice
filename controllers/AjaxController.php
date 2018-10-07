@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\Call;
+use app\models\CallGroups;
 use app\models\City;
 use app\models\Devices;
 use app\models\Functions;
@@ -91,15 +92,24 @@ class AjaxController extends Controller
             $group_id = abs($request->post('group_id'));
             $call->load(Yii::$app->request->post());
             $call_title = !empty($request->post('call_title')) ? $request->post('call_title') : 'Нет';
-
+            $group_id = !empty($group_id) ? $group_id : 1001;
+            $callGroups = CallGroups::findOne($group_id);
+            $city = \Yii::$app->action->currentCity;
             if($call->validate()) {
                 $call->phone = Functions::phone($call->phone);
-                $call->group_id = !empty($group_id) ? $group_id : 1001;
+                $call->group_id = $group_id;
                 $call->value = $call_title;
                 if (!$call->save(false)) {
                     print_arr($call->errors);
                     die('ERROR');
                 }
+                // Отправить на почту;
+                Functions::getAdminEmail(Yii::$app->params['adminEmail'],$callGroups->title.'-'.$city->name,
+                    'Имя: '.$call->fio.
+                    'Номер телефон: '.Functions::phone($call->phone).
+                    'Email'.$call->email.
+                    'comments: '.$call->comments
+                );
                 return $response->data = ['success'=>'ok','message'=>'Ваша заявка отправлена! В ближайшее время с вами свяжется менеджер!'];
             }else {
                 return ActiveForm::validate($call);
@@ -169,6 +179,7 @@ class AjaxController extends Controller
 
     // Ленивая подгрузка;
     function actionLimitDeviceProblems() {
+
         $request = Yii::$app->request;
         $limit = abs($request->post('limit'));
         $device_id = abs($request->post('device_id'));

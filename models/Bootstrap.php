@@ -15,15 +15,16 @@ class Bootstrap implements BootstrapInterface
         $pathInfo = Yii::$app->request->pathInfo;
 
         $cms = preg_match("/cms/i", $pathInfo);
-        //TODO: чуть позже вернусь;
-        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-
-        }
-        if(\Yii::$app->request->isAjax ) {
-
-        }
+        $ajax = preg_match("/ajax/i", $pathInfo);
+//        //TODO: чуть позже вернусь;
+//        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+//
+//        }
+//        if(\Yii::$app->request->isAjax ) {
+//
+//        }
         $result = [];
-        if(empty($cms)) {
+        if(empty($cms) && empty($ajax)) {
             $result = [
                 '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>/<last:[\w_\/-]+>' => 'repair/index',
                 '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>' => 'repair/index',

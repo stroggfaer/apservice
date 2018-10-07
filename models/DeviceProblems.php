@@ -37,7 +37,7 @@ class DeviceProblems extends \yii\db\ActiveRecord
         return [
             [['group_id', 'position', 'status'], 'integer'],
             [['group_id','title', 'description'], 'required'],
-            [['description','url','value'], 'string'],
+            [['description','url','value','seo_title','seo_keywords','seo_description','text'], 'string'],
             [['title'], 'string', 'max' => 258],
             [['time'], 'string', 'max' => 64],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => GroupDeviceProblems::className(), 'targetAttribute' => ['group_id' => 'id']],
@@ -57,6 +57,7 @@ class DeviceProblems extends \yii\db\ActiveRecord
             'time' => 'Время',
             'position' => 'Позиция',
             'value' => 'Значение',
+            'text'=>'Текст',
             'status' => 'Статус',
         ];
     }

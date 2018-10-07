@@ -93,13 +93,64 @@ class DevicesController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $devicesDetails = new DevicesDetails();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            if ($devicesDetails->load(Yii::$app->request->post())) {
+                // Пост данные в массиве;
+                if(!empty($model->checkbox_copy)) {
+                    // Копируем данные из таблиц;
+                    if (!empty($devicesDetails->devices_id)) {
+                        $rows = [];
+                        foreach ($devicesDetails->devices_id as $key => $value) {
+                            // Получаем копии данные ;
+                            $deviceProblems = DeviceProblems::findOne($value);
+                            if(!empty($deviceProblems)) {
+                                //Копируем и ставим;
+                                $modelCreatDeviceProblems = new DeviceProblems();
+                                $modelCreatDeviceProblems->attributes = $deviceProblems->attributes;
+                                $modelCreatDeviceProblems->title = $deviceProblems->title.'(копия'.$deviceProblems->id.')';
+                                $modelCreatDeviceProblems->position = $key;
+                                $modelCreatDeviceProblems->id = null;
+                                if($modelCreatDeviceProblems->save()){//сохранение модели с созданием новой записи в БД
+                                    $rows[$key]['device_problems_id'] = $modelCreatDeviceProblems->id;
+                                    $rows[$key]['devices_id'] = $model->id;
+                                }
+                            }
+                        }
+                        if (!ModelHelper::saveAll($devicesDetails::tableName(), $rows)) {
+                            throw new Exception();
+                        }
+                    }
+                }else{
+                    // Добавляем все записей;
+                    if (!empty($devicesDetails->devices_id)) {
+                        $rows = [];
+                        foreach ($devicesDetails->devices_id as $key => $value) {
+                            $rows[$key]['device_problems_id'] = $value;
+                            $rows[$key]['devices_id'] = $model->id;
+                        }
+                        if (!ModelHelper::saveAll($devicesDetails::tableName(), $rows)) {
+                            throw new Exception();
+                        }
+                    }
+                }
+            }
+
+
             return $this->redirect(['view', 'id' => $model->id]);
+        }
+        // Удалить проблему;
+        if(Yii::$app->request->post('delete')) {
+            $id = Yii::$app->request->post('id');
+            $devicesDetails = DevicesDetails::findOne($id);
+            $devicesDetails->delete();
         }
 
         return $this->render('update', [
             'model' => $model,
+            'devicesDetails' => $devicesDetails,
         ]);
     }
 
@@ -296,6 +347,7 @@ class DevicesController extends BackendController
 
                     $transactionBD->commit();
                 }
+
                 if ($devicesDetails->load(Yii::$app->request->post())) {
                     // Пост данные в массиве;
                     $_post = Yii::$app->request->post('DevicesDetails'); ///
@@ -344,7 +396,7 @@ class DevicesController extends BackendController
         $devicesDetails = new DevicesDetails();
         $translit = new Translit();
 
-        $prices = $model->getPrice()->one();
+        $prices = !empty($model->getPrice()->one()) ? $model->getPrice()->one() :  new Prices();
 
         if ($model->load(Yii::$app->request->post()) &&  $model->validate()) {
             $model->url = (!empty($model->url) ? $model->url : mb_strtolower($translit->translit($model->title,true,'ru-en')));
@@ -410,11 +462,11 @@ class DevicesController extends BackendController
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDeleteDeviceProblems($id)
+    public function actionDeleteDeviceProblems($id,$group_id = false)
     {
         $this->findModelDeviceProblems($id)->delete();
 
-        return $this->redirect(['device-problems']);
+        return $this->redirect(['device-problems', 'group_id' => $group_id]);
     }
 
     /**

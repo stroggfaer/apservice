@@ -29,8 +29,9 @@ class PagesController extends AppController
         $pages = Pages::find()->where(["url"=>$url,"status"=> 1])->limit(1)->one();
 
         if(!empty($pages) && !empty($url)){
+
             // Сео настройки;
-            $this->setMeta((!empty($pages->seo_title) ? $pages->seo_title : $pages->title),$pages->keywords,$pages->description);
+            $this->setMeta((!empty($pages->seo_title) ?   Functions::getTemplateCode($pages->seo_title) : $pages->title),Functions::getTemplateCode($pages->keywords),Functions::getTemplateCode($pages->description));
 
             //  Проверка файл;
             if(Functions::fileDir('/views/pages/'.$url)) {

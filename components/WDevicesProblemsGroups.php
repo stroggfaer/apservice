@@ -35,7 +35,7 @@ class WDevicesProblemsGroups extends Widget{
                                <div class="item">
                                     <a href="<?=Yii::$app->request->url.$devicesProblems->url?>">
                                         <?=$devicesProblems->title?>
-                                        <div class="small"><?=($devicesProblems->value ? $devicesProblems->price->value : '')?></div>
+                                        <div class="small"><?=(!empty($devicesProblems->price->value) ? $devicesProblems->price->value : '')?></div>
                                     </a>
                               </div>
                             <?php endforeach; ?>

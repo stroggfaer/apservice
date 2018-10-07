@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\widgets\Select2;
+use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
 /* @var $this yii\web\View */
 /* @var $model app\models\DeviceProblems */
 /* @var $form yii\widgets\ActiveForm */
@@ -31,11 +33,23 @@ $devices = ArrayHelper::map(array_merge(\app\models\Devices::find()->where(['sta
 
     </div>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city}'); ?>
+    <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city}'); ?>
+    <?= $form->field($model, 'seo_description')->textarea(['row' => 2])->hint('Шаблонизатор {city}'); ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('Только латинские буквы и цифры. Можно не заполнять.') ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'text')->widget(CKEditor::className(), [
+        'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
+            'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+            'inline' => false, //по умолчанию false
+        ]),
 
+        'options' => ['rows' => 6],
+
+
+    ])->label('Текст')->hint('Шаблонизатор {city} - Город, {device} - Девайс, {device} - Девайс, {device_problems} - Устройства проблемы');  ?>
     <?= $form->field($model, 'time')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
@@ -62,8 +76,11 @@ $devices = ArrayHelper::map(array_merge(\app\models\Devices::find()->where(['sta
         </tr>
         <?php if(!empty($city)):?>
             <?php
-            $pricesList = !empty($prices) ? ArrayHelper::map(array_merge($model->prices),'city_id','money') : '';
-            $prices->money = $pricesList; ?>
+            if(!empty($prices)) {
+                $pricesList = ArrayHelper::map(array_merge($model->prices),'city_id','money');
+                $prices->money = $pricesList;
+            }
+            ?>
             <?php foreach ($city as $value): ?>
                 <tr>
                     <td><?=$value->name?></td>
