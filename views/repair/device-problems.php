@@ -39,7 +39,7 @@ $call = new Call();
        <div class="description-seo">
         <div class="text-center title-main"><h2><?=$content->title?></h2></div>
            <?php $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : '')); ?>
-        <div class="text"><?=Functions::getTemplateCode($one->text,$one->id)?></div>
+        <div class="text"><?=Functions::getTemplateCode($text,$one->id)?></div>
     </div>
 
     <div class="update-devices-problems-list">
