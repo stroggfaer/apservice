@@ -39,7 +39,7 @@ class WAppleServices extends Widget{
                         <div class="item">
                             <div class="row">
                                 <div class="col-md-3 col-xs-3 image">
-                                    <a href="#" class="no_border"><img src="<?= $appleServices->img ?>"/></a>
+                                    <a href="#" class="no_border"><img src="<?= $appleServices->img.'?'.time()?>"/></a>
                                 </div>
                                 <div class="col-md-5 col-xs-5 address-service">
                                     <div class="title"><?= $appleServices->title ?></div>
@@ -53,7 +53,7 @@ class WAppleServices extends Widget{
                                         <div class="problems">Замена аккумулятра
                                             на <?= $this->model->device->title ?></div>
                                         <div class="content">
-                                            <div class="_icon-ap2 time"><?= $this->one->time ?> мин</div>
+                                            <div class="_icon-ap2 time"><?= $this->one->time ?></div>
                                             <div class="_icon-ap2 money"><?= Functions::money(!empty($this->one->price->money) ? $this->one->price->money : 0) ?>
                                                 руб.
                                             </div>

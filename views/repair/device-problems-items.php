@@ -46,7 +46,7 @@ $city = \Yii::$app->action->currentCity;
 
 <div class="call-form-content salon">
     <div class="container size">
-        <h3 class="text-center">Ближайщие салоны</h3>
+        <h3 class="text-center">Салоны рядом с вами</h3>
         <div class="update-salon">
            <?=app\components\WSalonForm::widget(['model'=>$model,'one'=>$one])?>
         </div>

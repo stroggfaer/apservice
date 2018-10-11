@@ -205,7 +205,7 @@ $(document).on('change','.js-select-devices-form',function () {
     var device_id = parseInt($(this).val());
     if(device_id) {
         loading('show');
-        $.post(ajax_path+'/diagnostics',{select_devices_form:true,device_id:device_id},function(response){
+        $.post(ajax_path+'diagnostics',{select_devices_form:true,device_id:device_id},function(response){
 
             $(".update-select__js").html($(response).find('.update-select__js').html());
             $(".update-content__js").html($(response).find('.update-content__js').html());
@@ -215,7 +215,7 @@ $(document).on('change','.js-select-devices-form',function () {
         });
     }else{
         loading('show');
-        $.post(ajax_path+'/diagnostics',{select_devices_remove:true},function(response){
+        $.post(ajax_path+'diagnostics',{select_devices_remove:true},function(response){
 
             $(".update-select__js").html($(response).find('.update-select__js').html());
             $(".update-content__js").html($(response).find('.update-content__js').html());
@@ -232,7 +232,7 @@ $(document).on('change','.js-select-devices-problems-form',function () {
     var device_problem_id = parseInt($(this).val());
     if(device_problem_id) {
         loading('show');
-        $.post(ajax_path+'/diagnostics',{select_devices_problems_form:true,device_problem_id:device_problem_id},function(response){
+        $.post(ajax_path+'diagnostics',{select_devices_problems_form:true,device_problem_id:device_problem_id},function(response){
 
             $(".update-content__js").html($(response).find('.update-content__js').html());
             $(".result-content__js").html($(response).find('.result-content__js').html());
@@ -241,7 +241,7 @@ $(document).on('change','.js-select-devices-problems-form',function () {
         });
     }else{
         loading('show');
-        $.post(ajax_path+'/diagnostics',{select_devices_problems_remove:true},function(response){
+        $.post(ajax_path+'diagnostics',{select_devices_problems_remove:true},function(response){
 
             $(".update-content__js").html($(response).find('.update-content__js').html());
             $(".result-content__js").html($(response).find('.result-content__js').html());
@@ -380,7 +380,7 @@ $(document).on('change','select.js-select-devices',function () {
 function select_devices (id) {
     if(!id) return false;
     loading('show');
-    $.post(ajax_path + '/select-devices',{id:id},function(response){
+    $.post(ajax_path + 'select-devices',{id:id},function(response){
         $('div.update_table_content').html($(response).find('div.update_table_content').html());
         loading('hide');
     });

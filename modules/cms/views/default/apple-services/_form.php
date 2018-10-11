@@ -64,7 +64,7 @@ $params1 = ['prompt' => 'Выберите район', 'options' => [$model->reg
             <?php
              $img = Functions::imgPath('/apple/'.$model->id.'.png');
              $pathFile = Functions::pathFile('/apple/').$model->id.'.png';
-             echo !empty($img) ?'<img style="width: 100px" class="js-delete-image-file" data-path="'.$pathFile.'" src="'.$img.'?'.rand(6,6).'" />' : 'Нет фото';
+             echo !empty($img) ?'<img style="width: 100px" class="js-delete-image-file" data-path="'.$pathFile.'" src="'.$img.'?'.time().'" />' : 'Нет фото';
             ?>
         </div>
         <?= $form->field($images, 'imageMax')->widget(FileInput::classname(), [
