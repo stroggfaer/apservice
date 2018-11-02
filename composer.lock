@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fd34171028074d16040d4aeec9152d6",
+    "content-hash": "9e19f1de37e7954a36afc40bb73a8608",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1820,6 +1820,53 @@
                 "yii"
             ],
             "time": "2017-01-06T23:35:14+00:00"
+        },
+        {
+            "name": "roopz/yii2-imap",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiioverflow/yii2-imap.git",
+                "reference": "1be0c4f49475c27205e1d44136026be9f54285b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiioverflow/yii2-imap/zipball/1be0c4f49475c27205e1d44136026be9f54285b9",
+                "reference": "1be0c4f49475c27205e1d44136026be9f54285b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "roopz\\imap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Roopan Valiya Veetil",
+                    "email": "yiioverflow@gmail.com",
+                    "homepage": "http://www.yiioverflow.com/"
+                }
+            ],
+            "description": "yii2 extension to read and process mails from IMAP and PHP",
+            "homepage": "https://github.com/yiioverflow/yii2-imap.git",
+            "keywords": [
+                "cron",
+                "extension",
+                "imap",
+                "inbox",
+                "mail",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-02-16 08:40:50"
         },
         {
             "name": "studio-42/elfinder",
@@ -4987,7 +5034,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "kartik-v/yii2-grid": 20,
-        "kartik-v/yii2-datecontrol": 20
+        "kartik-v/yii2-datecontrol": 20,
+        "roopz/yii2-imap": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

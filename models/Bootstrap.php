@@ -13,9 +13,10 @@ class Bootstrap implements BootstrapInterface
     public function bootstrap($app)
     {
         $pathInfo = Yii::$app->request->pathInfo;
-
+        // Исключение;
         $cms = preg_match("/cms/i", $pathInfo);
         $ajax = preg_match("/ajax/i", $pathInfo);
+        $gridview = preg_match("/gridview/i", $pathInfo);
 //        //TODO: чуть позже вернусь;
 //        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 //
@@ -24,7 +25,7 @@ class Bootstrap implements BootstrapInterface
 //
 //        }
         $result = [];
-        if(empty($cms) && empty($ajax)) {
+        if(empty($cms) && empty($ajax) && empty($gridview)) {
             $result = [
                 '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>/<last:[\w_\/-]+>' => 'repair/index',
                 '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>' => 'repair/index',
