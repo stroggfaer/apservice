@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $mail_login = $exportEmail->getAccountEmail();
 $lastOne = ParserEmail::find()->orderBy('id DESC')->limit(1)->one();
-
+// V123
 ?>
 <div class="parser-email-index">
 
@@ -25,7 +25,8 @@ $lastOne = ParserEmail::find()->orderBy('id DESC')->limit(1)->one();
 
     <?php if(!empty($mail_login['email'])): ?>
         <?php
-        //$call  = $exportEmail->searchMailbox(false,true);
+
+          //$call  = $exportEmail->searchMailbox(false,true);
         ?>
         <div class="alert alert-info">
             <span class="text-primary">Яндекс Почта (Входящие) | <b><?php echo($mail_login['email']);?></b></span><br>
