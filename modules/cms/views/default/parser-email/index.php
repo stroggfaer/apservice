@@ -15,7 +15,7 @@ $this->title = 'Список Email';
 $this->params['breadcrumbs'][] = $this->title;
 
 $mail_login = $exportEmail->getAccountEmail();
-$lastOne = ParserEmail::find()->orderBy('id DESC')->limit(1)->one();
+
 // V123
 ?>
 <div class="parser-email-index">
@@ -49,7 +49,7 @@ $lastOne = ParserEmail::find()->orderBy('id DESC')->limit(1)->one();
                        'pluginOptions' => [
                            'initval' => 1,
                            'min' => 1 ,
-                           'max' => ($exportEmail->countsEmail),
+                         //  'max' => ($exportEmail->countsEmail),
                        ],
                        'options' => [
                                'id'=>'maxCounts'
