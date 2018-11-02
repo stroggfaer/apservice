@@ -20,7 +20,10 @@ class AjaxBackendController extends BackendController
        }
         return false;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 58fd7b4b18eca46d5877663486d63c68812f6281
     // Загрузка данные;
     public function actionRunExportEmail() {
         $response = Yii::$app->response;
