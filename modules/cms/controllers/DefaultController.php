@@ -4,6 +4,8 @@ namespace app\modules\cms\controllers;
 
 
 use app\models\Content;
+use app\models\ExportEmail;
+
 use app\models\Pages;
 use dastanaron\translit\Translit;
 use app\modules\cms\models\PostSearchPages;
@@ -25,6 +27,9 @@ use app\modules\cms\models\AppleServicesSearch;
 
 use app\models\Delivery;
 use app\modules\cms\models\DeliverySearch;
+
+use app\models\ParserEmail;
+use app\modules\cms\models\ParserEmailSearch;
 
 use app\models\Functions;
 use app\models\Options;
@@ -872,6 +877,93 @@ class DefaultController extends BackendController
     protected function findModelDelivery($id)
     {
         if (($model = Delivery::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /*Настройка сбор данные почты */
+    public function actionMailUpload() {
+
+        $exportEmail = new ExportEmail();
+
+        $mail_login = yii::$app->params['mail_upload'];
+
+        if(empty($mail_login['email']) || empty($mail_login['password'])) {
+
+            return $this->render('mail-upload/index', [
+                'error' => true,
+            ]);
+        }
+
+        $mails_data = $exportEmail->getDataListEmail($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']);
+
+        return $this->render('mail-upload/index', [
+            'mails_data' => $mails_data,
+            'mail_login'=>$mail_login
+        ]);
+    }
+
+    /**
+     * Lists all ParserEmail models.
+     * @return mixed
+     */
+    public function actionParserEmail()
+    {
+        $exportEmail = new ExportEmail();
+
+//        $counts = 6;
+//
+//        $testSearsh = array(755,756,757,758,759,760,761,762,763,764,765,766,767,768,769,770,771,772,773,783);
+//        $dataMails = array();
+//        if(!empty($testSearsh)) {
+//            $mailsList = ParserEmail::find()->select('uid')->orderBy('id DESC')->asArray()->where(['status' => 1])->column();
+//            $result = array_diff($testSearsh, $mailsList);
+//            sort($result);
+//            $dataMails = array_slice($result, 0, $counts);
+//        }
+//        print_arr($dataMails);
+//
+//
+//        die('STOP');
+
+        $searchModel = new ParserEmailSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+       //$mails_data = $exportEmail->getDataListEmail();
+
+        return $this->render('parser-email/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'exportEmail'=>$exportEmail
+        ]);
+    }
+
+    /**
+     * Deletes an existing ParserEmail model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteParserEmail($id)
+    {
+        $this->findModelParserEmail($id)->delete();
+
+        return $this->redirect(['parser-email']);
+    }
+
+    /**
+     * Finds the ParserEmail model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return ParserEmail the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelParserEmail($id)
+    {
+        if (($model = ParserEmail::findOne($id)) !== null) {
             return $model;
         }
 

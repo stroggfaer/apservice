@@ -113,7 +113,7 @@ class DevicesController extends BackendController
                                 $modelCreatDeviceProblems->title = $deviceProblems->title.'(копия'.$deviceProblems->id.')';
                                 $modelCreatDeviceProblems->position = $key;
                                 $modelCreatDeviceProblems->id = null;
-                                if($modelCreatDeviceProblems->save()){//сохранение модели с созданием новой записи в БД
+                                if($modelCreatDeviceProblems->save()){//сохран ение модели с созданием новой записи в БД
                                     $rows[$key]['device_problems_id'] = $modelCreatDeviceProblems->id;
                                     $rows[$key]['devices_id'] = $model->id;
                                 }

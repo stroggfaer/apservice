@@ -9,9 +9,8 @@ $(document).ready(function(){
             $('.dropdown-menu', this).stop(true, true).hide();
         }, this), 100));
     });
-
-
 });
+
 // Чекбокс пометить;
 $(document).on('click','.js-checkbox-column',function(){
     loading('show');
@@ -51,6 +50,40 @@ $(document).on('click','.js-device-problems-delete',function(){
         //$('.table__com').html($(html).find('.table__com').html());
         loading('hide');
     });
+    return false;
+});
+
+// Отправка данные;
+$(document).on('click','.js-run-email-parser',function () {
+    loading('show');
+    var max_counts = $("#maxCounts").val();
+    if(max_counts > 0) {
+
+        $.ajax({
+            url: '/repair/cms/ajax-backend/run-export-email',
+            type: 'POST',
+            data: {runExportEmail: true,  max_counts: max_counts},
+            success: function(response){
+
+                if(isset(response) && response.status == 'ok') {
+                    console.log(response);
+                    console.log(response.data);
+                    alert('Успешно импортирован (' + response.counts + ')');
+                    window.location.reload();
+                }
+                loading('hide');
+            },
+            error: function(){
+                alert('Запрос не выполнен!');
+                loading('hide');
+            }
+        });
+
+    }else{
+        alert('Не может больше 0');
+        loading('hide');
+        return false;
+    }
     return false;
 });
 

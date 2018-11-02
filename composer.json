@@ -25,7 +25,8 @@
         "div/yii2-geoip": "^1.0",
         "kartik-v/yii2-datecontrol": "dev-master",
         "mihaildev/yii2-elfinder": "*",
-        "mihaildev/yii2-ckeditor": "*"
+        "mihaildev/yii2-ckeditor": "*",
+        "roopz/yii2-imap": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

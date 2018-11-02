@@ -160,8 +160,8 @@ class BackendController extends Controller
                     'title' => 'Настройки',
                 ],
                 [
-                    'link' => '/cms/mailer',
-                    'title' => 'Настройки почты',
+                    'link' => '/cms/parser-email', // /cms/mail-upload
+                    'title' => 'Выгрузка почты',
                 ],
                 [
                     'link' => '/cms/logs/index',
