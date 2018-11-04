@@ -119,13 +119,20 @@ class ExportEmail extends Model
          return $body;
     }
 
+    public function getAccountEmail() {
+        $mail_login = yii::$app->params['mail_upload'];
+        if(empty($mail_login['mail_imap']) || empty($mail_login['email']) || empty($mail_login['password'])) return false;
+        return $mail_login;
+    }
     // Подключение Email поток;
     public function getConnectEmail() {
+
         // Подключаем;
         $mail_login = $this->accountEmail;
-        $connection = imap_open($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']);
-        if(empty($connection)) return ("Ошибка соединения с почтой - ".$mail_login);
-        return $connection;
+
+        $connection = imap_open($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']) or die(imap_last_error());
+
+        return $connection
     }
 
     public function searchMailbox($counts=1,$options = false) {
@@ -202,11 +209,7 @@ class ExportEmail extends Model
 
     }
 
-    public function getAccountEmail() {
-        $mail_login = yii::$app->params['mail_upload'];
-        if(empty($mail_login['mail_imap']) || empty($mail_login['email']) || empty($mail_login['password'])) return false;
-        return $mail_login;
-    }
+
 
     // Количество писемь;
     public function getCountsEmail() {

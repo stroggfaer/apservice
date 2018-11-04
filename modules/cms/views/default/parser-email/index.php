@@ -26,11 +26,11 @@ $mail_login = $exportEmail->getAccountEmail();
     <?php if(!empty($mail_login['email'])): ?>
         <?php
 
-          //$call  = $exportEmail->searchMailbox(false,true);
+          $call  = $exportEmail->searchMailbox(false,true);
         ?>
         <div class="alert alert-info">
             <span class="text-primary">Яндекс Почта (Входящие) | <b><?php echo($mail_login['email']);?></b></span><br>
-            <?php if(false): ?>
+            <?php if(true): ?>
             <span class="text-primary">Всего количество писемь <span class="badge"><?=$exportEmail->countsEmail?></span></span><br>
             <span class="text-primary">Всего количество найдено заявки <span class="badge"><?=$call['countsSerach']?></span></span><br>
             <span class="text-primary">Осталось обработать заявки <span class="badge"><?=$call['count']?></span></span><br>
@@ -49,7 +49,7 @@ $mail_login = $exportEmail->getAccountEmail();
                        'pluginOptions' => [
                            'initval' => 1,
                            'min' => 1 ,
-                         //  'max' => ($exportEmail->countsEmail),
+                           'max' => ($exportEmail->countsEmail),
                        ],
                        'options' => [
                                'id'=>'maxCounts'
