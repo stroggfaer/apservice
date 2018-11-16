@@ -123,8 +123,8 @@ class ExportEmail extends Model
     public function getConnectEmail() {
         // Подключаем;
         $mail_login = $this->accountEmail;
-        $connection = imap_open($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']);
-        if(empty($connection)) return ("Ошибка соединения с почтой - ".$mail_login);
+	    $connection = @imap_open($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']) or die(imap_last_error());
+
         return $connection;
     }
 
@@ -224,8 +224,9 @@ class ExportEmail extends Model
     public function getParserBody($text = false) {
         if(empty($text)) return false;
         $data = [];
+		$text = strip_tags($text);
         // Что нужно отсеят;
-        $replace_array = array('Заявка на звонок', 'Имя:', 'Телефон:', 'Электронная почта:', 'Город:', 'email:', 'С какой формы поступила заявка: нижняя форма заявки');
+        $replace_array = array('Заявка на звонок', 'Имя:', 'Телефон:', 'Электронная почта:', 'Город:', 'email:', 'С какой формы поступила заявка: нижняя форма заявки','форма заказа звонка');
         $str = str_replace($replace_array, ",", $text);
         $str = preg_replace('/\s/', '', $str);
         $str = preg_replace('/^[,\s]+|[,\s]+$/', '', $str);
