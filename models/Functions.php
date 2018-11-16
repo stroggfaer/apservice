@@ -174,7 +174,7 @@ class Functions extends Model
 
                         break;
                     case 'device_problems':
-                        //  '/\[([^]]+)\]/'
+                        //  '/\[([^]]+)\]/' ++
 						
                         if(!empty($device_problems_id)) {
                             $currentDeviceProblems = $model->getCurrentDeviceProblems(false,$device_problems_id);
