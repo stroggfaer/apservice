@@ -132,7 +132,7 @@ class ExportEmail extends Model
 
         $connection = imap_open($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']) or die(imap_last_error());
 
-        return $connection
+        return $connection;
     }
 
     public function searchMailbox($counts=1,$options = false) {
