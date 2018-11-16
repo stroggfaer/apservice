@@ -33,9 +33,9 @@ $devices = ArrayHelper::map(array_merge(\app\models\Devices::find()->where(['sta
 
     </div>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city}'); ?>
-    <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city}'); ?>
-    <?= $form->field($model, 'seo_description')->textarea(['row' => 2])->hint('Шаблонизатор {city}'); ?>
+    <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city},{device},{device_problems}'); ?>
+    <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city},{device},{device_problems}'); ?>
+    <?= $form->field($model, 'seo_description')->textarea(['row' => 2])->hint('Шаблонизатор {city},{device},{device_problems}'); ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('Только латинские буквы и цифры. Можно не заполнять.') ?>
 

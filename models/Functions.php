@@ -169,7 +169,7 @@ class Functions extends Model
                             $currentDevices = $model->getCurrentDevices(false, $device_id);
                             $string = preg_replace('/\{device\}/', $currentDevices->title, $string);
                         }else{
-                            echo $string;
+                            //echo $string;
                         }
 
                         break;
@@ -181,7 +181,7 @@ class Functions extends Model
                             $string = preg_replace('/\{device_problems\}/', $currentDeviceProblems->title, $string);
                         }else{
 							
-                            echo $string;
+                            //echo $string;
                         }
                         break;
                 }
