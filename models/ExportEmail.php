@@ -119,18 +119,11 @@ class ExportEmail extends Model
          return $body;
     }
 
-    public function getAccountEmail() {
-        $mail_login = yii::$app->params['mail_upload'];
-        if(empty($mail_login['mail_imap']) || empty($mail_login['email']) || empty($mail_login['password'])) return false;
-        return $mail_login;
-    }
     // Подключение Email поток;
     public function getConnectEmail() {
-
         // Подключаем;
         $mail_login = $this->accountEmail;
-
-        $connection = imap_open($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']) or die(imap_last_error());
+	    $connection = @imap_open($mail_login['mail_imap'], $mail_login['email'], $mail_login['password']) or die(imap_last_error());
 
         return $connection;
     }
@@ -209,7 +202,11 @@ class ExportEmail extends Model
 
     }
 
-
+    public function getAccountEmail() {
+        $mail_login = yii::$app->params['mail_upload'];
+        if(empty($mail_login['mail_imap']) || empty($mail_login['email']) || empty($mail_login['password'])) return false;
+        return $mail_login;
+    }
 
     // Количество писемь;
     public function getCountsEmail() {
@@ -227,8 +224,9 @@ class ExportEmail extends Model
     public function getParserBody($text = false) {
         if(empty($text)) return false;
         $data = [];
+		$text = strip_tags($text);
         // Что нужно отсеят;
-        $replace_array = array('Заявка на звонок', 'Имя:', 'Телефон:', 'Электронная почта:', 'Город:', 'email:', 'С какой формы поступила заявка: нижняя форма заявки');
+        $replace_array = array('Заявка на звонок', 'Имя:', 'Телефон:', 'Электронная почта:', 'Город:', 'email:', 'С какой формы поступила заявка: нижняя форма заявки','форма заказа звонка');
         $str = str_replace($replace_array, ",", $text);
         $str = preg_replace('/\s/', '', $str);
         $str = preg_replace('/^[,\s]+|[,\s]+$/', '', $str);

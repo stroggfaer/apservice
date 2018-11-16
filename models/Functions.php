@@ -153,6 +153,7 @@ class Functions extends Model
         $regex = "/\{(.*?)\}/";
         preg_match_all($regex, $string, $matches);
         $model = new Repair();
+		
         if(!empty($matches[1])) {
             foreach ($matches[1] as $value) {
 
@@ -173,17 +174,21 @@ class Functions extends Model
 
                         break;
                     case 'device_problems':
-                        //  '/\[([^]]+)\]/'
+                        //  '/\[([^]]+)\]/' ++
+						
                         if(!empty($device_problems_id)) {
                             $currentDeviceProblems = $model->getCurrentDeviceProblems(false,$device_problems_id);
                             $string = preg_replace('/\{device_problems\}/', $currentDeviceProblems->title, $string);
                         }else{
+							
                             echo $string;
                         }
                         break;
                 }
             }
         }
+		
+	
         return $string;
     }
 
