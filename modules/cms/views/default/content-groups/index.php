@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\modules\cms\models\ContentGroupsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Группы контента';
+$this->title = 'Основные разделы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="content-groups-index">

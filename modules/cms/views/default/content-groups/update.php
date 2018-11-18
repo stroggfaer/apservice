@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ContentGroups */
 
-$this->title = 'Редактировать группы контента:'. $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Группы контента', 'url' => ['content-groups']];
+$this->title = 'Редактировать:'. $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Основные разделы', 'url' => ['content-groups']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>

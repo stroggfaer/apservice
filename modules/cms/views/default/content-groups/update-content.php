@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\ContentGroups */
 
 $this->title = 'Редактировать:'. $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Контенты', 'url' => ['content']];
+$this->params['breadcrumbs'][] = ['label' => 'Контент разделов', 'url' => ['content']];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="content-groups-update">

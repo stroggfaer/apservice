@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\AppleServices */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Apple Сервис', 'url' => ['apple-services']];
+$this->params['breadcrumbs'][] = ['label' => 'Адреса сервисов', 'url' => ['apple-services']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="apple-services-view">

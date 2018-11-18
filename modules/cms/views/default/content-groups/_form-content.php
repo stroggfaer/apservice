@@ -33,12 +33,29 @@ $group_id = Yii::$app->request->get('group_id');
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6])->label('Текст1'); ?>
+    <?= $form->field($model, 'text')->widget(CKEditor::className(), [
+        'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
+            'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+            'inline' => false, //по умолчанию false
+        ]),
+
+        'options' => ['rows' => 6],
+
+
+    ])->label('Текст');  ?>
 
     <?= $form->field($model, 'title2')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'text2')->textarea(['rows' => 6])->label('Текст2'); ?>
+    <?= $form->field($model, 'text2')->widget(CKEditor::className(), [
+        'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
+            'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+            'inline' => false, //по умолчанию false
+        ]),
 
+        'options' => ['rows' => 6],
+
+
+    ])->label('Текст2');  ?>
     <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\AppleServices */
 
 $this->title = 'Добавить';
-$this->params['breadcrumbs'][] = ['label' => 'Apple Сервис', 'url' => ['apple-services']];
+$this->params['breadcrumbs'][] = ['label' => 'Адреса сервисов', 'url' => ['apple-services']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="apple-services-create">

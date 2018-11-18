@@ -15,6 +15,7 @@ class Bootstrap implements BootstrapInterface
         $pathInfo = Yii::$app->request->pathInfo;
         // Исключение;
         $cms = preg_match("/cms/i", $pathInfo);
+        $site = preg_match("/site/i", $pathInfo);
         $ajax = preg_match("/ajax/i", $pathInfo);
         $gridview = preg_match("/gridview/i", $pathInfo);
 //        //TODO: чуть позже вернусь;
@@ -25,7 +26,7 @@ class Bootstrap implements BootstrapInterface
 //
 //        }
         $result = [];
-        if(empty($cms) && empty($ajax) && empty($gridview)) {
+        if(empty($cms) && empty($ajax) && empty($gridview) && empty($site)) {
             $result = [
                 '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>/<last:[\w_\/-]+>' => 'repair/index',
                 '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>' => 'repair/index',

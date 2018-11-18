@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\module\admin\models\PostSearchPages */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Страница';
+$this->title = 'Статичные страницы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-index">

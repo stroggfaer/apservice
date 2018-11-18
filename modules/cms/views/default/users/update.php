@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = 'Редактировать пользователь';
+$this->title = 'Редактировать пользователя';
 $this->params['breadcrumbs'][] = ['label' => 'Пользователь', 'url' => ['users']];
 $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view-users', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'passwordReset'=>$passwordReset,
     ]) ?>
 
 </div>

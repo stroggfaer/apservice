@@ -68,6 +68,10 @@ use \kartik\datecontrol\DateControl;
             ]);?>
             <?= $form->field($model, 'post',['options'=>['class'=>'form-group col-sm-6']])->textInput(['maxlength' => true]) ?>
         </div>
+        <?= $form->field($passwordReset, 'password_repeat')->passwordInput(['placeholder' => 'Новый Пароль (6 цифры)'])->label(false) ?>
+        <?= $form->field($passwordReset, 'password')->passwordInput(['placeholder' => 'Подтвердите пароль'])->label(false) ?>
+
+        <p class="text-muted small">* - Если пароль менять не нужно, то оставьте данное поле пустым</p>
         <?= $form->field($model, 'type')->checkbox(['disabled' => false,]) ?>
         <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>
 

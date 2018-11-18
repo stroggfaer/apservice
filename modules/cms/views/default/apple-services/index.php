@@ -8,7 +8,7 @@ use app\models\Functions;
 /* @var $searchModel app\modules\cms\models\AppleServicesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Apple Сервис';
+$this->title = 'Адреса сервисов';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Добавить Apple Сервис', ['create-apple-services'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить Адреса сервис', ['create-apple-services'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Pages */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Страница', 'url' => ['pages']];
+$this->params['breadcrumbs'][] = ['label' => 'Статичные страницы', 'url' => ['pages']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-view">

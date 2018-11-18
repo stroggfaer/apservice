@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\AppleServices */
 
 $this->title = 'Редактировать: '.$model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Apple Services', 'url' => ['apple-services']];
+$this->params['breadcrumbs'][] = ['label' => 'Адреса сервисов', 'url' => ['apple-services']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view-apple-services', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>

@@ -30,7 +30,7 @@ use app\modules\cms\models\DeliverySearch;
 
 use app\models\ParserEmail;
 use app\modules\cms\models\ParserEmailSearch;
-
+use app\models\SettingsUserForm;
 use app\models\Functions;
 use app\models\Options;
 use app\models\UploadedImage;
@@ -213,16 +213,20 @@ class DefaultController extends BackendController
      */
     public function actionUpdateUsers($id)
     {
+        $passwordReset = new SettingsUserForm(['scenario' => SettingsUserForm::SCENARIO_ADMIN_RULE]);
+        $passwordReset->setUserId($id);
+
         $model = $this->findModelUsers($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $passwordReset->load(Yii::$app->request->post());
+            // Восстановления пароля;
+            $passwordReset->savePassword();
             return $this->redirect(['view-users', 'id' => $model->id]);
-        }else{
-            if(!empty($model->errors)) print_arr($model->errors);
         }
-
         return $this->render('users/update', [
             'model' => $model,
+            'passwordReset'=>$passwordReset,
         ]);
     }
 

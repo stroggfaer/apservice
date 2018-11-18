@@ -22,7 +22,7 @@ class BackendController extends Controller
         $this->actionNavigation = [
             'main' => [
                 'title' => 'Главная',
-                'link' => '/cms/',
+                'link' => '/repair/cms/',
                 'status' => 1,
             ],
             'pages' => [
@@ -32,19 +32,19 @@ class BackendController extends Controller
                 'items' => [
                     [
                         'link' => '/cms/pages',
-                        'title' => 'Страницы',
+                        'title' => 'Статичные страницы',
                     ],
                     [
                         'link' => '/cms/content-groups',
-                        'title' => 'Группы контент',
+                        'title' => 'Основные разделы',
                     ],
                     [
                         'link' => '/cms/content',
-                        'title' => 'Контент',
+                        'title' => 'Контент разделов',
                     ],
                     [
                         'link' => '/cms/menu-repairs',
-                        'title' => 'Меню устройства',
+                        'title' => 'Устройства',
                     ],
                     [
                         'link' => '/cms/devices/index',
@@ -52,7 +52,7 @@ class BackendController extends Controller
                     ],
                     [
                         'link' => '/cms/devices/group-device-problems',
-                        'title' => 'Список проблемы',
+                        'title' => 'Список проблем',
                     ],
                     [
                         'link' => '/cms/devices/prices',
@@ -60,11 +60,11 @@ class BackendController extends Controller
                     ],
                     [
                         'link' => '/cms/apple-services',
-                        'title' => 'Apple Сервис',
+                        'title' => 'Адреса сервисов',
                     ],
                     [
                         'link' => '/cms/delivery',
-                        'title' => 'Доставка',
+                        'title' => 'Выезд / Доставка',
                     ],
                 ],
             ],

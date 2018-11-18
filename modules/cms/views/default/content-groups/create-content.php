@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\ContentGroups */
 
 $this->title = 'Создать контент';
-$this->params['breadcrumbs'][] = ['label' => 'Контента', 'url' => ['content']];
+$this->params['breadcrumbs'][] = ['label' => 'Контент разделов', 'url' => ['content']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="content-create">

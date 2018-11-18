@@ -34,7 +34,7 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 <div class="wrap">
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
-            <div class="navbar-header"><a class="navbar-brand" href="/cms">CMS <small>v <?=$version?></small></a></div>
+            <div class="navbar-header"><a class="navbar-brand" href="/repair/cms">CMS <small>v <?=$version?></small></a></div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <?php if(!empty(\Yii::$app->controller->actionNavigation)): ?>

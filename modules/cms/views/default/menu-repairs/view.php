@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\MenuRepairs */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Меню устройств', 'url' => ['menu-repairs']];
+$this->params['breadcrumbs'][] = ['label' => 'Устройства', 'url' => ['menu-repairs']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-repairs-view">

@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\modules\cms\models\MenuRepairSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Меню устройств';
+$this->title = 'Устройства';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-repairs-index">

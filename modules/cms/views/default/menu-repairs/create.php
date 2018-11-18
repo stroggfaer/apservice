@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\MenuRepairs */
 
 $this->title = 'Добавить ';
-$this->params['breadcrumbs'][] = ['label' => 'Меню устройств', 'url' => ['menu-repairs']];
+$this->params['breadcrumbs'][] = ['label' => 'Устройства', 'url' => ['menu-repairs']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-repairs-create">

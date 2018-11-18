@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
     <h1><?= Html::encode($this->title) ?></h1>
-    <p><?=  Html::a('Добавить пользователь', ['create-users'], ['class' => 'btn btn-success']) ?></p>
+    <p><?=  Html::a('Добавить пользователя', ['create-users'], ['class' => 'btn btn-success']) ?></p>
     <?php
     $gridColumns = [
         [
