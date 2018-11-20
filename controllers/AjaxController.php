@@ -165,6 +165,7 @@ class AjaxController extends Controller
         if(empty($device_id) && empty($devicesProblem_id) && empty($region_id)) return false;
 
         if(Yii::$app->request->isAjax) {
+
             $region = $model->getRegionsOne($region_id);
             $appleServices = !empty($region->appleServices) ? $region->appleServices : false;
             $one = $model->getCurrentDeviceProblems(false,$devicesProblem_id);

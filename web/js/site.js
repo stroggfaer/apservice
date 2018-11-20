@@ -1,5 +1,6 @@
 var ajax_path = '/repair/ajax/';
 var domain_city = '.apple.pc'; // apple.sc
+
 $(document).ready(function(){
 
     if($('#is_city_one').length) {
@@ -23,6 +24,7 @@ $(document).ready(function(){
         });
         //console.log('domain',domain);
     });
+
     // Закрыть модалка;
     $('#window-modal').on('hidden.bs.modal', function (e) {
         if($('#city-modal').length) {
@@ -31,7 +33,14 @@ $(document).ready(function(){
                 domain: domain_city // apple.sc
             });
         }
-    })
+    });
+
+    // Авто скролл;
+    if($('#scroll-1001').length) {
+        $('html,body').stop().animate({'scrollTop': $('#scroll-1001').offset().top - 600}, 800, 'swing', function () {
+        });
+    }
+
 
     // Карусель для контента;
     if($(".js-slider").length) {

@@ -43,7 +43,7 @@ class RepairController extends AppController
         if(!empty($alias) && empty($last)){
 
             $one = $model->getCurrentDevices($alias);
-            $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title) : $one->title), Functions::getTemplateCode($one->seo_keywords), Functions::getTemplateCode($one->seo_description));
+            $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title,$one->id) : $one->title), Functions::getTemplateCode($one->seo_keywords,$one->id), Functions::getTemplateCode($one->seo_description,$one->id));
 
             if(!empty($one)) {
                 return $this->render('device-problems', [

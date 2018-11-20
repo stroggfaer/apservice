@@ -28,7 +28,7 @@ $city = \Yii::$app->action->currentCity;
     </div>
 </div>
 
-<div class="return-problem">
+<div class="return-problem" id="scroll-1001">
     <div class="container size">
         <div class="title"><h3><?=$one->description?> на <?=$model->device->title?></h3></div>
         <div>Цена в сервисах</div>

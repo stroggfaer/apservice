@@ -23,6 +23,7 @@ class WAppleServices extends Widget{
         }
     }
     public function run(){
+
         if (!$this->model && !$this->appleServices && !$this->one) {
             ?>
             <div class="container size text-center">
@@ -50,8 +51,7 @@ class WAppleServices extends Widget{
                                 </div>
                                 <div class="col-md-4 col-xs-4 block">
                                     <div class="total">
-                                        <div class="problems">Замена аккумулятра
-                                            на <?= $this->model->device->title ?></div>
+                                        <div class="problems"><?=$this->one->title?> на <?= $this->model->device->title ?></div>
                                         <div class="content">
                                             <div class="_icon-ap2 time"><?= $this->one->time ?></div>
                                             <div class="_icon-ap2 money"><?= Functions::money(!empty($this->one->price->money) ? $this->one->price->money : 0) ?>
