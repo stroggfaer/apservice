@@ -42,17 +42,18 @@ $deviceProblems = $model->deviceProblemsArrayList;
 
 
     ])->label('Текст')->hint('Шаблонизатор {city} - Город, {device} - Девайс');  ?>
-    <?= $form->field($devicesDetails, 'devices_id')->widget(Select2::classname(), [
-        'data' =>  $model->deviceProblemsArrayList,
-        'maintainOrder' => true,
-        'options' => ['placeholder' => 'Введите список проблемы ...', 'multiple' => true],
-        'pluginOptions' => [
-            'tags' => true,
-            'tokenSeparators' => [',', ' '],
-            'maximumInputLength' => 30
-        ],
-    ])->label('Добавить проблемы'); ?>
-
+    <?php if(!empty($model->deviceProblemsArrayList)): ?>
+        <?= $form->field($devicesDetails, 'devices_id')->widget(Select2::classname(), [
+            'data' =>  $model->deviceProblemsArrayList,
+            'maintainOrder' => true,
+            'options' => ['placeholder' => 'Введите список проблемы ...', 'multiple' => true],
+            'pluginOptions' => [
+                'tags' => true,
+                'tokenSeparators' => [',', ' '],
+                'maximumInputLength' => 30
+            ],
+        ])->label('Добавить проблемы'); ?>
+    <?php endif; ?>
     <?= $form->field($model, 'checkbox_copy')->checkbox(['disabled' => false,]) ?>
     <?php if(!empty($model->devicesDetails)): ?>
         <div class="table__com">
