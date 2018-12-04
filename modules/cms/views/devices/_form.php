@@ -42,6 +42,7 @@ $deviceProblems = $model->deviceProblemsArrayList;
 
 
     ])->label('Текст')->hint('Шаблонизатор {city} - Город, {device} - Девайс');  ?>
+
      <?php if(!empty($model->deviceProblemsArrayList) && !empty($devicesDetails)): ?>
         <?= $form->field($devicesDetails, 'devices_id')->widget(Select2::classname(), [
             'data' =>  $model->deviceProblemsArrayList,

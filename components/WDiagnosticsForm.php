@@ -13,7 +13,10 @@ class WDiagnosticsForm extends Widget{
 
             ?>
              <div class="container size">
-                <div class="text-left"><h2>Предварительная диагностика</h2></div>
+                <div class="text-left">
+                    <h2 class="seo-title">Сколько стоит ремонт вашей техники Apple?</h2>
+                    <div style="position: relative;left: 5px;">Узнай  срок и цену ремонта за одну минут</div>
+                </div>
                 <div class="form right pull-left">
                     <form role="form" class="form__mod">
                         <div class="row">

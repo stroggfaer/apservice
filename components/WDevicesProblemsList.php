@@ -1,15 +1,8 @@
 <?php
 namespace app\components;
-
-use app\models\Clients;
 use app\models\Devices;
-use app\models\fitness\UserFitness;
 use app\models\Functions;
-use kartik\date\DatePicker;
-use kartik\datetime\DateTimePicker;
 use yii\base\Widget;
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use Yii;
 
 class WDevicesProblemsList extends Widget{
@@ -25,19 +18,24 @@ class WDevicesProblemsList extends Widget{
         $request = Yii::$app->request;
         $id = abs($request->post('id'));
         $limit = abs($request->post('limit'));
+        if(empty($this->model))  return false;
 
         $devices = new Devices();
 
-        $devicesAll = $devices->getDevices();
+        $devicesAll =  $this->model->devices;  //$devices->getDevices();
         $city =  \Yii::$app->action->currentCity;
-        $device = $devices->getDevice($id);
+        $device = !empty($id)?  $devices->getDevice($id)  : $devicesAll[0];
+
         if(!empty($limit)) $devices->setLimit($limit);
         $deviceProblems = $devices->getDeviceProblems($device);
         $countsLimit = $devices->getCountsLimit($device);
+
+
+        if(empty($devicesAll)) return false;
         ?>
 
             <div class="devices-problems-list">
-                <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
+                <div class="text-center title-main"><div class="seo-title">Выберите ваше устройство</div></div>
                 <div class="devices__menu devices_carusel desktop">
                     <div class="content__load"><div></div></div>
                     <div class="items">
@@ -58,14 +56,16 @@ class WDevicesProblemsList extends Widget{
                     <table class="table">
                         <tr class="header">
                             <th class="name1">Услуги по ремонту <?=$device->title?></th>
-                            <th class="text-right name2">Цена выезде</th>
-                            <th class="text-right name3">Цена в сервисных центрах</th>
+<!--                            <th class="text-right name2">Цена выезде</th>-->
+                            <th class="text-right name3">Цена</th>
                         </tr>
                         <?php if(!empty($deviceProblems)): ?>
                             <?php foreach ($deviceProblems as $deviceProblem): ?>
                                 <tr class="list">
-                                    <td><a href="<?=$devices->device->menuRepair->url?>/<?=$devices->device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></td>
-                                    <td class="text-right"><?=Functions::money($city->deliverie->price)?> руб</td>
+                                    <td><a href="/repair/<?=$device->menuRepair->url?>/<?=$device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></td>
+                                    <?php if(false):?>
+                                       <td class="text-right"><?=Functions::money($city->deliverie->price)?> руб</td>
+                                    <?php endif; ?>
                                     <td class="text-right"><?=$deviceProblem->value?></td>
                                 </tr>
                             <?php endforeach; ?>

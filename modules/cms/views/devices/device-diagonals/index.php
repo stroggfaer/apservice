@@ -3,21 +3,20 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\cms\models\DevicesSearch */
+/* @var $searchModel app\modules\cms\models\DeviceDiagonalsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Девайсы';
+$this->title = 'Диагональ устройства';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="devices-index">
+<div class="device-diagonals-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить', ['create-device-diagonals'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Список параметры', ['device-year'], ['class' => 'btn btn-danger']) ?>
     </p>
 
@@ -25,32 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-           // ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            [
-                'attribute'=>'title',
-                'label'=>'Девайс',
-
-            ],
-            'url:url',
-            [
-                'attribute'=>'menu_repair_id',
-                'content'   => function ($data) {
-                    return '<a href="/repair/cms/update-menu-repairs?id='.$data->menuRepair->id.'">'.$data->menuRepair->title.'</a>';
-                }
-            ],
-            //'menu_repair_id',
-
-
-            'position',
-            //'status',
-
+            'title',
+            'status',
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}&nbsp;{update}&nbsp;{delete}',
                 'headerOptions' => ['width' => '100'],
+                'urlCreator'=>function($action, $model, $key, $index){
+                    return Url::to([$action.'-device-diagonals','id'=>$model->id]);
+                }
+
             ],
         ],
     ]); ?>

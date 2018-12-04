@@ -87,6 +87,16 @@ $(document).on('click','.js-run-email-parser',function () {
     return false;
 });
 
+var $modal = $('#window-modal-add-diagonal');
+$modal.on('show.bs.modal', function(e) {
+    var device_year_id = $(e.relatedTarget).data('device-year-id');
+    $(this).find('.modal-body')
+        .html('Загрузка...')
+        .load('/repair/cms/devices/add-device-diagonal?id=' + device_year_id,{add_diagonal:true},function() {
+            $modal.modal('handleUpdate');
+        });
+});
+
 
 /*
 $(document).on('mouseover','.js-mounts .dropdown-toggle',function () {

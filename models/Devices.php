@@ -194,11 +194,12 @@ class Devices extends \yii\db\ActiveRecord
 
     // Список проблемы в массиве;
     public function getDeviceProblemsArrayList() {
+
         $device_problems_id = ArrayHelper::map(array_merge($this->devicesDetails),'id','device_problems_id');
         $deviceProblems = DeviceProblems::find()->select(['id','title'])->where(['status'=>1])->indexBy('id')->andWhere(['not in','id',$device_problems_id])->orderBy('id ASC')->all();
         if(!empty($deviceProblems)) {
             foreach ($deviceProblems as $key => $deviceProblem) {
-                $deviceProblems[$key] = $deviceProblem->title . ' (' .$deviceProblem->devices. ')';
+                $deviceProblems[$key] = $deviceProblem->title .' '. Functions::money($deviceProblem->price->money). '.р (' .$deviceProblem->devices. ')';
             }
         }
         return $deviceProblems;

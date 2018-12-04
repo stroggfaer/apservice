@@ -2,6 +2,7 @@
 
 namespace app\modules\cms\controllers;
 
+use app\models\DeviceYearDetails;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -26,6 +27,12 @@ use app\modules\cms\models\PricesSearch;
 
 use app\models\GroupDeviceProblems;
 use app\modules\cms\models\GroupDeviceProblemsSearch;
+
+use app\models\DeviceYear;
+use app\modules\cms\models\DeviceYearSearch;
+
+use app\models\DeviceDiagonals;
+use app\modules\cms\models\DeviceDiagonalsSearch;
 /**
  * DevicesController implements the CRUD actions for Devices model.
  */
@@ -580,4 +587,223 @@ class DevicesController extends BackendController
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * Lists all DeviceYear models.
+     * @return mixed
+     */
+    public function actionDeviceYear()
+    {
+        $searchModel = new DeviceYearSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('device-year/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single DeviceYear model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewDeviceYear($id)
+    {
+        return $this->render('device-year/view', [
+            'model' => $this->findModelDeviceYear($id),
+        ]);
+    }
+
+    /**
+     * Creates a new DeviceYear model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateDeviceYear()
+    {
+        $model = new DeviceYear();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-device-year', 'id' => $model->id]);
+        }
+
+        return $this->render('device-year/create', [
+            'model' => $model,
+        ]);
+    }
+
+    // Добавить
+    public function actionAddDeviceDiagonal($id)
+    {
+        if(empty($id)) return false;
+
+        $request = Yii::$app->request;
+        $model = new DeviceYearDetails();
+        $devices = new Devices();
+        // открыть форма;
+        if(Yii::$app->request->isAjax && $request->post('add_diagonal')) {
+            return $this->renderAjax('device-year/add_diagonal', [
+                'model' => $model,
+                'devices'=>$devices
+            ]);
+        }
+        // добавить
+        if ($model->load(Yii::$app->request->post())) {
+            print_arr(Yii::$app->request->post());
+            die();
+            return $this->redirect(['update-device-year', 'id' => $model->id]);
+        }
+
+    }
+
+    /**
+     * Updates an existing DeviceYear model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateDeviceYear($id)
+    {
+        $model = $this->findModelDeviceYear($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-device-year', 'id' => $model->id]);
+        }
+
+        return $this->render('device-year/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing DeviceYear model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteDeviceYear($id)
+    {
+        $this->findModelDeviceYear($id)->delete();
+
+        return $this->redirect(['device-year']);
+    }
+
+    /**
+     * Finds the DeviceYear model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return DeviceYear the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelDeviceYear($id)
+    {
+        if (($model = DeviceYear::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+    /**
+     * Lists all DeviceYear models.
+     * @return mixed
+     */
+    public function actionDeviceDiagonals()
+    {
+        $searchModel = new DeviceDiagonalsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('device-diagonals/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single DeviceYear model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewDeviceDiagonals($id)
+    {
+        return $this->render('device-diagonals/view', [
+            'model' => $this->findModelDeviceDiagonals($id),
+        ]);
+    }
+
+    /**
+     * Creates a new DeviceYear model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateDeviceDiagonals()
+    {
+        $model = new DeviceDiagonals();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-device-diagonals', 'id' => $model->id]);
+        }
+
+        return $this->render('device-diagonals/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing DeviceYear model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateDeviceDiagonals($id)
+    {
+        $model = $this->findModelDeviceDiagonals($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-device-diagonals', 'id' => $model->id]);
+        }
+
+        return $this->render('device-diagonals/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing DeviceYear model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteDeviceDiagonals($id)
+    {
+        $this->findModelDeviceDiagonals($id)->delete();
+
+        return $this->redirect(['device-diagonals']);
+    }
+
+    /**
+     * Finds the DeviceYear model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return DeviceYear the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelDeviceDiagonals($id)
+    {
+        if (($model = DeviceDiagonals::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
 }

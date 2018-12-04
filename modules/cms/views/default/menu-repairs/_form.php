@@ -35,6 +35,7 @@ use yii\widgets\ActiveForm;
     <?php endif; ?>
     <?= $form->field($model, 'icon')->textInput(['maxlength' => true])
         ->hint('Доступные классы: icon-iphone,icon-ipad,icon-mac,icon-watch,icon-ipod,icon-tv') ?>
+    <?= $form->field($model, 'show_prices')->checkbox(['disabled' => false,]) ?>
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>
 
     <div class="form-group">

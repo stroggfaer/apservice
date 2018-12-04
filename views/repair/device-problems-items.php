@@ -10,12 +10,13 @@ $city = \Yii::$app->action->currentCity;
 
 ?>
 <div class="container size">
+    <?=  app\components\WMenuRepairs::widget(['model'=>$model])?>
     <div class="devices-problems">
-        <div class="text-center title-main"><h2>Выбрано устройство <?=$model->device->title?></h2></div>
+        <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$model->device->title?></div></div>
 
         <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>true,'one'=>$one])?>
 
-        <div class="text-center title-main-1"><h2>Выберите проблему на <?=$model->device->title?></h2></div>
+        <div class="text-center title-main-1"><h2 class="seo-title">Выберите проблему на <?=$model->device->title?></h2></div>
         <div class="devices__com list">
             <div class="update-devices-problems">
                 <?=  app\components\WDevicesProblems::widget(['model'=>$model,'one'=>$one])?>
