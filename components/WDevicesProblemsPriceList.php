@@ -70,6 +70,26 @@ class WDevicesProblemsPriceList extends Widget{
                             <div class="clear"></div>
                         </div>
                     <?php endif;?>
+                    <?php if(!empty($device->deviceYearOne) && count($device->deviceYears) <= 1): ?>
+                        <div class="info">
+                            <div class="item">
+                                <div class="name">Год выпуска</div>
+                                <div class="name"><?=$device->deviceYearOne->title?></div>
+                            </div>
+                            <?php if(!empty($device->deviceYearOne->title_th1) && !empty($device->deviceYearOne->value1)): ?>
+                                <div class="item">
+                                    <div class="name"><?=$device->deviceYearOne->title_th1?></div>
+                                    <div class="name"><?=$device->deviceYearOne->value1?></div>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(!empty($device->deviceYearOne->title_th2) && !empty($device->deviceYearOne->value2)): ?>
+                                <div class="item">
+                                    <div class="name"><?=$device->deviceYearOne->title_th2?></div>
+                                    <div class="name"><?=$device->deviceYearOne->value2?></div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                     <?php if(!empty($deviceYearOne->deviceDiagonals)): ?>
                         <div class="devices__com list tags">
                             Выберите диагональ:
@@ -82,26 +102,7 @@ class WDevicesProblemsPriceList extends Widget{
                     </div>
                     <?php endif;?>
 
-                    <?php if(!empty($device->deviceYearOne) && count($device->deviceYears) <= 1): ?>
-                    <div class="info">
-                        <div class="item">
-                           <div class="name">Год выпуска</div>
-                           <div class="name"><?=$device->deviceYearOne->title?></div>
-                        </div>
-                        <?php if(!empty($device->deviceYearOne->title_th1) && !empty($device->deviceYearOne->value1)): ?>
-                            <div class="item">
-                                <div class="name"><?=$device->deviceYearOne->title_th1?></div>
-                                <div class="name"><?=$device->deviceYearOne->value1?></div>
-                            </div>
-                         <?php endif; ?>
-                        <?php if(!empty($device->deviceYearOne->title_th2) && !empty($device->deviceYearOne->value2)): ?>
-                            <div class="item">
-                                <div class="name"><?=$device->deviceYearOne->title_th2?></div>
-                                <div class="name"><?=$device->deviceYearOne->value2?></div>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <?php endif; ?>
+
                     <table class="table">
                         <tr class="header">
                             <th class="name1">Услуги по ремонту <?=$device->title?></th>
