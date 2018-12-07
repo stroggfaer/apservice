@@ -17,7 +17,7 @@ $call = new Call();
         <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$one->title?></div></div>
         <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>true])?>
 
-        <div class="text-center title-main-1"><h2 class="seo-title">Выберите проблему на <?=$one->title?></h2></div>
+        <div class="text-center title-main-1"><div class="seo-title">Выберите проблему на <?=$one->title?></div></div>
 
 
         <?=  app\components\WDevicesProblemsGroups::widget(['model'=>$model])?>
@@ -38,7 +38,7 @@ $call = new Call();
 
 
        <div class="description-seo">
-        <div class="text-center title-main"><h3><?=$content->title?></h3></div>
+        <div class="text-center title-main"><h3 class="seo-title"><?=$content->title?></h3></div>
            <?php $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : '')); ?>
         <div class="text"><?=Functions::getTemplateCode($text,$one->id)?></div>
     </div>
@@ -49,7 +49,7 @@ $call = new Call();
 </div>
 <div class="call-form-content">
     <div class="container size">
-        <h3 class="text-center">Бесплатная консультация и подбор сервиса</h3>
+        <div class="text-center seo-title size-1">Бесплатная консультация и подбор сервиса</div>
         <div class="description text-center">Проконсультируем Вас по нашей горячей линии или отправим к Вам мастера </div>
         <div class="alert alert__js hidden text-center">
             <b class="name"></b>

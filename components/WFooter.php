@@ -26,8 +26,8 @@ class WFooter extends Widget{
                     <div class="custom-menu_in_footer">
                         <ul>
                             <?php if(!empty($menuFooter)): ?>
-                                <?php foreach ($menuFooter as $value): ?>
-                                     <li><a href="<?=$value->url?>"><?=$value->title?></a></li>
+                                <?php foreach ($menuFooter as $menu):?>
+                                     <li><a href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?=$menu->title?></a></li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </ul>
@@ -58,7 +58,13 @@ class WFooter extends Widget{
                         <div class="item js-footer-menu-toggle">
                             <?php if(!empty($appleServices)): ?>
                                <?php foreach ($appleServices as $appleService): ?>
-                                   <div class="address"><a href="<?=$appleService->value?>" class="dotted"><?=$appleService->title?></a></div>
+                                   <div class="address">
+                                       <a href="<?=$appleService->value?>" class="dotted"><?=$appleService->title?></a>
+                                       <?php if(!empty($appleService->phone)): ?>
+                                           <div style="font-size: 12px"><strong class="small"><?=$appleService->phone?></strong></div>
+                                       <?php endif; ?>
+                                   </div>
+
                                <?php endforeach; ?>
                             <?php endif; ?>
                             <div class="clear"></div>
@@ -81,8 +87,8 @@ class WFooter extends Widget{
                             <div class="name">О компании</div>
                             <div class="i">
                                 <?php if(!empty($menuFooter)): ?>
-                                    <?php foreach ($menuFooter as $value): ?>
-                                        <div><a href="<?=$value->value?>"><?=$value->title?></a></div>
+                                    <?php foreach ($menuFooter as $menu): ?>
+                                        <div><a href="<?=(!empty($menu->url) ? $menu->url : $menu->value)?>"><?=$menu->title?></a></div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
@@ -98,7 +104,12 @@ class WFooter extends Widget{
                             <div class="i">
                                 <?php if(!empty($appleServices)): ?>
                                     <?php foreach ($appleServices as $appleService): ?>
-                                        <div><a href="<?=$appleService->value?>"><?=$appleService->title?></a></div>
+                                        <div>
+                                            <a href="<?=$appleService->value?>"><?=$appleService->title?></a>
+                                            <?php if(!empty($appleService->phone)): ?>
+                                                <strong><?=$appleService->phone?></strong>
+                                            <?php endif; ?>
+                                        </div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>

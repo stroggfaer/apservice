@@ -23,7 +23,7 @@ class WDevices extends Widget{
 
             ?>
               <?php if(empty($this->menu)): ?>
-                 <div class="devices__com">
+             <div class="devices__com">
                 <div class="items">
                    <?php foreach ($this->model->devices as $device): ?>
                        <?php $active = !empty($this->model->device) && $device->id == $this->model->device->id ? 'active': ''; ?>

@@ -90,6 +90,7 @@ class Repair extends Model
          }
          return false;
     }
+
     // Получить девайс;
     public function getDevice() {
         if(!empty($this->devices)) {
@@ -193,4 +194,8 @@ class Repair extends Model
         }
         return $return;
     }
+
+
+
+
 }

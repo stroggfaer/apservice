@@ -81,6 +81,20 @@ class DeviceProblems extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getDeviceYearDetails()
+    {
+        return $this->hasMany(DeviceYearDetails::className(), ['device_problem_id' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDeviceYearDetail()
+    {
+        return $this->hasOne(DeviceYearDetails::className(), ['device_problem_id' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getDevicesDetail()
     {
         return $this->hasOne(DevicesDetails::className(), ['device_problems_id' => 'id']);
@@ -122,6 +136,8 @@ class DeviceProblems extends \yii\db\ActiveRecord
         $data = implode(', ',$data);
         return $data;
     }
+
+
 
 
 }

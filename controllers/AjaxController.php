@@ -148,6 +148,17 @@ class AjaxController extends Controller
             return \app\components\WDevicesProblemsList::widget(['model'=>$model]);
         }
     }
+    // Выбор девайс режим прайса
+    function actionSelectDevicesPriceList() {
+        $request = Yii::$app->request;
+        $id = abs($request->post('id'));
+        $model = new Repair();
+        //
+        if(Yii::$app->request->isAjax && !empty($id)) {
+            $model->getCurrentDevices(false,$id);
+            return \app\components\WDevicesProblemsPriceList::widget(['model'=>$model]);
+        }
+    }
 
     // Ближающие салон;
     function actionSalonList() {
@@ -216,8 +227,6 @@ class AjaxController extends Controller
             $model->getCurrentDevices(false,$device_id);
             return \app\components\WDevicesProblemsList::widget(['model'=>$model]);
         }
-
-
     }
 
 

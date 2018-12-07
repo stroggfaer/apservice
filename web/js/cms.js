@@ -89,10 +89,11 @@ $(document).on('click','.js-run-email-parser',function () {
 
 var $modal = $('#window-modal-add-diagonal');
 $modal.on('show.bs.modal', function(e) {
-    var device_year_id = $(e.relatedTarget).data('device-year-id');
+    var device_year_id = $(e.relatedTarget).data('device-year-id'),
+        device_id = $(e.relatedTarget).data('device-id');
     $(this).find('.modal-body')
         .html('Загрузка...')
-        .load('/repair/cms/devices/add-device-diagonal?id=' + device_year_id,{add_diagonal:true},function() {
+        .load('/repair/cms/devices/add-device-diagonal?id=' + device_year_id,{add_diagonal:true,device_id:device_id},function() {
             $modal.modal('handleUpdate');
         });
 });

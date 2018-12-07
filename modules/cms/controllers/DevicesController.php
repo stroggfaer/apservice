@@ -641,19 +641,32 @@ class DevicesController extends BackendController
 
         $request = Yii::$app->request;
         $model = new DeviceYearDetails();
-        $devices = new Devices();
         // открыть форма;
         if(Yii::$app->request->isAjax && $request->post('add_diagonal')) {
             return $this->renderAjax('device-year/add_diagonal', [
-                'model' => $model,
-                'devices'=>$devices
+                'model' => $model
             ]);
         }
-        // добавить
+
+
+        // добавить параметры
         if ($model->load(Yii::$app->request->post())) {
-            print_arr(Yii::$app->request->post());
-            die();
-            return $this->redirect(['update-device-year', 'id' => $model->id]);
+            $device_diagonal_id = abs($model->device_diagonal_id);
+
+            if(!empty($model->device_problem_id)) {
+                foreach ($model->device_problem_id as $key => $device_problem_id) {
+                    $_model = clone $model;
+                    $_model->device_year_id = $id;
+                    $_model->device_diagonal_id = ($device_diagonal_id ? $device_diagonal_id : null);
+                    $_model->device_problem_id = $device_problem_id;
+                    if(!$_model->save(true)) {
+                        return print_r($_model->errors);
+                    }
+                }
+            }
+
+
+            return $this->redirect(['update-device-year', 'id' => $id]);
         }
 
     }
@@ -806,4 +819,22 @@ class DevicesController extends BackendController
     }
 
 
+    /*Форма удалить сязные данные для параметры*/
+    public function actionDeleteDeviceYearDetails($id, $device_year_id = false, $diagonal_id = false)
+    {
+        if(!empty($diagonal_id) && !empty($device_year_id)) {
+            DeviceYearDetails::deleteAll(['device_diagonal_id' => $diagonal_id,'device_year_id' => $device_year_id]);
+        }else {
+            $this->deleteDeviceYearDetails($id)->delete();
+        }
+        return $this->redirect(['update-device-year', 'id' => $device_year_id]);
+    }
+
+    protected function deleteDeviceYearDetails($id)
+    {
+        if (($model = DeviceYearDetails::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }

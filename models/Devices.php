@@ -69,6 +69,8 @@ class Devices extends \yii\db\ActiveRecord
 
 
 
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -112,16 +114,19 @@ class Devices extends \yii\db\ActiveRecord
     }
 
     // Список проблемы; Obj $device;
-    public function getDeviceProblems($device = false) {
+    public function getDeviceProblems($device = false,$limit = true) {
         $data = [];
         if(empty($device)) return false;
         //
-        if($this->countLimit > 0) {
-            $devicesDetails = $device->getDevicesDetails()->where(['status' => 1])->limit($this->countLimit)->orderBy('id ASC')->offset($this->limit)->all();
+        if(!empty($limit)) {
+            if ($this->countLimit > 0) {
+                $devicesDetails = $device->getDevicesDetails()->where(['status' => 1])->limit($this->countLimit)->orderBy('id ASC')->offset($this->limit)->all();
+            } else {
+                $devicesDetails = $device->getDevicesDetails()->where(['status' => 1])->limit($this->limit)->all();
+            }
         }else{
-            $devicesDetails = $device->getDevicesDetails()->where(['status' => 1])->limit($this->limit)->all();
+            $devicesDetails = $device->getDevicesDetails()->where(['status' => 1])->all();
         }
-
         foreach ($devicesDetails as $devicesDetail) {
             $data[] = $devicesDetail->deviceProblems;
         }
@@ -205,5 +210,38 @@ class Devices extends \yii\db\ActiveRecord
         return $deviceProblems;
         //return ArrayHelper::map(array_merge(DeviceProblems::find()->where(['status'=>1])->andWhere(['not in','id',$device_problems_id])->orderBy('id ASC')->all()),'id','title');
     }
+
+    /*------Режим прайса V 2.0.1;-------*/
+    /*--Если меню устройства акт. show_prices = 1  -*/
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDeviceYears()
+    {
+        return $this->hasMany(DeviceYear::className(), ['device_id' => 'id'])->where(['status'=>1]);
+    }
+
+    public function getDeviceYearOne($id = false) {
+        if(empty($this->deviceYears)) return false;
+
+        if(!empty($id)) {
+            return $this->getDeviceYears()->where(['id'=>$id,'status'=>1])->one();
+        }else{
+            return  $this->deviceYears[0];
+        }
+    }
+    //
+    public function getDeviceDiagonalsOne($id = false,$device_year_id = false) {
+        $deviceYearOne = $this->getDeviceYearOne($device_year_id);
+
+        if(!empty($id)) {
+            $deviceDiagonalOne = DeviceDiagonals::findOne($id);
+            return $deviceDiagonalOne;
+        }else{
+            if(empty($deviceYearOne->deviceDiagonals)) return false;
+            return  $deviceYearOne->deviceDiagonals[0];
+        }
+    }
+
 
 }

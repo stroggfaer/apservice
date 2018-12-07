@@ -41,8 +41,14 @@ img.size-2 {
 }
 .seo-title {
   font-size: 30px;
+  &.size-1 {
+    font-size: 24px;
+  }
   @media only screen and (max-width: @screen-sm-min) {
     font-size: 24px;
+    &.size-1 {
+      font-size: 20px;
+    }
   }
 }
 @media only screen and (max-width: @screen-mobile-min) {
@@ -978,6 +984,17 @@ h1 {
         }
       }
    }
+   &.tags {
+     .items {
+       .item {
+          width: auto;
+          a {
+            font-size: 12px;
+            padding: 5px 18px;
+          }
+       }
+     }
+   }
    @media only screen and (max-width: @screen-sm-min) {
      &.groups {
        .group {
@@ -990,6 +1007,26 @@ h1 {
 .devices-problems-list {
   .select__mod {
      margin: 20px 0 20px;
+  }
+  &.price-list {
+    .devices__menu {
+       margin-bottom: 5px;
+    }
+    .devices__com {
+      padding: 5px 0px;
+    }
+    .info {
+      padding: 10px 0;
+      .item {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-bottom: 8px;
+      }
+      .name {
+        font-size: 18px;
+        margin-right: 15px;
+      }
+    }
   }
   .table {
      th {
@@ -1027,7 +1064,7 @@ h1 {
           display: block;
           text-align: center;
           text-decoration: none;
-          height: 40px;
+          min-height: 40px;
           padding: 8px 0;
         }
        &:hover,&.active {

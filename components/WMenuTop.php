@@ -21,7 +21,7 @@ class WMenuTop extends Widget{
                 ?>
                 <div class="hidden-slide_menu-module">
                     <?php foreach ($header as $key => $menu): ?>
-                        <div><a class="no_border" href="<?= $menu->value ?>"><?= $menu->title ?></a></div>
+                        <div><a class="no_border" href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?= $menu->title ?></a></div>
                     <?php endforeach; ?>
                 </div>
                 <?php

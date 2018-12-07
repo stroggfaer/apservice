@@ -66,4 +66,16 @@ class DeviceDiagonals extends \yii\db\ActiveRecord
     {
         return $this->hasMany(DeviceYearDetails::className(), ['device_diagonal_id' => 'id']);
     }
+
+    public function getDiagonalDeviceProblems()
+    {
+        $deviceProblems = DeviceProblems::find()->select(['device_problems.title', 'device_problems.id'])->from(DeviceProblems::tableName())->
+        leftJoin(DeviceYearDetails::tableName(), 'device_year_details.device_problem_id = device_problems.id')->where(['device_year_details.device_diagonal_id' => $this->id, 'device_problems.status' => 1])->all();
+        return $deviceProblems;
+    }
+
+
+
+
+
 }

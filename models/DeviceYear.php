@@ -74,4 +74,43 @@ class DeviceYear extends \yii\db\ActiveRecord
     {
         return $this->hasMany(DeviceYearDetails::className(), ['device_year_id' => 'id']);
     }
+    //
+    public function getDeviceDiagonals() {
+        $deviceDiagonals = DeviceDiagonals::find()->
+        leftJoin(DeviceYearDetails::tableName(),'device_year_details.device_diagonal_id = device_diagonals.id')->
+        where(['device_diagonals.status'=>1,'device_year_details.device_year_id'=>$this->id])->all();
+        return $deviceDiagonals;
+    }
+
+    public function getDeviceDiagonalOne($diagonal_id = false) {
+        if(empty($diagonal_id)) return false;
+        $deviceDiagonals = DeviceDiagonals::find()->
+        leftJoin(DeviceYearDetails::tableName(),'device_year_details.device_diagonal_id = device_diagonals.id')->
+        where(['device_diagonals.id'=>$diagonal_id,'device_diagonals.status'=>1,'device_year_details.device_year_id'=>$this->id])->all();
+        return $deviceDiagonals;
+    }
+
+    // Список проблемы
+    public function getDeviceProblems($diagonal_id = false,$flag = true) {
+
+           $deviceProblemsObj = DeviceProblems::find();
+
+           if(!empty($flag)) {
+               $deviceProblemsObj->select(['device_problems.title', 'device_problems.id'])->leftJoin(DeviceYearDetails::tableName(), 'device_year_details.device_problem_id = device_problems.id');
+           }else{
+               $deviceProblemsObj->select(['device_problems.*'])->leftJoin(DeviceYearDetails::tableName(), 'device_year_details.device_problem_id = device_problems.id');
+           }
+           if(!empty($diagonal_id)) {
+               $deviceProblems = $deviceProblemsObj->where(['device_year_details.device_year_id' => $this->id, 'device_problems.status' => 1])->
+               andWhere(['device_year_details.device_diagonal_id'=>$diagonal_id])->all();
+           }else{
+               $deviceProblems = $deviceProblemsObj->where(['device_year_details.device_year_id' => $this->id, 'device_problems.status' => 1])->
+               andWhere(['is', 'device_year_details.device_diagonal_id',null])->all();
+           }
+
+        return $deviceProblems;
+    }
+
+    // Загрузка Список проблемы;
+
 }

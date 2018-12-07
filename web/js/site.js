@@ -219,6 +219,7 @@ $(document).on('change','.js-select-devices-form',function () {
             $(".update-select__js").html($(response).find('.update-select__js').html());
             $(".update-content__js").html($(response).find('.update-content__js').html());
             $(".result-content__js").html($(response).find('.result-content__js').html());
+            $(".text-left h2").html($(response).find('.text-left h2').html());
 
             loading('hide');
         });
@@ -229,7 +230,7 @@ $(document).on('change','.js-select-devices-form',function () {
             $(".update-select__js").html($(response).find('.update-select__js').html());
             $(".update-content__js").html($(response).find('.update-content__js').html());
             $(".result-content__js").html($(response).find('.result-content__js').html());
-
+            $(".text-left h2").html($(response).find('.text-left h2').html());
             loading('hide');
         });
     }
@@ -372,10 +373,17 @@ $(document).on('click','.js-call-problems2', function(){
 
 // Списко таблицы девайсов
 $(document).on('click','.js-select-devices',function () {
-   var id = $(this).data('id');
+   var id = $(this).data('id'),
+       action = $(this).data('action');
+
     $('.js-select-devices').removeClass('active');
     $(this).addClass('active');
-    select_devices(id);
+    if(action == 'price-list') {
+        select_devices_price_list(id,false,false);
+    }else{
+        select_devices(id);
+    }
+   
     return false;
 })
 $(document).on('change','select.js-select-devices',function () {
@@ -386,10 +394,33 @@ $(document).on('change','select.js-select-devices',function () {
     return false;
 });
 
+// Выбор год и диоагналь;
+$(document).on('click','.js-device-tags',function () {
+    var device_year_id = $(this).data('device-year-id'),
+        id = $(this).data('id'),
+        index = $(this).data('index'),
+        diagonal_id = $(this).data('diagonal-id');
+
+    $('.js-device-tags.tags-' + index).removeClass('active');
+    $(this).addClass('active');
+    select_devices_price_list(id, device_year_id, diagonal_id);
+    return false;
+});
+
+//
 function select_devices (id) {
     if(!id) return false;
     loading('show');
     $.post(ajax_path + 'select-devices',{id:id},function(response){
+        $('div.update_table_content').html($(response).find('div.update_table_content').html());
+        loading('hide');
+    });
+}
+//
+function select_devices_price_list(id, device_year_id, diagonal_id) {
+    if(!id) return false;
+    loading('show');
+    $.post(ajax_path + 'select-devices-price-list',{id:id, device_year_id:device_year_id, diagonal_id:diagonal_id},function(response){
         $('div.update_table_content').html($(response).find('div.update_table_content').html());
         loading('hide');
     });

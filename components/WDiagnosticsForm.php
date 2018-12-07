@@ -10,11 +10,17 @@ class WDiagnosticsForm extends Widget{
     public function run(){
 
         $repair =  new Repair();
-
+        $city = \Yii::$app->action->currentCity;
             ?>
              <div class="container size">
                 <div class="text-left">
-                    <h2 class="seo-title">Сколько стоит ремонт вашей техники Apple?</h2>
+                    <h2 class="seo-title">
+                        <?php if(!empty($repair->deviceObj->deviceOne)): ?>
+                           Сколько стоит ремонт вашей <?=$repair->deviceObj->deviceOne->title?> в г. <?=Functions::strEnd($city->name)?>?
+                        <?php else: ?>
+                            Сколько стоит ремонт вашей техники Apple?
+                        <?php endif; ?>
+                    </h2>
                     <div style="position: relative;left: 5px;">Узнай  срок и цену ремонта за одну минут</div>
                 </div>
                 <div class="form right pull-left">

@@ -1,18 +1,21 @@
 <?php
 namespace app\components;
 use yii\base\Widget;
-
+use app\models\Options;
 use Yii;
 use app\models\Functions;
+
+
 
 class WSlides extends Widget{
 
     public function run(){
         $city = \Yii::$app->action->currentCity;
+        $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
         ?>
            <div class="slides">
         <div class="container size-2">
-            <h1 class="text-center">Ремонт Apple в <?=Functions::strEnd($city->name)?></h1>
+            <h1 class="text-center"><?=Functions::getTemplateCode($options->title);?></h1>
             <div class="row top">
                 <div class="center-block">
                     <div class="col-xs-6 desktop">

@@ -8,7 +8,9 @@ use kartik\widgets\Select2;
 /* @var $model app\models\DeviceYear */
 $deviceDiagonals = \app\models\DeviceDiagonals::find()->select(['title','id'])->where(['status'=>1])->orderBy('id ASC')->indexBy('id')->asArray()->column();
 $params = ['prompt' => 'Выберите диагональ'];
-$deviceProblems = $devices->deviceProblemsArrayList;
+$device_id = abs(Yii::$app->request->post('device_id'));
+$deviceProblems = $model->getDeviceProblemsArrayParamsList($device_id);
+
 ?>
 <div class="device-year-create">
     <?php $form = ActiveForm::begin(); ?>
@@ -27,4 +29,6 @@ $deviceProblems = $devices->deviceProblemsArrayList;
         <?php endif; ?>
        <?= Html::submitButton('Добавить', ['class' =>'btn btn-danger']) ?>
     <?php ActiveForm::end(); ?>
+    <br>
+    <div class="text-muted">*- Если диоганаля нет, то можно пропустить</div>
 </div>

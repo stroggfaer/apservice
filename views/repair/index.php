@@ -20,6 +20,7 @@ $description2 = $one->description2 ? $one->description2 : (!empty($content->text
         <?php if(!empty($one->show_prices)): ?>
 
             <?= app\components\WDevicesProblemsPriceList::widget(['model'=>$model])?>
+
         <?php else: ?>
             <div class="text-center title-main"><div class="seo-title">Выберите ваше устройство</div></div>
             <?=  app\components\WDevices::widget(['model'=>$model])?>
