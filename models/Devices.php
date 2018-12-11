@@ -44,7 +44,7 @@ class Devices extends \yii\db\ActiveRecord
             [['title','menu_repair_id'], 'required'],
             [['checkbox_copy'],'boolean'],
             [['url'], 'string', 'max' => 68],
-            [['seo_title','seo_keywords','seo_description','text'],'string'],
+            [['seo_title','seo_keywords','seo_description','text','title_h3','description'],'string'],
             [['title'], 'string', 'max' => 128],
             [['menu_repair_id'], 'exist', 'skipOnError' => true, 'targetClass' => MenuRepairs::className(), 'targetAttribute' => ['menu_repair_id' => 'id']],
         ];
@@ -63,6 +63,9 @@ class Devices extends \yii\db\ActiveRecord
             'position' => 'Позиция',
             'checkbox_copy'=>'Копировать',
             'text'=>'Текст',
+            'title_h1'=>'Заголовок H1',
+            'title_h3'=>'Заголовок H3',
+            'description'=>'Описание контент',
             'status' => 'Статус',
         ];
     }

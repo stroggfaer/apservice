@@ -12,10 +12,13 @@ class WSlides extends Widget{
     public function run(){
         $city = \Yii::$app->action->currentCity;
         $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
+        $title = !empty(\Yii::$app->action->titleH1) ? \Yii::$app->action->titleH1 : (!empty($options->title) ? $options->title : '');
+        $device_id = !empty(\Yii::$app->action->device_id) ? \Yii::$app->action->device_id : false;
+        $device_problems_id = !empty(\Yii::$app->action->device_problems_id) ? \Yii::$app->action->device_problems_id : false;
         ?>
            <div class="slides">
         <div class="container size-2">
-            <h1 class="text-center"><?=Functions::getTemplateCode($options->title);?></h1>
+            <h1 class="text-center"><?=Functions::getTemplateCode($title,$device_id,$device_problems_id);?></h1>
             <div class="row top">
                 <div class="center-block">
                     <div class="col-xs-6 desktop">

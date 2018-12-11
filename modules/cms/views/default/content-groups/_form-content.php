@@ -29,9 +29,18 @@ $group_id = Yii::$app->request->get('group_id');
         <?= $form->field($model, 'group_id')->DropDownList($contentGroups, $params)->label('Группы');  ?>
     <?php endif; ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true])->
+    hint('
+         Группа: Ремонт Шаблонизатор {city} - Город, {repair} - Ремонт,<br>
+         Группа: Девайс Шаблонизатор {city} - Город, {device} - Девайс<br>
+         Группа: Проблемы Шаблонизатор {city} - Город, {device} - Девайс {device_problems} - Проблемы<br>'
+    )->label('Заголовок H3') ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6])->hint('
+         Группа: Ремонт Шаблонизатор {city} - Город, {repair} - Ремонт,<br>
+         Группа: Девайс Шаблонизатор {city} - Город, {device} - Девайс<br>
+         Группа: Проблемы Шаблонизатор {city} - Город, {device} - Девайс {device_problems} - Проблемы<br>'
+    ) ?>
 
     <?= $form->field($model, 'text')->widget(CKEditor::className(), [
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
@@ -42,9 +51,17 @@ $group_id = Yii::$app->request->get('group_id');
         'options' => ['rows' => 6],
 
 
-    ])->label('Текст');  ?>
+    ])->label('Текст')->hint('
+         Группа: Ремонт Шаблонизатор {city} - Город, {repair} - Ремонт,<br>
+         Группа: Девайс Шаблонизатор {city} - Город, {device} - Девайс<br>
+         Группа: Проблемы Шаблонизатор {city} - Город, {device} - Девайс {device_problems} - Проблемы<br>'
+    ) ?>
 
-    <?= $form->field($model, 'title2')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title2')->textInput(['maxlength' => true])-> hint('
+         Группа: Ремонт Шаблонизатор {city} - Город, {repair} - Ремонт,<br>
+         Группа: Девайс Шаблонизатор {city} - Город, {device} - Девайс<br>
+         Группа: Проблемы Шаблонизатор {city} - Город, {device} - Девайс {device_problems} - Проблемы<br>'
+    )->label('Заголовок H3')  ?>
 
     <?= $form->field($model, 'text2')->widget(CKEditor::className(), [
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
@@ -55,7 +72,11 @@ $group_id = Yii::$app->request->get('group_id');
         'options' => ['rows' => 6],
 
 
-    ])->label('Текст2');  ?>
+    ])->label('Текст2')->hint('
+         Группа: Ремонт Шаблонизатор {city} - Город, {repair} - Ремонт,<br>
+         Группа: Девайс Шаблонизатор {city} - Город, {device} - Девайс<br>
+         Группа: Проблемы Шаблонизатор {city} - Город, {device} - Девайс {device_problems} - Проблемы<br>'
+    ) ?>
     <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>

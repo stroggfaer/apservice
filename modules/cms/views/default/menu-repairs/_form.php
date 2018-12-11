@@ -21,11 +21,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город')  ?>
 
     <?= $form->field($model, 'seo_description')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'title1')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'description1')->textarea(['rows' => 4]) ?>
-    <?= $form->field($model, 'title2')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'description2')->textarea(['rows' => 4]) ?>
-
+    <div class="alert alert-info">
+        <?= $form->field($model, 'title_h1')->textInput(['maxlength' => true])->label('Заголовок H1')->hint('Шаблонизатор {repair} - Девайс {city} - Город') ?>
+      <?= $form->field($model, 'title1')->textInput(['maxlength' => true])->label('Заголовок H2')->hint('Шаблонизатор {repair} - Девайс {city} - Город'); ?>
+      <?= $form->field($model, 'description1')->textarea(['rows' => 4])->hint('Шаблонизатор {repair} - Девайс {city} - Город') ?>
+      <?= $form->field($model, 'title2')->textInput(['maxlength' => true])->label('Заголовок H3')->hint('Шаблонизатор {repair} - Девайс {city} - Город') ?>
+      <?= $form->field($model, 'description2')->textarea(['rows' => 4])->hint('Шаблонизатор {repair} - Девайс {city} - Город') ?>
+    </div>
     <?php if($model->isNewRecord): ?>
         <?php $position = \app\models\MenuRepairs::find()->select('position')->where(['status'=>1])->orderBy('id DESC')->one();
         $positionValue =  !empty($position) ? $position->position + 1 : 1 ?>

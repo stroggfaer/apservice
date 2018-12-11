@@ -30,9 +30,9 @@ $devices = ArrayHelper::map(array_merge(\app\models\Devices::find()->where(['sta
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <?=$form->field($model, 'group_id',['options'=>['class'=>'form-group col-sm-6']])->DropDownList($items, $params);  ?>
-
     </div>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title_h1')->textInput(['maxlength' => true])->hint('Шаблонизатор {city},{device},{device_problems}'); ?>
     <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city},{device},{device_problems}'); ?>
     <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city},{device},{device_problems}'); ?>
     <?= $form->field($model, 'seo_description')->textarea(['row' => 2])->hint('Шаблонизатор {city},{device},{device_problems}'); ?>

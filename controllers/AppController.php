@@ -7,6 +7,7 @@ use yii\web\Controller;
 
 class AppController extends Controller
 {
+   public  $title_h1;
 
     public function init()
     {

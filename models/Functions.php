@@ -149,7 +149,7 @@ class Functions extends Model
     }
 
     // Шаблоный сео;
-    public static function getTemplateCode($string,$device_id = false, $device_problems_id = false) {
+    public static function getTemplateCode($string,$device_id = false, $device_problems_id = false,$repair=false) {
         $regex = "/\{(.*?)\}/";
         preg_match_all($regex, $string, $matches);
         $model = new Repair();
@@ -172,6 +172,16 @@ class Functions extends Model
                             //echo $string;
                         }
 
+                    break;
+                    case 'repair':
+                        //  '/\[([^]]+)\]/'
+                        if(!empty($repair_id)) {
+                            $currentRepair = $model->getCurrentRepair(false, $repair_id);
+                            $string = preg_replace('/\{repair\}/', $currentRepair->title, $string);
+                        }else{
+                            $currentRepair = $model->getCurrentRepair();
+                            $string = preg_replace('/\{repair\}/', $currentRepair->title, $string);
+                        }
                         break;
                     case 'device_problems':
                         //  '/\[([^]]+)\]/' ++

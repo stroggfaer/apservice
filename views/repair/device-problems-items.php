@@ -11,9 +11,14 @@ $city = \Yii::$app->action->currentCity;
 ?>
 <div class="container size">
     <?=  app\components\WMenuRepairs::widget(['model'=>$model])?>
-    <div class="devices-problems">
-        <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$model->device->title?></div></div>
 
+    <div class="devices-problems">
+        <?php if(!empty($model->device->title) && false): ?>
+           <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$model->device->title?></div></div>
+        <?php endif; ?>
+        <br/>
+        <br/>
+        <br/>
         <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>true,'one'=>$one])?>
 
         <div class="text-center title-main-1"><h2 class="seo-title">Выберите проблему на <?=$model->device->title?></h2></div>

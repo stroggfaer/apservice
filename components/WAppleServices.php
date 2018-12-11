@@ -40,7 +40,7 @@ class WAppleServices extends Widget{
                         <div class="item">
                             <div class="row">
                                 <div class="col-md-3 col-xs-3 image">
-                                    <a href="#" class="no_border"><img src="<?= $appleServices->img.'?'.time()?>"/></a>
+                                    <a href="<?=(!empty($appleServices->value) ? $appleServices->value : 'https://apple.sc/contacts')?>" class="no_border"><img src="<?= $appleServices->img.'?'.time()?>"/></a>
                                 </div>
                                 <div class="col-md-5 col-xs-5 address-service">
                                     <div class="title"><?= $appleServices->title ?></div>

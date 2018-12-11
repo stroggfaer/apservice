@@ -28,6 +28,7 @@ class RepairController extends AppController
 
             $one = $model->getCurrentRepair($url);
             if(!empty($one)) {
+                \Yii::$app->action->setTitleH1($one->title_h1);
                 // Сео настройки;
                 $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title) : $one->title), Functions::getTemplateCode($one->seo_keywords), Functions::getTemplateCode($one->seo_description));
                 return $this->render('index', [
@@ -43,6 +44,8 @@ class RepairController extends AppController
         if(!empty($alias) && empty($last)){
 
             $one = $model->getCurrentDevices($alias);
+            \Yii::$app->action->setTitleH1($one->title_h1);
+            \Yii::$app->action->setDeviceId($one->id);
             $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title,$one->id) : $one->title), Functions::getTemplateCode($one->seo_keywords,$one->id), Functions::getTemplateCode($one->seo_description,$one->id));
 
             if(!empty($one)) {
@@ -59,7 +62,9 @@ class RepairController extends AppController
         if(!empty($last)){
             $devices = $model->getCurrentDevices($alias);
             $one = $model->getCurrentDeviceProblems(false,false, array('url'=>$last,'device_id'=>$devices->id));
-
+            \Yii::$app->action->setTitleH1($one->title_h1);
+            \Yii::$app->action->setDeviceId($devices->id);
+            \Yii::$app->action->setDeviceProblemsId($one->id);
             // Сео настройки;
             $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title,$devices->id,$one->id) : $one->title), Functions::getTemplateCode($one->seo_keywords,$devices->id,$one->id), Functions::getTemplateCode($one->seo_description,$devices->id,$one->id));
 

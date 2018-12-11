@@ -57,7 +57,7 @@ $deviceProblems = $model->deviceProblemsArrayList;
     <?php endif; ?>
 
     <?= $form->field($model, 'checkbox_copy')->checkbox(['disabled' => false,]) ?>
-    <?php if(!empty($model->devicesDetails)): ?>
+    <?php if(true && !empty($model->devicesDetails)): ?>
         <div class="table__com">
             <div class="content">
                 <table class="table table-bordered table-hover">
@@ -79,6 +79,22 @@ $deviceProblems = $model->deviceProblemsArrayList;
             <?php endif; ?>
         </div>
     <?php endif; ?>
+
+   <div class="alert alert-info">
+       <h3>Параметры для SEO</h3>
+       <?= $form->field($model, 'title_h1')->textInput(['maxlength' => true])->hint('Шаблонизатор {device} - Девайс {city} - Город'); ?>
+       <?= $form->field($model, 'title_h3')->textInput(['maxlength' => true])->hint('Шаблонизатор {device} - Девайс {city} - Город'); ?>
+       <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+           'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
+               'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+               'inline' => false, //по умолчанию false
+           ]),
+
+           'options' => ['rows' => 2],
+       ])->label('Описание для контента')->hint('Шаблонизатор {city} - Город, {device} - Девайс');  ?>
+   </div>
+
+
     <?php if($model->isNewRecord): ?>
         <?php $position = \app\models\Devices::find()->select('position')->where(['status'=>1])->orderBy('id DESC')->one();
         $positionValue =  !empty($position) ? $position->position + 1 : 1 ?>

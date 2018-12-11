@@ -38,7 +38,7 @@ $call = new Call();
 
 
        <div class="description-seo">
-        <div class="text-center title-main"><h3 class="seo-title"><?=$content->title?></h3></div>
+        <div class="text-center title-main"><h3 class="seo-title"><?=Functions::getTemplateCode($content->title,$one->id)?></h3></div>
            <?php $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : '')); ?>
         <div class="text"><?=Functions::getTemplateCode($text,$one->id)?></div>
     </div>

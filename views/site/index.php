@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 use app\models\Options;
+use app\models\Functions;
 /* @var $this yii\web\View */
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 $pageTrainer = \app\models\Pages::find()->where(['id'=>1005,'status'=>1])->one();
@@ -21,12 +22,12 @@ $description2 = $one->description2 ? $one->description2 : (!empty($content->text
 
         <?php if(!empty($title1) && !empty($title2)):?>
             <div class="description-seo">
-                <div class="text-center title-main"><h2 class="seo-title"><?=$title1?></h2></div>
-                <div class="text"><?=$description1?></div>
+                <div class="text-center title-main"><h2 class="seo-title"><?=Functions::getTemplateCode($title1)?></h2></div>
+                <div class="text"><?=Functions::getTemplateCode($description1)?></div>
             </div>
             <div class="description-seo">
-                <div class="text-center title-main"><h3 class="seo-title"><?=$title2?></h3></div>
-                <div class="text"><?=$description2?></div>
+                <div class="text-center title-main"><h3 class="seo-title"><?=Functions::getTemplateCode($title2)?></h3></div>
+                <div class="text"><?=Functions::getTemplateCode($description2)?></div>
             </div>
         <?php endif; ?>
         <div class="update-devices-problems-list">

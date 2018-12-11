@@ -32,11 +32,17 @@ class Repair extends Model
         return $data;
     }
     // Menu Repair;
-    public function getCurrentRepair($url = false)
+    public function getCurrentRepair($url = false,$id=false)
     {
         $current = (!empty(\Yii::$app->request->queryParams['url']) ? trim(\Yii::$app->request->queryParams['url'], '/') : false);
         $url = !empty($url) ? $url :  $current;
-        $data = MenuRepairs::find()->where(['status'=>1,'url'=>$url])->orderBy('position ASC')->one();
+        if($id) {
+            $data = MenuRepairs::find()->where(['status'=>1,'id'=>$id])->limit(1)->one();
+        }else{
+            $data = MenuRepairs::find()->where(['status'=>1,'url'=>$url])->limit(1)->one();
+        }
+
+
         if(!$data) return false;
         return $data;
     }
