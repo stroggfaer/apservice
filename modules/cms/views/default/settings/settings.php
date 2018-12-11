@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город') ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label('Заголовок H1')->hint('Шаблонизатор {city} - Город') ?>
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
