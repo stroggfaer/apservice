@@ -27,7 +27,7 @@ class BackendController extends Controller
             ],
             'pages' => [
                 'title' => 'Контент',
-                'link' => '#',
+                'link' => '',
                 'status' => 1,
                 'items' => [
                     [
@@ -70,7 +70,7 @@ class BackendController extends Controller
             ],
             'marketing' => [
                 'title' => 'Маркетинг',
-                'link' => '#',
+                'link' => '',
                 'status' => 1,
                 'items' => [
                     [
@@ -81,7 +81,7 @@ class BackendController extends Controller
             ],
             'geo' => [
                 'title' => 'Гео данные',
-                'link' => '#',
+                'link' => '',
                 'status' => 1,
                 'items' => [
                     [
@@ -101,7 +101,7 @@ class BackendController extends Controller
         ];
         if(\Yii::$app->user->can('old_admin'))  $this->actionNavigation['shop'] =[
             'title' => 'Магазин',
-            'link' => '#',
+            'link' => '',
             'status' => 1,
             'items' => [
                 [
@@ -152,7 +152,7 @@ class BackendController extends Controller
         ];
         if(\Yii::$app->user->can('admin')) $this->actionNavigation['options'] = [
             'title' => 'Система',
-            'link' => '#',
+            'link' => '',
             'status' => 1,
             'items' => [
                 [

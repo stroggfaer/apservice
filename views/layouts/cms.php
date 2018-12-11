@@ -40,7 +40,7 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
                     <?php if(!empty(\Yii::$app->controller->actionNavigation)): ?>
                         <?php foreach(\Yii::$app->controller->actionNavigation as $key=>$value): ?>
                             <li class="dropdown js-mounts">
-                                <a <?= !empty($value['items']) ? 'class="dropdown-toggle" role="navigation"  data-toggle="dropdown"' : '' ?>href="/repair<?=$value['link']?>">
+                                <a <?= !empty($value['items']) ? 'class="dropdown-toggle" role="navigation"  data-toggle="dropdown"' : '' ?>href="/repair/<?=$value['link']?>" <?=empty($value['link']) ? 'onclick="return false;"': ''?>>
                                     <?=$value['title']?>
                                     <?php if(!empty($value['count'])): ?><span style="margin-left: 5px" class="badge pull-right danger-bg"><?=$value['count']?></span><?php endif; ?>
                                 </a>

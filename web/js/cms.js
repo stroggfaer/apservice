@@ -4,10 +4,12 @@ $(document).ready(function(){
     $('.js-mounts').hover(function () {
         clearTimeout($.data(this, 'timer'));
         $('.dropdown-menu', this).stop(true, true).show();
+        return false;
     }, function () {
         $.data(this, 'timer', setTimeout($.proxy(function () {
             $('.dropdown-menu', this).stop(true, true).hide();
         }, this), 100));
+        return false;
     });
 });
 
