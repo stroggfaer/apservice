@@ -36,7 +36,7 @@ class WSalonForm extends Widget{
                         </select>
                     </div>
                     <div class="form-group col-md-4  col-xs-4">
-                        <label>Выбранно проблему:</label>
+                        <label>Выберите проблему:</label>
                         <select class="form-control" name="devicesProblem">
                             <?php if(!empty($this->model->devicesProblems)): ?>
                                 <?php foreach ($this->model->devicesProblems as $devicesProblems):
