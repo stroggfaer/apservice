@@ -14,7 +14,12 @@ $call = new Call();
 <div class="container size">
     <?=  app\components\WMenuRepairs::widget(['model'=>$model])?>
     <div class="devices-problems">
-        <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$one->title?></div></div>
+        <br>
+        <br>
+        <br>
+        <?php if(false): ?>
+           <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$one->title?></div></div>
+        <?php endif; ?>
         <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>true])?>
 
         <div class="text-center title-main-1"><div class="seo-title">Выберите проблему на <?=$one->title?></div></div>
@@ -38,7 +43,8 @@ $call = new Call();
 
 
        <div class="description-seo">
-        <div class="text-center title-main"><h3 class="seo-title"><?=Functions::getTemplateCode($content->title,$one->id)?></h3></div>
+           <?php $title_h3 = (!empty($one->title_h3) ? $one->title_h3 : (!empty($content->title) ? $content->title : '')); ?>
+        <div class="text-center title-main"><h3 class="seo-title"><?=Functions::getTemplateCode($title_h3,$one->id)?></h3></div>
            <?php $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : '')); ?>
         <div class="text"><?=Functions::getTemplateCode($text,$one->id)?></div>
     </div>

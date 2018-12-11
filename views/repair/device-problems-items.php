@@ -13,7 +13,7 @@ $city = \Yii::$app->action->currentCity;
     <?=  app\components\WMenuRepairs::widget(['model'=>$model])?>
 
     <div class="devices-problems">
-        <?php if(!empty($model->device->title) && false): ?>
+        <?php if(false): ?>
            <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$model->device->title?></div></div>
         <?php endif; ?>
         <br/>

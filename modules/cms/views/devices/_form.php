@@ -32,16 +32,7 @@ $deviceProblems = $model->deviceProblemsArrayList;
     <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город'); ?>
     <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город')  ?>
     <?= $form->field($model, 'seo_description')->textarea(['row' => 2])->hint('Шаблонизатор {city} - Город')  ?>
-    <?= $form->field($model, 'text')->widget(CKEditor::className(), [
-        'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
-            'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-            'inline' => false, //по умолчанию false
-        ]),
 
-        'options' => ['rows' => 4],
-
-
-    ])->label('Текст')->hint('Шаблонизатор {city} - Город, {device} - Девайс');  ?>
 
      <?php if(!empty($model->deviceProblemsArrayList) && !empty($devicesDetails)): ?>
         <?= $form->field($devicesDetails, 'devices_id')->widget(Select2::classname(), [
@@ -74,7 +65,7 @@ $deviceProblems = $model->deviceProblemsArrayList;
 
                 </table>
             </div>
-            <?php if(count($model->devicesDetails) >= 6): ?>
+            <?php if(count($model->devicesDetails) >= 5): ?>
                <div class="text-center more"> <a href="#" onclick="return table_all();">Загрузить все</a></div>
             <?php endif; ?>
         </div>
@@ -84,14 +75,16 @@ $deviceProblems = $model->deviceProblemsArrayList;
        <h3>Параметры для SEO</h3>
        <?= $form->field($model, 'title_h1')->textInput(['maxlength' => true])->hint('Шаблонизатор {device} - Девайс {city} - Город'); ?>
        <?= $form->field($model, 'title_h3')->textInput(['maxlength' => true])->hint('Шаблонизатор {device} - Девайс {city} - Город'); ?>
-       <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+       <?= $form->field($model, 'text')->widget(CKEditor::className(), [
            'editorOptions' => ElFinder::ckeditorOptions('elfinder',[
                'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
                'inline' => false, //по умолчанию false
            ]),
 
-           'options' => ['rows' => 2],
-       ])->label('Описание для контента')->hint('Шаблонизатор {city} - Город, {device} - Девайс');  ?>
+           'options' => ['rows' => 3],
+
+
+       ])->label('Текст')->hint('Шаблонизатор {city} - Город, {device} - Девайс');  ?>
    </div>
 
 
