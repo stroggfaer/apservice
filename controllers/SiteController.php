@@ -72,7 +72,7 @@ class SiteController extends AppController
 
         $model = new Repair();
         $one =  $model->menuRepair;
-
+        \Yii::$app->action->setTitleH1($one->title_h1);
         return $this->render('index',[
             'model'=>$model,
             'one'=>$one
