@@ -3,6 +3,7 @@ namespace app\components;
 
 use yii\base\Widget;
 use Yii;
+use app\models\Options;
 
 
 class WCityGeo extends Widget{
@@ -19,14 +20,16 @@ class WCityGeo extends Widget{
             return false;
         }else {
             $city = \Yii::$app->action->currentCity;
+            $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
+
             ?>
             <div id="city-modal" data-domen="<?=$city->domen?>">
                 <div class="items">
                    <?php foreach ($this->model as $city): ?>
                        <?php if(!empty($city->main)): ?>
-                          <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="http://apple.pc/repair/" class="city"><?=$city->name?></a></div>
+                          <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="//<?=$options->url?>" class="city"><?=$city->name?></a></div>
                        <?php else: ?>
-                           <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="http://<?=$city->domen?>.apple.pc/repair/" class="city"><?=$city->name?></a></div>
+                           <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="//<?=$city->domen?><?=$options->url?>" class="city"><?=$city->name?></a></div>
                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
