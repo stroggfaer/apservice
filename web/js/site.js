@@ -1,5 +1,5 @@
 var ajax_path = '/repair/ajax/';
-var domain_city = '.apple.pc'; // apple.sc
+var domain_city = '.apple.sc'; // apple.sc
 
 $(document).ready(function(){
 
