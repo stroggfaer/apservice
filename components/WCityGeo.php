@@ -27,9 +27,9 @@ class WCityGeo extends Widget{
                 <div class="items">
                    <?php foreach ($this->model as $city): ?>
                        <?php if(!empty($city->main)): ?>
-                          <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="//<?=$options->url?>" class="city"><?=$city->name?></a></div>
+                          <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="//demo.apple.sc/repair/" class="city"><?=$city->name?></a></div>
                        <?php else: ?>
-                           <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="//<?=$city->domen?><?=$options->url?>" class="city"><?=$city->name?></a></div>
+                           <div class="js-city-one" data-domen="<?=$city->domen?>"><a href="//<?=$city->domen?>.apple.sc/repair/" class="city"><?=$city->name?></a></div>
                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
