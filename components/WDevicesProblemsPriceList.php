@@ -15,8 +15,10 @@ class WDevicesProblemsPriceList extends Widget{
         if ($this->model === null) {
             $this->model = false;
         }
+
     }
     public function run(){
+
         $request = Yii::$app->request;
         $id = abs($request->post('id') ? $request->post('id') : $this->model->devices[0]->id);
         $device_year_id = abs($request->post('device_year_id'));
@@ -37,6 +39,8 @@ class WDevicesProblemsPriceList extends Widget{
             // Выгрузка стандарт;
             $deviceProblems = $device->getDeviceProblems($device, false);
         }
+
+        $deviceDiagonals =  !empty($deviceYearOne->deviceDiagonals) ? $deviceYearOne->deviceDiagonals : false;
 
         ?>
 
@@ -70,31 +74,36 @@ class WDevicesProblemsPriceList extends Widget{
                             <div class="clear"></div>
                         </div>
                     <?php endif;?>
-                    <?php if(!empty($device->deviceYearOne) && count($device->deviceYears) <= 1): ?>
+
+                    <?php if(!empty($device->deviceYearOne) && count($device->deviceYears) <= 1 || empty($deviceDiagonals)): ?>
                         <div class="info">
-                            <div class="item">
-                                <div class="name">Год выпуска</div>
-                                <div class="name"><?=$device->deviceYearOne->title?></div>
-                            </div>
-                            <?php if(!empty($device->deviceYearOne->title_th1) && !empty($device->deviceYearOne->value1)): ?>
+                            <?php if(!empty($deviceDiagonals)):?>
                                 <div class="item">
-                                    <div class="name"><?=$device->deviceYearOne->title_th1?></div>
-                                    <div class="name"><?=$device->deviceYearOne->value1?></div>
+                                    <div class="name">Год выпуска</div>
+                                    <div class="name"><?=$deviceYearOne->title?></div>
                                 </div>
                             <?php endif; ?>
-                            <?php if(!empty($device->deviceYearOne->title_th2) && !empty($device->deviceYearOne->value2)): ?>
+                            <?php if(!empty($deviceYearOne->title_th1) && !empty($deviceYearOne->value1)): ?>
                                 <div class="item">
-                                    <div class="name"><?=$device->deviceYearOne->title_th2?></div>
-                                    <div class="name"><?=$device->deviceYearOne->value2?></div>
+                                    <div class="name"><?=$deviceYearOne->title_th1?></div>
+                                    <div class="name"><?=$deviceYearOne->value1?></div>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(!empty($deviceYearOne->title_th2) && !empty($deviceYearOne->value2)): ?>
+                                <div class="item">
+                                    <div class="name"><?=$deviceYearOne->title_th2?></div>
+                                    <div class="name"><?=$deviceYearOne->value2?></div>
                                 </div>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
-                    <?php if(!empty($deviceYearOne->deviceDiagonals)): ?>
+
+                    <?php if(!empty($deviceDiagonals)): ?>
+
                         <div class="devices__com list tags">
                             Выберите диагональ:
                             <div class="items">
-                               <?php foreach ($device->deviceYearOne->deviceDiagonals as $deviceDiagonal): ?>
+                               <?php foreach ($deviceDiagonals as $deviceDiagonal): ?>
                                    <div class="item js-device-tags  <?=($deviceDiagonalOne->id == $deviceDiagonal->id ? 'active' : '')?> tags-2" data-index="2" data-id="<?=$device->id?>" data-device-year-id="<?=$deviceYearOne->id?>" data-diagonal-id="<?=$deviceDiagonal->id?>"  ><a href="#"><?=$deviceDiagonal->title?></a></div>
                                <?php endforeach; ?>
                             </div>

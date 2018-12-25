@@ -67,10 +67,17 @@ class DeviceDiagonals extends \yii\db\ActiveRecord
         return $this->hasMany(DeviceYearDetails::className(), ['device_diagonal_id' => 'id']);
     }
 
-    public function getDiagonalDeviceProblems()
+    public function getDiagonalDeviceProblems($device_year_id = false)
     {
-        $deviceProblems = DeviceProblems::find()->select(['device_problems.title', 'device_problems.id'])->from(DeviceProblems::tableName())->
-        leftJoin(DeviceYearDetails::tableName(), 'device_year_details.device_problem_id = device_problems.id')->where(['device_year_details.device_diagonal_id' => $this->id, 'device_problems.status' => 1])->all();
+        $deviceProblemsObj = DeviceProblems::find();
+        if(!empty($device_year_id)) {
+            $deviceProblems = $deviceProblemsObj->select(['device_problems.title', 'device_problems.id'])->from(DeviceProblems::tableName())->
+            leftJoin(DeviceYearDetails::tableName(), 'device_year_details.device_problem_id = device_problems.id')->where(['device_year_details.device_diagonal_id' => $this->id,'device_year_details.device_year_id' => $device_year_id, 'device_problems.status' => 1])->all();
+        }else{
+            $deviceProblems = $deviceProblemsObj->select(['device_problems.title', 'device_problems.id'])->from(DeviceProblems::tableName())->
+            leftJoin(DeviceYearDetails::tableName(), 'device_year_details.device_problem_id = device_problems.id')->where(['device_year_details.device_diagonal_id' => $this->id, 'device_problems.status' => 1])->all();
+        }
+
         return $deviceProblems;
     }
 

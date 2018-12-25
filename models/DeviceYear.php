@@ -21,6 +21,7 @@ use Yii;
  */
 class DeviceYear extends \yii\db\ActiveRecord
 {
+    private $device_year_id;
     /**
      * @inheritdoc
      */
@@ -58,7 +59,10 @@ class DeviceYear extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
-
+    public function setDeviceYearId($device_year_id) {
+        if(empty($device_year_id)) return false;
+        return $this->device_year_id  = $device_year_id;
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

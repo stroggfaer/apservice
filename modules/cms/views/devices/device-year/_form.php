@@ -49,7 +49,7 @@ $params = ['prompt' => 'Выберите девайс', 'options' => [$model->de
                                     <th>Цена</th>
                                     <th>Действия</th>
                                 </tr>
-                                <?php foreach ($deviceDiagonal->diagonalDeviceProblems as $diagonalDeviceProblem): ?>
+                                <?php foreach ($deviceDiagonal->getDiagonalDeviceProblems($model->id) as $diagonalDeviceProblem):?>
                                  <tr>
                                      <td><?=$diagonalDeviceProblem->title?></td>
                                      <td><?=\app\models\Functions::money($diagonalDeviceProblem->price->money)?> р.</td>

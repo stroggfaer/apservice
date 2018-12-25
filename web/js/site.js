@@ -421,6 +421,7 @@ function select_devices_price_list(id, device_year_id, diagonal_id) {
     if(!id) return false;
     loading('show');
     $.post(ajax_path + 'select-devices-price-list',{id:id, device_year_id:device_year_id, diagonal_id:diagonal_id},function(response){
+
         $('div.update_table_content').html($(response).find('div.update_table_content').html());
         loading('hide');
     });

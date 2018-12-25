@@ -156,6 +156,7 @@ class AjaxController extends Controller
         //
         if(Yii::$app->request->isAjax && !empty($id)) {
             $model->getCurrentDevices(false,$id);
+
             return \app\components\WDevicesProblemsPriceList::widget(['model'=>$model]);
         }
     }

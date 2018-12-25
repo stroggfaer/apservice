@@ -26,6 +26,7 @@ class Devices extends \yii\db\ActiveRecord
     public $checkbox_copy = false;
     private $limit = 6; // Limit start;
     private $countLimit = 0; // Limit end;
+    private $device_year_id;
     /**
      * @inheritdoc
      */
@@ -216,6 +217,11 @@ class Devices extends \yii\db\ActiveRecord
 
     /*------Режим прайса V 2.0.1;-------*/
     /*--Если меню устройства акт. show_prices = 1  -*/
+
+    public function setDeviceYearId($device_year_id) {
+        if(empty($device_year_id)) return false;
+        return $this->device_year_id  = $device_year_id;
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -228,6 +234,7 @@ class Devices extends \yii\db\ActiveRecord
         if(empty($this->deviceYears)) return false;
 
         if(!empty($id)) {
+
             return $this->getDeviceYears()->where(['id'=>$id,'status'=>1])->one();
         }else{
             return  $this->deviceYears[0];
