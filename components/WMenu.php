@@ -22,7 +22,7 @@ class WMenu extends Widget{
             ?>
             <div class="items">
                 <?php foreach ($header as $key => $menu): ?>
-                    <div class="item <?=$key == 0 ? 'active' : ''?>"><a href="<?= $menu->value ?>"><?= $menu->title ?></a></div>
+                    <a class="<?=$key == 0 ? 'active' : ''?>" href="<?= $menu->value ?>"><?= $menu->title ?></a>
                 <?php endforeach; ?>
             </div>
             <?php

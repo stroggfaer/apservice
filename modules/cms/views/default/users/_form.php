@@ -38,8 +38,10 @@ use \kartik\datecontrol\DateControl;
                 ],
             ]);?>
             <?= $form->field($model, 'email',['options'=>['class'=>'form-group col-sm-6']])->textInput(['maxlength' => true]) ?>
+
             <?= $form->field($model, 'password_repeat',['options'=>['class'=>'form-group col-sm-6']])->passwordInput() ?>
             <?= $form->field($model, 'password',['options'=>['class'=>'form-group col-sm-6']])->passwordInput() ?>
+
             <?= $form->field($model, 'post',['options'=>['class'=>'form-group col-sm-6']])->passwordInput() ?>
         </div>
         <?= $form->field($model, 'type')->checkbox(['disabled' => false,]) ?>

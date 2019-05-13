@@ -17,12 +17,21 @@ class RepairController extends AppController
     public function actionIndex($url = false, $alias = false, $last = false)
     {
 
+
         // Обработка урл;
         $url = (!empty($url) ? trim($url, '/') : false);
         $alias = (!empty($alias) ? trim($alias, '/') : false);
         $last = (!empty($last) ? trim($last, '/') : false);
 
+       // print_arr($url);
+       // die('A');
         $model = new Repair();
+        if(empty($url)) {
+            $one = $model->menuRepair;
+
+            return $this->redirect(Url::home());
+
+        }
         // Первый уровень
         if(!empty($url) && empty($alias)) {
 

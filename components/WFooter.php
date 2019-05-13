@@ -18,114 +18,88 @@ class WFooter extends Widget{
 
            $appleServices = $model->getAppleServices();
            $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
+           $phone= (!empty($city->value) ? $city->value : $city->phone);
+
          ?>
-           <div class="container size">
+
             <!--Десктоп-->
-            <div class="desktop">
-                <div class="border">
+            <div class="border">
+                 <div class="container size footer-top">
                     <div class="custom-menu_in_footer">
                         <ul>
                             <?php if(!empty($menuFooter)): ?>
                                 <?php foreach ($menuFooter as $menu):?>
                                      <li><a href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?=$menu->title?></a></li>
                                 <?php endforeach; ?>
+                                <li><a href="#">Поддержка </a></li>
+                                <li><a href="#">Аксессуары</a></li>
                             <?php endif; ?>
                         </ul>
                     </div>
                     <div class="custom_footerInfo">
                         <div class="footerSocial">
-                            <span>Мы в социальных сетях:</span>
-                            <div>
-                                <a href="https://www.facebook.com/appleservicensk/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="https://vk.com/appleservicensk" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
-                                <a href="https://www.instagram.com/http.apple.sc/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            </div>
+                            <a href="https://www.facebook.com/appleservicensk/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i><span>facebook</span></a>
+                            <a href="https://www.instagram.com/http.apple.sc/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i><span>instagram</span></a>
+                            <a href="https://vk.com/appleservicensk" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i><span>vkontakte</span></a>
                         </div>
-                        <div class="footerCards">
-                            <span>Принимаем:</span>
-                            <div class="cardLogo" id="logoVisa"><i class="fa fa-cc-visa" aria-hidden="true"></i></div>
-                            <div class="cardLogo" id="logoMastercard"><i class="fa fa-cc-mastercard" aria-hidden="true"></i></div>
+                        <div class="footerContact">
+                          <div class="phone">
+                              <a href="tel:<?=$phone?>" class="no_border"><?=$phone?></a>
+                          </div>
+                           <div class="messengers">
+                              <a href="#" class="no_border"><i class="fa fa-whatsapp"></i>WatsApp</a>
+                              <a href="#" class="no_border margin-right-clear"><i class="icon-telegram telegram"></i>Telegram</a>
+                           </div>
                         </div>
                     </div>
                     <div class="clear"></div>
-                </div>
-                <div class="">
-                    <div class="custom-adresses">
-                        <h3>Салоны в <?=Functions::strEnd($city->name)?></h3>
+                 </div>
+            </div>
+            <div class="container size">
+                <div class="custom-address">
+                    <h3>Салоны в <?=Functions::strEnd($city->name)?></h3>
+                    <div class="buttons">
+                        <i class="icon-left-arrow js-address-prev" aria-hidden="true"></i>
+                        <i class="icon-right-arrow js-address-next" aria-hidden="true"></i>
                     </div>
-                    <div class="contacts">
-                        <?php if(empty($city->value)): ?>
-                        <div class="item js-footer-menu-toggle">
-                            <?php if(!empty($appleServices)): ?>
+                </div>
+                <div class="contacts">
+                    <?php if(empty($city->value)): ?>
+                    <?php if(!empty($appleServices)):?>
+                       <div class="address-carousel">
+                          <div class="items">
                                <?php foreach ($appleServices as $appleService): ?>
-                                   <div class="address">
-                                       <a href="<?=(!empty($appleService->value) ? $appleService->value : 'https://apple.sc/contacts')?>" class="dotted"><?=$appleService->title?></a>
-                                       <?php if(!empty($appleService->phone)): ?>
-                                           <div style="font-size: 12px"><strong class="small"><?=$appleService->phone?></strong></div>
-                                       <?php endif; ?>
-                                   </div>
-
-                               <?php endforeach; ?>
-                            <?php endif; ?>
-                            <div class="clear"></div>
-                        </div>
-                        <?php else: ?>
-                          <h4><?=$city->value?></h4>
-                        <?php endif; ?>
-                    </div>
-                    <div class="copyright">
-                        <div>© 2008-2018 Сервисный центр AppleService  |  ООО Эпплсервис-НСК2 ИНН5401283771</div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div><!--./Десктоп-->
-            <!--Мобилка-->
-            <div class="mobile">
-                <div class="menu_bottom__mod">
-                    <div class="items">
-                        <div class="item js-footer-menu-toggle">
-                            <div class="name">О компании</div>
-                            <div class="i">
-                                <?php if(!empty($menuFooter)): ?>
-                                    <?php foreach ($menuFooter as $menu): ?>
-                                        <div><a href="<?=(!empty($menu->url) ? $menu->url : $menu->value)?>"><?=$menu->title?></a></div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name"><a href="#" class="no_border">Услуги</a></div>
-                        </div>
-                        <div class="item">
-                            <div class="name"><a href="/accessories" class="no_border">Продукция и аксессуары</a></div>
-                        </div>
-                        <div class="item js-footer-menu-toggle">
-                            <div class="name">Салоны в <?=Functions::strEnd($city->name)?></div>
-                            <div class="i">
-                                <?php if(!empty($appleServices)): ?>
-                                    <?php foreach ($appleServices as $appleService): ?>
-                                        <div>
-                                            <a href="<?=(!empty($appleService->value) ? $appleService->value : 'https://apple.sc/contacts')?>"><?=$appleService->title?></a>
-                                            <?php if(!empty($appleService->phone)): ?>
-                                                <strong><?=$appleService->phone?></strong>
-                                            <?php endif; ?>
+                                    <div class="item">
+                                        <div class="content">
+                                           <a href="<?=(!empty($appleService->url) ? $appleService->url : 'https://apple.sc/contacts')?>" class="title"><?=$appleService->title?></a>
+                                           <?php if(!empty($appleService->address)): ?>
+                                               <div class="address"><?=$appleService->address?></div>
+                                           <?php endif; ?>
+                                           <?php if(!empty($appleService->value)): ?>
+                                               <div class="value text-muted small"><?=$appleService->value?></div>
+                                           <?php endif; ?>
+                                              <div class="value text-muted small">2 - Этаж</div>
+                                           <?php if(!empty($appleService->metro)): ?>
+                                               <div class="metro"><i class="icon-m"></i> <?=$appleService->metro?></div>
+                                           <?php endif; ?>
+                                           <?php if(!empty($appleService->phone)): ?>
+                                               <div class="phone"><?=$appleService->phone?></div>
+                                           <?php endif; ?>
                                         </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="social">
-                    <a href="https://www.facebook.com/appleservicensk/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="https://vk.com/appleservicensk" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
-                    <a href="https://www.instagram.com/http.apple.sc/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                   </div>
+                               <?php endforeach; ?>
+                          </div>
+                       </div>
+                    <?php endif; ?>
+                    <?php else: ?>
+                        <h4><?=$city->value?></h4>
+                    <?php endif; ?>
                 </div>
                 <div class="copyright">
-                    <div>© 2008-<?=date('Y')?> Сервисный центр AppleService  |  ООО Эпплсервис-НСК2 ИНН5401283771</div>
+                    <div class="text-grey">© <?=date('Y')?> Сервисный центр ASX Care <div class="language"><div class="ru">RU</div> </div></div>
                 </div>
-            </div> <!--./Мобилка-->
-        </div>
+                <div class="clear"></div>
+            </div>
             <?php
         }
 

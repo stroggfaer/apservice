@@ -28,9 +28,14 @@ class Bootstrap implements BootstrapInterface
         $result = [];
         if(empty($cms) && empty($ajax) && empty($gridview) && empty($site)) {
             $result = [
-                '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>/<last:[\w_\/-]+>' => 'repair/index',
-                '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>' => 'repair/index',
-                '/<url:[\w_\/-]+>' => 'repair/index',
+            //    '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>/<last:[\w_\/-]+>' => 'repair/index',
+              //  '/<url:[\w_\/-]+>/<alias:[\w_\/-]+>' => 'repair/index',
+               // '/<url:[\w_\/-]+>' => 'repair/index',
+             //   '/<url:[\w_\/-]+>' => 'pages/page',
+                'repair/<url:[\w_\/-]+>/<alias:[\w_\/-]+>/<last:[\w_\/-]+>' => 'repair/index',
+                'repair/<url:[\w_\/-]+>/<alias:[\w_\/-]+>' => 'repair/index',
+                'repair/<url:[\w_\/-]+>' => 'repair/index',
+                'repair' => 'repair/index',
             ];
         }
 

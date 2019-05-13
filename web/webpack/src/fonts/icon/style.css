@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?qe0s2m');
-  src:  url('fonts/icomoon.eot?qe0s2m#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?qe0s2m') format('truetype'),
-    url('fonts/icomoon.woff?qe0s2m') format('woff'),
-    url('fonts/icomoon.svg?qe0s2m#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?2k57cr');
+  src:  url('fonts/icomoon.eot?2k57cr#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?2k57cr') format('truetype'),
+    url('fonts/icomoon.woff?2k57cr') format('woff'),
+    url('fonts/icomoon.svg?2k57cr#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,51 +24,82 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-icon_ipod:before {
-  content: "\e907";
+.icon-left-arrow:before {
+  content: "\e915";
+  color: #bdbdbd;
 }
-.icon-contacts:before {
+.icon-right-arrow:before {
+  content: "\e916";
+  color: #bdbdbd;
+}
+.icon-m:before {
+  content: "\e914";
+  color: #eb5757;
+}
+.icon-telegram:before {
   content: "\e900";
+  color: #c4c4c4;
 }
-.icon-curer:before {
+.icon-courier-image:before {
   content: "\e901";
 }
-.icon-ipad:before {
+.icon-email-image:before {
   content: "\e902";
 }
-.icon-iphone:before {
+.icon-map-image:before {
   content: "\e903";
-  color: #3ba4ff;
 }
-.icon-mac:before {
+.icon-menu_support:before {
   content: "\e904";
 }
-.icon-master:before {
+.icon-master-image:before {
   content: "\e905";
-  color: #2680ee;
 }
-.icon-phone:before {
+.icon-clock:before {
   content: "\e906";
+  color: #bdbdbd;
 }
-.icon-start01:before {
+.icon-wallet:before {
+  content: "\e907";
+  color: #bdbdbd;
+}
+.icon-car:before {
   content: "\e908";
   color: #fff;
 }
-.icon-start02:before {
+.icon-icon-clock:before {
   content: "\e909";
-  color: #fff;
+  color: #f6f6f6;
 }
-.icon-start03:before {
+.icon-icon-scope:before {
   content: "\e90a";
-  color: #fff;
+  color: #f6f6f6;
 }
-.icon-start04:before {
-  content: "\e90d";
-  color: #fff;
+.icon-icon-security:before {
+  content: "\e90b";
+  color: #f6f6f6;
+}
+.icon-accessories:before {
+  content: "\e90c";
 }
 .icon-tv:before {
-  content: "\e90b";
+  content: "\e90d";
+}
+.icon-ipad:before {
+  content: "\e90e";
+}
+.icon-iphone:before {
+  content: "\e90f";
+}
+.icon-ipod:before {
+  content: "\e910";
+}
+.icon-monitor:before {
+  content: "\e911";
+}
+.icon-mac:before {
+  content: "\e912";
 }
 .icon-watch:before {
-  content: "\e90c";
+  content: "\e913";
 }

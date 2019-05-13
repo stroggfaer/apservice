@@ -4,7 +4,7 @@
 </IfModule>
 
 <IfModule mod_rewrite.c>
-   RewriteCond %{REQUEST_URI} ^/repair/.*
+   #RewriteCond %{REQUEST_URI} ^/repair/.*
    RewriteRule ^(.*)$ web/$1 [L]
 
    RewriteCond %{REQUEST_URI} !^/web/

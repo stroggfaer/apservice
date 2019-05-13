@@ -22,7 +22,7 @@ class BackendController extends Controller
         $this->actionNavigation = [
             'main' => [
                 'title' => 'Главная',
-                'link' => '/repair/cms/',
+                'link' => '/cms/',
                 'status' => 1,
             ],
             'pages' => [

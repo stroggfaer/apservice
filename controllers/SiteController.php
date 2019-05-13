@@ -93,7 +93,7 @@ class SiteController extends AppController
         $model = new LoginForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('/repair/cms');
+            return $this->redirect('/cms');
         } else {
             return $this->render('login', [
                 'model' => $model,

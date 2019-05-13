@@ -53,7 +53,7 @@ $city = \Yii::$app->action->currentCity;
 
 <div class="wrapper">
     <!--Шапка-->
-    <div id="header">
+    <div id="header" class="hidden">
         <div class="container size">
             <div class="desktop">
                 <a class="logo" href="/">
@@ -93,18 +93,75 @@ $city = \Yii::$app->action->currentCity;
             </div>
         </div>
     </div>
-    <div id="menu">
-        <div class="container size">
-            <div class="geo mobile">
-                <a class="city geo_position js-city" href="javascript:void(0)" title="Выбрать другой город"><?=$city->name?></a>
+
+    <div id="header">
+        <div class="top-header">
+            <div class="container size ">
+                <div class="flex">
+                    <div class="city icon-fa">
+                        <a href="javascript:void(0)" class="js-city" title="Выбрать другой город"><?=$city->name?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="menu-top">
+                        <a class="no_border" href="#">Информация</a>
+                        <a class="no_border" href="#">О компании</a>
+                        <a class="no_border" href="#">Новости</a>
+                        <a class="no_border" href="#">Вакансии</a>
+                        <a class="no_border" href="#">Франчайзинг</a>
+                    </div>
+                    <div class="messengers">
+                        <?= app\components\WMessengers::widget()?>
+                    </div>
+                </div>
             </div>
-            <?=  app\components\WMenu::widget()?>
-            <div class="basket">
-                <div class="icon-basket"></div>
-            </div>
-            <div class="clear"></div>
         </div>
-    </div> <!--./Шапка-->
+        <div class="container size">
+            <div class="header-bottom">
+                <div class="logo-top">
+                    <a class="logo no_border" href="/">
+                        <img src="/images/logo1x.png" alt="" />
+                        <span class="description">сервисный центр по ремонту техники Apple</span>
+                    </a>
+                </div>
+                <div class="menu">
+                    <?=  app\components\WMenu::widget()?>
+                </div>
+                <a class="car icon-car" href="#">
+                    <div class="count">3</div>
+                </a>
+                <div class="fixed_menu">
+                    <div class="slide_menu js-menu-mobile">
+                        <div class="slide_menu-btn"><span class="slide_menu-btn-two_border"></span></div>
+                    </div>
+                </div>
+                <div class="top_phone ">
+                    <?php $phone_top = (!empty($city->value) ? $city->value : $city->phone); ?>
+                    <a href="tel::<?=$phone_top?>" class="callibri_phone"><?=$phone_top?></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Меню моб. версия-->
+    <div id="menu-mobile">
+        <div class="menu-content">
+            <div class="container size">
+                <div class="label-header">
+
+                </div>
+                <?=  app\components\WMenuMobile::widget()?>
+                <div class="label-footer">
+                    <div class="city icon-fa">
+                        <a href="javascript:void(0)" class="js-city no_border" title="Выбрать другой город"><?=$city->name?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    </div>
+                    <a href="tel::<?=$phone_top?>" class="phone no_border"><?=$phone_top?></a>
+                    <div class="messengers">
+                        <?= app\components\WMessengers::widget()?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!--./Меню моб. версия-->
+
     <!--Content-->
     <div id="center">
         <!--Главная страница-->
@@ -114,8 +171,9 @@ $city = \Yii::$app->action->currentCity;
 
         </div> <!--./Главная страница-->
     </div> <!--./Content-->
-
 </div>
+
+
 <div id="footer">
     <?=  app\components\WFooter::widget()?>
 </div>

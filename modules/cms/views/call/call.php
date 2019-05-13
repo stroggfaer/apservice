@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'email',
             'comments',
             [
-                'attribute' => 'Статус',
+                'label' => 'Статус',
                 'format' => 'raw',
                 'contentOptions' => ['class'=>'text-center'],
                 'value' => function ($model, $index, $widget) {
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'attribute' => 'Удалить',
+                'label' => 'Удалить',
                 'format' => 'raw',
                 'contentOptions' => ['class'=>'text-center'],
                 'value' => function ($model, $index, $widget) {

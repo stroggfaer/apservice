@@ -220,8 +220,10 @@ class DefaultController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $passwordReset->load(Yii::$app->request->post());
+
             // Восстановления пароля;
             $passwordReset->savePassword();
+
             return $this->redirect(['view-users', 'id' => $model->id]);
         }
         return $this->render('users/update', [
