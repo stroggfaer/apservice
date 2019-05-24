@@ -27,10 +27,9 @@ class RepairController extends AppController
        // die('A');
         $model = new Repair();
         if(empty($url)) {
+
             $one = $model->menuRepair;
-
             return $this->redirect(Url::home());
-
         }
         // Первый уровень
         if(!empty($url) && empty($alias)) {
@@ -40,7 +39,7 @@ class RepairController extends AppController
                 \Yii::$app->action->setTitleH1($one->title_h1);
                 // Сео настройки;
                 $this->setMeta((!empty($one->seo_title) ? Functions::getTemplateCode($one->seo_title) : $one->title), Functions::getTemplateCode($one->seo_keywords), Functions::getTemplateCode($one->seo_description));
-                return $this->render('index', [
+                return $this->render('@app/views/site/index', [
                     'model' => $model,
                     'one' => $one,
                 ]);

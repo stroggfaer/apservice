@@ -16,8 +16,34 @@ class WSlides extends Widget{
         $device_id = !empty(\Yii::$app->action->device_id) ? \Yii::$app->action->device_id : false;
         $device_problems_id = !empty(\Yii::$app->action->device_problems_id) ? \Yii::$app->action->device_problems_id : false;
         ?>
-           <div class="slides">
-        <div class="container size-2">
+        <div class="slider js-slider">
+            <div class="items">
+                <div class="item">
+                    <a href="#"><img src="/files/slides/1001.png"></a>
+                    <div class="caption">
+                        <h1>Ремонт техники Apple любой сложности</h1>
+                        <div class="description">
+                            <ul>
+                                <li>Лаборатория сложного ремонта</li>
+                                <li>Фирменное оборудование</li>
+                                <li>Огромный склад запчастей</li>
+                            </ul>
+                        </div>
+                        <div class="buttons">
+                           <button class="btn btn-red circle">Записаться на диагностику</button>
+                           <div class="m-text">Бесплатная диагностика вашего устройства</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="#"><img src="/files/slides/1001.png"></a>
+                </div>
+            </div>
+        </div>
+
+         <?php if(false): ?>
+         <div class="slides js-slider">
+            <div class="container size-2">
             <h1 class="text-center"><?=Functions::getTemplateCode($title,$device_id,$device_problems_id);?></h1>
             <div class="row top">
                 <div class="center-block">
@@ -56,7 +82,8 @@ class WSlides extends Widget{
 
             <div class="text-center buttons desktop"><div class="btn btn-blue circle js-call-buttons">Узнать стоимость ремонта</div></div>
         </div>
-    </div>
+         </div>
+         <?php endif; ?>
         <?php
 
     }

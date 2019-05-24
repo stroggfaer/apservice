@@ -1,102 +1,180 @@
-.repair {
-   .slides {
-       width: 100%;
-       height: 560px;
-       background: url('@{imagesFiles}/slider/bg.jpg') 0px 0px no-repeat;
-       color:@white;
-       @media only screen and (max-width: @screen-mobile-min) {
-          height: 490px;
-          background-size: cover;
-          background-position: center;
-       }
-       .container {
-           h1 {
-             margin-top: 50px;
-           }
-           .top {
-              margin-top: 30px;
-           }
-           .center-block {
-             width: 660px;
+
+.slider{
+  width: 100%;
+  .items {
+    // height: 65vh;
+    min-height: 470px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 0;
+    .fa {
+      position: absolute;
+      z-index: 100;
+      top: 0;
+      bottom: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: @white;
+      @pos: 25px;
+      &.icon-left-arrow {
+        left: @pos;
+      }
+      &.icon-right-arrow {
+        right: @pos;
+      }
+      &.icon-left-arrow,  &.icon-right-arrow {
+        &::before {
+          color: @white;
+        }
+      }
+    }
+    .item {
+      position: relative;
+    }
+    .caption{
+      position: absolute;
+      right: 10px;
+      top: 30px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      color: @grey2;
+      min-width: 400px;
+      max-width: 625px;
+      height: 100%;
+      z-index: 100;
+      h1{
+        font-size: 3.5em;
+        color: @silver;
+      }
+      .description {
+        font-size:20px;
+        margin-bottom: 20px;
+        ul {
+          padding: 5px 0 0 20px;
+          li {
+            line-height: 37px;
+            color:@silver;
+          }
+        }
+      }
+      .buttons {
+        margin-top: 48px;
+        .m-text {
+          color: @grey;
+          font-size: 12px;
+          text-align: center;
+          margin-left: 30px;
+          width: 235px;
+          margin-top: 20px;
+        }
+      }
+
+      @media only screen and (max-width: @screen-lg-min) {
+        h1{
+          font-size: 2em;
+        }
+      }
+    }
+
+    @media only screen and (max-width: @screen-md-min) {
+      .caption{
+        margin: 0 auto;
+        text-align: center;
+        left: 0px;
+        right: 0px;
+        min-width: 320px;
+        h1 {
+          font-size: 2.8em;
+          max-width: 420px;
+          margin: 0 auto 30px;
+          line-height: 50px;
+        }
+        .description {
+          display: flex;
+          justify-content: center;
+          text-align: left;
+        }
+        .buttons {
+           .m-text {
              margin: 20px auto;
-             font-size: 18px;
-             font-weight: bold;
-             .icon__md {
-                 padding: 5px 0px;
-                 &.left {
-                    margin-left: 55px;
-                 }
-             }
            }
-           .flex-bottom {
-              display: flex;
-              flex-wrap: nowrap;
-              justify-content: space-evenly;
-              margin-top: 70px;
-              .col {
-                 width: 20%;
-                 text-align: center;
-                 cursor: pointer;
-                 .icon-circle {
-                   background: @white;
-                   color:@black;
-                   width: 95px;
-                   padding: 25px 0;
-                   border-radius: 50%;
-                   text-align: center;
-                   font-size: 42px;
-                   margin: 0 auto;
-                 }
-                  .description {
-                    color:@white;
-                    font-size: 14px;
-                    margin-top: 10px;
-                  }
-                &:hover {
-                  .icon-circle {
-                     color:@blue1;
-                  }
-                  .description {
-                    text-decoration: underline;
-                  }
-                }
-              }
-             @media only screen and (max-width: @screen-mobile-min) {
-                display: block;
-                .col {
-                   width: 50%;
-                   float: left;
-                   margin-bottom: 40px;
-                }
-             }
-           }
-           .buttons {
-               margin-top: 50px;
-              .btn {
-                 font-size: 20px;
-              }
-           }
-           @media only screen and (max-width: @screen-mobile-min) {
-              .top {
-                margin: 0px;
-              }
-              .flex-bottom {
-                 margin-top: 40px;
-              }
-              .center-block {
-                 width: 100%;
-                 margin: 0px;
-              }
-           }
-       }
-   }
+        }
+      }
+    }
+
+    @media only screen and (max-width: 500px) {
+      .caption{
+         h1 {
+           font-size: 2.3em;
+           margin: 0 auto 15px;
+         }
+         .buttons {
+            margin-top: 35px;
+         }
+      }
+      .slick-dots {
+        bottom: 20px;
+      }
+      .fa {
+        display: none !important;
+      }
+    }
+  }
+  .slick-dots {
+    bottom: 18px;
+    @media only screen and (max-width: @screen-xs-min) {
+      bottom: 0px;
+    }
+    li {
+      margin: 0px;
+
+      &.slick-active{
+        button::before {
+          background: @white;
+        }
+      }
+      button::before {
+        color: transparent;
+        font-size: 15px;
+        opacity: 1;
+        border-radius: 100%;
+       // border: 1px solid @white;
+        width: 12px;
+        height: 12px;
+        background: @grey1;
+      }
+    }
+  }
+}
+
+
+
+.repair {
    .menu__devices {
-      margin-top: 10px;
+     padding: 40px 0px;
+   }
+   .devicesProblemsMenu {
+     .menu__devices {
+       padding: 25px 0 15px;
+       .container {
+         padding: 0px;
+         width: 100%;
+       }
+     }
    }
    .title-main {
       padding: 20px 0px;
+     .m-text {
+       margin-top: 20px;
+       font-size: 16px;
+     }
+
       @media only screen and (max-width: @screen-mobile-min) {
-         padding: 0px;
+
+        .m-text {
+          font-size: 14px;
+        }
       }
    }
    .devices {
@@ -107,7 +185,7 @@
            }
        }
    }
-  .devices-problems {
+   .devices-problems {
     .title-main-1 {
        margin: 40px 0 20px;
     }
@@ -130,24 +208,25 @@
   }
 
   .diagnostics {
-     background: @black1;
-     color:@white1;
-     height: 350px;
-     padding-top: 20px;
+     background: @white;
+     border-radius: 10px;
+  //   color:@white1;
+    // height: 350px;
+    width: 75%;
+    margin: 35px auto 0;
+    padding: 10px 50px;
      .form {
-        width: 60%;
+      //  width: 60%;
+        margin-bottom: 15px;
         .description {
            color:@white1;
            margin-top: 20px;
         }
         .form__mod {
            padding-top: 25px;
-           padding-bottom: 10px;
+           padding-bottom: 0px;
         }
-        .description-warning {
-           font-size: 11px;
-           display: none;
-        }
+
        @media only screen and (max-width: @screen-mobile-min) {
            .form__mod {
               .form-group {
@@ -156,57 +235,67 @@
            }
        }
      }
+     .description-warning {
+       text-align: center;
+       font-size: 13px;
+       padding: 20px 0px;
+       color: @grey1;
+       margin-top: 14px;
+    }
      .result-content {
-       width: 40%;
+       width: auto;
+       margin-top: 5px;
        .content {
-         padding-left: 100px;
-         padding-top: 30px;
-         .description-warning {
-           font-size: 11px;
+         display: flex;
+         justify-content: right;
+         width: 100%;
+         div {
+           font-size: 20px;
          }
-         .title {
-           padding: 25px 0 18px;
-           font-size: 16px;
-           font-weight: normal;
+         .time {
+           margin-right: 35px;
          }
-         ._icon-ap {
-           padding: 0 0 5px 35px;
-           font-size: 23px;
+         .i {
+           display: inline-block;
+           margin-left: 16px;
+           font-family: sans-serif;
+           position: relative;
+           top: -1px;
          }
        }
      }
+     .diagnostic-result {
+        .title {
+          font-size: 20px;
+        }
+        .description {
+          margin-top: 8px;
+        }
+      }
+     @media only screen and (max-width: @screen-md-min) {
+        padding: 10px 15px;
+        width: 96%;
+     }
      @media only screen and (max-width: @screen-sm-min) {
-        .text-left {
-           text-align: center;
-        }
-        .form {
-          .description-warning {
-             display: block;
-          }
-        }
-        .result-content{
-          .description-warning {
-              display: none;
-          }
-        }
-        .form,.result-content{
+         width: 94%;
+        .diagnostic-result {
            width: 100%;
+           float: none !important;
+           margin-bottom: 30px;
+        }
+        .result-content {
+          width: 100%;
+          float: none !important;
+          .content {
+            justify-content: left;
+          }
+        }
+        .description-warning {
+           margin: 0px;
+        }
+         .text-left {
            text-align: center;
-        }
-        .result-content{
-           .content {
-             padding: 0 0 20px 0;
-             ._icon-ap {
-                display: inline-block;
-                padding: 0 30px 5px 25px;
-                vertical-align: text-bottom;
-                position: relative;
-                left:20px;
-             }
-           }
-        }
-
-        height: auto;
+         }
      }
    }
   .call-form-content {
@@ -266,7 +355,7 @@
        font-size: 24px;
        padding: 5px 0;
        margin-top: 20px;
-       color:@blue;
+       color:@reg1;
        font-weight: bold;
     }
   }
@@ -376,3 +465,223 @@
   }
 }
 
+.container-full {
+   background: @white;
+}
+.devices-problems-list {
+  box-shadow: 0 0 15px 0px @grey1;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 50px;
+  @media only screen and (max-width: @screen-mobile-min) {
+    box-shadow: none;
+    padding: 0px;
+    border-radius: 0px;
+  }
+  .devices__menu {
+    margin: -10px -10px 0px -10px;
+    background: @silver;
+    border-radius: 5px 5px 0px 0px;
+  }
+  .block-table {
+       .list-items {
+          display: flex;
+          flex-wrap: wrap;
+          width: 100%;
+          padding: 10px 0px;
+          .list {
+             width: 50%;
+             padding: 8px 15px 8px 15px;
+             overflow: hidden;
+           //  float: left;
+             .name {
+                 width: 50%;
+             }
+             .price,.value {
+                 width: 50%;
+                font-weight: bold;
+             }
+             .content {
+               display: flex;
+               flex: auto;
+               flex-wrap: wrap;
+               position: relative;
+               width: 100%;
+               &::after {
+                 position: absolute;
+                 content: "";
+                 bottom: -8px;
+                 border-bottom: 1px solid @silver;
+                 width: 100%;
+               }
+             }
+          }
+
+          @media only screen and (max-width: 670px) {
+            .list {
+              width: 100%;
+            }
+          }
+
+          @media only screen and (max-width: @screen-mobile-min) {
+            .list {
+               padding: 8px 5px;
+            }
+          }
+       }
+  }
+  .more {
+     margin-left: 15px;
+  }
+}
+
+.bg-master {
+  background: url('@{imagesPath}/bg-master.png') no-repeat;
+  height: 632px;
+  .content-text {
+     margin-top: 60px;
+    .title {
+      color: @white;
+      font-size: 40px;
+    }
+    .text {
+      font-size: 18px;
+      margin-bottom: 30px;
+      margin-top: 20px;
+      color: @silver;
+    }
+    .btn {
+       padding: 12px 60px;
+    }
+  }
+  .i-description {
+     margin-top: 70px;
+     padding: 18px 0px 0px 16px;
+
+    .item {
+        display: flex;
+        font-size: 2.5em;
+        padding: 0px 0px 25px 15px;
+        align-items: center;
+        div {
+           font-size: 14px;
+           color:@silver;
+           //width: 175px;
+           line-height: 20px;
+          //font-family: Sans-Serif;
+           font-family: sans-serif !important;
+           margin-left: 20px;
+        }
+     }
+  }
+  .show-sm-mod {
+    display: none;
+  }
+  @media only screen and (max-width: @screen-md-min) {
+     background-size: auto 100%;
+     background-position: right;
+     .show-sm-mod {
+       display: block;
+     }
+     .hidden-sm-mod {
+      display: none;
+     }
+  }
+  @media only screen and (max-width: 767px) {
+     height: 100%;
+     padding-bottom: 40px;
+    .content-text {
+      margin-top:25px;
+      .title {
+        text-align: center;
+      }
+      .text {
+        margin-bottom: 15px;
+      }
+    }
+    .i-description {
+       padding: 0px;
+       margin-top: 0px;
+       margin-bottom: 15px;
+      .item {
+        font-size: 3em;
+        padding: 0 0 35px 15px;
+      }
+      .icon-description {
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.review {
+  margin: 15px 0 30px;
+  .review-carousel {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+}
+
+//Страница проблемсы дивайс;
+.page-devices-problems {
+  .devices-problems-list {
+      margin-bottom: 5px;
+  }
+  .description-seo {
+    padding: 20px 0px;
+  }
+  .menu__devices {
+
+  }
+}
+
+//
+.apple-services-list {
+   padding: 40px 0px;
+   .flex {
+     display: flex;
+     justify-content: center;
+      .icons {
+        width: 11%;
+        text-align: center;
+        margin-right: 15px;
+        cursor: pointer;
+         i {
+            font-size: 5em;
+         }
+         .name {
+           margin-top: 5px;
+         }
+         &:hover {
+           color:@reg1;
+         }
+      }
+   }
+   @media only screen and (max-width: @screen-md-min) {
+    .flex {
+      display: flex;
+      justify-content: center;
+      .icons {
+        width: 20%;
+        margin-right: 0px;
+      }
+    }
+  }
+   @media only screen and (max-width: 630px) {
+     .flex {
+       display: flex;
+       justify-content: center;
+       flex-wrap: wrap;
+       .icons {
+         width: 50%;
+         margin-right: 0px;
+         margin-bottom: 50px;
+         &:last-child {
+           margin-bottom: 0px;
+         }
+       }
+     }
+   }
+}

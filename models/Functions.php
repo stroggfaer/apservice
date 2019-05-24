@@ -208,7 +208,7 @@ class Functions extends Model
         $email = !empty($email) ? $email : $options->adminEmail;
         // Отправка писемь
         Yii::$app->mailer->compose()
-            ->setFrom([Yii::$app->params['adminEmail']=>'Форма заявкиAppleService'])
+            ->setFrom([Yii::$app->params['adminEmail']=>'Форма заявки Apple Service'])
             ->setTo($email)
             ->setSubject($title) // тема письма
             ->setTextBody($text)
@@ -217,4 +217,10 @@ class Functions extends Model
         return false;
     }
 
+
+    // Обрезаем название;
+    public static function strResize($text) {
+        $array = ['iPhone'];
+        return str_replace($array, '', $text);
+    }
 }

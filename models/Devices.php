@@ -24,7 +24,7 @@ class Devices extends \yii\db\ActiveRecord
 
     public $device_id;
     public $checkbox_copy = false;
-    private $limit = 6; // Limit start;
+    private $limit = 20; // Limit start;
     private $countLimit = 0; // Limit end;
     private $device_year_id;
     /**

@@ -2,57 +2,84 @@
 use yii\bootstrap\ActiveForm;
 use app\models\Call;
 use app\models\Functions;
-
+use yii\helpers\Html;
+$city = \Yii::$app->action->currentCity;
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1001])->one();
-
-//$this->title = $one->title;
+$mainTitle = 'Ремонт '.$one->title.' в '.Functions::strEnd($city->name);
+$this->params['breadcrumbs'][] = [
+    'template' => "<li>{link}</li>\n", // шаблон для этой ссылки
+    'label' => 'Ремонт', // название ссылки
+    'url' => ['/repair/'] // сама ссылка
+];
+$this->params['breadcrumbs'][] = $mainTitle;
 
 $call = new Call();
 
 ?>
-
-<div class="container size">
-    <?=  app\components\WMenuRepairs::widget(['model'=>$model])?>
-    <div class="devices-problems">
-        <br>
-        <br>
-        <br>
-        <?php if(false): ?>
-           <div class="text-center title-main"><div class="seo-title">Выбрано устройство <?=$one->title?></div></div>
-        <?php endif; ?>
-        <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>true])?>
-
-        <div class="text-center title-main-1"><div class="seo-title">Выберите проблему на <?=$one->title?></div></div>
-
-
-        <?=  app\components\WDevicesProblemsGroups::widget(['model'=>$model])?>
-
-        <div class="default-problems">
-            <a href="#" class="black solid js-call-problems1">У меня другая проблемы</a>
-            <a href="#" class="black solid js-call-problems2">У меня несколько проблем</a>
-        </div>
-
+<div class="page-devices-problems">
+    <div class="container min-size">
+       <h1 class="title-page"><?= Html::encode($mainTitle) ?></h1>
     </div>
-</div>
 
-<div class="diagnostics">
     <?=  app\components\WDiagnosticsForm::widget()?>
-</div>
-
-<div class="container size">
-
-
-       <div class="description-seo">
-           <?php $title_h3 = (!empty($one->title_h3) ? $one->title_h3 : (!empty($content->title) ? $content->title : '')); ?>
-        <div class="text-center title-main"><h3 class="seo-title"><?=Functions::getTemplateCode($title_h3,$one->id)?></h3></div>
-           <?php $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : '')); ?>
-        <div class="text"><?=Functions::getTemplateCode($text,$one->id)?></div>
+    <div class="apple-services-list">
+        <div class="flex">
+            <div class="icons js-call-address">
+                <i class="icon-call-image"></i>
+                <div class="name">Позвоните нам</div>
+            </div>
+            <div class="icons js-call-courier">
+                <i class="icon-courier-image"></i>
+                <div class="name">Вызвать курьера</div>
+            </div>
+            <div class="icons js-call-master">
+                <i class="icon-master-image"></i>
+                <div class="name">Вызвать мастера</div>
+            </div>
+            <div class="icons">
+                <a href="#" class="no_border">
+                  <i class="icon-email-image"></i>
+                  <div class="name">Отправить Email</div>
+                </a>
+            </div>
+            <div class="icons">
+                <a href="#" class="no_border">
+                  <i class="icon-map-image"></i>
+                  <div class="name">Приехать к нам</div>
+                </a>
+            </div>
+        </div>
     </div>
+    <div class="container-full">
+        <div class="container min-size">
 
-    <div class="update-devices-problems-list">
-        <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
+            <div class="devicesProblemsMenu">
+                <?=  app\components\WMenuRepairs::widget(['model'=>$model,'classNames'=>'page-menu','select'=>true])?>
+            </div>
+            <div class="devices-problems hidden">
+                <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>false,])?>
+            </div>
+        </div>
+        <div class="container min-size">
+            <div class="title-main-1"><div class="seo-title">Ремонт <?=$one->title?></div></div>
+            <div class="update-devices-problems-list">
+                <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>
+            </div>
+        </div>
+        <div class="container min-size">
+            <div class="description-seo">
+                <?php
+                  $title_h3 = (!empty($one->title_h3) ? $one->title_h3 : (!empty($content->title) ? $content->title : ''));
+                  $text = (!empty($one->text) ? $one->text : (!empty($content->text) ? $content->text : ''));
+                ?>
+
+                <?php ?>
+                <div class="text"><?=Functions::getTemplateCode($text,$one->id)?></div>
+            </div>
+        </div>
     </div>
 </div>
+<?php if(false): ?>
 <div class="call-form-content">
     <div class="container size">
         <div class="text-center seo-title size-1">Бесплатная консультация и подбор сервиса</div>
@@ -80,7 +107,7 @@ $call = new Call();
         <?php ActiveForm::end(); ?> <!--./Форма-->
     </div>
 </div>
-
+<?php endif; ?>
 
 
 

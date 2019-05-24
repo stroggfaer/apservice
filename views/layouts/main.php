@@ -53,47 +53,6 @@ $city = \Yii::$app->action->currentCity;
 
 <div class="wrapper">
     <!--Шапка-->
-    <div id="header" class="hidden">
-        <div class="container size">
-            <div class="desktop">
-                <a class="logo" href="/">
-                    <span></span>
-                </a>
-                <div class="select-city-menu">
-                    <div class="mcs-module">
-                        <a class="city geo_position js-city" href="javascript:void(0)" title="Выбрать другой город"><?=$city->name?></a>
-                    </div>
-                </div>
-                <div class="fixed_menu">
-                    <div class="slide_menu js-menu">
-                        <div class="slide_menu-btn"><span class="slide_menu-btn-two_border"></span>
-                            <?=  app\components\WMenuTop::widget()?>
-                        </div>
-                    </div>
-                </div>
-                <div class="top_phone  icon-fa">
-                    <i class="fa fa-phone white" aria-hidden="true"></i>
-                    <a href="tel:<?=$city->phone?>" class="callibri_phone"><?=!empty($city->value) ? $city->value : $city->phone?></a>
-                </div>
-            </div>
-            <div class="mobile">
-                <div class="flex">
-                    <div class="fixed_menu">
-                        <div class="slide_menu js-menu-mobile">
-                            <div class="slide_menu-btn"><span class="slide_menu-btn-two_border"></span></div>
-                        </div>
-                    </div>
-                    <a class="logo" href="/">
-                        <span></span>
-                    </a>
-                    <div class="top_phone  icon-fa">
-                        <a href="tel:<?=$city->phone?>" class="callibri_phone"><i class="fa fa-phone white" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="header">
         <div class="top-header">
             <div class="container size ">
@@ -164,9 +123,14 @@ $city = \Yii::$app->action->currentCity;
 
     <!--Content-->
     <div id="center">
+        <div class="container min-size">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+        </div>
         <!--Главная страница-->
         <div class="repair">
-            <?=  app\components\WSlides::widget()?>
+
             <?=$content?>
 
         </div> <!--./Главная страница-->

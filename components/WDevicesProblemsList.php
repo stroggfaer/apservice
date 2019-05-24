@@ -35,15 +35,16 @@ class WDevicesProblemsList extends Widget{
         ?>
 
             <div class="devices-problems-list">
-                <div class="text-center title-main"><div class="seo-title">Выберите ваше устройство</div></div>
+                <div class="text-center title-main hidden"><div class="seo-title">Выберите ваше устройство</div></div>
                 <div class="devices__menu devices_carusel desktop">
                     <div class="content__load"><div></div></div>
-                    <div class="items">
+                    <div class="items" data-counts="<?=count($devicesAll)?>">
                         <?php foreach ($devicesAll as $key => $value): ?>
-                            <div class="item <?=$device->id == $value->id ? 'active' : ''?>  js-select-devices"  data-id="<?=$value->id?>"><a href="#"><?=$value->title?></a></div>
+                            <div class="item <?=$device->id == $value->id ? 'active' : ''?>  js-select-devices"  data-id="<?=$value->id?>"><a href="#"><?=Functions::strResize($value->title)?></a></div>
                         <?php endforeach; ?>
                     </div>
                 </div>
+                <div class="label-text mobile">Выберите модель устройства</div>
                 <div class="select__mod mobile">
                     <select class="select js-select-devices">
                         <?php foreach ($devicesAll as $key => $value): ?>
@@ -52,25 +53,24 @@ class WDevicesProblemsList extends Widget{
                     </select>
                 </div>
 
-                <div class="table update_table_content">
-                    <table class="table">
-                        <tr class="header">
-                            <th class="name1">Услуги по ремонту <?=$device->title?></th>
-<!--                            <th class="text-right name2">Цена выезде</th>-->
-                            <th class="text-right name3">Цена</th>
-                        </tr>
+                <div class="update_table_content block-table">
+                    <div class="list-items">
                         <?php if(!empty($deviceProblems)): ?>
                             <?php foreach ($deviceProblems as $deviceProblem): ?>
-                                <tr class="list">
-                                    <td><a href="/repair/<?=$device->menuRepair->url?>/<?=$device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></td>
-                                    <?php if(false):?>
-                                       <td class="text-right"><?=Functions::money($city->deliverie->price)?> руб</td>
-                                    <?php endif; ?>
-                                    <td class="text-right"><?=$deviceProblem->value?></td>
-                                </tr>
+                                <div class="list">
+                                    <div class="content">
+                                        <div class="name"><a href="/repair/<?=$device->menuRepair->url?>/<?=$device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></div>
+                                        <?php if(false):?>
+                                           <div class="text-right price"><?=Functions::money($city->deliverie->price)?> <span class="rub">р.</span></div>
+                                        <?php endif; ?>
+                                        <div class="text-right value"><?=$deviceProblem->value?></div>
+                                    </div>
+                                </div>
                             <?php endforeach; ?>
+
                         <?php endif; ?>
-                    </table>
+                    </div>
+                    <div class="clear"></div>
                     <?php if(!empty($countsLimit['counts'])): ?>
                       <a href="#" class="dotted js-limit-devices-problems-table more" data-device-id="<?=$device->id?>" data-counts="<?=$countsLimit['counts']?>"  data-limit="<?=$countsLimit['limit']?>">Еще услуги</a>
                     <?php endif; ?>

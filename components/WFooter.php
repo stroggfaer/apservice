@@ -24,7 +24,7 @@ class WFooter extends Widget{
 
             <!--Десктоп-->
             <div class="border">
-                 <div class="container size footer-top">
+                 <div class="container min-size footer-top">
                     <div class="custom-menu_in_footer">
                         <ul>
                             <?php if(!empty($menuFooter)): ?>
@@ -55,8 +55,8 @@ class WFooter extends Widget{
                     <div class="clear"></div>
                  </div>
             </div>
-            <div class="container size">
-                <div class="custom-address">
+            <div class="container min-size">
+                <div class="title-carousel">
                     <h3>Салоны в <?=Functions::strEnd($city->name)?></h3>
                     <div class="buttons">
                         <i class="icon-left-arrow js-address-prev" aria-hidden="true"></i>
