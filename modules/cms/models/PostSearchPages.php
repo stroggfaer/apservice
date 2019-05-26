@@ -45,6 +45,7 @@ class PostSearchPages extends Pages
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['position'=>SORT_ASC]]
         ]);
 
         $this->load($params);
