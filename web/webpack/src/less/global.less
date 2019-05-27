@@ -973,6 +973,8 @@ h3 {
      justify-content: center;
    }
     .item {
+      font-family: 'SF UI Display Thin',sans-serif;
+      font-weight: bold;
       padding: 5px 8px;
      // width: 20%;
       text-align: center;
@@ -987,7 +989,7 @@ h3 {
         display: block;
         border: 1px solid @grey;
         padding: 5px 30px;
-        color: @black;
+        color: @base_color;
         font-size: 16px;
         border-radius: 50px;
         transition: 200ms ease-out;
@@ -1195,6 +1197,7 @@ h3 {
        position: relative;
        text-align: center;
         a {
+          font-weight: bold;
           text-align: center;
           text-decoration: none;
           padding: 5px 10px;
@@ -1236,11 +1239,15 @@ h3 {
     label {
       padding-bottom: 5px;
     }
+    input.form-control {
+      height: 47px;
+      padding: 6px 15px;
+      font-size: 16px;
+    }
   }
 
   .form-group {
     .select__mod {
-
       select {
         border: none;
       }
@@ -1316,7 +1323,7 @@ h3 {
      width: 100%;
      border: none;
      color: @black1;
-     font-family: Arial, sans-serif;
+     font-family: 'SF UI Display Light', sans-serif;
      font-size: 18px;
      line-height: 1.4;
      font-weight: normal;

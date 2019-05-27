@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'js/vendor/carousel/slick.css',
         'js/vendor/fancybox/jquery.fancybox.css',
         'js/vendor/font-awesome/css/font-awesome.min.css',
+         'build/fonts/style.css',
          'build/css/style.bundle.css'
     ];
     public $js = [

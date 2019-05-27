@@ -48,7 +48,7 @@ $model = new \app\models\Repair();
         <?= $form->field($call, 'phone')->widget(\yii\widgets\MaskedInput::className(), ['mask' => '+7 (999)-999-9999',])->textInput(['placeholder' => 'Телефон*'])->label(false);?>
         <input type="hidden" name="group_id" value="<?=$group_id?>">
         <input type="hidden" name="call_form" value="true">
-        <div class="form-group text-center"><button class="btn btn-success loading js-send-call" type="submit">Отправить</button></div>
+        <div class="buttons text-center"><button class="btn btn-red circle loading js-send-call" type="submit">Отправить</button></div>
         <?php ActiveForm::end(); ?> <!--./Форма-->
     <?php endif; ?>
 </div>

@@ -58,7 +58,7 @@ $city = \Yii::$app->action->currentCity;
             <div class="container size ">
                 <div class="flex">
                     <div class="city icon-fa">
-                        <a href="javascript:void(0)" class="js-city" title="Выбрать другой город"><?=$city->name?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <a href="javascript:void(0)" class="js-city font_light" title="Выбрать другой город"><?=$city->name?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                     </div>
                     <div class="menu-top">
                         <a class="no_border" href="#">Информация</a>
