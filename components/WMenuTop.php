@@ -1,5 +1,6 @@
 <?php
 namespace app\components;
+use app\models\Repair;
 use yii\base\Widget;
 use yii\helpers\Html;
 use Yii;
@@ -16,14 +17,14 @@ class WMenuTop extends Widget{
     }
     public function run(){
 
-            $header = Pages::menuPages(3);
-            if(!empty($header)) {
+             $menuFooter = Pages::menuPagesFooter();
+
+
+            if(!empty($menuFooter)) {
                 ?>
-                <div class="hidden-slide_menu-module">
-                    <?php foreach ($header as $key => $menu): ?>
-                        <div><a class="no_border" href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?= $menu->title ?></a></div>
-                    <?php endforeach; ?>
-                </div>
+                   <?php foreach ($menuFooter as $key => $menu): ?>
+                       <a class="item" href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?= $menu->title ?></a>
+                   <?php endforeach; ?>
                 <?php
             }
         }

@@ -31,8 +31,7 @@ class WFooter extends Widget{
                                 <?php foreach ($menuFooter as $menu):?>
                                      <li><a href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?=$menu->title?></a></li>
                                 <?php endforeach; ?>
-                                <li><a href="#">Поддержка </a></li>
-                                <li><a href="#">Аксессуары</a></li>
+
                             <?php endif; ?>
                         </ul>
                     </div>

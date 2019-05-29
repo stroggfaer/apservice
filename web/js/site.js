@@ -298,6 +298,10 @@ $(document).ready(function(){
     $('.navbar-toggle').click(function(){
         $(this).children('div').toggleClass('open');
     });
+    // Меню;
+    $(document).on('click','.js-toggle-menu',function () {
+        $(this).toggleClass('active');
+    });
 
     $("[data-fancybox]").fancybox();
 

@@ -96,8 +96,9 @@ h1,h2,h3,h4,b,strong{
       background-image: url('@{imagesPath}/city.png');
       background-repeat: no-repeat;
       position: relative;
-      padding: 7px 33px;
+      padding: 10px 33px;
       margin: -7px 20px -7px 0px;
+      width: 180px;
       .fa {
         margin: 0 0px 0 5px;
       }
@@ -110,11 +111,16 @@ h1,h2,h3,h4,b,strong{
       display: flex;
     }
     .menu-top {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       a {
         margin-right: 20px;
+        color:@grey1;
       }
     }
     .messengers {
+      white-space: nowrap;
       margin: 0 0 0 auto;
       a {
         margin-right: 15px;
@@ -323,6 +329,9 @@ h1,h2,h3,h4,b,strong{
              &.active {
                color: @grey1;
                background: #2C2C2C;
+               .group {
+                 display: block;
+               }
                .fa-down {
                  &::before {
                    content: "\f106";
@@ -343,14 +352,15 @@ h1,h2,h3,h4,b,strong{
                 }
              }
              .group {
-                margin-top: 10px;
+               display: none;
+                margin-top: 20px;
                 margin-left: 15px;
                 .i {
                   display: block;
                   color: @grey;
                   text-decoration: none;
-                  font-size: 18px;
-                  padding-bottom: 8px;
+                  font-size: 16px;
+                  padding-bottom: 20px;
                 }
              }
           }

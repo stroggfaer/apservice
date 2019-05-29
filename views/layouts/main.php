@@ -61,11 +61,7 @@ $city = \Yii::$app->action->currentCity;
                         <a href="javascript:void(0)" class="js-city font_light" title="Выбрать другой город"><?=$city->name?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                     </div>
                     <div class="menu-top">
-                        <a class="no_border" href="#">Информация</a>
-                        <a class="no_border" href="#">О компании</a>
-                        <a class="no_border" href="#">Новости</a>
-                        <a class="no_border" href="#">Вакансии</a>
-                        <a class="no_border" href="#">Франчайзинг</a>
+                        <?= app\components\WMenuTop::widget()?>
                     </div>
                     <div class="messengers">
                         <?= app\components\WMessengers::widget()?>
