@@ -45,7 +45,7 @@ class WAppleServices extends Widget{
                                 <div class="col-md-5 col-xs-5 address-service">
                                     <div class="title"><?= $appleServices->title ?></div>
                                     <div class="address"><?= $appleServices->address ?></div>
-                                    <div class="metro"><?= $appleServices->metro ?></div>
+                                    <div class="metro"><i class="icon-m"></i><?= $appleServices->metro ?></div>
                                     <div class="time"><?= $appleServices->time ?></div>
                                     <div class="phone"><?= !empty($appleServices->phone) ? $appleServices->phone : $appleServices->city->phone ?></div>
                                 </div>
@@ -53,8 +53,8 @@ class WAppleServices extends Widget{
                                     <div class="total">
                                         <div class="problems"><?=$this->one->title?> на <?= $this->model->device->title ?></div>
                                         <div class="content">
-                                            <div class="_icon-ap2 time"><?= $this->one->time ?></div>
-                                            <div class="_icon-ap2 money"><?= Functions::money(!empty($this->one->price->money) ? $this->one->price->money : 0) ?>
+                                            <div class="time"><i class="icon-clock"></i><?= $this->one->time ?></div>
+                                            <div class="money"><i class="icon-wallet"></i><?= Functions::money(!empty($this->one->price->money) ? $this->one->price->money : 0) ?>
                                                 руб.
                                             </div>
                                         </div>

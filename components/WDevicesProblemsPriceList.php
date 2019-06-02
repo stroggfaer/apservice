@@ -41,11 +41,10 @@ class WDevicesProblemsPriceList extends Widget{
         }
 
         $deviceDiagonals =  !empty($deviceYearOne->deviceDiagonals) ? $deviceYearOne->deviceDiagonals : false;
-
         ?>
 
             <div class="devices-problems-list price-list">
-                <div class="text-center title-main"><h2>Выберите ваше устройство</h2></div>
+                <div class="text-center title-main hidden"><h2>Выберите ваше устройство</h2></div>
                 <div class="devices__menu devices_carusel desktop">
                     <div class="content__load"><div></div></div>
                     <div class="items">
@@ -55,13 +54,13 @@ class WDevicesProblemsPriceList extends Widget{
                     </div>
                 </div>
                 <div class="select__mod mobile">
-                    <select class="select js-select-devices">
+                    <select class="select js-select-devices" data-action="price-list">
                         <?php foreach ($this->model->devices as $key => $value): ?>
                            <option <?=$device->id == $value->id ? 'selected' : ''?> value="<?=$value->id?>" ><?=$value->title?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="table update_table_content">
+                <div class="block-table update_table_content">
 
                     <?php if(!empty($device->deviceYears) && count($device->deviceYears) != 1): ?>
                         <div class="devices__com list tags">
@@ -111,22 +110,22 @@ class WDevicesProblemsPriceList extends Widget{
                     </div>
                     <?php endif;?>
 
-
-                    <table class="table">
-                        <tr class="header">
-                            <th class="name1">Услуги по ремонту <?=$device->title?></th>
-                            <th class="text-right name3">Цена</th>
-                        </tr>
-
+                       <div class="list-items">
                         <?php if(!empty($deviceProblems)): ?>
                             <?php foreach ($deviceProblems as $deviceProblem): ?>
-                                <tr class="list">
-                                    <td><a href="/repair/<?=$device->menuRepair->url?>/<?=$device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></td>
-                                    <td class="text-right"><?=Functions::money($deviceProblem->price->money) > 0 ? Functions::money($deviceProblem->price->money).' р.' : 'Беслпатно' ?></td>
-                                </tr>
+                                <?php $style =  count($deviceProblems) >=1 ? 'style="width:100%"':'' ?>
+                                <div class="list" <?=$style?>>
+                                    <div class="content">
+                                        <div class="name"><a href="/repair/<?=$device->menuRepair->url?>/<?=$device->url?>/<?=$deviceProblem->url?>"><?=$deviceProblem->title?></a></div>
+                                        <div class="text-right value"><?=Functions::money($deviceProblem->price->money) > 0 ? Functions::money($deviceProblem->price->money).' р.' : 'Беслпатно' ?></div>
+                                    </div>
+                                </div>
                             <?php endforeach; ?>
+
                         <?php endif; ?>
-                    </table>
+                    </div>
+
+
                 </div>
             </div>
             <?php

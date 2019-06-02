@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=> 'Девайс ID',
                 'content'=>function($data){
                     $html = '';
-                    $html .= '<a href="/repair/cms/devices/update?id='.$data->device->id.'">'.$data->device->title.'</a>';
+                    $html .= '<a href="/cms/devices/update?id='.$data->device->id.'">'.$data->device->title.'</a>';
                     return $html;
                 },
             ],

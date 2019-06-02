@@ -31,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'city_id',
                // 'label'=>'Категорий',
                 'content'   => function ($data) {
-                    return '<a href="/repair/cms/geo/update-city?id='.$data->city->id.'">'.$data->city->name.'</a>';
+                    return '<a href="/cms/geo/update-city?id='.$data->city->id.'">'.$data->city->name.'</a>';
                 }
             ],
             [
                 'attribute'=>'device_problems_id',
                 // 'label'=>'Категорий',
                 'content'   => function ($data) {
-                    return '<a href="/repair/cms/devices/update-device-problems?id='.$data->deviceProblems->id.'">'.$data->deviceProblems->title.'</a>';
+                    return '<a href="/cms/devices/update-device-problems?id='.$data->deviceProblems->id.'">'.$data->deviceProblems->title.'</a>';
                 }
             ],
             'money',

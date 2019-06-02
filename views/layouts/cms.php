@@ -62,6 +62,7 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
     </nav>
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'Главная', 'url' => '/cms'],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>

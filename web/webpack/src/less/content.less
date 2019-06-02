@@ -1,12 +1,14 @@
 
 .slider{
   width: 100%;
+  background: @black;
   .items {
     // height: 65vh;
     min-height: 470px;
     overflow: hidden;
     position: relative;
-    margin-bottom: 0;
+    max-width: 1500px;
+    margin: 0 auto;
     .fa {
       position: absolute;
       z-index: 100;
@@ -399,19 +401,38 @@
              padding: @pad;
            }
            .metro {
-             padding: 2px 0px 0px 20px;
-             background: url('@{imagesPath}/metro.png') 0px 0px no-repeat;
+             padding: 2px 0px 0px 0px;
+            // background: url('@{imagesPath}/metro.png') 0px 0px no-repeat;
              background-size: 18px;
-             background-position: 0 3px;
+            // background-position: 0 3px;
+             i{
+               font-size: 12px;
+               margin-right: 5px;
+             }
            }
-          .time {
-            padding: @pad;
-          }
+
+
           .phone {
              font-weight: bold;
              margin-top: 12px;
           }
         }
+        .content {
+         font-size: 16px;
+         i {
+           padding-right: 5px;
+           &.icon-wallet {
+             position: relative;
+             top: 1px;
+           }
+         }
+         .time {
+           margin-bottom: 3px;
+         }
+         .money {
+
+         }
+       }
         .total {
            border: 1px solid @grey;
            padding: 10px;
@@ -537,6 +558,7 @@
 
 .bg-master {
   background: url('@{imagesPath}/bg-master.png') no-repeat;
+  background-color: @black;
   height: 632px;
   .content-text {
      margin-top: 60px;
@@ -730,6 +752,7 @@
     }
     .name {
       padding: 0 5px 0px 20px;
+      font-weight: bold;
     }
   }
   .address {
@@ -745,6 +768,7 @@
     justify-content: center;
   }
   .metro {
+    white-space: nowrap;
     i {
       margin-right: 4px;
       font-size: 12px;

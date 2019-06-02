@@ -15,10 +15,54 @@ AppAsset::register($this);
 
 
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
-
 $city = \Yii::$app->action->currentCity;
 
+//print_arr($options);
 //$data = Yii::$app->geo->getData();
+
+if(Functions::domain($options->url)) {
+    $domain = '.'.Functions::domain($options->url);
+    $jsScript = "
+         jQuery(document).ready(function () { 
+                var domain_city = '".$domain."'; // apple.sc
+                 // Заопмним город;
+                $(document).one('click','.js-city-one',function () {
+                    var domain = $(this).data('domen');       
+                     console.log(domain);
+                    //
+                    $.cookie('MCS_CITY_CODE', domain, {
+                        domain: domain_city,
+                        path: '/'
+                    });
+                    console.log('domain',domain_city);
+                });
+                              // Закрыть модалка;
+                $('#window-modal').on('hidden.bs.modal', function (e) {
+                    if($('#city-modal').length) {
+                        var domain_city = '".$domain."'; // apple.sc
+                        var domain = $('#city-modal').data('domen');
+                       $.cookie('MCS_CITY_CODE', domain, {
+                            domain: domain_city,
+                            path: '/'
+                        });
+                    }
+                });
+
+         })";
+
+    if(empty(\Yii::$app->action->domainCookie) ) {
+        $__jsScript = "
+         jQuery(document).ready(function () { 
+                // Запрос на геолокаций;
+                $(window).on('load', function () {
+                   console.log('GEO');
+                    $('.js-city').click();
+                });
+         });";
+        $this->registerJs($__jsScript);
+    }
+    $this->registerJs($jsScript);
+}
 
 ?>
 <?php $this->beginPage() ?>

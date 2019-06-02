@@ -26,7 +26,8 @@
         "kartik-v/yii2-datecontrol": "dev-master",
         "mihaildev/yii2-elfinder": "*",
         "mihaildev/yii2-ckeditor": "*",
-        "roopz/yii2-imap": "dev-master"
+        "roopz/yii2-imap": "dev-master",
+        "warrence/yii2-kartikgii": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -45,7 +45,7 @@ class AppleServices extends \yii\db\ActiveRecord
         return [
             [['city_id', 'region_id', 'status'], 'integer'],
             [['text'], 'string'],
-            [['title', 'title_seo', 'time', 'map_lat', 'map_lon', 'value','url'], 'string', 'max' => 68],
+            [['title', 'title_seo', 'time', 'map_lat', 'map_lon', 'value','url','level'], 'string', 'max' => 68],
             [['address'], 'string', 'max' => 128],
             [['metro','phone'], 'string', 'max' => 64],
             [['description'], 'string', 'max' => 328],
@@ -66,6 +66,7 @@ class AppleServices extends \yii\db\ActiveRecord
             'title' => 'Название',
             'title_seo' => 'SEO Название',
             'address' => 'Адресс',
+            'level' => 'Этаж',
             'metro' => 'Метро',
             'time' => 'Время работы',
             'phone' => 'Телефон',
@@ -95,7 +96,7 @@ class AppleServices extends \yii\db\ActiveRecord
 
     public function getImg() {
        $img = Functions::imgPath('/apple/'.$this->id.'.png');
-       return !empty($img) ? $img : '/repair/files/no_photo.png';
+       return !empty($img) ? $img : '/files/no_photo.png';
     }
 
 }

@@ -39,8 +39,9 @@ class WDevicesProblemsList extends Widget{
                 <div class="devices__menu devices_carusel desktop">
                     <div class="content__load"><div></div></div>
                     <div class="items" data-counts="<?=count($devicesAll)?>">
+
                         <?php foreach ($devicesAll as $key => $value): ?>
-                            <div class="item <?=$device->id == $value->id ? 'active' : ''?>  js-select-devices"  data-id="<?=$value->id?>"><a href="#"><?=Functions::strResize($value->title)?></a></div>
+                            <div class="item <?=$device->id == $value->id ? 'active' : ''?>  js-select-devices"  data-id="<?=$value->id?>" data-action=""><a href="#"><?=Functions::strResize($value->title)?></a></div>
                         <?php endforeach; ?>
                     </div>
                 </div>

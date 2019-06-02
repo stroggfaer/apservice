@@ -99,17 +99,17 @@ class Functions extends Model
 
     // Путь к файлу;
     public static function pathFile($path= false) {
-        return $_SERVER['DOCUMENT_ROOT'].'/repair/web/files'.$path;
+        return $_SERVER['DOCUMENT_ROOT'].'/web/files'.$path;
     }
     // Проверка изображения;
     public static function imgPath($dir, $dev = false) {
 
-        if(!empty($dev)) return $dev.'/repair/files'.$dir;
+        if(!empty($dev)) return $dev.'/web/files'.$dir.'?'.time();
         //
         if(!empty($dir) && file_exists(self::pathFile($dir))) {
-            return '/repair/files'.$dir;
+            return '/web/files'.$dir.'?'.time();
         }
-        return false;
+        return '/web/files/no_photo.png';
     }
     // Удаление файлов;
     public static function fDelete($dir, $files) {
@@ -143,13 +143,28 @@ class Functions extends Model
         return $subdomain = $host[0];
     }
 
+    // Убирает http:/s и www. (site.com)
+    public static function domain($url) {
+        if(empty($url)) return false;
+        $output = preg_replace('/^(https?:)?(\/\/)?(www\.)?/', '', $url);
+        return trim($output,"/");
+    }
+
+    public static function getUri() {
+       $uri = parse_url(Yii::$app->request->referrer);
+       if(!empty($uri['path'])) {
+           return $uri['path'];
+       }
+       return '/';
+    }
+
     // Добавляем окончание строки;
     public static function strEnd($text,$str = 'е') {
           return preg_replace("/$/", $str, $text);
     }
 
     // Шаблоный сео;
-    public static function getTemplateCode($string,$device_id = false, $device_problems_id = false,$repair=false) {
+    public static function getTemplateCode($string, $device_id = false, $device_problems_id = false,$repair=false) {
         $regex = "/\{(.*?)\}/";
         preg_match_all($regex, $string, $matches);
         $model = new Repair();
@@ -167,7 +182,10 @@ class Functions extends Model
                         //  '/\[([^]]+)\]/'
                         if(!empty($device_id)) {
                             $currentDevices = $model->getCurrentDevices(false, $device_id);
-                            $string = preg_replace('/\{device\}/', $currentDevices->title, $string);
+                            if($currentDevices) {
+                                $string = preg_replace('/\{device\}/', $currentDevices->title, $string);
+                            }
+
                         }else{
                             //echo $string;
                         }
@@ -176,11 +194,12 @@ class Functions extends Model
                     case 'repair':
                         //  '/\[([^]]+)\]/'
                         if(!empty($repair_id)) {
+
                             $currentRepair = $model->getCurrentRepair(false, $repair_id);
-                            $string = preg_replace('/\{repair\}/', $currentRepair->title, $string);
+                            $string = preg_replace('/\{repair\}/', !empty($currentRepair->short_name) ? $currentRepair->short_name : $currentRepair->title, $string);
                         }else{
                             $currentRepair = $model->getCurrentRepair();
-                            $string = preg_replace('/\{repair\}/', $currentRepair->title, $string);
+                            $string = preg_replace('/\{repair\}/', !empty($currentRepair->short_name) ? $currentRepair->short_name :$currentRepair->title, $string);
                         }
                         break;
                     case 'device_problems':

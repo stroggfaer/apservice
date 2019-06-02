@@ -28,12 +28,22 @@ class ActionCity extends Component{
 
         // Если урл пустой в настройки то гео отключаем
         if(!empty($options->url)) {
-            $subDomain = Functions::subDomain($_SERVER['HTTP_HOST']);
+            $getDomain = self::getDomainCookie();
+            $_subDomain = Functions::subDomain($_SERVER['HTTP_HOST']);
+            $subDomain = !empty($getDomain) ? $getDomain : $_subDomain;
             $city = City::find()->where(['like', 'domen', $subDomain])->one();
-            if (empty($city)) {
-                header("Location: " . $options->url);
-                exit();
+
+            if (!empty($city) && empty($city->main)) {
+                if($city->domen != $_subDomain) {
+                    $url = '//'.$city->domen.'.'.Functions::domain($options->url).$_SERVER['REQUEST_URI'];
+                    header('Location: '.$url);
+                    die();
+                }
+            }else{
+
+                return $city = City::find()->where(['status'=>1,'main'=>1])->one();
             }
+
         }else{
             $city = City::find()->where(['status'=>1,'main'=>1])->one();
         }
@@ -67,4 +77,17 @@ class ActionCity extends Component{
         return $this->device_problems_id;
     }
 
+
+    public static function  getDomainCookie() {
+      $domain =  isset($_COOKIE['MCS_CITY_CODE']) && !empty($_COOKIE['MCS_CITY_CODE']) ? $_COOKIE['MCS_CITY_CODE'] : null;
+        return $domain;
+    }
+    public function  removeDomainCookie() {
+
+         if(!empty($_COOKIE['MCS_CITY_CODE'])) {
+             setcookie('MCS_CITY_CODE','',time() - 3600);
+             unset($_COOKIE['MCS_CITY_CODE']);
+         }
+        return false;
+    }
 }

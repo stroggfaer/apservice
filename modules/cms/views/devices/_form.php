@@ -58,7 +58,7 @@ $deviceProblems = $model->deviceProblemsArrayList;
                     </tr>
                        <?php foreach ($model->devicesDetails as $devicesDetails): ?>
                          <tr class="item">
-                             <td><a href="/repair/cms/devices/update-device-problems?id=<?=$devicesDetails->deviceProblems->id?>" target="_blank"><?=$devicesDetails->deviceProblems->title?></a></td>
+                             <td><a href="/cms/devices/update-device-problems?id=<?=$devicesDetails->deviceProblems->id?>" target="_blank"><?=$devicesDetails->deviceProblems->title?></a></td>
                              <td><button type="button" class="close js-device-problems-delete" data-dismiss="alert" data-id="<?=$devicesDetails->id?>" aria-hidden="true">×</button></td>
                          </tr>
                        <?php endforeach; ?>

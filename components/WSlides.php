@@ -1,5 +1,6 @@
 <?php
 namespace app\components;
+use app\models\Sliders;
 use yii\base\Widget;
 use app\models\Options;
 use Yii;
@@ -15,75 +16,28 @@ class WSlides extends Widget{
         $title = !empty(\Yii::$app->action->titleH1) ? \Yii::$app->action->titleH1 : (!empty($options->title) ? $options->title : '');
         $device_id = !empty(\Yii::$app->action->device_id) ? \Yii::$app->action->device_id : false;
         $device_problems_id = !empty(\Yii::$app->action->device_problems_id) ? \Yii::$app->action->device_problems_id : false;
+        $sliders = Sliders::find()->where(['status'=>1])->all();
         ?>
+        <?php if(!empty($sliders)): ?>
         <div class="slider js-slider">
-            <div class="items">
-                <div class="item">
-                    <a href="#"><img src="/files/slides/1001.png"></a>
+            <div class="items" >
+                <?php foreach ($sliders as $slider): ?>
+                   <div class="item">
+                    <a href="<?=$slider->url?>"><img src="<?=$slider->img?>"></a>
                     <div class="caption">
-                        <h1>Ремонт техники Apple любой сложности</h1>
-                        <div class="description">
-                            <ul>
-                                <li>Лаборатория сложного ремонта</li>
-                                <li>Фирменное оборудование</li>
-                                <li>Огромный склад запчастей</li>
-                            </ul>
-                        </div>
-                        <div class="buttons">
-                           <button class="btn btn-red circle">Записаться на диагностику</button>
-                           <div class="m-text">Бесплатная диагностика вашего устройства</div>
-                        </div>
+                        <h1><?=$slider->title?></h1>
+                        <?php if(!empty($slider->description) && !empty($slider->show_text)): ?>
+                            <div class="description"><?=$slider->description?></div>
+                        <?php endif; ?>
+                        <?php if(!empty($slider->buttons) && !empty($slider->show_button)): ?>
+                            <?=$slider->buttons?>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <div class="item">
-                    <a href="#"><img src="/files/slides/1001.png"></a>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
-
-         <?php if(false): ?>
-         <div class="slides js-slider">
-            <div class="container size-2">
-            <h1 class="text-center"><?=Functions::getTemplateCode($title,$device_id,$device_problems_id);?></h1>
-            <div class="row top">
-                <div class="center-block">
-                    <div class="col-xs-6 desktop">
-                        <div class="icon-start01 icon__md"><div>Срочный ремонт 15 минут</div></div>
-                        <div class="icon-start02 icon__md"><div>Гарантия на сделанный ремонт</div></div>
-                    </div>
-                    <div class="col-xs-6 desktop">
-                        <div class="icon-start03 icon__md left"><div>10 точек по Новосибирску</div></div>
-                        <div class="icon-start04 icon__md left"><div>Вызов курьера на дом</div></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="flex-bottom">
-                        <div class="col  js-call-address">
-                            <div class="icon-circle icon-phone"></div>
-                            <div class="description">Позвонить нам</div>
-                        </div>
-                        <div class="col js-call-courier">
-                            <div class="icon-circle icon-curer"></div>
-                            <div class="description ">Вызвать курьера</div>
-                        </div>
-                        <div class="col js-call-master">
-                            <div class="icon-circle icon-master"></div>
-                            <div class="description ">Вызвать мастера</div>
-                        </div>
-                        <div class="col">
-                            <a href="/contacts" class="no_border">
-                              <div class="icon-circle icon-contacts"></div>
-                              <div class="description">Приехать к нам</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-
-            <div class="text-center buttons desktop"><div class="btn btn-blue circle js-call-buttons">Узнать стоимость ремонта</div></div>
-        </div>
-         </div>
-         <?php endif; ?>
+        <?php endif; ?>
         <?php
 
     }

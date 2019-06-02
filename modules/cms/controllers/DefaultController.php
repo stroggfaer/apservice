@@ -7,6 +7,7 @@ use app\models\Content;
 use app\models\ExportEmail;
 
 use app\models\Pages;
+use app\modules\cms\models\CallGroupsSearch;
 use dastanaron\translit\Translit;
 use app\modules\cms\models\PostSearchPages;
 
@@ -27,6 +28,12 @@ use app\modules\cms\models\AppleServicesSearch;
 
 use app\models\Delivery;
 use app\modules\cms\models\DeliverySearch;
+
+use app\models\Reviews;
+use app\modules\cms\models\ReviewsSearch;
+
+use app\models\Sliders;
+use app\modules\cms\models\SlidersSearch;
 
 use app\models\ParserEmail;
 use app\modules\cms\models\ParserEmailSearch;
@@ -54,7 +61,13 @@ class DefaultController extends BackendController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new CallGroupsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -975,4 +988,267 @@ class DefaultController extends BackendController
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
+    /**
+     * Lists all Reviews models.
+     * @return mixed
+     */
+    public function actionReviews()
+    {
+        $searchModel = new ReviewsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('reviews/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single Reviews model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewReviews($id)
+    {
+        return $this->render('reviews/view', [
+            'model' => $this->findModelReviews($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Reviews model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateReviews()
+    {
+        $model = new Reviews();
+        $images = new UploadedImage();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $images->imageMax = UploadedFile::getInstance($images, 'imageMax');
+            // Путь и расширения файл;
+            $file =  Functions::pathFile('/review/').$model->id;
+
+            // Параметры $file путь; резайз $w-Длина $h-высота;
+            if ($images->isUpload($file,300,300,100,100)) {
+                // file is uploaded successfully
+            }
+            return $this->redirect(['view-reviews', 'id' => $model->id]);
+        }
+
+        return $this->render('reviews/create', [
+            'model' => $model,
+            'images'=>$images
+        ]);
+    }
+
+    /**
+     * Updates an existing Reviews model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateReviews($id)
+    {
+        // Загружаем фото;
+        $images = new UploadedImage();
+
+        $model = $this->findModelReviews($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $images->imageMax = UploadedFile::getInstance($images, 'imageMax');
+            // Путь и расширения файл;
+            $file =  Functions::pathFile('/review/').$model->id;
+
+            // Параметры $file путь; резайз $w-Длина $h-высота;
+            if ($images->isUpload($file,300,300,100,100)) {
+                // file is uploaded successfully
+            }
+            return $this->redirect(['view-reviews', 'id' => $model->id]);
+        }
+
+        return $this->render('reviews/update', [
+            'model' => $model,
+            'images'=>$images
+        ]);
+    }
+
+    /**
+     * Deletes an existing Reviews model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteReviews($id)
+    {
+        $this->findModelReviews($id)->delete();
+
+        return $this->redirect(['reviews']);
+    }
+
+    /**
+     * Finds the Reviews model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Reviews the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelReviews($id)
+    {
+        if (($model = Reviews::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /*Sliders*/
+    public function actionSliders()
+    {
+        $searchModel = new SlidersSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        // Сортировка блоки;
+        if(!empty(Yii::$app->request->post('sortable'))) {
+            $position = 1;
+            $id = Yii::$app->request->post('id');
+            if(empty($id)) return 'пустой ID';
+            foreach ($id as $value) {
+                if(!empty($value)) {
+                    $update = Sliders::find()->where(['id' => $value])->one();
+                    if(empty($update)) return 'empty';
+                    $update->position = $position;
+                    $update->save();
+                    $position++;
+                }
+            }
+            return 'Ok';
+        }
+
+        return $this->render('sliders/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+
+    /**
+     * Displays a single Sliders model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewSliders($id)
+    {
+        return $this->render('sliders/view', [
+            'model' => $this->findModelSliders($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Sliders model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateSliders()
+    {
+        $model = new Sliders();
+        $image = new UploadedImage();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // Загрузка изображения;
+            $image->imageMax = UploadedFile::getInstance($image, 'imageMax');
+            $model->exp = $image->imageMax->extension;
+            if($model->save()) {
+                // Путь и расширения файл;
+                $file = Functions::pathFile('/sliders/' . $model->id);
+                if ($image->isUpload($file, 1440)) {
+                    // file is uploaded successfully
+                }
+            }
+
+            return $this->redirect(['view-sliders', 'id' => $model->id]);
+        }
+
+        return $this->render('sliders/create', [
+            'model' => $model,
+            'image' => $image,
+        ]);
+    }
+
+    /**
+     * Updates an existing Sliders model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateSliders($id)
+    {
+        $model = $this->findModelSliders($id);
+        $image = new UploadedImage();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Загрузка изображения;
+            $image->imageMax = UploadedFile::getInstance($image, 'imageMax');
+            // Путь и расширения файл;
+            $file = Functions::pathFile('/sliders/'.$model->id);
+            if ($image->isUpload($file,1440)) {
+                // file is uploaded successfully
+            }
+
+            return $this->redirect(['view-sliders', 'id' => $model->id]);
+        }
+
+        return $this->render('sliders/update', [
+            'model' => $model,
+            'image' => $image,
+        ]);
+    }
+
+    /**
+     * Deletes an existing Sliders model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteSliders($id)
+    {
+        $file = Functions::pathFile('/sliders/');
+        $model = $this->findModelSliders($id);
+        Functions::fDelete($file,$id.'.'.$model->exp);
+        Functions::fDelete($file,$id.'_min.'.$model->exp);
+        $this->findModelSliders($id)->delete();
+
+        return $this->redirect(['sliders']);
+    }
+
+    /**
+     * Finds the Sliders model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Sliders the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelSliders($id)
+    {
+        if (($model = Sliders::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+
+
 }

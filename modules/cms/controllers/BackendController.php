@@ -66,6 +66,16 @@ class BackendController extends Controller
                         'link' => '/cms/delivery',
                         'title' => 'Выезд / Доставка',
                     ],
+                    [
+                        'link' => '/cms/reviews',
+                        'title' => 'Отзывы',
+                    ],
+                    [
+                        'link' => '/cms/sliders',
+                        'title' => 'Слайдеры',
+                    ],
+
+
                 ],
             ],
             'marketing' => [

@@ -31,8 +31,11 @@ class AppAsset extends AssetBundle
         'js/vendor/fancybox/jquery.fancybox.js',
         'js/vendor/carousel/slick.min.js',
         'js/vendor/cookie/jquery.cookie.js',
+       // '//maps.googleapis.com/maps/api/js',
+       // 'js/vendor/map/landcarte.min.js',
         'js/site.js',
         'js/functions.js',
+       // 'js/map.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

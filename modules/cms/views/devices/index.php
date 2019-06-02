@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'menu_repair_id',
                 'content'   => function ($data) {
-                    return '<a href="/repair/cms/update-menu-repairs?id='.$data->menuRepair->id.'">'.$data->menuRepair->title.'</a>';
+                    return '<a href="/cms/update-menu-repairs?id='.$data->menuRepair->id.'">'.$data->menuRepair->title.'</a>';
                 }
             ],
             //'menu_repair_id',

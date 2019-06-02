@@ -1,39 +1,16 @@
 var ajax_path = '/ajax/';
-var domain_city = '.apple.sc'; // apple.sc
+
+
 
 $(document).ready(function(){
 
-    if($('#is_city_one').length) {
-        // Запрос на геолокаций;
-        $(window).on('load', function () {
-            $('.js-city').click();
-        });
-    }
     //
     $(document).on('click','.js-city',function () {
         window_modal('ajax/city','Выбор города',{geo:true},'#window-modal');
         return false;
     });
 
-    // Заопмним город;
-    $(document).one('click','.js-city-one',function () {
-        var domain = $(this).data('domen');
-        //
-        $.cookie('MCS_CITY_CODE', domain, {
-            domain: domain_city // apple.sc
-        });
-        //console.log('domain',domain);
-    });
 
-    // Закрыть модалка;
-    $('#window-modal').on('hidden.bs.modal', function (e) {
-        if($('#city-modal').length) {
-            var domain = $('#city-modal').data('domen');
-            $.cookie('MCS_CITY_CODE', domain, {
-                domain: domain_city // apple.sc
-            });
-        }
-    });
 
     // Авто скролл;
     if($('#scroll-1001').length) {
@@ -55,6 +32,7 @@ $(document).ready(function(){
                 speed: 1000,
                 slidesToShow: 1,
                 arrows: true,
+                adaptiveHeight: true,
                 slidesToScroll: 1,
                 prevArrow: '<i class="fa icon-left-arrow" aria-hidden="true"></i>',
                 nextArrow: '<i class="fa icon-right-arrow" aria-hidden="true"></i>',
@@ -218,6 +196,7 @@ $(document).ready(function(){
                 dots: false,
                 autoplay: false,
                 autoplaySpeed: 6000,
+                lazyLoad: 'progressive',
                 // mobileFirst: true,
                 // infinite: false,
                 speed: 1000,
@@ -458,7 +437,10 @@ $(document).on('click','.js-send-call', function(){
 
     return false;
 });
-
+// Записаться на диагностику
+$(document).on('click','.js-sign-up', function(){
+    return window_modal('ajax/call','Записаться на диагностику',{call:true,group_id:1006},'#window-modal',3);
+});
 // Позвонить к нам;
 $(document).on('click','.js-call', function(){
     return window_modal('ajax/call','Позвонить к нам',{call:true,group_id:1001},'#window-modal',1);
@@ -498,7 +480,7 @@ $(document).on('click','.js-call-problems2', function(){
 $(document).on('click','.js-select-devices',function () {
    var id = $(this).data('id'),
        action = $(this).data('action');
-
+     console.log(action);
     $('.js-select-devices').removeClass('active');
     $(this).addClass('active');
     if(action == 'price-list') {

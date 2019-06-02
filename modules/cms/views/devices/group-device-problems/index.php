@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'title',
                 'content'=>function($data){
                     $html = '';
-                    $html .= '<a href="/repair/cms/devices/device-problems?group_id='.$data->id.'">'.$data->title.'</a>';
+                    $html .= '<a href="/cms/devices/device-problems?group_id='.$data->id.'">'.$data->title.'</a>';
                     return $html;
                 },
             ],

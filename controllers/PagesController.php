@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Functions;
 use app\models\Pages;
+use app\models\Repair;
 use Yii;
 use yii\web\NotFoundHttpException;
 
@@ -41,9 +42,15 @@ class PagesController extends AppController
 
         try {
             $pages = $this->setPage($this->action->id);
+            $model = new Repair();
+            $city = \Yii::$app->action->currentCity;
+            $appleServices = $model->getAppleServices();
             // Загрузка страница;
             return $this->render('contacts', [
-                'pages'=>$pages
+                'pages'=>$pages,
+                'model'=>$model,
+                'city'=>$city,
+                'contacts'=>$appleServices
             ]);
         } catch (NotFoundHttpException $e) {
             return $this->redirect('/site/error');

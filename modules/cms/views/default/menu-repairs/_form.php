@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('Только латинские буквы и цифры. Можно не заполнять.') ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город')  ?>
-
+    <?= $form->field($model, 'short_name')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город')  ?>
     <?= $form->field($model, 'seo_title')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город')  ?>
 
     <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => true])->hint('Шаблонизатор {city} - Город')  ?>
