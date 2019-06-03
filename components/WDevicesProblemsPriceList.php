@@ -20,7 +20,9 @@ class WDevicesProblemsPriceList extends Widget{
     public function run(){
 
         $request = Yii::$app->request;
-        $id = abs($request->post('id') ? $request->post('id') : $this->model->devices[0]->id);
+        $id = !empty(abs($request->post('id'))) ? $request->post('id') : (!empty($this->model->device->id) ? $this->model->device->id : $this->model->devices[0]->id);
+
+
         $device_year_id = abs($request->post('device_year_id'));
         $diagonal_id = abs($request->post('diagonal_id'));
 

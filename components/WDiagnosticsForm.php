@@ -1,5 +1,6 @@
 <?php
 namespace app\components;
+use app\models\Devices;
 use app\models\Functions;
 use app\models\Repair;
 use yii\base\Widget;
@@ -7,10 +8,22 @@ use Yii;
 
 class WDiagnosticsForm extends Widget{
 
+    public $model;
+
+    public function init() {
+        parent::init();
+
+        if ($this->model === null) {
+            $this->model = false;
+        }
+
+    }
     public function run(){
 
         $repair =  new Repair();
+        $devices = new Devices();
         $city = \Yii::$app->action->currentCity;
+
             ?>
              <div class="diagnostics">
                 <div class="text-left">
@@ -26,18 +39,28 @@ class WDiagnosticsForm extends Widget{
                                     <option>---</option>
                                     <?php if(!empty($repair->devices)): ?>
                                         <?php foreach ($repair->devices as $device): ?>
-                                             <option <?=(!empty($repair->deviceObj->deviceOne) && $repair->deviceObj->deviceOne->id == $device->id ? 'selected' : '')?> value="<?=$device->id?>"><?=$device->title?></option>
+                                             <?php
+                                                $selected = (!empty($repair->deviceObj->deviceOne) && $repair->deviceObj->deviceOne->id == $device->id ? 'selected' : !empty($this->model->device->id) && $this->model->device->id == $device->id ? 'selected' : '');
+                                              ?>
+                                             <option <?=$selected?> value="<?=$device->id?>"><?=$device->title?></option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </select></div>
                             </div>
+                            <?php
+                             /*TODO доделать по умол выбираем 1*/
+                            $deviceProblems = !empty($this->model->device) ? $devices->getDeviceProblems($this->model->device): (!empty($repair->deviceObj->deviceOneProblems) ? $repair->deviceObj->deviceOneProblems : false);
+                            ?>
                             <div class="form-group col-md-6 col-xs-6 update-select__js">
                                 <label>Укажите проблему</label>
-                                <div class="select__mod"> <select class="select form-control js-select-devices-problems-form" <?=!empty($repair->deviceObj->deviceOne) ? '' : 'disabled'?>>
+                                <div class="select__mod"> <select class="select form-control js-select-devices-problems-form" <?=!empty($deviceProblems) ? '' : 'disabled'?>>
                                     <option>---</option>
-                                    <?php if(!empty($repair->deviceObj->deviceOneProblems)): ?>
-                                        <?php foreach ($repair->deviceObj->deviceOneProblems as $deviceOneProblem): ?>
-                                            <option <?=(!empty($repair->deviceObj->deviceProblemOne) && $repair->deviceObj->deviceProblemOne->id == $deviceOneProblem->id ? 'selected' : '')?> value="<?=$deviceOneProblem->id?>"><?=$deviceOneProblem->title?></option>
+                                    <?php if(!empty($deviceProblems)):?>
+                                        <?php foreach ($deviceProblems as $deviceOneProblem): ?>
+                                            <?php
+                                            $selected_2 = (!empty($devices->deviceProblemOne) && $devices->deviceProblemOne->id == $deviceOneProblem->id ? 'selected' : '')
+                                            ?>
+                                            <option <?=$selected_2?> value="<?=$deviceOneProblem->id?>"><?=$deviceOneProblem->title?></option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </select></div>

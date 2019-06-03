@@ -21,7 +21,7 @@ $call = new Call();
        <h1 class="title-page"><?= Html::encode($mainTitle) ?></h1>
     </div>
 
-    <?=  app\components\WDiagnosticsForm::widget()?>
+    <?=  app\components\WDiagnosticsForm::widget(['model'=>$model])?>
     <div class="apple-services-list">
         <div class="flex">
             <div class="icons js-call-address">
@@ -63,7 +63,10 @@ $call = new Call();
         <div class="container min-size">
             <div class="title-main-1"><div class="seo-title">Ремонт <?=$one->title?></div></div>
             <div class="update-devices-problems-list">
-                <?php if(!empty($one->show_prices)): ?>
+                <?php
+
+
+                if(!empty($one->menuRepair->show_prices)): ?>
                     <?= app\components\WDevicesProblemsPriceList::widget(['model'=>$model])?>
                 <?php else: ?>
                     <?=  app\components\WDevicesProblemsList::widget(['model'=>$model])?>

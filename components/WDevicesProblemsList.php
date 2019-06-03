@@ -16,7 +16,7 @@ class WDevicesProblemsList extends Widget{
     }
     public function run(){
         $request = Yii::$app->request;
-        $id = abs($request->post('id'));
+        $id = !empty(abs($request->post('id'))) ? $request->post('id') : (!empty($this->model->device->id) ? $this->model->device->id : null);
         $limit = abs($request->post('limit'));
         if(empty($this->model))  return false;
 
@@ -24,7 +24,8 @@ class WDevicesProblemsList extends Widget{
 
         $devicesAll =  $this->model->devices;  //$devices->getDevices();
         $city =  \Yii::$app->action->currentCity;
-        $device = !empty($id)?  $devices->getDevice($id)  : $devicesAll[0];
+
+        $device = !empty($id) ?  $devices->getDevice($id)  : $devicesAll[0];
 
         if(!empty($limit)) $devices->setLimit($limit);
         $deviceProblems = $devices->getDeviceProblems($device);
@@ -39,7 +40,10 @@ class WDevicesProblemsList extends Widget{
                 <div class="devices__menu devices_carusel desktop">
                     <div class="content__load"><div></div></div>
                     <div class="items" data-counts="<?=count($devicesAll)?>">
+                        <?php
 
+
+                        ?>
                         <?php foreach ($devicesAll as $key => $value): ?>
                             <div class="item <?=$device->id == $value->id ? 'active' : ''?>  js-select-devices"  data-id="<?=$value->id?>" data-action=""><a href="#"><?=Functions::strResize($value->title)?></a></div>
                         <?php endforeach; ?>
