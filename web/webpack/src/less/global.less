@@ -73,17 +73,17 @@ a {
   color: @base_color;
   // Base;
   &:focus {
-    outline: none;
+    color: @base_color;
     background: transparent;
   }
   &:hover{
     color: @reg1;
   }
   &:link{
-    //color: initial;
+    color: @base_color;
   }
   &:visited{
-   // color: initial;
+    color: @base_color;
 
   }
   &.btn{
@@ -1251,6 +1251,11 @@ h3 {
       font-size: 16px;
     }
   }
+
+  .form-control:focus {
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(58, 58, 57, 0.63);
+  }
+
 
   .form-group {
     .select__mod {
