@@ -189,7 +189,11 @@ $(document).ready(function(){
     if($(".devices_carusel").length) {
           var countsElements = $(".devices_carusel .items").data('counts'),
               counts = countsElements < 15 ?  countsElements : 8;
-
+// Сплывающий подсказка;
+        $(document).on('mouseover','.js-tooltip',function () {
+            console.log('js-tooltip');
+            $(this).tooltip('toggle');
+        });
         try {
             // Карусель
             $(".devices_carusel .items").slick({
@@ -341,10 +345,14 @@ $(document).on('change','.js-select-devices-form',function () {
 
 // Выбор проблемы;
 $(document).on('change','.js-select-devices-problems-form',function () {
-    var device_problem_id = parseInt($(this).val());
+    var device_problem_id = parseInt($(this).val()),
+        device_id = $(this).parent().find('option:selected').data('device-id');
+
+    console.log('device_id',device_id);
+
     if(device_problem_id) {
         loading('show');
-        $.post(ajax_path+'diagnostics',{select_devices_problems_form:true,device_problem_id:device_problem_id},function(response){
+        $.post(ajax_path+'diagnostics',{select_devices_problems_form:true,device_problem_id:device_problem_id,'device_id':device_id},function(response){
 
             $(".update-content__js").html($(response).find('.update-content__js').html());
             $(".result-content__js").html($(response).find('.result-content__js').html());
@@ -363,6 +371,7 @@ $(document).on('change','.js-select-devices-problems-form',function () {
     }
     return false
 });
+
 
 // Таб переключение
 $(document).on('click','.js-tab-button',function(){

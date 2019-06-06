@@ -12,18 +12,24 @@ use yii\web\NotFoundHttpException;
 class PagesController extends AppController
 {
 
-//    public function beforeAction( $action )
-//    {
-//        return parent::beforeAction($action);
-//    }
+    public function beforeAction($action)
+    {
+        return parent::beforeAction($action);
+    }
 
     // Страница сайта;
     public function actionPage($url = false)
     {
        // $url = preg_replace('/\s/', '', $url);
         $url =  trim($url,"/"); // Удаляем слэш;
+
         try {
+
             $pages = $this->setPage($url);
+            if(empty($pages->content)) {
+                // Запуск контроллер экшен;
+                return Yii::$app->runAction($url);
+            }
             //  Проверка файл;
             if(Functions::fileDir('/views/pages/'.$url)) {
                 return $this->render($url, [ 'pages' => $pages,]);
@@ -32,8 +38,10 @@ class PagesController extends AppController
                 return $this->render('index',[ 'pages' => $pages]);
             }
         } catch (NotFoundHttpException $e) {
+
             return $this->redirect('/site/error');
         }
+
     }
 
     // Контакты;
@@ -69,7 +77,10 @@ class PagesController extends AppController
         $url =  trim($action,"/"); // Удаляем слэш;
         // Страница;
         $pages = Pages::find()->where(["url"=>$url,"status"=> 1])->limit(1)->one();
-        if(empty($pages)) throw new NotFoundHttpException('The requested page does not exist.');
+        if(empty($pages)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
         // Сео настройки;
         $this->setMeta((!empty($pages->seo_title) ?   Functions::getTemplateCode($pages->seo_title) : $pages->title),Functions::getTemplateCode($pages->keywords),Functions::getTemplateCode($pages->description));
         return $pages;

@@ -1,12 +1,17 @@
 <?php
+
+use app\models\Options;
 use yii\helpers\Html;
 $this->params['breadcrumbs'][] = $pages->title;
+$options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 // https://console.developers.google.com/google/maps-apis/apis/maps-backend.googleapis.com/metrics?project=asxmap-1559144430469&authuser=1&duration=PT1H
 
 // AIzaSyAaKwRkxxmcJ48O-2LPNwWmZcT5jUPTG1c&callback=initMap
 // AIzaSyAibeoKy-F_zPEssZQuGIJC5F6MagTQ1Ks
 
-$this->registerJsFile('//maps.googleapis.com/maps/api/js?key=AIzaSyAaKwRkxxmcJ48O-2LPNwWmZcT5jUPTG1c', ['depends' => [\yii\web\JqueryAsset::className()]]);
+// AIzaSyAaKwRkxxmcJ48O-2LPNwWmZcT5jUPTG1c
+
+$this->registerJsFile('//maps.googleapis.com/maps/api/js?key='.$options->map_key, ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/vendor/map/landcarte.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/map.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>

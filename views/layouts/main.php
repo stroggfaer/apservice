@@ -124,8 +124,8 @@ if(Functions::domain($options->url)) {
                 <div class="menu">
                     <?=  app\components\WMenu::widget()?>
                 </div>
-                <a class="car icon-car" href="#">
-                    <div class="count">3</div>
+                <a class="car icon-car" target="_blank" href="https://apple.sc/accessories">
+                    <div class="count hidden">3</div>
                 </a>
                 <div class="fixed_menu">
                     <div class="slide_menu js-menu-mobile">

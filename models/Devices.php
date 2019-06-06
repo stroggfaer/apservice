@@ -174,11 +174,15 @@ class Devices extends \yii\db\ActiveRecord
     }
 
     // Получить девайс;
-    public function getDeviceOne()
+    public function getDeviceOne($id = false)
     {
         $session = Yii::$app->session;
         if(empty($session['devices']['device_id'])) return false;
-        return Devices::find()->where(['id'=>$session['devices']['device_id'],'status'=>1])->limit(1)->one();
+        if($id) {
+            return Devices::find()->where(['id' => $id, 'status' => 1])->limit(1)->one();
+        }else{
+            return Devices::find()->where(['id' => $session['devices']['device_id'], 'status' => 1])->limit(1)->one();
+        }
     }
 
     // Получить список проблемы;
@@ -194,11 +198,15 @@ class Devices extends \yii\db\ActiveRecord
     }
 
     // Получить девайс проблем;
-    public function getDeviceProblemOne()
+    public function getDeviceProblemOne($device_problem_id = false)
     {
         $session = Yii::$app->session;
         if(empty($session['devices']['device_problem_id'])) return false;
-        return DeviceProblems::find()->where(['id'=>$session['devices']['device_problem_id'],'status'=>1])->limit(1)->one();
+        if($device_problem_id) {
+            return DeviceProblems::find()->where(['id' => $device_problem_id, 'status' => 1])->limit(1)->one();
+        }else{
+            return DeviceProblems::find()->where(['id' => $session['devices']['device_problem_id'], 'status' => 1])->limit(1)->one();
+        }
     }
 
     // Список проблемы в массиве;

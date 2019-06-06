@@ -19,12 +19,19 @@ class WDiagnosticsForm extends Widget{
 
     }
     public function run(){
-
+        // TODO: Нужно оптимизировать модель;
+        $request = Yii::$app->request;
+        $device_id = $request->post('device_id');
+        $device_problem_id = $request->post('device_problem_id');
         $repair =  new Repair();
         $devices = new Devices();
-        $city = \Yii::$app->action->currentCity;
+       // $city = \Yii::$app->action->currentCity;
 
-            ?>
+            $currentDevices = $repair->getCurrentDevices(false,(!empty($device_id) ? $device_id : $this->model->device->id));
+            $deviceProblems = $devices->getDeviceProblems($currentDevices);
+            $currentDeviceProblems = $repair->getCurrentDeviceProblems(false,(!empty($device_problem_id) ? $device_problem_id : $deviceProblems[0]));
+
+        ?>
              <div class="diagnostics">
                 <div class="text-left">
                     <h2 class="seo-title">Предварительная диагностика</h2>
@@ -36,32 +43,36 @@ class WDiagnosticsForm extends Widget{
                             <div class="form-group col-md-6 col-xs-6 ">
                                 <label>Укажите устройство</label>
                                 <div class="select__mod"><select  class="select form-control js-select-devices-form ">
-                                    <option>---</option>
                                     <?php if(!empty($repair->devices)): ?>
                                         <?php foreach ($repair->devices as $device): ?>
                                              <?php
-                                                $selected = (!empty($repair->deviceObj->deviceOne) && $repair->deviceObj->deviceOne->id == $device->id ? 'selected' : !empty($this->model->device->id) && $this->model->device->id == $device->id ? 'selected' : '');
+                                                $selected = (!empty($currentDevices) && $currentDevices->id == $device->id ? 'selected' : '');
                                               ?>
                                              <option <?=$selected?> value="<?=$device->id?>"><?=$device->title?></option>
                                         <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <option>---</option>
                                     <?php endif; ?>
+
                                 </select></div>
                             </div>
                             <?php
                              /*TODO доделать по умол выбираем 1*/
-                            $deviceProblems = !empty($this->model->device) ? $devices->getDeviceProblems($this->model->device): (!empty($repair->deviceObj->deviceOneProblems) ? $repair->deviceObj->deviceOneProblems : false);
                             ?>
                             <div class="form-group col-md-6 col-xs-6 update-select__js">
                                 <label>Укажите проблему</label>
                                 <div class="select__mod"> <select class="select form-control js-select-devices-problems-form" <?=!empty($deviceProblems) ? '' : 'disabled'?>>
-                                    <option>---</option>
+
                                     <?php if(!empty($deviceProblems)):?>
                                         <?php foreach ($deviceProblems as $deviceOneProblem): ?>
                                             <?php
-                                            $selected_2 = (!empty($devices->deviceProblemOne) && $devices->deviceProblemOne->id == $deviceOneProblem->id ? 'selected' : '')
+
+                                            $selected_2 = (!empty($currentDeviceProblems) && $currentDeviceProblems->id == $deviceOneProblem->id ? 'selected' : '')
                                             ?>
-                                            <option <?=$selected_2?> value="<?=$deviceOneProblem->id?>"><?=$deviceOneProblem->title?></option>
+                                            <option <?=$selected_2?>  data-device-id="<?=$deviceOneProblem->device->id?>"   value="<?=$deviceOneProblem->id?>"><?=$deviceOneProblem->title?></option>
                                         <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <option>---</option>
                                     <?php endif; ?>
                                 </select></div>
                             </div>
@@ -69,16 +80,19 @@ class WDiagnosticsForm extends Widget{
                     </form>
                 </div>
                  <div class="update-content__js pull-left diagnostic-result">
-                     <?php if(!empty($repair->deviceObj->deviceProblemOne)): ?>
-                         <div class="title"><?=$repair->deviceObj->deviceProblemOne->title?></div>
-                         <div class="description"><?=$repair->deviceObj->deviceProblemOne->description?></div>
+                     <?php
+                        $result =  !empty($currentDeviceProblems) ? $currentDeviceProblems : $deviceProblems[0]
+                     ?>
+                     <?php if(!empty($result)): ?>
+                         <div class="title"><?=$result->title?></div>
+                         <div class="description"><?=$result->description?></div>
                      <?php endif; ?>
                  </div>
                  <div class="result-content result-content__js pull-right ">
-                    <?php if(!empty($repair->deviceObj->deviceProblemOne)): ?>
+                    <?php if(!empty($result)): ?>
                         <div class="content">
-                            <div class="icon-clock time"><span class="i"><?=$repair->deviceObj->deviceProblemOne->time?></span></div>
-                            <div class="icon-wallet money"><span class="i"><?=Functions::money($repair->deviceObj->deviceProblemOne->price->money)?> <span class="rub">р.</span></span></div>
+                            <div class="icon-clock time"><span class="i"><?=$result->time?></span></div>
+                            <div class="icon-wallet money"><span class="i"><?=Functions::money($result->price->money)?> <span class="rub">р.</span></span></div>
                         </div>
                     <?php endif; ?>
                 </div>

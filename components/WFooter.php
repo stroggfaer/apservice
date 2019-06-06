@@ -3,6 +3,7 @@ namespace app\components;
 
 use app\models\Options;
 use app\models\Repair;
+use app\models\Socials;
 use yii\base\Widget;
 use yii\helpers\Html;
 use Yii;
@@ -19,7 +20,7 @@ class WFooter extends Widget{
            $appleServices = $model->getAppleServices();
            $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
            $phone= (!empty($city->value) ? $city->value : $city->phone);
-
+           $socials =  Socials::find()->where(['type'=>1,'status'=>1])->all();
          ?>
 
             <!--Десктоп-->
@@ -37,17 +38,18 @@ class WFooter extends Widget{
                     </div>
                     <div class="custom_footerInfo">
                         <div class="footerSocial">
-                            <a href="https://www.facebook.com/appleservicensk/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i><span>facebook</span></a>
-                            <a href="https://www.instagram.com/http.apple.sc/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i><span>instagram</span></a>
-                            <a href="https://vk.com/appleservicensk" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i><span>vkontakte</span></a>
+                            <?php if(!empty($socials)): ?>
+                                  <?php foreach ($socials as $key=>$social): ?>
+                                      <a href="<?=$social->href?>" target="_blank"><i class="<?=$social->icon?>" aria-hidden="true"></i><span><?=$social->title?></span></a>
+                                 <?php endforeach; ?>
+                             <?php endif; ?>
                         </div>
                         <div class="footerContact">
                           <div class="phone">
                               <a href="tel:<?=$phone?>" class="no_border"><?=$phone?></a>
                           </div>
                            <div class="messengers">
-                              <a href="#" class="no_border"><i class="fa fa-whatsapp"></i>WatsApp</a>
-                              <a href="#" class="no_border margin-right-clear"><i class="icon-telegram telegram"></i>Telegram</a>
+                               <?= \app\components\WMessengers::widget()?>
                            </div>
                         </div>
                     </div>

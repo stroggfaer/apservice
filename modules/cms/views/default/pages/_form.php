@@ -52,7 +52,8 @@ $params = ['prompt' => 'Выберите позицию меню', 'options' => 
     <?php endif; ?>
 
     <?=$form->field($model, 'menu')->DropDownList($menuType, $params)->label('Тип меню');  ?>
-
+  
+    <?= $form->field($model, 'content')->checkbox(['disabled' => false,]) ?>
     <?= $form->field($model, 'footer')->checkbox(['disabled' => false,]) ?>
 
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>

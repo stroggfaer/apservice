@@ -74,6 +74,10 @@ class BackendController extends Controller
                         'link' => '/cms/sliders',
                         'title' => 'Слайдеры',
                     ],
+                    [
+                        'link' => '/cms/socials',
+                        'title' => 'Соцкнопок',
+                    ],
 
 
                 ],
@@ -87,6 +91,7 @@ class BackendController extends Controller
                         'link' => '/cms/call/index',
                         'title' => 'Заявки',
                     ],
+
                 ],
             ],
             'geo' => [

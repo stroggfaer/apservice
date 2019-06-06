@@ -36,7 +36,7 @@ class Pages extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['description', 'text','value'], 'string'],
-            [['menu', 'position', 'status','footer'], 'integer'],
+            [['menu', 'position', 'status','footer','content'], 'integer'],
             [['url', 'title', 'seo_title'], 'string', 'max' => 128],
             [['keywords'], 'string', 'max' => 228],
         ];
@@ -58,6 +58,7 @@ class Pages extends \yii\db\ActiveRecord
             'menu' => 'Тип меню',
             'footer' => 'Показывать меню на футере',
             'value' => 'Значения',
+            'content'=> 'Показывать контент',
             'position' => 'Позиция',
             'status' => 'Статус',
         ];

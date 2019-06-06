@@ -1,4 +1,6 @@
 <?php
+
+use app\models\Options;
 use yii\bootstrap\ActiveForm;
 use app\models\Call;
 use app\models\Functions;
@@ -12,7 +14,7 @@ $this->params['breadcrumbs'][] = [
     'url' => ['/repair/'] // сама ссылка
 ];
 $this->params['breadcrumbs'][] = $mainTitle;
-
+$options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 $call = new Call();
 
 ?>
@@ -37,13 +39,13 @@ $call = new Call();
                 <div class="name">Вызвать мастера</div>
             </div>
             <div class="icons">
-                <a href="#" class="no_border">
+                <a href="<?='mailto:'.$options->email?>" class="no_border">
                   <i class="icon-email-image"></i>
                   <div class="name">Отправить Email</div>
                 </a>
             </div>
             <div class="icons">
-                <a href="#" class="no_border">
+                <a href="/contacts" class="no_border">
                   <i class="icon-map-image"></i>
                   <div class="name">Приехать к нам</div>
                 </a>

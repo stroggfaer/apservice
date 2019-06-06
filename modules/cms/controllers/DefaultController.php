@@ -35,6 +35,9 @@ use app\modules\cms\models\ReviewsSearch;
 use app\models\Sliders;
 use app\modules\cms\models\SlidersSearch;
 
+use app\models\Socials;
+use app\modules\cms\models\SocialsSearch;
+
 use app\models\ParserEmail;
 use app\modules\cms\models\ParserEmailSearch;
 use app\models\SettingsUserForm;
@@ -1248,7 +1251,88 @@ class DefaultController extends BackendController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    //
+    /**
+     * Lists all Socials models.
+     * @return mixed
+     */
+    public function actionSocials()
+    {
+        $searchModel = new SocialsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        return $this->render('socials/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
+    /**
+     * Creates a new Socials model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateSocials()
+    {
+        $model = new Socials();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['socials', 'id' => $model->id]);
+        }
+
+        return $this->render('socials/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Socials model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateSocials($id)
+    {
+        $model = $this->findModelSocials($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['socials', 'id' => $model->id]);
+        }
+
+        return $this->render('socials/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing Socials model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteSocials($id)
+    {
+        $this->findModelSocials($id)->delete();
+
+        return $this->redirect(['socials']);
+    }
+
+    /**
+     * Finds the Socials model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Socials the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelSocials($id)
+    {
+        if (($model = Socials::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 
 }

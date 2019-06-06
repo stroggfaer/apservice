@@ -38,7 +38,7 @@ class Options extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 60],
             [['phone'], 'string', 'max' => 12],
             [['email', 'adminEmail'], 'string', 'max' => 30],
-            [['value','address'], 'string', 'max' => 200],
+            [['value','address','map_key'], 'string', 'max' => 200],
             [['logo', 'url', 'description'], 'string', 'max' => 128],
         ];
     }
@@ -58,6 +58,7 @@ class Options extends \yii\db\ActiveRecord
             'logo' => 'Logo',
             'url' => 'Url',
             'description' => 'Description',
+            'map_key' => 'map_key',
             'status' => 'Status',
         ];
     }

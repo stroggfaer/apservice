@@ -36,6 +36,7 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'map_key')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
