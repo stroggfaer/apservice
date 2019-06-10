@@ -121,6 +121,9 @@ if(Functions::domain($options->url)) {
                         <span class="description">сервисный центр по ремонту техники Apple</span>
                     </a>
                 </div>
+                <a href="#" class="logo-h">
+                    <img src="/images/logo-h.png" alt="" />
+                </a>
                 <div class="menu">
                     <?=  app\components\WMenu::widget()?>
                 </div>
