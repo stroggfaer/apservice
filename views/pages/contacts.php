@@ -10,7 +10,7 @@ $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 // AIzaSyAibeoKy-F_zPEssZQuGIJC5F6MagTQ1Ks
 
 // AIzaSyAaKwRkxxmcJ48O-2LPNwWmZcT5jUPTG1c
-
+http://maps.google.com/maps/api/js?sensor=false
 $this->registerJsFile('//maps.googleapis.com/maps/api/js?key='.$options->map_key, ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/vendor/map/landcarte.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/map.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
