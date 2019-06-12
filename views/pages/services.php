@@ -2,12 +2,13 @@
 
 use app\models\Options;
 use yii\helpers\Html;
-$this->params['breadcrumbs'][] = $appleService->title;
+
 $this->params['breadcrumbs'][] = [
     'template' => "<li>{link}</li>\n", // шаблон для этой ссылки
     'label' => 'Контакты', // название ссылки
     'url' => ['/contacts/'] // сама ссылка
 ];
+$this->params['breadcrumbs'][] = $appleService->title;
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 // https://console.developers.google.com/google/maps-apis/apis/maps-backend.googleapis.com/metrics?project=asxmap-1559144430469&authuser=1&duration=PT1H
 
