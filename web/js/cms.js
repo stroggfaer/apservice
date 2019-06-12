@@ -35,7 +35,7 @@ $(document).on('click','.js-delete-image-file',function () {
     var path = $(this).data('path');
     var element = $(this);
     if (!confirm("Удалить?")) return false;
-    $.post('/repair/cms/ajax-backend/images-delete',{delete_image_file:true,'path':path},function(response){
+    $.post('/cms/ajax-backend/images-delete',{delete_image_file:true,'path':path},function(response){
         $(".form-content-images").html(response);
        // loading('hide');
     });
@@ -62,7 +62,7 @@ $(document).on('click','.js-run-email-parser',function () {
     if(max_counts > 0) {
 
         $.ajax({
-            url: '/repair/cms/ajax-backend/run-export-email',
+            url: '/cms/ajax-backend/run-export-email',
             type: 'POST',
             data: {runExportEmail: true,  max_counts: max_counts},
             success: function(response){
@@ -95,7 +95,7 @@ $modal.on('show.bs.modal', function(e) {
         device_id = $(e.relatedTarget).data('device-id');
     $(this).find('.modal-body')
         .html('Загрузка...')
-        .load('/repair/cms/devices/add-device-diagonal?id=' + device_year_id,{add_diagonal:true,device_id:device_id},function() {
+        .load('/cms/devices/add-device-diagonal?id=' + device_year_id,{add_diagonal:true,device_id:device_id},function() {
             $modal.modal('handleUpdate');
         });
 });

@@ -30,7 +30,7 @@ class WFooter extends Widget{
                         <ul>
                             <?php if(!empty($menuFooter)): ?>
                                 <?php foreach ($menuFooter as $menu):?>
-                                     <li><a href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?=$menu->title?></a></li>
+                                     <li><a href="<?= (!empty($menu->url) ? '/'.$menu->url : $menu->value)?>"><?=$menu->title?></a></li>
                                 <?php endforeach; ?>
 
                             <?php endif; ?>
@@ -72,7 +72,7 @@ class WFooter extends Widget{
                                <?php foreach ($appleServices as $appleService): ?>
                                     <div class="item">
                                         <div class="content">
-                                           <a href="<?=(!empty($appleService->url) ? $appleService->url : 'https://apple.sc/contacts')?>" class="title"><?=$appleService->title?></a>
+                                           <a href="<?=(!empty($appleService->url) ? '/'.$appleService->url : 'https://apple.sc/contacts')?>" class="title"><?=$appleService->title?></a>
                                            <?php if(!empty($appleService->address)): ?>
                                                <div class="address"><?=$appleService->address?></div>
                                            <?php endif; ?>

@@ -23,7 +23,7 @@ class WMenuTop extends Widget{
             if(!empty($menuFooter)) {
                 ?>
                    <?php foreach ($menuFooter as $key => $menu): ?>
-                       <a class="item" href="<?= (!empty($menu->url) ? $menu->url : $menu->value)?>"><?= $menu->title ?></a>
+                       <a class="item" href="<?= (!empty($menu->url) ? '/'.$menu->url : $menu->value)?>"><?= $menu->title ?></a>
                    <?php endforeach; ?>
                 <?php
             }
