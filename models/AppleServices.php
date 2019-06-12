@@ -48,7 +48,7 @@ class AppleServices extends \yii\db\ActiveRecord
             [['title', 'title_seo', 'time', 'map_lat', 'map_lon', 'value','url','level'], 'string', 'max' => 68],
             [['address'], 'string', 'max' => 128],
             [['metro','phone'], 'string', 'max' => 64],
-            [['description'], 'string', 'max' => 328],
+            [['description','keywords'], 'string', 'max' => 328],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
         ];
@@ -65,6 +65,7 @@ class AppleServices extends \yii\db\ActiveRecord
             'region_id' => 'Район',
             'title' => 'Название',
             'title_seo' => 'SEO Название',
+            'keywords'=>'Сео Ключ',
             'address' => 'Адресс',
             'level' => 'Этаж',
             'metro' => 'Метро',

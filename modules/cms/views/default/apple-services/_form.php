@@ -31,6 +31,7 @@ $params1 = ['prompt' => 'Выберите район', 'options' => [$model->reg
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'title_seo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'level')->textInput(['maxlength' => true]) ?>

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AppleServices;
 use app\models\Functions;
 use app\models\Pages;
 use app\models\Repair;
@@ -64,6 +65,28 @@ class PagesController extends AppController
             return $this->redirect('/site/error');
         }
     }
+
+
+    // Сервисы;
+    public function actionServices($url = false) {
+        if(empty($url)) return $this->redirect('/site/error');
+        $url =  trim($url,"/"); // Удаляем слэш;
+        try {
+            $model = new Repair();
+            $city = \Yii::$app->action->currentCity;
+            $appleService = AppleServices::find()->where(['city_id'=>$city->id,'url'=>$url, 'status'=>1])->one();
+            $this->setMeta((!empty($appleService->title_seo) ?   Functions::getTemplateCode($appleService->title_seo) : $appleService->title),Functions::getTemplateCode($appleService->keywords),Functions::getTemplateCode($appleService->description));
+            // Загрузка страница;
+            return $this->render('services', [
+                'model'=>$model,
+                'city'=>$city,
+                'appleService'=>$appleService
+            ]);
+        } catch (NotFoundHttpException $e) {
+            return $this->redirect('/site/error');
+        }
+    }
+
 
 
     /**
