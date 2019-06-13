@@ -7,10 +7,20 @@ use app\models\Options;
 $content = \app\models\Content::find()->where(['status'=>1,'group_id'=>1002])->one();
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 $city = \Yii::$app->action->currentCity;
-
+$this->params['breadcrumbs'][] = [
+    'template' => "<li>{link}</li>\n", // шаблон для этой ссылки
+    'label' => 'Ремонт', // название ссылки
+    'url' => ['/repair/'] // сама ссылка
+];
+$this->params['breadcrumbs'][] = [
+    'template' => "<li>{link}</li>\n", // шаблон для этой ссылки
+    'label' => $model->currentRepair->title, // название ссылки
+    'url' => ['/repair/'.$model->currentRepair->url] // сама ссылка
+];
+$this->params['breadcrumbs'][] = $one->title;
 ?>
 <div class="container min-size">
-   <?=  app\components\WMenuRepairs::widget(['model'=>$model])?>
+   <?=  app\components\WMenuRepairs::widget(['model'=>$model,'level'=>3])?>
 </div>
 <div class="container-full">
     <div class="container min-size">
@@ -21,7 +31,7 @@ $city = \Yii::$app->action->currentCity;
             <br/>
             <br/>
             <br/>
-            <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>true,'one'=>$one])?>
+            <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>true,'one'=>$one,'level'=>3])?>
 
             <div class="text-center title-main-1"><h2 class="seo-title">Выберите проблему на <?=$model->device->title?></h2></div>
             <div class="devices__com list">

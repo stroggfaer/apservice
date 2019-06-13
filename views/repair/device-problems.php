@@ -56,7 +56,7 @@ $call = new Call();
         <div class="container min-size">
 
             <div class="devicesProblemsMenu">
-                <?=  app\components\WMenuRepairs::widget(['model'=>$model,'classNames'=>'page-menu','select'=>true])?>
+                <?=  app\components\WMenuRepairs::widget(['model'=>$model,'classNames'=>'page-menu','select'=>true,'level'=>2])?>
             </div>
             <div class="devices-problems hidden">
                 <?=  app\components\WDevices::widget(['model'=>$model,'menu'=>false,])?>

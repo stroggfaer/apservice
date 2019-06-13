@@ -74,5 +74,11 @@ class MenuRepairs extends \yii\db\ActiveRecord
         return $this->hasMany(Devices::className(), ['menu_repair_id' => 'id']);
     }
 
+    public function getDevice()
+    {
+        return $this->hasOne(Devices::className(), ['menu_repair_id' => 'id'])->where(['status'=>1]);
+    }
+
+
 
 }

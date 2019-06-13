@@ -988,6 +988,12 @@ h3 {
       @media only screen and (max-width: @screen-mobile-min) {
          width: 50%;
       }
+      &.active {
+        a {
+          border: 1px solid @reg1;
+          color: @reg1;
+        }
+      }
       a {
         display: block;
         border: 1px solid @grey;
@@ -997,7 +1003,7 @@ h3 {
         border-radius: 50px;
         transition: 200ms ease-out;
         text-decoration: none;
-        &:hover {
+        &:hover,&.active {
           border: 1px solid @reg1;
           color: @reg1;
           text-decoration: none;

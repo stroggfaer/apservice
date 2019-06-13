@@ -261,5 +261,10 @@ class Devices extends \yii\db\ActiveRecord
         }
     }
 
+    public function getDeviceProblemDefault() {
+        if(empty($this->id)) return false;
+        $devicesDetails = DevicesDetails::find()->where(['devices_id'=>$this->id])->one();
+        return $devicesDetails->deviceProblems;
+    }
 
 }
