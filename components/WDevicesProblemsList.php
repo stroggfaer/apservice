@@ -31,19 +31,19 @@ class WDevicesProblemsList extends Widget{
         $deviceProblems = $devices->getDeviceProblems($device);
         $countsLimit = $devices->getCountsLimit($device);
 
-
-        if(empty($devicesAll)) return false;
         ?>
 
             <div class="devices-problems-list">
                 <div class="text-center title-main hidden"><div class="seo-title">Выберите ваше устройство</div></div>
                 <div class="devices__menu devices_carusel desktop">
                     <div class="content__load"><div></div></div>
+                    <?php if(!empty($devicesAll) && !empty($device)): ?>
                     <div class="items" data-counts="<?=count($devicesAll)?>">
                         <?php foreach ($devicesAll as $key => $value): ?>
                             <div class="item <?=$device->id == $value->id ? 'active' : ''?>  js-select-devices "  data-id="<?=$value->id?>" data-action=""><a href="#" title="<?=$value->title?>"><?=Functions::strResize($value->title)?></a></div>
                         <?php endforeach; ?>
                     </div>
+                    <?php endif; ?>
                 </div>
                 <div class="label-text mobile">Выберите модель устройства</div>
                 <div class="select__mod mobile">

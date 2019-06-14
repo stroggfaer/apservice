@@ -3,6 +3,8 @@ namespace app\components;
 
 use yii\base\Widget;
 use Yii;
+use kartik\select2\Select2;
+use yii\web\JsExpression;
 
 class WMenuRepairs extends Widget{
 
@@ -45,13 +47,22 @@ class WMenuRepairs extends Widget{
                             </div>
                         <?php endforeach;  ?>
 
+
+
                     </div>
                     <?php if(!empty($select)): ?>
                         <div class="select__mod <?=$select?>">
-                       <select class="select js-select-devices">
+                       <select class="select " onchange="top.location.href=this.value">
                            <?php $active = (!empty($this->model->currentRepair->id) && $this->model->currentRepair->id == $value->id ? 'selected' : '') ?>
                            <?php foreach ($this->model->menuRepairs as $key => $value): ?>
-                               <option <?=$active?> value="<?=$value->id?>" ><?=$value->title?></option>
+                               <?php
+                               // Многоуровневый меню;
+                               $url = !empty($this->model->currentRepair->id) && !empty($this->model->device->url) && $this->model->currentRepair->id == $value->id ?
+                                   $value->url.'/'.$this->model->device->url : (!empty($this->level) && $this->level == 2 ?
+                                       $value->url.'/'.$value->device->url : (!empty($this->level) && $this->level == 3 ?
+                                           $value->url.'/'.$value->device->url.'/'.$value->device->deviceProblemDefault->url : $value->url));
+                               ?>
+                               <option <?=$active?> value="/repair/<?=$url?>" ><?=$value->title?></option>
                            <?php endforeach; ?>
                        </select>
                    </div>
