@@ -101,6 +101,14 @@ class Functions extends Model
     public static function pathFile($path= false) {
         return $_SERVER['DOCUMENT_ROOT'].'/web/files'.$path;
     }
+
+    public static function isPathFile($dir= false) {
+        if(file_exists(self::pathFile($dir))) {
+            return true;
+        }
+        return false;
+    }
+
     // Проверка изображения;
     public static function imgPath($dir, $dev = false) {
 

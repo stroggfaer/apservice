@@ -181,3 +181,14 @@ a.desc:after {
 .table__com .more {
     padding-top: 15px;
 }
+.form-content-images {
+    position: relative;
+}
+.form-content-images i {
+    position: absolute;
+    color: red;
+    top: -7px;
+    left: -8px;
+    z-index: 1000;
+    cursor: pointer;
+}

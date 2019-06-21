@@ -30,6 +30,9 @@ use app\models\Functions;
         ]);
     ?>
     <div class="images form-content-images ">
+        <?php if(Functions::isPathFile('/review/'.$model->id.'.jpg')): ?>
+            <i class="glyphicon glyphicon-remove js-delete-image-file" data-file-name="review/<?=$model->id.'.jpg'?>" ></i>
+        <?php endif; ?>
         <?php echo Html::img($model->img,['width'=>'100']); ?>
     </div>
     <?php

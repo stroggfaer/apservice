@@ -23,8 +23,9 @@ class RepairController extends AppController
         $alias = (!empty($alias) ? trim($alias, '/') : false);
         $last = (!empty($last) ? trim($last, '/') : false);
 
-       // print_arr($url);
-       // die('A');
+        if (defined('YII_DEBUG')) {
+
+        }
         $model = new Repair();
         if(empty($url)) {
 

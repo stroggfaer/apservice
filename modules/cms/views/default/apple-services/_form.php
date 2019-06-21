@@ -63,18 +63,17 @@ $params1 = ['prompt' => 'Выберите район', 'options' => [$model->reg
 
     <?php  if(!$model->isNewRecord): ?>
         <div class="images form-content-images">
-            <?php
-             $img = Functions::imgPath('/apple/'.$model->id.'.png');
-             $pathFile = Functions::pathFile('/apple/').$model->id.'.png';
-             echo !empty($img) ?'<img style="width: 100px" class="js-delete-image-file" data-path="'.$pathFile.'" src="'.$img.'?'.time().'" />' : 'Нет фото';
-            ?>
+            <?php if($model->isImg): ?>
+               <i class="glyphicon glyphicon-remove js-delete-image-file" data-file-name="apple/<?=$model->id.'.'.$model->ext?>" ></i>
+            <?php endif; ?>
+            <?php echo '<img style="width: 100px" class="" src="'.$model->img.'?'.time().'" />'; ?>
         </div>
         <?= $form->field($images, 'imageMax')->widget(FileInput::classname(), [
             'options' => [
                 'accept' => 'image/*',
                 'multiple' => true
             ],
-        ])->label('Загрузить Обложка 210x210 формат png'); ?>
+        ])->label('Загрузить Обложка 210x210'); ?>
     <?php endif; ?>
 
 

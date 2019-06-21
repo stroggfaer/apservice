@@ -46,7 +46,7 @@ class AppleServices extends \yii\db\ActiveRecord
             [['city_id', 'region_id', 'status'], 'integer'],
             [['text'], 'string'],
             [['title', 'title_seo', 'time', 'map_lat', 'map_lon', 'value','url','level'], 'string', 'max' => 68],
-            [['address'], 'string', 'max' => 128],
+            [['address','ext'], 'string', 'max' => 128],
             [['metro','phone'], 'string', 'max' => 64],
             [['description','keywords'], 'string', 'max' => 328],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
@@ -96,8 +96,16 @@ class AppleServices extends \yii\db\ActiveRecord
     }
 
     public function getImg() {
-       $img = Functions::imgPath('/apple/'.$this->id.'.png');
+       $img = Functions::imgPath('/apple/'.$this->id.'.'.$this->ext);
        return !empty($img) ? $img : '/files/no_photo.png';
+    }
+
+    public function getIsImg() {
+        return Functions::isPathFile('/apple/'.$this->id.'.'.$this->ext);
+    }
+
+    public function getDirImg(){
+        return Functions::pathFile('/apple/').$this->id.'.'.$this->ext;
     }
 
 }

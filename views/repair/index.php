@@ -23,7 +23,7 @@ $description2 = $one->description2 ? $one->description2 : (!empty($content->text
             <?= app\components\WDevicesProblemsPriceList::widget(['model'=>$model])?>
 
         <?php else: ?>
-            <div class="text-center title-main"><div class="seo-title">Выберите ваше устройство</div></div>
+            <div class="text-center title-main"><div class="seo-title " onclick="">Выберите ваше устройство</div></div>
             <?=  app\components\WDevices::widget(['model'=>$model])?>
             <?php if(!empty($title1) && !empty($title2)):?>
                 <div class="description-seo">

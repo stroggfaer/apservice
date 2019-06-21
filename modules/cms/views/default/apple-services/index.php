@@ -32,8 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'id',
                 'label'=>'Превью',
                 'content'   => function ($data) {
-                    $img = Functions::imgPath('/apple/'.$data->id.'.png');
-                    return !empty($img) ?'<img style="width: 100px" src="'.$img.'?'.rand(6,6).'" />' : 'Нет фото';
+                    return'<img style="width: 100px" src="'.$data->img.'?'.rand(6,6).'" />';
                 }
             ],
             [

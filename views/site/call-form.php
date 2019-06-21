@@ -27,7 +27,6 @@ $model = new \app\models\Repair();
               </div>
             <?php endforeach; ?>
        </div>
-
     <?php else: ?>
         <?php if(!empty($callGroups->description)): ?>
             <div class="description"><?=$callGroups->description?></div>

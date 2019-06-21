@@ -49,7 +49,7 @@ class AjaxController extends Controller
     function actionDiagnostics()
     {
         $request = Yii::$app->request;
-       // $devices =  new Devices();
+        $devices =  new Devices();
 
         // Выбор девайс;
         if ($request->post('select_devices_form')) {

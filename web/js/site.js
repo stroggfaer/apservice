@@ -462,7 +462,7 @@ $(document).on('click','.js-call-courier', function(){
 
 // Вызвать мастера;
 $(document).on('click','.js-call-master', function(){
-    return window_modal('ajax/call','Вызвать мастера',{call:true,group_id:1003},'#window-modal',3);
+    return window_modal('ajax/call','Вызвать мастера',{call_problems:true,group_id:1003},'#window-modal',3);
 });
 
 // Узнать стоимтость;

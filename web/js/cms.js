@@ -32,10 +32,10 @@ $(document).on('click','.js-call-delete',function(){
 });
 // Удалить избражения;
 $(document).on('click','.js-delete-image-file',function () {
-    var path = $(this).data('path');
+    var file_name = $(this).data('file-name');
     var element = $(this);
     if (!confirm("Удалить?")) return false;
-    $.post('/cms/ajax-backend/images-delete',{delete_image_file:true,'path':path},function(response){
+    $.post('/cms/ajax-backend/images-delete',{delete_image_file:true,'file_name':file_name},function(response){
         $(".form-content-images").html(response);
        // loading('hide');
     });

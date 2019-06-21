@@ -768,6 +768,8 @@ class DefaultController extends BackendController
 
             // Параметры $file путь; резайз $w-Длина $h-высота;
             if ($images->isUpload($file,false)) {
+                $model->ext = $images->imageMax->extension;
+                $model->save();
                 // file is uploaded successfully
             }
             return $this->redirect(['view-apple-services', 'id' => $model->id]);
