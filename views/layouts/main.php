@@ -204,7 +204,9 @@ if(Functions::domain($options->url)) {
 <div id="footer">
     <?=  app\components\WFooter::widget()?>
 </div>
+<?php if(false): ?>
 <?=  app\components\WHtml::widget()?>
+<?php endif; ?>
 <?php $this->endBody() ?>
 </body>
 </html>

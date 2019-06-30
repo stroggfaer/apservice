@@ -21,6 +21,9 @@ use Yii;
  */
 class Call extends \yii\db\ActiveRecord
 {
+    public $repair;
+    public $devices;
+    public $problems;
     /**
      * @inheritdoc
      */
@@ -36,7 +39,7 @@ class Call extends \yii\db\ActiveRecord
     {
         return [
             [['group_id', 'status'], 'integer'],
-            [['comments'], 'string'],
+            [['comments','options'], 'string'],
             [['fio','phone'], 'required'],
 
           //  ['phone', 'validatePhone'],
@@ -73,6 +76,7 @@ class Call extends \yii\db\ActiveRecord
             'email' => 'E-mail',
             'comments' => 'Комменатрий',
             'date' => 'Дата создание',
+            'options'=>'Праметры',
             'status' => 'Статус',
         ];
     }

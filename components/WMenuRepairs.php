@@ -33,22 +33,21 @@ class WMenuRepairs extends Widget{
                             <?php $active = (!empty($this->model->currentRepair->id) && $this->model->currentRepair->id == $value->id ? 'active' : '') ?>
                             <div class="item <?=$active?>">
                                 <?php
+
                                  // Многоуровневый меню;
                                  $url = !empty($this->model->currentRepair->id) && !empty($this->model->device->url) && $this->model->currentRepair->id == $value->id ?
-                                     $value->url.'/'.$this->model->device->url : (!empty($this->level) && $this->level == 2 ?
-                                         $value->url.'/'.$value->device->url : (!empty($this->level) && $this->level == 3 ?
+                                     $value->url.'/'.$this->model->device->url : (!empty($this->level) && $this->level == 2 && !empty($value->device)?
+                                         $value->url.'/'.$value->device->url : (!empty($this->level) && $this->level == 3 && !empty($value->device->deviceProblemDefault) ?
                                              $value->url.'/'.$value->device->url.'/'.$value->device->deviceProblemDefault->url : $value->url));
 
                                 ?>
+
                                 <a href="/repair/<?=$url?>">
                                     <div class="icon-menu <?=$value->icon?>"></div>
                                     <div class="menu"><?=$value->title?></div>
                                 </a>
                             </div>
                         <?php endforeach;  ?>
-
-
-
                     </div>
                     <?php if(!empty($select)): ?>
                         <div class="select__mod <?=$select?>">
@@ -58,9 +57,10 @@ class WMenuRepairs extends Widget{
                                <?php
                                // Многоуровневый меню;
                                $url = !empty($this->model->currentRepair->id) && !empty($this->model->device->url) && $this->model->currentRepair->id == $value->id ?
-                                   $value->url.'/'.$this->model->device->url : (!empty($this->level) && $this->level == 2 ?
-                                       $value->url.'/'.$value->device->url : (!empty($this->level) && $this->level == 3 ?
+                                   $value->url.'/'.$this->model->device->url : (!empty($this->level) && $this->level == 2 && !empty($value->device)?
+                                       $value->url.'/'.$value->device->url : (!empty($this->level) && $this->level == 3 && !empty($value->device->deviceProblemDefault) ?
                                            $value->url.'/'.$value->device->url.'/'.$value->device->deviceProblemDefault->url : $value->url));
+
                                ?>
                                <option <?=$active?> value="/repair/<?=$url?>" ><?=$value->title?></option>
                            <?php endforeach; ?>

@@ -13,6 +13,7 @@ class Repair extends Model
     private $devices;
     private $limit = 12; // Limit start;
     private $countLimit = 0; // Limit end;
+    private $menu_repair_id;
 
     // Пагинация ajax; array
     public function setLimitDevicesProblems($countLimit)
@@ -31,6 +32,18 @@ class Repair extends Model
         $data = MenuRepairs::find()->where(['status'=>1])->orderBy('id ASC')->one();
         return $data;
     }
+
+    public  function setMenuRepair($menu_repair_id = false) {
+        if(empty($menu_repair_id)) return false;
+        return $this->menu_repair_id = $menu_repair_id;
+    }
+
+    public function getSelectCurrentRepair() {
+        if(empty($this->menu_repair_id)) return false;
+        return $this->getCurrentRepair(false,$this->menu_repair_id);
+    }
+
+
     // Menu Repair;
     public function getCurrentRepair($url = false,$id=false)
     {
@@ -52,6 +65,8 @@ class Repair extends Model
         if(empty($this->currentRepair->devices)) return false;
         return $this->currentRepair->devices;
     }
+
+
 
     // Девайс;
     public function getCurrentDevices($alias = false, $id=false) {
@@ -200,8 +215,5 @@ class Repair extends Model
         }
         return $return;
     }
-
-
-
 
 }

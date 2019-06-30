@@ -462,7 +462,7 @@ $(document).on('click','.js-call-courier', function(){
 
 // Вызвать мастера;
 $(document).on('click','.js-call-master', function(){
-    return window_modal('ajax/call','Вызвать мастера',{call_problems:true,group_id:1003},'#window-modal',3);
+    return window_modal('ajax/call','Вызвать мастера',{call_problems:true,group_id:1003},'#window-modal',2);
 });
 
 // Узнать стоимтость;
@@ -594,6 +594,64 @@ $(document).on('click','.js-limit-devices-problems-table',function () {
             // });
             $('.more').hide();
         }
+        loading('hide');
+    });
+    return false;
+});
+
+/*----МОДАЛКА----*/
+// Выбор устройства;
+$(document).on('change','.js-call-select-form-repair',function () {
+    var element  = $(this),
+        repair_id = parseInt($(this).val());
+    loading('show');
+    $.post('/ajax/call',{
+        call_problems: true,
+        group_id:1003,
+        repair_id: repair_id,
+    },function(response){
+        $('.call-form .content_update').html($(response).find('.content_update').html());
+        $('.js-send-call').prop('disabled',false);
+        loading('hide');
+    });
+    return false;
+});
+$(document).ajaxError(function() {
+    loading('hide');
+    alert('Ошибка сервер');
+});
+// Выбор модели;
+$(document).on('change','.js-call-select-form-devices',function () {
+    var element  = $(this),
+        repair_id =  $(this).data('repair-id'),
+        device_id = parseInt($(this).val());
+
+    $('.js-call-select-form-problems-list').attr('data-device-id',device_id).attr('data-device-id',repair_id);
+
+    loading('show');
+      console.log(repair_id + ' ' + device_id);
+     $.post('/ajax/call',{
+        call_problems: true,
+        group_id:1003,
+        repair_id: repair_id,
+        device_id: device_id,
+    },function(response){
+        $('.call-form .content_update').html($(response).find('.content_update').html());
+        loading('hide');
+    });
+    return false;
+});
+
+// Выбор проблемы;
+$(document).on('change','.js-call-select-form-problems-list',function () {
+    var element  = $(this),
+        problem_id = parseInt($(this).val());
+    loading('show');
+    $.post('/ajax/call-problems-result',{
+        call_problems_result: true,
+        problem_id: problem_id,
+    },function(response){
+        $('.call-form .content_result').html(response);
         loading('hide');
     });
     return false;

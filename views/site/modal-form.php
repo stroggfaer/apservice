@@ -30,7 +30,6 @@ $model = new \app\models\Repair();
         <?= $form->field($call, 'phone')->widget(\yii\widgets\MaskedInput::className(), ['mask' => '+7 (999)-999-9999',])->textInput(['placeholder' => 'Телефон*'])->label(false);?>
 
 
-
         <?=  $form->field($call, 'comments')->textarea(['row' => 2,'placeholder' => 'Опишите проблему'])->label(false) ?>
         <input type="hidden" name="group_id" value="<?=$group_id?>">
         <input type="hidden" name="call_form" value="true">

@@ -87,7 +87,7 @@ class AjaxController extends Controller
 
         $request = Yii::$app->request;
         $call =  new Call();
-
+        $repair = new Repair();
         // Отправить данные из формы;
         if ($request->post('call_form')) {
             $group_id = abs($request->post('group_id'));
@@ -100,6 +100,18 @@ class AjaxController extends Controller
                 $call->phone = Functions::phone($call->phone);
                 $call->group_id = $group_id;
                 $call->value = $call_title;
+                if($group_id == 1003) {
+                    $_post = $request->post('Call');
+                    $_repair = $repair->getCurrentRepair(false,$_post['repair']);
+                    $_devices = $repair->getCurrentDevices(false,$_post['devices']);
+                    $_problems = $repair->getCurrentDeviceProblems(false,$_post['problems']);
+                    if(!empty($_repair) && !empty($_devices) && !empty($_problems)) {
+                        $html = 'Устройства: ' . $_repair->title . '<br>';
+                        $html .= 'Модель' . $_devices->title . '<br>';
+                        $html .= 'Проблема' . $_problems->title . '<br>';
+                        $call->comments = $html;
+                    }
+                }
                 if (!$call->save(false)) {
                     print_arr($call->errors);
                     die('ERROR');
@@ -109,7 +121,7 @@ class AjaxController extends Controller
                     'Имя: '.$call->fio.
                     'Номер телефон: '.Functions::phone($call->phone).
                     'Email'.$call->email.
-                    'comments: '.$call->comments
+                    'comments: '.!empty($call->comments) ? $call->comments : ''
                 );
                 return $response->data = ['success'=>'ok','message'=>'Ваша заявка отправлена! В ближайшее время с вами свяжется менеджер!'];
             }else {
@@ -127,17 +139,29 @@ class AjaxController extends Controller
         $request = Yii::$app->request;
         if(Yii::$app->request->isAjax) {
            if($request->post('call_problems')) {
+               return $this->renderAjax('/site/modal-problems-list', [
+                   'call' => $call
+               ]);
+           }elseif($request->post('call_form')) {
                return $this->renderAjax('/site/modal-form', [
                    'call' => $call
                ]);
-           }else {
+           }else{
                return $this->renderAjax('/site/call-form', [
                    'call' => $call
                ]);
            }
         }
     }
+    function actionCallProblemsResult() {
+        $request = Yii::$app->request;
+        $model = new Repair();
 
+        if(Yii::$app->request->isAjax && $request->post('call_problems_result')) {
+            $problem_id = $request->post('problem_id');
+            return \app\components\modal\WContentProblemsList::widget(['repair'=>$model,'device_problems_id'=>$problem_id]);
+        }
+    }
     // Выбор девайс;
     function actionSelectDevices() {
         $request = Yii::$app->request;

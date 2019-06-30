@@ -1256,6 +1256,8 @@ h3 {
       padding: 6px 15px;
       font-size: 16px;
     }
+
+
   }
 
   .form-control:focus {
@@ -1320,6 +1322,9 @@ h3 {
   height: 50px;
   border-radius: 5px;
   z-index: 100;
+  &.disabled {
+     opacity: .4;
+  }
   &::before {
     position: absolute;
     right: 0;
@@ -1355,6 +1360,7 @@ h3 {
      &::after {
        content: "";
      }
+
    }
 
 }
@@ -1549,7 +1555,6 @@ h3 {
     }
   }
 }
-
 .review-carousel {
   .item {
     padding: 16px;
@@ -1579,6 +1584,8 @@ h3 {
         .names {
            padding: 0px;
            font-weight: bold;
+           display: flex;
+           align-items: center;
         }
         .description {
           font-size: 12px;

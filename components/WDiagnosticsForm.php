@@ -29,7 +29,7 @@ class WDiagnosticsForm extends Widget{
 
             $currentDevices = $repair->getCurrentDevices(false,(!empty($device_id) ? $device_id : $this->model->device->id));
             $deviceProblems = $devices->getDeviceProblems($currentDevices);
-            $currentDeviceProblems = $repair->getCurrentDeviceProblems(false,(!empty($device_problem_id) ? $device_problem_id : $deviceProblems[0]));
+            $currentDeviceProblems = $repair->getCurrentDeviceProblems(false,(!empty($device_problem_id) ? $device_problem_id : (!empty($deviceProblems[0]) ? $deviceProblems[0] : false)));
 
         ?>
              <div class="diagnostics">
@@ -81,7 +81,7 @@ class WDiagnosticsForm extends Widget{
                 </div>
                  <div class="update-content__js pull-left diagnostic-result">
                      <?php
-                        $result =  !empty($currentDeviceProblems) ? $currentDeviceProblems : $deviceProblems[0]
+                        $result =  !empty($currentDeviceProblems) ? $currentDeviceProblems : (!empty($deviceProblems[0]) ? $deviceProblems[0] : false);
                      ?>
                      <?php if(!empty($result)): ?>
                          <div class="title"><?=$result->title?></div>
@@ -97,9 +97,7 @@ class WDiagnosticsForm extends Widget{
                     <?php endif; ?>
                 </div>
                  <div class="clear"></div>
-                 <div class="description-warning">
-                     Внимание! Данная информация является ознакомительной и не гарантирует, что результаты “Предварительной диагностики” могут совпадать с диагностикой вашего устройства в сервисном центре.
-                 </div>
+                 <div class="description-warning"><?=Yii::$app->params['text_diagnostics']?></div>
                 <div class="clear"></div>
             </div>
             <?php

@@ -91,6 +91,19 @@ class Devices extends \yii\db\ActiveRecord
         return $this->hasMany(DevicesDetails::className(), ['devices_id' => 'id']);
     }
 
+    public function getDeviceProblemsList()
+    {
+        $data = [];
+        $devicesDetails = DevicesDetails::find()->where(['devices_id'=>$this->id,'status'=>1])->all();
+        if(!empty($devicesDetails)) {
+            foreach ($devicesDetails as $devicesDetail) {
+                $data[] = $devicesDetail->deviceProblems;
+            }
+            return $data;
+        }
+        return $data;
+    }
+
 
     // Список девайс;
     public function getDevices() {
