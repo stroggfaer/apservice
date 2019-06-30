@@ -107,8 +107,8 @@ class AjaxController extends Controller
                     $_problems = $repair->getCurrentDeviceProblems(false,$_post['problems']);
                     if(!empty($_repair) && !empty($_devices) && !empty($_problems)) {
                         $html = 'Устройства: ' . $_repair->title . ' ';
-                        $html .= ' Модель' . $_devices->title . ' ';
-                        $html .= ' Проблема' . $_problems->title . ' ';
+                        $html .= ' Модель: ' . $_devices->title . ' ';
+                        $html .= ' Проблема: ' . $_problems->title . ' ';
                         $call->comments = $html;
                     }
                 }
