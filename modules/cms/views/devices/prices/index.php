@@ -13,10 +13,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="prices-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?php if(Yii::$app->session->hasFlash('error')):?>
+        <div class="alert alert-danger"><b> <?= Yii::$app->session->getFlash('error')?></b></div> <!-- For success message -->
+    <?php endif; ?>
+    <?php if(Yii::$app->session->hasFlash('success')):?>
+        <div class="alert alert-success"><b> <?= Yii::$app->session->getFlash('success')?></b></div> <!-- For success message -->
+    <?php endif; ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Добавить', ['create-prices'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Копирование цены', ['create-copy-prices'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,10 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-           // 'city_id',
             [
-                'attribute'=>'city_id',
-               // 'label'=>'Категорий',
+                'attribute' => 'city_id',
+                'format' => 'raw',
+                'filter' => \app\models\City::find()->select('name')->indexBy('id')->column(),
                 'content'   => function ($data) {
                     return '<a href="/cms/geo/update-city?id='.$data->city->id.'">'.$data->city->name.'</a>';
                 }

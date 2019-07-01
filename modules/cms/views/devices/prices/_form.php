@@ -20,11 +20,15 @@ $params1 = ['prompt' => 'Выберите проблемы', 'options' => [$mode
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?=$form->field($model, 'city_id')->DropDownList($items, $params);  ?>
+         <?=$form->field($model, 'city_id')->DropDownList($items, $params);  ?>
 
-    <?=$form->field($model, 'device_problems_id')->DropDownList($items1, $params1);  ?>
+        <?=$form->field($model, 'device_problems_id')->DropDownList($items1, $params1);  ?>
 
-    <?= $form->field($model, 'money')->textInput(['maxlength' => true]) ?>
+         <?= $form->field($model, 'money')->textInput(['maxlength' => true]) ?>
+
+         <?php if($model->isNewRecord): ?>
+
+         <?php endif; ?>
 
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>
 

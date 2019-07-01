@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 $parent = \app\models\Country::find()->orderBy('id ASC')->all();
 $items = ArrayHelper::map(array_merge($parent),'id', 'title');
 $params = ['prompt' => 'Выберите устройства', 'options' => [$model->country_id=>['selected'=>'selected']]];
+
 ?>
 
 <div class="city-form">
@@ -36,6 +37,8 @@ $params = ['prompt' => 'Выберите устройства', 'options' => [$m
 
         <?= $form->field($model, 'map_lon',['options'=>['class'=>'form-group col-sm-3']])->textInput(['maxlength' => true]) ?>
     </div>
+
+
     <div class="clear"></div>
     <?= $form->field($model, 'zoom')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'value')->textInput(['maxlength' => true])->hint('Например: Скоро открытие') ?>

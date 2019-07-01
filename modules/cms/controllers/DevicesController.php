@@ -2,6 +2,7 @@
 
 namespace app\modules\cms\controllers;
 
+use app\models\City;
 use app\models\DeviceYearDetails;
 use Yii;
 use yii\web\Controller;
@@ -530,6 +531,7 @@ class DevicesController extends BackendController
         $model = new Prices();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
             return $this->redirect(['view-prices', 'id' => $model->id]);
         }
 
@@ -537,6 +539,40 @@ class DevicesController extends BackendController
             'model' => $model,
         ]);
     }
+
+    public function actionCreateCopyPrices()
+    {
+        $model = new Prices();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $copy_city = City::findOne($model->copy_city);
+            if(!empty($copy_city->prices) && !empty($model->city_id)) {
+                $i = 0;
+                foreach ($copy_city->prices as $copy) {
+                    $i++;
+                      $_model = new Prices();
+                      $_model->city_id = $model->city_id;
+                      $_model->device_problems_id = $copy->device_problems_id;
+                      $_model->money = $copy->money;
+                      $_model->value = $copy->value;
+                      $_model->status = 1;
+                      $_model->save();
+                }
+
+                Yii::$app->session->setFlash('success','Прайсы Успешно скопированы! ('.$i.')');
+            }else{
+                Yii::$app->session->setFlash('error','Ошибка! не выбран город');
+            }
+
+            return $this->redirect(['prices']);
+        }
+
+        return $this->render('prices/create_copy', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * Updates an existing Prices model.

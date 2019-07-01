@@ -18,6 +18,8 @@ use Yii;
  */
 class Prices extends \yii\db\ActiveRecord
 {
+    public $copy;
+    public $copy_city;
     /**
      * @inheritdoc
      */
@@ -33,7 +35,7 @@ class Prices extends \yii\db\ActiveRecord
     {
         return [
             [['city_id','money','device_problems_id'], 'required'],
-            [['city_id', 'device_problems_id', 'status'], 'integer'],
+            [['city_id', 'device_problems_id', 'status','copy','copy_city'], 'integer'],
             [['money'], 'number'],
              [['value'],'string'],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
