@@ -35,7 +35,7 @@ class WDevices extends Widget{
                                   $active = !empty($this->model->device) && $device->id == $this->model->device->id ? 'active' : '';
 
 
-                              if(!empty($device->deviceProblemsDefault->deviceProblems->url)) {
+                              if(!empty($device->deviceProblemsDefault->deviceProblems->url) && !empty($this->level) && $this->level == 3) {
                                   $url = '/repair/' . $device->menuRepair->url . '/' . $device->url.'/'.$device->deviceProblemsDefault->deviceProblems->url;
                               }else {
                                   $url = '/repair/' . $device->menuRepair->url . '/' . $device->url;
@@ -60,7 +60,7 @@ class WDevices extends Widget{
                                        $selected = !empty($this->model->device) && $device->id == $this->model->device->id ? 'selected' : '';
 
                                        $icon = !empty($device->menuRepair->icon) ? $device->menuRepair->icon : '';
-                                       if(!empty($device->deviceProblemsDefault->deviceProblems->url)) {
+                                       if(!empty($device->deviceProblemsDefault->deviceProblems->url) && !empty($this->level) && $this->level == 3) {
                                           $url = '/repair/' . $device->menuRepair->url . '/' . $device->url.'/'.$device->deviceProblemsDefault->deviceProblems->url;
                                        }else {
                                           $url = '/repair/' . $device->menuRepair->url . '/' . $device->url;
