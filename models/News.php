@@ -132,7 +132,7 @@ class News extends \yii\db\ActiveRecord
     // Загрузка нововстей
     public function getNewsAll($limit = 12) {
         $city = \Yii::$app->action->currentCity;
-        $news = self::find()->where(['status'=>1,'city_id'=>$city->id])->orderBy('date_create DESC');
+        $news = self::find()->where(['status'=>1])->orderBy('date_create DESC');
         if($this->sessionType) {
             return $news->andWhere(['type'=>$this->sessionType])->limit($limit)->all();
         }
