@@ -894,3 +894,38 @@
    }
 }
 
+.news {
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+   .breadcrumb {
+      margin: 0px;
+      padding: 0px;
+   }
+   .devices__com {
+     padding: 0px;
+     margin: 0 -10px;
+     .items {
+       justify-content: left;
+     }
+   }
+   .content-menu {
+     background: @base_color_footer;
+     margin: 0 -15px 20px -15px;
+     padding: 20px 15px 30px;
+     .breadcrumb {
+        padding-bottom: 0px;
+     }
+     .select__mod {
+       background: @white;
+     }
+   }
+  @media only screen and (max-width: @screen-xs-min) {
+    margin-top: 0px;
+    .devices__com {
+       .item {
+         width: 33%;
+       }
+    }
+  }
+}

@@ -658,6 +658,24 @@ $(document).on('change','.js-call-select-form-problems-list',function () {
 });
 
 
+/*-----Новости-----*/
+$(document).on('click','.js-type-news .item',function () {
+    var element  = $(this),
+        type = parseInt($(this).data('type'));
+    loading('show');
+     $('.js-type-news .item').removeClass('active');
+     $(this).addClass('active');
+    //
+    $.post('/ajax/news-list',{
+        typeNews: true,
+        type: type,
+    },function(response){
+        $('.news__com .upadate').html(response);
+        loading('hide');
+    });
+    return false;
+});
+
 
 
 console.log('Scripts Version 3.2.0 ');

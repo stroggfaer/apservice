@@ -79,11 +79,11 @@ a {
   &:hover{
     color: @reg1;
   }
-  &:link{
-    color: @base_color;
+  &:link,&:visited{
+   // color: @base_color;
   }
   &:visited{
-    color: @base_color;
+   // color: @base_color;
 
   }
   &.btn{
@@ -402,6 +402,20 @@ h3 {
     padding: 12px 35px;
     &:hover {
       background: @base_color_element - 30;
+    }
+    &.circle {
+      border-radius: 60px;
+    }
+  }
+  &.btn-more {
+    background: @grey;
+    color: @black1;
+    font-size: 18px;
+    padding: 12px 0;
+    width: 100%;
+    max-width: 450px;
+    &:hover {
+      background: @grey - 30;
     }
     &.circle {
       border-radius: 60px;
@@ -1301,7 +1315,6 @@ h3 {
 
    }
 }
-
 // Color;
 .text-blue {
   color:@blue;
@@ -1350,7 +1363,7 @@ h3 {
      line-height: 1.4;
      font-weight: normal;
      padding: 7px 10px 7px 10px;
-     height: 50px;
+     height: 48px;
      vertical-align: top;
      outline: 0;
      -webkit-appearance: none;
@@ -1602,4 +1615,64 @@ h3 {
   button:before {
     font-size: 12px;
   }
+}
+
+// Сайтдбар;
+.sidebar  {
+   .left-menu {
+     border-radius: 10px;
+     border: 1px  solid @grey;
+    // padding: 10px;
+     .item {
+        display: block;
+        padding: 13px 20px;
+        font-size: 16px;
+        border-bottom: 1px solid @grey;
+        &:last-child {
+           border:none;
+        }
+       &.active {
+          color:@grey1;
+       }
+       &:hover {
+          color:@reg1;
+       }
+     }
+   }
+}
+
+/*---Выровнить по высоте -*/
+.equal, .equal > div[class*='col-'] {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  display: flex;
+}
+.news__com {
+  padding: 15px 0px;
+   .block {
+     margin-bottom: 15px;
+      .images {
+        max-height: 240px;
+        overflow: hidden;
+      }
+      .date {
+         color:@grey1;
+         padding: 10px 0 5px;
+      }
+      .title {
+         font-weight: bold;
+         font-size: 16px;
+         padding-bottom: 10px;
+      }
+      .anons {
+        color:@grey1;
+      }
+
+   }
+   .more {
+      margin-top: 10px;
+   }
 }

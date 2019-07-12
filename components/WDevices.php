@@ -30,14 +30,21 @@ class WDevices extends Widget{
                        <?php foreach ($this->model->devices as $device): ?>
 
                            <?php
-                              if(!empty($this->level) && $this->level == 3) {
-                                  $active = !empty($this->model->device) && $device->id == $this->one->device->id ? 'active' : '';
-                              }else {
+                      // print_arr($this->model->device);
+
                                   $active = !empty($this->model->device) && $device->id == $this->model->device->id ? 'active' : '';
+
+
+                              if(!empty($device->deviceProblemsDefault->deviceProblems->url)) {
+                                  $url = '/repair/' . $device->menuRepair->url . '/' . $device->url.'/'.$device->deviceProblemsDefault->deviceProblems->url;
+                              }else {
+                                  $url = '/repair/' . $device->menuRepair->url . '/' . $device->url;
                               }
+
+
                            ?>
 
-                          <div class="item  <?=$active?>"><a href="/repair/<?=$device->menuRepair->url.'/'.$device->url?>"><?=$device->title?></a></div>
+                          <div class="item  <?=$active?>"><a href="<?=$url?>"><?=$device->title?></a></div>
                        <?php endforeach; ?>
                     </div>
                     <div class="clear"></div>
@@ -49,14 +56,17 @@ class WDevices extends Widget{
                              <?php foreach ($this->model->devices as $device): ?>
 
                                  <?php
-                                       if(!empty($this->level) && $this->level == 3) {
-                                           $selected = !empty($this->model->device) && $device->id == $this->one->device->id ? 'selected' : '';
-                                       }else{
-                                           $selected = !empty($this->model->device) && $device->id == $this->model->device->id ? 'selected' : '';
-                                       }
+
+                                       $selected = !empty($this->model->device) && $device->id == $this->model->device->id ? 'selected' : '';
+
                                        $icon = !empty($device->menuRepair->icon) ? $device->menuRepair->icon : '';
+                                       if(!empty($device->deviceProblemsDefault->deviceProblems->url)) {
+                                          $url = '/repair/' . $device->menuRepair->url . '/' . $device->url.'/'.$device->deviceProblemsDefault->deviceProblems->url;
+                                       }else {
+                                          $url = '/repair/' . $device->menuRepair->url . '/' . $device->url;
+                                       }
                                  ?>
-                                 <option <?=$selected?> value="/repair/<?=$device->menuRepair->url.'/'.$device->url?>">
+                                 <option <?=$selected?> value="<?=$url?>">
                                      <div class="<?=$icon?>"></div><?=$device->title?>
                                  </option>
                              <?php endforeach; ?>

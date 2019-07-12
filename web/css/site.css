@@ -118,13 +118,13 @@ a.desc:after {
 }
 
 /*----------Menu----------*/
-.dropdown-menu {
+.navbar .dropdown-menu {
     background: #080808;
 }
-.dropdown-menu li a {
+.navbar .dropdown-menu li a {
     color: #9d9d9d
 }
-.dropdown-menu li a:hover {
+.navbar .dropdown-menu li a:hover {
     background: #323232;
     color: #9d9d9d
 }

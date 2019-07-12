@@ -250,4 +250,53 @@ class Functions extends Model
         $array = ['iPhone'];
         return str_replace($array, '', $text);
     }
+
+    // Транслит;
+    public static function translit($string, $encoding = 'UTF-8') {
+        $rus = array('', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я');
+        $eng = array('', 'a', 'b', 'v', 'g', 'd', 'e', 'yo', 'g', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'ts', 'ch', 'sh', 'shch', '', 'i', '', 'e', 'yu', 'ya', 'A', 'B', 'V', 'G', 'D', 'E', 'Yo', 'G', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'Ts', 'Ch', 'Sh', 'Shch', '', 'I', '', 'E', 'Yu', 'Ya');
+        $length = mb_strlen($string, $encoding);
+        $result = '';
+        for ($i = 0; $i < $length; $i++) {
+            $char = mb_substr($string, $i, 1, $encoding);
+            if (array_search($char, $eng)) {
+                $result .= $char;
+            } else {
+                if ($position = array_search($char, $rus)) {
+                    $result .= $eng[$position];
+                } else {
+                    $result .= '-';
+                }
+            }
+        }
+        $result = preg_replace("/\-+/", "-", $result);
+        $result = trim($result, '-');
+        return strtolower($result);
+    }
+
+    // Вывести дата формат на русском;
+    public static function dateFormat($date = null) {
+        if(!empty($date)) {
+            $currentDate = date("d.m.Y",strtotime($date));
+        }else{
+            $currentDate = date("d.m.Y");
+        }
+        $_monthsList = array(".01." => "января", ".02." => "февраля",
+            ".03." => "марта", ".04." => "апреля", ".05." => "мая", ".06." => "июня",
+            ".07." => "июля", ".08." => "августа", ".09." => "сентября",
+            ".10." => "октября", ".11." => "ноября", ".12." => "декабря");
+        $_mD = date(".m.");
+        return $currentDate = str_replace($_mD, " ".$_monthsList[$_mD]." ", $currentDate);
+    }
+
+
+    /*----Интерфейс----*/
+
+    /**
+     * $type $bool
+     */
+    public static function htmlCheck($type) {
+        return (!empty($type) ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>');
+    }
+
 }

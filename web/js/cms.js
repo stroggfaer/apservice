@@ -33,9 +33,10 @@ $(document).on('click','.js-call-delete',function(){
 // Удалить избражения;
 $(document).on('click','.js-delete-image-file',function () {
     var file_name = $(this).data('file-name');
+    var file_min = $(this).data('file-min') ? $(this).data('file-min') : null;
     var element = $(this);
     if (!confirm("Удалить?")) return false;
-    $.post('/cms/ajax-backend/images-delete',{delete_image_file:true,'file_name':file_name},function(response){
+    $.post('/cms/ajax-backend/images-delete',{delete_image_file:true,'file_name':file_name,'file_min':file_min},function(response){
         $(".form-content-images").html(response);
        // loading('hide');
     });

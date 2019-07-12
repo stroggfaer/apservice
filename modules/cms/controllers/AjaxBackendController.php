@@ -11,11 +11,17 @@ class AjaxBackendController extends BackendController
     public function actionImagesDelete()
     {
         $file_name = Yii::$app->request->post('file_name');
+        $file_min = Yii::$app->request->post('file_min');
         $path = $_SERVER['DOCUMENT_ROOT'].'/web/files/'.$file_name;
+       if(!empty($file_min)) $path_min = $_SERVER['DOCUMENT_ROOT'].'/web/files/'.$file_min;
         // Удаления обложка в бассеин;
        if(Yii::$app->request->post('delete_image_file')) {
            // Удаляем файл;
            Functions::fDeleteOne($path);
+           if(isset($path_min) && !empty($path_min)) {
+               Functions::fDeleteOne($path_min);
+           }
+
        }
         return false;
     }

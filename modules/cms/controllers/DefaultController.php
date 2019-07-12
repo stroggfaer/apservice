@@ -6,6 +6,7 @@ namespace app\modules\cms\controllers;
 use app\models\Content;
 use app\models\ExportEmail;
 
+use app\models\ImageResize;
 use app\models\Pages;
 use app\modules\cms\models\CallGroupsSearch;
 use dastanaron\translit\Translit;
@@ -37,6 +38,9 @@ use app\modules\cms\models\SlidersSearch;
 
 use app\models\Socials;
 use app\modules\cms\models\SocialsSearch;
+
+use app\models\News;
+use app\modules\cms\models\NewsSearch;
 
 use app\models\ParserEmail;
 use app\modules\cms\models\ParserEmailSearch;
@@ -1336,5 +1340,156 @@ class DefaultController extends BackendController
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * Lists all News models.
+     * @return mixed
+     */
+    public function actionNews()
+    {
+        $searchModel = new NewsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('news/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single News model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewNews($id)
+    {
+        return $this->render('news/view', [
+            'model' => $this->findModelNews($id),
+        ]);
+    }
+
+    /**
+     * Creates a new News model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateNews()
+    {
+        $model = new News();
+        $model->date_create =  date('Y-m-d');
+        if ($model->load(Yii::$app->request->post())) {
+            $model->url = !empty($model->url) ? $model->url : Functions::translit($model->title);
+            $model->description = !empty($model->description) ? $model->description : $model->anons;
+            if($model->save(true)) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if (!empty($model->imageFile->extension)) {
+
+                    $_model = News::findOne($model->id);
+                    $_model->ext = $model->imageFile->extension;
+                    $_model->save(true);
+                    $file = Functions::pathFile('/news/' . $model->id);
+                    $fileDir = $file . '.' . $model->imageFile->extension;
+                    $model->imageFile->saveAs($fileDir);
+
+                    $imageResize = new ImageResize($fileDir);
+                    $imageResize->resizeImage(1280, 960, 'auto');
+                    $imageResize->saveImage($fileDir, 100);
+                    // Для обложки;
+                    $fileDirMin = $file . '_min.' . $model->imageFile->extension;
+                    $imageResize->mCopy($fileDir, $fileDirMin, 270, 175, 'auto');
+
+                }
+                return $this->redirect(['view-news', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('news/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing News model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateNews($id)
+    {
+
+        $model = $this->findModelNews($id);
+        $model->date_create = !empty($model->date_create) ? $model->date_create : date('Y-m-d');
+        if ($model->load(Yii::$app->request->post())) {
+            $model->url = !empty($model->url) ? $model->url : Functions::translit($model->title);
+            $model->description = !empty($model->description) ? $model->description : $model->anons;
+
+            if($model->save(true)) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+                if (!empty($model->imageFile->extension)) {
+
+                    $_model = News::findOne($model->id);
+                    $_model->ext = $model->imageFile->extension;
+                    $_model->save(true);
+                    $file = Functions::pathFile('/news/' . $model->id);
+                    $fileDir = $file . '.' . $model->imageFile->extension;
+                    $model->imageFile->saveAs($fileDir);
+
+                    $imageResize = new ImageResize($fileDir);
+                    $imageResize->resizeImage(1280, 960, 'auto');
+                    $imageResize->saveImage($fileDir, 100);
+                    // Для обложки;
+                    $fileDirMin = $file . '_min.' . $model->imageFile->extension;
+                    $imageResize->mCopy($fileDir, $fileDirMin, 270, 175, 'auto');
+
+                }
+                return $this->redirect(['view-news', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('news/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing News model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteNews($id)
+    {
+        $file = Functions::pathFile('/news/');
+        $model = $this->findModelNews($id);
+        Functions::fDelete($file,$id.'.'.$model->ext);
+        Functions::fDelete($file,$id.'_min.'.$model->ext);
+
+        $this->findModelNews($id)->delete();
+
+        return $this->redirect(['news']);
+    }
+
+    /**
+     * Finds the News model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return News the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelNews($id)
+    {
+        if (($model = News::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+
+
 
 }

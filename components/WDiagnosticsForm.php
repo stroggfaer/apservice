@@ -91,7 +91,9 @@ class WDiagnosticsForm extends Widget{
                  <div class="result-content result-content__js pull-right ">
                     <?php if(!empty($result)): ?>
                         <div class="content">
-                            <div class="icon-clock time"><span class="i"><?=$result->time?></span></div>
+                            <?php if(!empty($result->time)): ?>
+                                 <div class="icon-clock time"><span class="i"><?=$result->time?></span></div>
+                            <?php endif; ?>
                             <div class="icon-wallet money"><span class="i"><?=Functions::money($result->price->money)?> <span class="rub">р.</span></span></div>
                         </div>
                     <?php endif; ?>

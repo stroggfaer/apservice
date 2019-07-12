@@ -65,4 +65,8 @@ class DevicesDetails extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DeviceProblems::className(), ['id' => 'device_problems_id']);
     }
+    public function getDeviceProblemsAll()
+    {
+        return $this->hasMany(DeviceProblems::className(), ['id' => 'device_problems_id']);
+    }
 }

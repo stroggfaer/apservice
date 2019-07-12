@@ -6,6 +6,7 @@ use app\models\CallGroups;
 use app\models\City;
 use app\models\Devices;
 use app\models\Functions;
+use app\models\News;
 use app\models\Repair;
 use Yii;
 use yii\web\Controller;
@@ -255,6 +256,18 @@ class AjaxController extends Controller
         }
     }
 
+
+    // Нововсти;
+    function actionNewsList() {
+        $request = Yii::$app->request;
+        $model = new News();
+
+        if(Yii::$app->request->isAjax && $request->post('typeNews')) {
+            $type = abs($request->post('type'));
+            $model->setType($type);
+            return \app\components\news\WNewsItem::widget(['modelNews'=>$model]);
+        }
+    }
 
 }
 

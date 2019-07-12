@@ -78,6 +78,10 @@ class BackendController extends Controller
                         'link' => '/cms/socials',
                         'title' => 'Соцкнопок',
                     ],
+                    [
+                        'link' => '/cms/news',
+                        'title' => 'Новости',
+                    ],
 
 
                 ],

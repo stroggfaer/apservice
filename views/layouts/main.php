@@ -183,14 +183,17 @@ if(Functions::domain($options->url)) {
     </div> <!--./Меню моб. версия-->
     <?php
        $classCenter = in_array(Yii::$app->controller->id,yii::$app->params['controller']) ? '' : 'grey';
+
     ?>
     <!--Content-->
     <div id="center" class="<?=$classCenter?>">
-        <div class="container min-size">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-        </div>
+        <?php if(isset($this->params['breadcrumbs'])): ?>
+            <div class="container min-size">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+            </div>
+        <?php endif; ?>
         <!--Главная страница-->
         <div class="repair">
 

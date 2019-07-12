@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\AppleServices;
 use app\models\Functions;
+use app\models\News;
 use app\models\Pages;
 use app\models\Repair;
 use Yii;
@@ -75,6 +76,7 @@ class PagesController extends AppController
             $model = new Repair();
             $city = \Yii::$app->action->currentCity;
             $appleService = AppleServices::find()->where(['city_id'=>$city->id,'url'=>$url, 'status'=>1])->one();
+            if(empty($appleService))    return $this->redirect('/site/error');
             $this->setMeta((!empty($appleService->title_seo) ?   Functions::getTemplateCode($appleService->title_seo) : $appleService->title),Functions::getTemplateCode($appleService->keywords),Functions::getTemplateCode($appleService->description));
             // Загрузка страница;
             return $this->render('services', [
@@ -85,6 +87,25 @@ class PagesController extends AppController
         } catch (NotFoundHttpException $e) {
             return $this->redirect('/site/error');
         }
+    }
+
+
+    // Новости;
+    public function actionNews($url = false) {
+
+        $url =  trim($url,"/"); // Удаляем слэш;
+        $model = new Repair();
+        $city = \Yii::$app->action->currentCity;
+        $one = News::find()->where(['url'=>$url, 'status'=>1])->one();
+        if(empty($one))    return $this->redirect('/site/error');
+        $this->setMeta((!empty($one->seo_title) ?   Functions::getTemplateCode($one->seo_title) : $one->title),Functions::getTemplateCode($one->keywords),Functions::getTemplateCode($one->description));
+        // Загрузка страница;
+        return $this->render('news', [
+            'model'=>$model,
+            'city'=>$city,
+            'one'=>$one
+        ]);
+
     }
 
 

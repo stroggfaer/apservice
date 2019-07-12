@@ -22,6 +22,7 @@ class CmsAsset extends AssetBundle
 
     public $css = [
        // 'css/theme-bootstrap.css',
+        'js/vendor/font-awesome/css/font-awesome.min.css',
         'css/cms.css',
         'css/site.css',
     ];

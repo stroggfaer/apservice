@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
 /**
@@ -89,6 +90,13 @@ class Devices extends \yii\db\ActiveRecord
     public function getDevicesDetails()
     {
         return $this->hasMany(DevicesDetails::className(), ['devices_id' => 'id']);
+    }
+    public function getDevicesDetail()
+    {
+        return $this->hasOne(DevicesDetails::className(), ['devices_id' => 'id']);
+    }
+    public function getDeviceProblemsDefault() {
+         return  $this->hasOne(DevicesDetails::className(), ['devices_id' => 'id'])->joinWith('deviceProblems')->where(['devices_details.status'=>1,'device_problems.status'=>1]);
     }
 
     public function getDeviceProblemsList()
