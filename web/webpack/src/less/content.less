@@ -150,7 +150,20 @@
   }
 }
 
+.title-main {
+  padding: 20px 0px;
+  .m-text {
+    margin-top: 20px;
+    font-size: 16px;
+  }
 
+  @media only screen and (max-width: @screen-mobile-min) {
+
+    .m-text {
+      font-size: 14px;
+    }
+  }
+}
 
 .repair {
    .menu__devices {
@@ -165,20 +178,7 @@
        }
      }
    }
-   .title-main {
-      padding: 20px 0px;
-     .m-text {
-       margin-top: 20px;
-       font-size: 16px;
-     }
 
-      @media only screen and (max-width: @screen-mobile-min) {
-
-        .m-text {
-          font-size: 14px;
-        }
-      }
-   }
    .devices {
        .description-seo {
            margin-bottom: 10px;
@@ -927,5 +927,18 @@
          width: 33%;
        }
     }
+  }
+}
+
+.new {
+  .images {
+    margin: 10px 0px;
+  }
+   .date {
+       padding-bottom: 10px;
+   }
+  .text {
+     padding: 5px 0 10px;
+     border-bottom: 1px solid @grey;
   }
 }

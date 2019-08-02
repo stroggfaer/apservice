@@ -14,6 +14,8 @@ $params = ['prompt' => 'Выберите тип новости', 'options' => [$
 
 $city = \app\models\City::find()->select('name')->indexBy('id')->orderBy('id ASC')->column();
 $params_city = ['prompt' => 'Выберите город', 'options' => [$model->city_id=>['selected'=>'selected']]];
+
+
 ?>
 
 <div class="news-form">

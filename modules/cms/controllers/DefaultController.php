@@ -1424,7 +1424,6 @@ class DefaultController extends BackendController
         if ($model->load(Yii::$app->request->post())) {
             $model->url = !empty($model->url) ? $model->url : Functions::translit($model->title);
             $model->description = !empty($model->description) ? $model->description : $model->anons;
-
             if($model->save(true)) {
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 

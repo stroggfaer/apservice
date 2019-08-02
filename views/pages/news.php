@@ -4,8 +4,11 @@ use app\models\Options;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
+use yii\widgets\LinkPager;
 $options = Options::find()->where(['id'=>1000,'status'=>1])->one();
 $modelNews = new \app\models\News();
+
+
 
 ?>
 <div class="container min-size">
@@ -30,7 +33,7 @@ $modelNews = new \app\models\News();
                      </div>
                  </div>
                  <?php if(!empty($one)): ?>
-                   <div class="new col-sm-9 col-xs-12">
+                     <div class="new col-sm-9 col-xs-12">
                        <div class="hidden-xs">
                            <?= Breadcrumbs::widget([
                                'links' => [
@@ -45,7 +48,7 @@ $modelNews = new \app\models\News();
                            ]) ?>
                        </div>
                        <h1 class="title hidden-xs"><?=$one->title?></h1>
-                       <div class="siver date"><?=\app\models\Functions::dateFormat($one->date_create)?></div>
+                       <div class="silver date"><?=\app\models\Functions::dateFormat($one->date_create)?></div>
                        <div class="images"><img src="<?=$one->getImages(false);?>" alt="" class="size-2" /></div>
                        <div class="text"><?=$one->text?></div>
                    </div>
@@ -72,5 +75,13 @@ $modelNews = new \app\models\News();
                      </div>
                  <?php endif; ?>
         </div>
+
+        <?php if(!empty($one)): ?>
+            <?php
+            $newsRandom = \app\models\News::find()->where(['status'=>1])->andWhere(['!=','id',$one->id])->limit(3)->orderBy(new \yii\db\Expression('rand()'))->all();
+
+            ?>
+            <?= app\components\news\WNewsRandom::widget(['newsRandom'=>$newsRandom])?>
+        <?php endif; ?>
     </div>
 </div>

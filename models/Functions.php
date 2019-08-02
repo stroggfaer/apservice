@@ -168,7 +168,13 @@ class Functions extends Model
 
     // Добавляем окончание строки;
     public static function strEnd($text,$str = 'е') {
-          return preg_replace("/$/", $str, $text);
+          $city = \Yii::$app->action->currentCity;
+          if(!empty($city->name_morp)) {
+              return $city->name_morp;
+          }else{
+              return preg_replace("/$/", $str, $text);
+          }
+
     }
 
     // Шаблоный сео;

@@ -40,8 +40,8 @@ class Bootstrap implements BootstrapInterface
                 'repair/<url:[\w_\/-]+>/<alias:[\w_\/-]+>' => 'repair/index',
                 'repair/<url:[\w_\/-]+>' => 'repair/index',
                 'repair' => 'repair/index',
-
                 '<url:[\w_\/-]+>' => 'pages/page',
+
                 //'<url:\w+>'=>'pages/page',
             ];
         }

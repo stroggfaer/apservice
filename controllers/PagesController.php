@@ -29,6 +29,7 @@ class PagesController extends AppController
 
             $pages = $this->setPage($url);
             if(empty($pages->content)) {
+
                 // Запуск контроллер экшен;
                 return Yii::$app->runAction($url);
             }

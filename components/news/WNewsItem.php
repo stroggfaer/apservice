@@ -5,6 +5,7 @@ use app\models\Functions;
 use yii\base\Widget;
 use Yii;
 use yii\helpers\StringHelper;
+use yii\widgets\LinkPager;
 
 class WNewsItem extends Widget{
     public $modelNews;
@@ -23,17 +24,25 @@ class WNewsItem extends Widget{
             <div class="row equal">
                <?php foreach ($this->modelNews->newsAll as $item): ?>
                    <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="block">
-                        <div class="images">
-                            <a href="<?=$item->url?>"><img class="size-2" src="<?=$item->getImages(true)?>" /></a>
+                        <div class="block">
+                            <div class="images">
+                                <a href="<?=$item->url?>"><img class="size-2" src="<?=$item->getImages(true)?>" /></a>
+                            </div>
+                            <div class="date"><?=Functions::dateFormat($item->date_create)?></div>
+                            <div class="title"><a href="<?=$item->url?>" class="red-hover"><?=$item->title?></a></div>
+                            <div class="anons"><?=StringHelper::truncate($item->anons,180)?></div>
                         </div>
-                        <div class="date"><?=Functions::dateFormat($item->date_create)?></div>
-                        <div class="title"><a href="<?=$item->url?>" class="red-hover"><?=$item->title?></a></div>
-                        <div class="anons"><?=StringHelper::truncate($item->anons,180)?></div>
                     </div>
-                </div>
                <?php endforeach; ?>
             </div>
+
+            <?php
+
+            // отображаем постраничную разбивку
+            echo LinkPager::widget([
+                'pagination' => $this->modelNews->pages,
+            ]);
+            ?>
             <?php
         }
     }

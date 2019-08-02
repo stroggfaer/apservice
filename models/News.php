@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use yii\data\Pagination;
 /**
  * This is the model class for table "news".
  *
@@ -50,8 +50,9 @@ class News extends \yii\db\ActiveRecord
             [['description'], 'string', 'max' => 600],
             [['ext'], 'string', 'max' => 40],
             [['imageFile'], 'file',  'extensions' => 'png, jpg, gif'],
-            [['city_id'], 'unique'],
-            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => News::className(), 'targetAttribute' => ['city_id' => 'city_id']],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
+
+            ///  [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => News::className(), 'targetAttribute' => ['city_id' => 'id']],
         ];
     }
 
@@ -83,7 +84,7 @@ class News extends \yii\db\ActiveRecord
      */
     public function getCity()
     {
-        return $this->hasOne(News::className(), ['city_id' => 'city_id']);
+        return $this->hasOne(News::className(), ['city_id' => 'id']);
     }
 
     /**
@@ -91,7 +92,7 @@ class News extends \yii\db\ActiveRecord
      */
     public function getNews()
     {
-        return $this->hasOne(News::className(), ['city_id' => 'city_id']);
+        return $this->hasOne(News::className(), ['city_id' => 'id']);
     }
 
     public function setType($type) {
@@ -128,15 +129,27 @@ class News extends \yii\db\ActiveRecord
         return Functions::pathFile('/news/').$this->id.'.'.$this->ext;
     }
 
+    private function objNews() {
+      return self::find()->where(['status'=>1])->orderBy('date_create DESC');
+    }
+
+    public function getPages() {
+        // делаем копию выборки
+        $countQuery = clone $this->objNews();
+        // подключаем класс Pagination, выводим по 10 пунктов на страницу
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 2,'forcePageParam' => false, 'pageSizeParam' => false]);
+        return $pages;
+
+    }
 
     // Загрузка нововстей
     public function getNewsAll($limit = 12) {
         $city = \Yii::$app->action->currentCity;
-        $news = self::find()->where(['status'=>1])->orderBy('date_create DESC');
+
         if($this->sessionType) {
-            return $news->andWhere(['type'=>$this->sessionType])->limit($limit)->all();
+            return $news = $this->objNews()->andWhere(['type'=>$this->sessionType])->andWhere(['city_id' => $city->id])->orWhere(['is', 'city_id', new \yii\db\Expression('null')])->offset($this->pages->offset)->limit($this->pages->limit)->all();
         }
-        return  $news->limit($limit)->all();
+        return  $news = $this->objNews()->andWhere(['city_id' => $city->id])->orWhere(['is', 'city_id', new \yii\db\Expression('null')])->offset($this->pages->offset)->limit($this->pages->limit)->all();
     }
 
 }

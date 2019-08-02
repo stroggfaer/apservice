@@ -23,7 +23,7 @@ $params = ['prompt' => 'Выберите устройства', 'options' => [$m
         <?= $form->field($model, 'domen',['options'=>['class'=>'form-group col-sm-6']])->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'name',['options'=>['class'=>'form-group col-sm-6']])->textInput(['maxlength' => true]) ?>
-
+        <?= $form->field($model, 'name_morp',['options'=>['class'=>'form-group col-sm-6']])->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'seo_name',['options'=>['class'=>'form-group col-sm-6']])->textInput(['maxlength' => true]) ?>
     </div>
     <div class="clear"></div>
