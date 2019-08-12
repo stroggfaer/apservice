@@ -43,7 +43,7 @@ class AppleServices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['city_id', 'region_id', 'status'], 'integer'],
+            [['city_id', 'region_id', 'status','2gis_id'], 'integer'],
             [['text'], 'string'],
             [['title', 'title_seo', 'time', 'map_lat', 'map_lon', 'value','url','level'], 'string', 'max' => 68],
             [['address','ext'], 'string', 'max' => 128],
@@ -76,10 +76,18 @@ class AppleServices extends \yii\db\ActiveRecord
             'map_lon' => 'Map Lon',
             'text' => 'Текст',
             'value' => 'Значение',
+            '2gis_id'=> 'id филиал 2gis',
             'status' => 'Статус',
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReviews()
+    {
+        return $this->hasMany(Reviews::className(), ['apple_service_id' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

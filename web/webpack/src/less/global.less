@@ -1525,6 +1525,30 @@ h3 {
     margin: 0 auto;
   }
 }
+.rating-icon {
+  background: url('@{imagesPath}/rating-icon.png') 0px 0px no-repeat;
+  height: 16px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 82px;
+}
+.rating-icon.rating-1 {
+  background-position: 0px -16px;
+}
+.rating-icon.rating-2 {
+  background-position: 0px -32px;
+}
+.rating-icon.rating-3 {
+  background-position: 0px -48px;
+}
+.rating-icon.rating-4 {
+  background-position: 0px -64px;
+}
+.rating-icon.rating-5 {
+  background-position: 0px -80px;
+}
 .content__load_f {
   display: block;
 }
@@ -1591,7 +1615,7 @@ h3 {
      }
      .client {
        display: flex;
-       flex-wrap: wrap;
+     //  flex-wrap: wrap;
        padding-top: 20px;
         .photo {
           margin-right: 14px;
@@ -1600,10 +1624,16 @@ h3 {
           overflow: hidden;
         }
         .names {
-           padding: 0px;
+           margin-bottom: 3px;
            font-weight: bold;
            display: flex;
+           flex-wrap: wrap;
            align-items: center;
+        }
+        .date {
+          margin-top: 5px;
+          color:@grey1;
+          font-size: 12px;
         }
         .description {
           font-size: 12px;
@@ -1611,6 +1641,11 @@ h3 {
           color:@grey1;
           font-weight: normal;
         }
+       .rating {
+         position: relative;
+         width: 100%;
+         height: 18px;
+       }
      }
   }
 }
@@ -1696,5 +1731,10 @@ h3 {
    }
    .more {
       margin-top: 10px;
+   }
+}
+.content-title {
+   .btn {
+      margin-top: 16px;
    }
 }

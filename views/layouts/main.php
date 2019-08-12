@@ -135,12 +135,13 @@ if(Functions::domain($options->url)) {
             <div class="header-bottom">
                 <div class="logo-top">
                     <a class="logo no_border" href="/">
-                        <img src="/images/logo1x.png" alt="" />
+<!--                        <img src="/images/logo1x.png" alt="" />-->
+                        <img src="/images/logo.svg" alt="" />
                         <span class="description">сервисный центр по ремонту техники Apple</span>
                     </a>
                 </div>
                 <a href="https://apple.sc/" class="logo-h">
-                    <img src="/images/logo-h.png" alt="" />
+                    <img src="/images/logo_2.svg" alt="" />
                 </a>
                 <div class="menu">
                     <?=  app\components\WMenu::widget()?>

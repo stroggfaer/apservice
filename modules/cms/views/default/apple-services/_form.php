@@ -76,7 +76,8 @@ $params1 = ['prompt' => 'Выберите район', 'options' => [$model->reg
         ])->label('Загрузить Обложка 210x210'); ?>
     <?php endif; ?>
 
-
+    <?= $form->field($model, '2gis_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'show')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'status')->checkbox(['disabled' => false,]) ?>
 
     <div class="form-group">

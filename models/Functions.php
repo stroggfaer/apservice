@@ -305,4 +305,8 @@ class Functions extends Model
         return (!empty($type) ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>');
     }
 
+
+    public static function urlencode($text) {
+        return str_replace(array('%2F','%252F', '%3F', '%3D', '%26', '%2523'), array('/', '/', '?', '=', '&', '#'), rawurlencode($text));
+    }
 }

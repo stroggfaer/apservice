@@ -109,8 +109,6 @@ class PagesController extends AppController
 
     }
 
-
-
     /**
      * @param string $action
      * @return array|null|\yii\db\ActiveRecord|\yii\web\Response

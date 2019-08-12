@@ -169,6 +169,18 @@ class BackendController extends Controller
                 ],
             ],
         ];
+        if(\Yii::$app->user->can('admin')) $this->actionNavigation['modules'] = [
+
+            'title' => 'Модули',
+            'link' => '/cms/modules/',
+            'status' => 1,
+            'items' => [
+                [
+                    'link' => '/cms/modules/parser-reviews-2gis',
+                    'title' => 'Выгрузка отзывы Дубль Гис',
+                ],
+            ],
+        ];
         if(\Yii::$app->user->can('admin')) $this->actionNavigation['options'] = [
             'title' => 'Система',
             'link' => '',

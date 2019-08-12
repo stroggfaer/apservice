@@ -37,10 +37,17 @@ class WNewsItem extends Widget{
             </div>
 
             <?php
-
+            $pages = $this->modelNews->pages;
+            $links = $pages->getLinks();
+            foreach ($pages->getLinks() as $rel => $href) {
+                $pages->getLinks()[$rel] =  123;
+            }
+            print_arr($pages->getLinks());
             // отображаем постраничную разбивку
             echo LinkPager::widget([
-                'pagination' => $this->modelNews->pages,
+                'pagination' => $pages,
+                'registerLinkTags' => true
+
             ]);
             ?>
             <?php
