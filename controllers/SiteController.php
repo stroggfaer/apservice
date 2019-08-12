@@ -185,8 +185,11 @@ class SiteController extends AppController
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionTest()
     {
-        return $this->render('about');
+      if(!empty(Yii::$app->params['info'])) {
+          phpinfo();
+      }
+       return false;
     }
 }
