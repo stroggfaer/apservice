@@ -60,7 +60,7 @@ class Reviews extends \yii\db\ActiveRecord
             'rating'=>'Рейтинг',
             'gis_id'=>'2gis_id',
             'date_created'=>'date_created',
-            'show'=>'Показать на слайдер',
+            'show'=>'Показать на главном',
             'status' => Yii::t('app', 'Статус'),
         ];
     }

@@ -86,6 +86,7 @@ class ModulesController extends BackendController
                                 $review->text = $reviews['text'];
                                 $review->rating = $reviews['rating'];
                                 $review->gis_id = $reviews['id'];
+                                $review->date_created = date('Y-m-d H:i:s',strtotime($reviews['date_created']));
                                 $review->status = 1;
                                 if ($_rating <= $reviews['rating']) {
                                     if ($review->save(true)) {
