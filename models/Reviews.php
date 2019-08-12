@@ -38,7 +38,7 @@ class Reviews extends \yii\db\ActiveRecord
             [['text','value'], 'string'],
             [['date','date_created'], 'safe'],
             ['date', 'default', 'value'=>date('Y-m-d')],
-            [['status','rating','gis_id'], 'integer'],
+            [['status','rating','gis_id','show'], 'integer'],
             [['name', 'description'], 'string', 'max' => 128],
             [['apple_service_id'], 'exist', 'skipOnError' => true, 'targetClass' => AppleServices::className(), 'targetAttribute' => ['apple_service_id' => 'id']],
         ];
