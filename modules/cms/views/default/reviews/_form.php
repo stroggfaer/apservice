@@ -25,6 +25,7 @@ use app\models\Functions;
                 'name' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Имя...', 'maxlength' => 128]],
                 'description' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Описание...', 'maxlength' => 128]],
                 'text' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Текст...','rows' => 6]],
+                'show' => ['type' => Form::INPUT_CHECKBOX, 'options' => ['disabled' => false,]],
                 'status' => ['type' => Form::INPUT_CHECKBOX, 'options' => ['disabled' => false,]],
             ]
         ]);
