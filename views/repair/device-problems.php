@@ -26,20 +26,20 @@ $call = new Call();
     <?=  app\components\WDiagnosticsForm::widget(['model'=>$model])?>
     <div class="apple-services-list">
         <div class="flex">
-            <div class="icons js-call-address">
+            <div class="icons js-call-address" id="ya_call">
                 <i class="icon-call-image"></i>
                 <div class="name">Позвоните нам</div>
             </div>
-            <div class="icons js-call-courier">
+            <div class="icons js-call-courier" id="ya_courier">
                 <i class="icon-courier-image"></i>
                 <div class="name">Вызвать курьера</div>
             </div>
-            <div class="icons js-call-master">
+            <div class="icons js-call-master" id="ya_master">
                 <i class="icon-master-image"></i>
                 <div class="name">Вызвать мастера</div>
             </div>
-            <div class="icons">
-                <a href="<?='mailto:'.$options->email?>" class="no_border">
+            <div class="icons" id="ya_email" onclick="yaCounter54017833.reachGoal('ya_email');">
+                <a href="<?='mailto:'.$options->email?>" class="no_border" >
                   <i class="icon-email-image"></i>
                   <div class="name">Отправить Email</div>
                 </a>

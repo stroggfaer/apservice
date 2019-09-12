@@ -18,7 +18,7 @@ class ReviewsSearch extends Reviews
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
+            [['id', 'status','rating'], 'integer'],
             [['name', 'description', 'text', 'date'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class ReviewsSearch extends Reviews
             'id' => $this->id,
             'date' => $this->date,
             'status' => $this->status,
+            'rating'=> $this->rating
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

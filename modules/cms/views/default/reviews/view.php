@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'type' => DateControl::FORMAT_DATE
                 ]
             ],
+            'rating',
             'show',
             'status',
         ],

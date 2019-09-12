@@ -25,7 +25,7 @@ $model = new \app\models\Repair();
             'validateOnChange'       => false,
             'validateOnSubmit'       => true,
         ]); ?>
-        <div class="small">* Обязательные поля</div>
+        <div class="small hidden">* Обязательные поля</div>
         <?= $form->field($call, 'fio')->textInput(['placeholder' => 'Имя*'])->label(false) ?>
         <?= $form->field($call, 'phone')->widget(\yii\widgets\MaskedInput::className(), ['mask' => '+7 (999)-999-9999',])->textInput(['placeholder' => 'Телефон*'])->label(false);?>
 

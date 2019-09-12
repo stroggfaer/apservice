@@ -124,7 +124,7 @@ class AjaxController extends Controller
                     'Email'.$call->email.
                     'comments: '.!empty($call->comments) ? $call->comments : ''
                 );
-                return $response->data = ['success'=>'ok','message'=>'Ваша заявка отправлена! В ближайшее время с вами свяжется менеджер!'];
+                return $response->data = ['success'=>'ok','message'=>'Ваша заявка отправлена! В ближайшее время с вами свяжется менеджер!','group_id'=>$group_id];
             }else {
                 return ActiveForm::validate($call);
             }

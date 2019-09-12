@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     // Авто скролл;
     if($('#scroll-1001').length) {
-        $('html,body').stop().animate({'scrollTop': $('#scroll-1001').offset().top - 600}, 800, 'swing', function () {
+        $('html,body').stop().animate({'scrollTop': $('#scroll-1001').offset().top}, 900, 'swing', function () {
         });
     }
 
@@ -427,9 +427,41 @@ $(document).on('click','.js-send-call', function(){
                 $('.alert__js .name').text(response.message);
                 $form.parents('.js-form-ajax').hide();
 
+                try{
+                    // Вызвать курьера (0)
+                    if(response.group_id && response.group_id === 1001) {
+                        yaCounter54017833.reachGoal('ya_courier');
+                    }
+                    // Вызвать курьера (0)
+                    if(response.group_id && response.group_id === 1002) {
+                        yaCounter54017833.reachGoal('ya_courier');
+                    }
+                    // 	Вызвать мастера (0)
+                    if(response.group_id && response.group_id === 1003) {
+                        yaCounter54017833.reachGoal('ya_master');
+                    }
+                    //	Узнать стоимость ремонта (0)
+                    if(response.group_id && response.group_id === 1004) {
+                        yaCounter54017833.reachGoal('ya_remont');
+                    }
+                    // Позвоните нам (0)
+                    if(response.group_id && response.group_id === 1005) {
+                        yaCounter54017833.reachGoal('ya_my_call');
+                    }
+                    // 	Записаться на диагностику (0)
+                    if(response.group_id && response.group_id === 1006) {
+                        yaCounter54017833.reachGoal('ya_diagnostics');
+                    }
+
+
+                }catch (e){
+                    console.log('цель не работае');
+                }
+
                 setTimeout(function() {
                     window.location.reload();
                 },3000);
+                console.log('group_id', response.group_id);
             }
             // Выводим ошибки;
             if(isset(response)) {
@@ -472,6 +504,12 @@ $(document).on('click','.js-call-buttons', function(){
 
 // Позвонить к нам;
 $(document).on('click','.js-call-address', function(){
+    try{
+        yaCounter54017833.reachGoal('ya_call');
+    }catch (e){
+        console.log('цель не работае');
+    }
+
     return window_modal('ajax/call','Позвонить нам',{call:true,group_id:1005},'#window-modal');
 });
 

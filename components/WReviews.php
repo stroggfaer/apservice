@@ -42,7 +42,7 @@ class WReviews extends Widget {
                                             <?php if(!empty($review->rating)): ?>
                                                 <div class="rating"><div class="rating-icon rating-<?=$review->rating?>"></div></div>
                                             <?php endif; ?>
-                                            <div class="date"><?=!empty($review->date_created) ? date('d.m.Y',strtotime($review->date_created)).' г.' : date('d.m.Y',strtotime($review->date))?> г.</div>
+                                            <div class="date"><?=!empty($review->date_created) ? date('d.m.Y',strtotime($review->date_created)) : date('d.m.Y',strtotime($review->date))?> г.</div>
                                         </div>
 
                                     </div>

@@ -39,10 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             'name',
-            'description',
+            //'description',
             'text:ntext',
             ['attribute' => 'date','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']],
-//            'status',
+            ['attribute' => 'date_created','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']],
+
+            'rating',
+            'status',
 
             [
                 'class' => 'yii\grid\ActionColumn',
