@@ -73,7 +73,7 @@ if(!empty($model->getSelectCurrentRepair()->devices[0]->deviceProblemsList)) {
         ]); ?>
         <div class="row">
            <div class="col-sm-6">
-            <div class="small hidden">* Обязательные поля</div>
+            <div class="small">* Обязательные поля</div>
                <?= $form->field($call, 'fio')->textInput(['placeholder' => 'Имя*'])->label(false) ?>
                <?= $form->field($call, 'phone')->widget(\yii\widgets\MaskedInput::className(), ['mask' => '+7 (999)-999-9999',])->textInput(['placeholder' => 'Телефон*'])->label(false);?>
            </div>
