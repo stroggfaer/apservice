@@ -97,6 +97,6 @@ if(!empty($model->getSelectCurrentRepair()->devices[0]->deviceProblemsList)) {
         </div>
         <input type="hidden" name="group_id" value="<?=$group_id?>">
         <input type="hidden" name="call_form" value="true">
-        <div class="form-group text-center"><button class="btn btn-red circle loading js-send-call" disabled="disabled" type="submit">Отправить</button></div>
+        <div class="form-group text-center"><button class="btn btn-red circle loading js-send-call" id="ya_send_<?=$group_id?>" disabled="disabled" type="submit">Отправить</button></div>
         <?php ActiveForm::end(); ?> <!--./Форма-->
 </div>

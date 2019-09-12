@@ -430,27 +430,27 @@ $(document).on('click','.js-send-call', function(){
                 try{
                     // Вызвать курьера (0)
                     if(response.group_id && response.group_id === 1001) {
-                        yaCounter54017833.reachGoal('ya_courier');
+                        yaCounter54017833.reachGoal('ya_send_1001');
                     }
                     // Вызвать курьера (0)
                     if(response.group_id && response.group_id === 1002) {
-                        yaCounter54017833.reachGoal('ya_courier');
+                        yaCounter54017833.reachGoal('ya_send_1002');
                     }
                     // 	Вызвать мастера (0)
                     if(response.group_id && response.group_id === 1003) {
-                        yaCounter54017833.reachGoal('ya_master');
+                        yaCounter54017833.reachGoal('ya_send_1003');
                     }
                     //	Узнать стоимость ремонта (0)
                     if(response.group_id && response.group_id === 1004) {
-                        yaCounter54017833.reachGoal('ya_remont');
+                        yaCounter54017833.reachGoal('ya_send_1004');
                     }
                     // Позвоните нам (0)
                     if(response.group_id && response.group_id === 1005) {
-                        yaCounter54017833.reachGoal('ya_my_call');
+                        yaCounter54017833.reachGoal('ya_send_1005');
                     }
                     // 	Записаться на диагностику (0)
                     if(response.group_id && response.group_id === 1006) {
-                        yaCounter54017833.reachGoal('ya_diagnostics');
+                        yaCounter54017833.reachGoal('ya_send_1006');
                     }
 
 
