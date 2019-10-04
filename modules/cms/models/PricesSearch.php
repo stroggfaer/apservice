@@ -2,6 +2,8 @@
 
 namespace app\modules\cms\models;
 
+use app\models\DeviceProblems;
+use app\models\DevicesDetails;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -12,13 +14,14 @@ use app\models\Prices;
  */
 class PricesSearch extends Prices
 {
+    public $device_id;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'city_id', 'device_problems_id', 'status'], 'integer'],
+            [['id', 'city_id', 'device_problems_id','device_id', 'status'], 'integer'],
             [['money'], 'number'],
         ];
     }
@@ -65,6 +68,11 @@ class PricesSearch extends Prices
             'money' => $this->money,
             'status' => $this->status,
         ]);
+
+        $query->leftJoin(DeviceProblems::tableName(),'device_problems.id=prices.device_problems_id')
+        ->leftJoin(DevicesDetails::tableName(),'devices_details.device_problems_id=device_problems.id')->andFilterWhere([
+             'devices_id'=>$this->device_id
+            ]);
 
         return $dataProvider;
     }

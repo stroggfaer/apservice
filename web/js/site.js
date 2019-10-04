@@ -430,7 +430,7 @@ $(document).on('click','.js-send-call', function(){
                 try{
                     // Вызвать курьера (0)
                     if(response.group_id && response.group_id === 1001) {
-                        yaCounter54017833.reachGoal('ya_send_1001');
+                        yaCounter54017833.reachGoal(' ');
                     }
                     // Вызвать курьера (0)
                     if(response.group_id && response.group_id === 1002) {
