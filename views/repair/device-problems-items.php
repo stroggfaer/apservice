@@ -18,6 +18,8 @@ $this->params['breadcrumbs'][] = [
     'url' => ['/repair/'.$model->currentRepair->url] // сама ссылка
 ];
 $this->params['breadcrumbs'][] = $one->title;
+
+
 ?>
 <div class="container min-size">
    <?=  app\components\WMenuRepairs::widget(['model'=>$model,'level'=>3])?>
@@ -72,8 +74,13 @@ $this->params['breadcrumbs'][] = $one->title;
     </div>
 
     <div class="apple-service">
-        <?php $regions = $model->getRegionsOne($model->regions[0]->id); ?>
-        <?= app\components\WAppleServices::widget(['appleServices'=>$regions->appleServices,'one'=>$one,'model'=>$model])?>
+
+        <?php
+        if(!empty($model->regions)) {
+            $regions = $model->getRegionsOne($model->regions[0]->id);
+            echo app\components\WAppleServices::widget(['appleServices'=>$regions->appleServices,'one'=>$one,'model'=>$model]);
+        }
+        ?>
     </div>
 
     <div class="info-call">

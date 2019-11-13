@@ -79,7 +79,10 @@ class WFooter extends Widget{
                                            <?php if(!empty($appleService->value)): ?>
                                                <div class="value text-muted small"><?=$appleService->value?></div>
                                            <?php endif; ?>
-                                              <div class="value text-muted small">2 - Этаж</div>
+
+                                           <?php if(!empty($appleService->level)): ?>
+                                              <div class="value text-muted small"><?=$appleService->level?></div>
+                                           <?php endif; ?>
                                            <?php if(!empty($appleService->metro)): ?>
                                                <div class="metro"><i class="icon-m"></i> <?=$appleService->metro?></div>
                                            <?php endif; ?>

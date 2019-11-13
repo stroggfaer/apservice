@@ -64,7 +64,12 @@ class WDevicesProblemsList extends Widget{
                                         <?php if(false):?>
                                            <div class="text-right price"><?=Functions::money($city->deliverie->price)?> <span class="rub">р.</span></div>
                                         <?php endif; ?>
-                                        <div class="text-right value"><?=$deviceProblem->value?></div>
+
+                                        <?php if(!empty($deviceProblem->price->money)): ?>
+                                            <div class="text-right value"><?=Functions::money($deviceProblem->price->money)?> руб.</div>
+                                        <?php else: ?>
+                                            <div class="text-right value"><?=$deviceProblem->value?></div>
+                                        <?php endif;?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
