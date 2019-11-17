@@ -58,6 +58,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 return '<a href="/cms/devices/update-device-problems?id='.$data->deviceProblems->id.'">'.$data->deviceProblems->title.'</a>';
             }
         ],
+        [
+            'label'=>'Описание проблем',
+            'attribute'=>'device_problems_id',
+            // 'label'=>'Категорий',
+            'content'   => function ($data) {
+                return '<a href="/cms/devices/update-device-problems?id='.$data->deviceProblems->id.'">'.$data->deviceProblems->description.'</a>';
+            }
+        ],
         'money',
         [
             'class' => 'kartik\grid\BooleanColumn',
