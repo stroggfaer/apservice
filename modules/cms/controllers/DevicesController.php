@@ -4,13 +4,18 @@ namespace app\modules\cms\controllers;
 
 use app\models\City;
 use app\models\DeviceYearDetails;
+use app\models\ExcelUploadPrices;
+use arogachev\excel\import\basic\Importer;
 use Yii;
+use yii\bootstrap\ActiveForm;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use dastanaron\translit\Translit;
 use \yii\web\Response;
 use yii\helpers\Html;
+use yii\web\UploadedFile;
 use yiier\helpers\ModelHelper;
 use yii\base\Exception;
 
@@ -492,6 +497,193 @@ class DevicesController extends BackendController
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /*------------download-prices-excel START-----------------*/
+    public function actionDownloadPricesExcel()
+    {
+        $modelPrices = new Prices();
+        //$model = new ExcelUploadPrices(['scenario' => ExcelUploadPrices::SCENARIO_EXCEL]);
+         $model = new ExcelUploadPrices();
+
+        // Запуск импорта;
+        if(Yii::$app->request->post('Run') && $model->load(Yii::$app->request->post())) {
+//
+//            $response = Yii::$app->response;
+//            $response->format = \yii\web\Response::FORMAT_JSON;
+
+            if($model->validate()) {
+                // Если запись есть то удаляем;
+                $count = ExcelUploadPrices::find()->select('id')->count();
+                // удаляем все данные;
+                if($count > 0) $model->deleteAll();
+                // Подготовка данные;
+                $model->excel = UploadedFile::getInstance($model, 'excel');
+                if(!empty($model->excel)) {
+                    // Подготовки пути;
+                    $filePath = Yii::getAlias('@app/web/files/excel/');
+                    //  $fileDir = $filePath . 'file_' . date('YmdHis') . '.xls';
+                    $fileDir = $filePath .'/fileUpdate.xls';
+                    if($model->excel->saveAs($fileDir)) {
+                        // Добавляем запись;
+                        $importer = new Importer([
+                            'filePath' => $fileDir,
+                            'standardModelsConfig' => [
+                                [
+                                    'className' => ExcelUploadPrices::className(),
+                                    'standardAttributesConfig' => [
+                                        [
+                                            'name' => 'devices',
+                                            'valueReplacement' => function ($devices){
+                                                if(empty($devices) && !isset($devices)) {
+                                                    ExcelUploadPrices::setMessage('Ошибка не заполнено devices');
+                                                }
+
+                                                return $devices;
+                                            },
+                                        ],
+                                        [
+                                            'name' => 'city',
+                                            'valueReplacement' => function ($city) {
+                                                if(empty($city) && !isset($city)) {
+                                                    ExcelUploadPrices::setMessage('Ошибка не заполнено city');
+                                                }
+                                                return $city;
+                                            },
+                                        ],
+                                        [
+                                            'name' => 'device_problems',
+                                            'valueReplacement' => function ($device_problems) {
+                                                if(empty($device_problems) && !isset($device_problems)) {
+                                                    ExcelUploadPrices::setMessage('Ошибка не заполнено device_problems');
+                                                }
+                                                return $device_problems;
+                                            },
+                                        ],
+//                                        [
+//                                            'name' => 'description_problems',
+//                                            'valueReplacement' => function ($description_problems) {
+////                                                if(empty($description_problems) && !isset($description_problems)) {
+////                                                    ExcelUploadPrices::setMessage('Ошибка не заполнено description_problems');
+////                                                }
+//                                                return $description_problems;
+//                                            },
+//                                        ],
+                                        [
+                                            'name' => 'prices',
+                                            'valueReplacement' => function ($prices) {
+                                                if(empty($prices) && !isset($prices)) {
+                                                    ExcelUploadPrices::setMessage('Ошибка не заполнено prices');
+                                                }
+                                                return $prices;
+                                            },
+                                        ],
+                                        [
+                                            'name' => 'status',
+                                            'valueReplacement' => function ($status) {
+                                                if(empty($status) && !isset($status))  $status = 0;
+                                                return $status;
+                                            },
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ]);
+                        // Сохраняем времменный в таблице;
+                        if (!$importer->run()) {
+                            echo $importer->error;
+                            if ($importer->wrongModel) {
+                                echo Html::errorSummary($importer->wrongModel);
+                            }
+                        }
+
+                        //
+                        $dataProvider = new ActiveDataProvider([
+                            'query' => ExcelUploadPrices::find()->orderBy('id DESC'),
+                            'pagination' => [
+                                'pageSize' => 60,
+                            ],
+                        ]);
+
+                        return $this->render('prices/prices-excel-form', [
+                            'dataProvider' => $dataProvider,
+                        ]);
+
+                    }
+
+                }else {
+                    $model->addError('excel', 'Загрузите файл');
+                }
+            }
+           // return ActiveForm::validate($model);
+        }
+
+
+        return $this->render('prices/index-download-prices-excel', [
+            'model'=>$model,
+            'modelPrices' => $modelPrices
+        ]);
+    }
+    // Загрузка прайс;
+    public function actionRunPricesExcel()
+    {
+
+
+        $model = ExcelUploadPrices::find()->all();
+     //   $modelPrices = new Prices();
+        if(Yii::$app->request->post('Run')) {
+
+            if(!empty($model)) {
+                $status = false;
+                $col = 0;
+                foreach ($model as $key=> $value) {
+                    if ($value->rowPrices['status'] == 1) {
+                        $col++;
+                        $modelPrices = Prices::find()->where(['id'=>$value->rowPrices['price_id']])->one();
+                        $modelPrices->money = $value->prices;
+                        if(!empty($value->status) && isset($value->status)) $modelPrices->status = $value->status;
+                        $modelPrices->save();
+
+//                            // Если есть описание обновляем;
+//                            if(!empty($value->description_problems)) {
+//                                $deviceProblems = DeviceProblems::find()->where(['id' => $value->rowPrices['device_problems_id']])->one();
+//                                $deviceProblems->description = $value->description_problems;
+//                                $deviceProblems->save();
+//                            }
+                      $status = true;
+
+                    }elseif ($value->rowPrices['status'] == 2) {
+                        $col++;
+                        $prices = new Prices();
+                        $prices->money = $value->prices;
+                        $prices->city_id = $value->rowPrices['city_id'];
+                        $prices->device_problems_id = $value->rowPrices['device_problems_id'];
+                        if(!empty($value->status) && isset($value->status)) {
+                            $prices->status = $value->status;
+                        }else{
+                            $prices->status = 0;
+                        }
+                        if(!$prices->save(true)) {
+                            print_arr($prices->errors);
+                            die('error');
+                        }
+                        $status = true;
+                    }
+
+                }
+
+                // Данные успешно добавлены;
+                if(!empty($status)) {
+                    Yii::$app->session->setFlash('success','Успешно добавлена ('.$col.') кол.!');
+                    return $this->redirect(['/cms/devices/prices']);
+                }
+            }
+        }
+    }
+
+
+    /*------------download-prices-excel END-----------------*/
+
+
 
     /**
      * Lists all Prices models.

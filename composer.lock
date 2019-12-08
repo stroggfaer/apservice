@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e26e497926163b656090b88a2deeea67",
+    "content-hash": "6f07bee5b96f5d929ac0c3bc8da482e0",
     "packages": [
+        {
+            "name": "arogachev/yii2-excel",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arogachev/yii2-excel.git",
+                "reference": "e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arogachev/yii2-excel/zipball/e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3",
+                "reference": "e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3",
+                "shasum": ""
+            },
+            "require": {
+                "phpoffice/phpexcel": "1.8.*",
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "yiisoft/yii2-codeception": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "arogachev\\excel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Rogachev",
+                    "email": "arogachev90@gmail.com"
+                }
+            ],
+            "description": "ActiveRecord import and export based on PHPExcel for Yii 2 framework",
+            "homepage": "https://github.com/arogachev/yii2-excel",
+            "keywords": [
+                "Active Record",
+                "PHPExcel",
+                "excel",
+                "export",
+                "import",
+                "yii2"
+            ],
+            "time": "2016-07-23T06:45:48+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -54,7 +103,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -75,7 +124,7 @@
             "version": "3.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e"
             },
             "dist": {
@@ -93,7 +142,7 @@
             "version": "1.12.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:components/jqueryui.git",
+                "url": "https://github.com/components/jqueryui.git",
                 "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
             },
             "dist": {
@@ -114,7 +163,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -2128,6 +2177,69 @@
             "time": "2017-01-06T23:35:14+00:00"
         },
         {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "1441011fb7ecdd8cc689878f54f8b58a6805f870"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/1441011fb7ecdd8cc689878f54f8b58a6805f870",
+                "reference": "1441011fb7ecdd8cc689878f54f8b58a6805f870",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": "^5.2|^7.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Erik Tilt"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://rootslabs.net"
+                },
+                {
+                    "name": "Mark Baker",
+                    "homepage": "http://markbakeruk.net"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "https://github.com/PHPOffice/PHPExcel",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "abandoned": "phpoffice/phpspreadsheet",
+            "time": "2018-11-22T23:07:24+00:00"
+        },
+        {
             "name": "roopz/yii2-imap",
             "version": "dev-master",
             "source": {
@@ -3959,6 +4071,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-01-06T05:45:45+00:00"
         },
         {

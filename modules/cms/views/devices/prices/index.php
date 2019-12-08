@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Добавить', ['create-prices'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Копирование цены', ['create-copy-prices'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Загрузка цены Excel', ['download-prices-excel'], ['class' => 'btn btn-success']) ?>
     </p>
 
 

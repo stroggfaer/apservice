@@ -27,7 +27,8 @@
         "mihaildev/yii2-elfinder": "*",
         "mihaildev/yii2-ckeditor": "*",
         "roopz/yii2-imap": "dev-master",
-        "warrence/yii2-kartikgii": "dev-master"
+        "warrence/yii2-kartikgii": "dev-master",
+        "arogachev/yii2-excel": "^0.1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
