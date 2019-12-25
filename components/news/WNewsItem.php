@@ -42,7 +42,7 @@ class WNewsItem extends Widget{
             foreach ($pages->getLinks() as $rel => $href) {
                 $pages->getLinks()[$rel] =  123;
             }
-            print_arr($pages->getLinks());
+//            print_arr($pages->getLinks());
             // отображаем постраничную разбивку
             echo LinkPager::widget([
                 'pagination' => $pages,

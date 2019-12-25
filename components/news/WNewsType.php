@@ -15,8 +15,6 @@ class WNewsType extends Widget{
             $this->modelNews = false;
         }
     }
-
-
     public function run(){
             ?>
             <div class="devices__com ">
