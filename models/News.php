@@ -139,7 +139,8 @@ class News extends \yii\db\ActiveRecord
         // подключаем класс Pagination, выводим по 10 пунктов на страницу
         $pages = new Pagination([
             'totalCount' => $countQuery->count(),
-            'pageSize' => 2,'forcePageParam' => true,
+            'pageSize' => 2,'forcePageParam' => false,
+
             'pageSizeParam' => false,
             //'urlManager' => 'news/page/<page:\d+>'
         ]);
