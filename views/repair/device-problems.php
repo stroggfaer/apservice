@@ -24,6 +24,7 @@ $call = new Call();
     </div>
 
     <?=  app\components\WDiagnosticsForm::widget(['model'=>$model])?>
+
     <div class="apple-services-list">
         <div class="flex">
             <div class="icons js-call-address" id="ya_call">

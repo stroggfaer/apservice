@@ -484,7 +484,7 @@ $(document).on('click','.js-sign-up', function(){
 });
 // Позвонить к нам;
 $(document).on('click','.js-call', function(){
-    return window_modal('ajax/call','Позвонить к нам',{call:true,group_id:1001},'#window-modal',1);
+    return window_modal('ajax/call','Оставить заявку',{call:true,group_id:1001},'#window-modal',1);
 });
 
 // Вызвать курьера;

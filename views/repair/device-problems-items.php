@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $one->title;
                 <div class="update-devices-problems">
                     <?=  app\components\WDevicesProblems::widget(['model'=>$model,'one'=>$one])?>
                 </div>
+
                 <div class="clear"></div>
                 <?php if(!empty($model->countsLimit['counts'])): ?>
                    <div class="more"><a href="#" class=" dotted js-limit-devices-problems" data-counts="<?=$model->countsLimit['counts']?>"  data-limit="<?=$model->countsLimit['limit']?>" data-device-id="<?=$model->device->id?>" data-devices-problems-id="<?=$one->id?>">Показать еще</a></div>

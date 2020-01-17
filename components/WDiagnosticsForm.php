@@ -99,6 +99,7 @@ class WDiagnosticsForm extends Widget{
                     <?php endif; ?>
                 </div>
                  <div class="clear"></div>
+                 <div class="text-center" style="margin-top: 20px;"><a class="btn btn-red circle hidden-sm-mod js-call" href="#">Оставить заявку</a></div>
                  <div class="description-warning"><?=Yii::$app->params['text_diagnostics']?></div>
                 <div class="clear"></div>
             </div>
