@@ -37,7 +37,7 @@ class WAddressListMenu extends Widget{
                                     <div class="metro"><i class="icon-m"></i> <?=$appleService->metro?></div>
                                 <?php endif; ?>
                                 <?php if(!empty($appleService->phone)): ?>
-                                    <div class="phone"><?=$appleService->phone?></div>
+                                    <div class="phone"><a href="tel:<?=$appleService->phone?>" class="no_border"><?=$appleService->phone?></a></div>
                                 <?php endif; ?>
                             </div>
                       <?php endforeach; ?>
