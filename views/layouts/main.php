@@ -155,8 +155,13 @@ if(Functions::domain($options->url)) {
                     </div>
                 </div>
                 <div class="top_phone ">
-                    <?php $phone_top = (!empty($city->value) ? $city->value : $city->phone); ?>
-                    <a href="tel::<?=$phone_top?>" class="callibri_phone"><?=$phone_top?></a>
+                    <div class="desktop">
+                       <?php $phone_top = (!empty($city->value) ? $city->value : $city->phone); ?>
+                       <a href="tel::<?=$phone_top?>" class="callibri_phone"><?=$phone_top?></a>
+                    </div>
+                    <div class="mobile ">
+                       <i class="fa fa-phone js-phone-mobile"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -164,11 +169,9 @@ if(Functions::domain($options->url)) {
 
     <!--Меню моб. версия-->
     <div id="menu-mobile">
-        <div class="menu-content">
+        <div class="menu-content menu-list-content">
             <div class="container size">
-                <div class="label-header">
-
-                </div>
+                <div class="label-header"></div>
                 <?=  app\components\WMenuMobile::widget()?>
                 <div class="label-footer">
                     <div class="city icon-fa">
@@ -179,6 +182,11 @@ if(Functions::domain($options->url)) {
                         <?= app\components\WMessengers::widget()?>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="menu-content address-list-content">
+            <div class="container size">
+                <?=  app\components\WAddressListMenu::widget()?>
             </div>
         </div>
     </div> <!--./Меню моб. версия-->
