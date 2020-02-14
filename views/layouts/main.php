@@ -96,7 +96,9 @@ if(Functions::domain($options->url)) {
 </head>
 <body>
 <?php $this->beginBody() ?>
-
+<?php if(true): ?>
+    <?=  app\components\WHtml::widget()?>
+<?php endif; ?>
 <!--Modal Оплата-->
 <?php Modal::begin(['header' => '<h4></h4>',
     'closeButton' => ['tag' => 'button', 'label' => '&times;'],
@@ -216,9 +218,7 @@ if(Functions::domain($options->url)) {
 <div id="footer">
     <?=  app\components\WFooter::widget()?>
 </div>
-<?php if(true): ?>
-<?=  app\components\WHtml::widget()?>
-<?php endif; ?>
+
 <?php $this->endBody() ?>
 </body>
 </html>
