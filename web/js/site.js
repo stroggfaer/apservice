@@ -448,31 +448,38 @@ $(document).on('click','.js-send-call', function(){
                 $('.alert__js').removeClass('hidden');
                 $('.alert__js .name').text(response.message);
                 $form.parents('.js-form-ajax').hide();
+                // reachGoal
 
                 try{
                     // Вызвать курьера (0)
                     if(response.group_id && response.group_id === 1001) {
-                        yaCounter54017833.reachGoal(' ');
+                        yaCounter54017833.reachGoal('ya_send_1001');
+                        console.log('reachGoal ya_send_1001');
                     }
                     // Вызвать курьера (0)
                     if(response.group_id && response.group_id === 1002) {
                         yaCounter54017833.reachGoal('ya_send_1002');
+                        console.log('reachGoal ya_send_1002');
                     }
                     // 	Вызвать мастера (0)
                     if(response.group_id && response.group_id === 1003) {
                         yaCounter54017833.reachGoal('ya_send_1003');
+                        console.log('reachGoal ya_send_1003');
                     }
                     //	Узнать стоимость ремонта (0)
                     if(response.group_id && response.group_id === 1004) {
                         yaCounter54017833.reachGoal('ya_send_1004');
+                        console.log('reachGoal ya_send_1004');
                     }
                     // Позвоните нам (0)
                     if(response.group_id && response.group_id === 1005) {
                         yaCounter54017833.reachGoal('ya_send_1005');
+                        console.log('reachGoal ya_send_1005');
                     }
                     // 	Записаться на диагностику (0)
                     if(response.group_id && response.group_id === 1006) {
                         yaCounter54017833.reachGoal('ya_send_1006');
+                        console.log('reachGoal ya_send_1006');
                     }
 
 
