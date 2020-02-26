@@ -113,17 +113,20 @@ class AjaxController extends Controller
                         $call->comments = $html;
                     }
                 }
+
+                if(!empty(Yii::$app->params['supportEmail'])) {
+                    // Отправить на почту;
+                    $_html = 'Имя: ' . $call->fio . '<br> 
+                              Номер телефон: ' . $call->phone . '<br>  
+                              Email' . $call->email . '<br>  
+                              comments: ' . (!empty($call->comments) ? $call->comments : 'Нет') . '<br>
+                              group_id:' . $group_id;
+                    Functions::getAdminEmail(Yii::$app->params['supportEmail'], $callGroups->title . '-' . $city->name, $_html);
+                }
                 if (!$call->save(false)) {
                     print_arr($call->errors);
                     die('ERROR');
                 }
-                // Отправить на почту;
-                Functions::getAdminEmail(Yii::$app->params['adminEmail'],$callGroups->title.'-'.$city->name,
-                    'Имя: '.$call->fio.
-                    'Номер телефон: '.Functions::phone($call->phone).
-                    'Email'.$call->email.
-                    'comments: '.!empty($call->comments) ? $call->comments : ''
-                );
                 return $response->data = ['success'=>'ok','message'=>'Ваша заявка отправлена! В ближайшее время с вами свяжется менеджер!','group_id'=>$group_id];
             }else {
                 return ActiveForm::validate($call);

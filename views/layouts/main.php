@@ -138,7 +138,7 @@ if(Functions::domain($options->url)) {
                 <div class="logo-top">
                     <a class="logo no_border" href="/">
 <!--                        <img src="/images/logo1x.png" alt="" />-->
-                        <img src="/images/logo.svg" alt="" />
+                        <img src="/images/logo_care.png" alt=""/>
                         <span class="description">сервисный центр по ремонту техники Apple</span>
                     </a>
                 </div>

@@ -239,14 +239,18 @@ class Functions extends Model
     public static function getAdminEmail($email=false,$title,$text) {
         $options = Options::findOne(1000);
         $email = !empty($email) ? $email : $options->adminEmail;
-        // Отправка писемь
-        Yii::$app->mailer->compose()
-            ->setFrom([Yii::$app->params['adminEmail']=>'Форма заявки Apple Service'])
-            ->setTo($email)
-            ->setSubject($title) // тема письма
-            ->setTextBody($text)
-            ->setHtmlBody($text)
-            ->send();
+        try {
+            // Отправка писемь
+            Yii::$app->mailer->compose()
+                ->setFrom([Yii::$app->params['adminEmail']=>'Форма заявки Apple Service'])
+                ->setTo($email)
+                ->setSubject($title) // тема письма
+                ->setTextBody($text)
+                ->setHtmlBody($text)
+                ->send();
+        } catch (Exception $e) {}
+
+
         return false;
     }
 
