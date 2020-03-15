@@ -38,10 +38,10 @@ $this->registerJsFile('js/map.js', ['depends' => [\yii\web\JqueryAsset::classNam
                 <p class="worktime"><?=$appleService->time?></p>
             </div>
           <div class="row">
-                <div class="col-md-2 col-xs-2 image">
+                <div class="col-md-2 col-sm-3 col-xs-12 image">
                     <a href="<?=(!empty($appleService->value) ? $appleService->value : '/services/'.$appleService->url)?>" class="no_border"><img src="<?= $appleService->img.'?'.time()?>" class="size-2"/></a>
                 </div>
-                <div class="col-md-10 col-xs-10 address">
+                <div class="col-md-10 col-sm-9 col-xs-12 address">
                     <div class="title"><?= $appleService->title ?></div>
                     <div class="address"><?= $appleService->address ?></div>
                     <div class="metro"><i class="icon-m"></i><?= $appleService->metro ?></div>
