@@ -42,7 +42,7 @@ class City extends \yii\db\ActiveRecord
         return [
             [['country_id','position','main', 'status'], 'integer'],
             [['country_id', 'domen', 'name'], 'required'],
-            [['seo_description','value'], 'string'],
+            [['seo_description','value','code_js'], 'string'],
             [['domen', 'name','name_morp','seo_name'], 'string', 'max' => 128],
             [['time'], 'string', 'max' => 68],
             [['phone', 'map_lon'], 'string', 'max' => 30],

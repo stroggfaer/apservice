@@ -28,6 +28,8 @@ $params = ['prompt' => 'Выберите устройства', 'options' => [$m
     </div>
     <div class="clear"></div>
     <?= $form->field($model, 'seo_description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'code_js')->textarea(['rows' => 6]) ?>
+
     <div class="row">
         <?= $form->field($model, 'time',['options'=>['class'=>'form-group col-sm-3']])->textInput(['maxlength' => true]) ?>
 
