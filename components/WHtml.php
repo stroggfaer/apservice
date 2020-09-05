@@ -11,7 +11,6 @@ class WHtml extends Widget{
         ?>
         <link rel="stylesheet" href="https://cdn.envybox.io/widget/cbk.css">
         <script type="text/javascript" src="https://cdn.envybox.io/widget/cbk.js?wcb_code=8e19b74b1fd11a621534d1de2d9fd2a3" charset="UTF-8" async></script>
-
         <script src="//cdn.callibri.ru/callibri.js" type="text/javascript" charset="utf-8"></script>
         <?php  if(!empty($city->code_js)): ?>
            <?=$city->code_js;?>
