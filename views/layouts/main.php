@@ -219,7 +219,9 @@ if(Functions::domain($options->url)) {
 <div id="footer">
     <?=  app\components\WFooter::widget()?>
 </div>
-
+<?php  if(!empty($city->code_html)): ?>
+    <?=$city->code_html;?>
+<?php endif; ?>
 <?php $this->endBody() ?>
 </body>
 </html>

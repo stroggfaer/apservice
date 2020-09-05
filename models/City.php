@@ -42,7 +42,7 @@ class City extends \yii\db\ActiveRecord
         return [
             [['country_id','position','main', 'status'], 'integer'],
             [['country_id', 'domen', 'name'], 'required'],
-            [['seo_description','value','code_js'], 'string'],
+            [['seo_description','value','code_js','code_html'], 'string'],
             [['domen', 'name','name_morp','seo_name'], 'string', 'max' => 128],
             [['time'], 'string', 'max' => 68],
             [['phone', 'map_lon'], 'string', 'max' => 30],
@@ -72,7 +72,8 @@ class City extends \yii\db\ActiveRecord
             'zoom' => 'Zoom',
             'value' => 'Заглушка',
             'main'=>'Главный',
-
+            'code_js'=>'Ставка код',
+            'code_html'=>'Ставка html код',
             'position'=>'Позиция',
             'status' => 'Статус',
         ];
